@@ -4,7 +4,7 @@
  * @Author: zhao
  * @Date: 2021-01-06 16:08:20
  * @LastEditors: zhao
- * @LastEditTime: 2021-01-06 16:09:59
+ * @LastEditTime: 2021-01-12 10:28:01
 -->
 npm install -g hexo-cli
 
@@ -21,3 +21,6 @@ hexo clean
 hexo g
 
 hexo d
+
+监听静态文件改变：hexo d --watch  
+hexo server
