@@ -1,5 +1,5 @@
 ---
-title: css-BEM
+title: css-BEM块元素修饰符
 tags:
   - 前端
 categories:
@@ -8,7 +8,8 @@ categories:
 date: 2021-01-14 17:50:50
 ---
 
-BlockElementModifier其实是块（block）、元素（element）、修饰符（modifier）。
+## BlockElementModifier其实是块（block）、元素（element）、修饰符（modifier）。
+
 这三个部分使用__ 与`--`连接:
 .块__元素--修饰符{}
 

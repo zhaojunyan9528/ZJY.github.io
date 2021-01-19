@@ -1,5 +1,5 @@
 ---
-title: css-background
+title: css-background属性使用
 tags:
   - 前端
 categories:
@@ -14,24 +14,23 @@ Background 是一种 CSS 简写属性，一次性定义了所有的背景属性�
 
 语法：
 
-    background: background-color，background-image，background-repeat，background-attachment，background-position;
-    <!-- 不强制要求书写顺序 -->
++ background: background-color，background-image，background-repeat，background-attachment，background-position;(不强制要求书写顺序)
 
-    background-color 指定要使用的背景颜色 transparent 
+    + background-color 指定要使用的背景颜色 transparent 
 
-    background-position 指定背景图像的位置 0%, 0% 
+    + background-position 指定背景图像的位置 0%, 0% 
 
-    background-image 指定要使用的一个或多个背景图像 none 
+    + background-image 指定要使用的一个或多个背景图像 none 
 
-    background-repeat 指定如何重复背景图像 repeat
+    + background-repeat 指定如何重复背景图像 repeat
 
-    background-attachment 设置背景图像是否固定或者随着页面的其余部分滚动。 croll
+    + background-attachment 设置背景图像是否固定或者随着页面的其余部分滚动。 croll
 
-    background-size 指定背景图片的大小 auto CSS3
+    + background-size 指定背景图片的大小 auto CSS3
 
-    background-origin 指定背景图像的定位区域 padding-box CSS3
+    + background-origin 指定背景图像的定位区域 padding-box CSS3
 
-    background-clip 指定背景图像的绘画区域 border-box CSS3
+    + background-clip 指定背景图像的绘画区域 border-box CSS3
 
 多背景图片 background-image：
 
@@ -83,13 +82,13 @@ background-position 默认的定位为 padding-box 盒子的左上角。其属�
 
 背景重复 background-repeat：
 
-    除了常见的几个 repeat、repeat-x，repeat-y 以及 no-repeat 以外，还在CSS3 中新加了两个值： space 和 round：
-    1.背景图片小于容器时
-        background-repeat:space 在保证不缩放的前提下尽可能多的重复图片，并等分图片中间的空隙
-        background-repeat:round 在尽可能多的重复图片的前提下，拉伸图片以铺满容器
-    2.背景图片大于容器时
-        background-repeat:space 在不缩放的前提下裁剪图片，只保留在容器内的部分
-        background-repeat:round 缩小图片以铺满容器，长宽与容器尺寸一致（未按比例缩放，图片极有可能变形）
+除了常见的几个 repeat、repeat-x，repeat-y 以及 no-repeat 以外，还在CSS3 中新加了两个值： space 和 round：
++ 1.背景图片小于容器时
+    + background-repeat:space 在保证不缩放的前提下尽可能多的重复图片，并等分图片中间的空隙
+    + background-repeat:round 在尽可能多的重复图片的前提下，拉伸图片以铺满容器
++ 2.背景图片大于容器时
+    + background-repeat:space 在不缩放的前提下裁剪图片，只保留在容器内的部分
+    + background-repeat:round 缩小图片以铺满容器，长宽与容器尺寸一致（未按比例缩放，图片极有可能变形）
 
 背景相对位置 background-origin：
 
