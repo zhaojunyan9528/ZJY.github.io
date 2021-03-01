@@ -7,7 +7,7 @@ categories:
     - Javascript
 date: 2021-03-01 17:19:59
 ---
-##  Object.create()
+## Object.create()
 
 Object.create()方法创建一个新的对象,使用现有的对象来提供新创建对象的__proto__.
 
