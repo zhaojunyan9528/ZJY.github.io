@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="1. 块作用域-let {}2. 恒量-const3. 解构数组let arr &#x3D; [1,2,3] console.log(…arr) 4. 解构对象let obj &#x3D; {a:a,b:b,c:c} &#x3D; {a:1,b:2,c:3} console.log(a,b,c)&#x2F;&#x2F; 1 2 3 5. 模板字符串：let day &#x3D; ‘sunnday’  today is $&amp;#123;day&amp;#125; 6.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="es6-es6知识点">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="1. 块作用域-let {}2. 恒量-const3. 解构数组let arr &#x3D; [1,2,3] console.log(…arr) 4. 解构对象let obj &#x3D; {a:a,b:b,c:c} &#x3D; {a:1,b:2,c:3} console.log(a,b,c)&#x2F;&#x2F; 1 2 3 5. 模板字符串：let day &#x3D; ‘sunnday’  today is $&amp;#123;day&amp;#125; 6.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-19T09:39:20.000Z">
+<meta property="article:modified_time" content="2021-01-19T09:48:19.661Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>es6-es6知识点</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B92/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/&text=es6-es6知识点"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/&title=es6-es6知识点"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/&is_video=false&description=es6-es6知识点"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=es6-es6知识点&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/&title=es6-es6知识点"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/&title=es6-es6知识点"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/&title=es6-es6知识点"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/&title=es6-es6知识点"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/&name=es6-es6知识点&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/&t=es6-es6知识点"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9D%97%E4%BD%9C%E7%94%A8%E5%9F%9F-let"><span class="toc-number">1.</span> <span class="toc-text">1. 块作用域-let {}</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%81%92%E9%87%8F-const"><span class="toc-number">2.</span> <span class="toc-text">2. 恒量-const</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%A7%A3%E6%9E%84%E6%95%B0%E7%BB%84"><span class="toc-number">3.</span> <span class="toc-text">3. 解构数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%A7%A3%E6%9E%84%E5%AF%B9%E8%B1%A1"><span class="toc-number">4.</span> <span class="toc-text">4. 解构对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">5. 模板字符串：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%B8%A6%E6%A0%87%E7%AD%BE%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%9A"><span class="toc-number">6.</span> <span class="toc-text">6. 带标签的模板字符串：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-startsWith-endsWith-%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E5%85%B6%E4%BB%96%E5%AD%97%E7%AC%A6%E4%B8%B2-%E8%BF%94%E5%9B%9E%E5%B8%83%E5%B0%94%E5%80%BC"><span class="toc-number">7.</span> <span class="toc-text">7. startsWith() endsWith() 判断是否包含其他字符串 返回布尔值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%EF%BC%9A"><span class="toc-number">8.</span> <span class="toc-text">8. 默认参数：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E2%80%A6%E5%B1%95%E5%BC%80%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">9.</span> <span class="toc-text">9. …展开操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E2%80%A6%E5%89%A9%E4%BD%99%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">10.</span> <span class="toc-text">10. …剩余操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E5%87%BD%E6%95%B0%E7%9A%84%E5%90%8D%E5%AD%97"><span class="toc-number">11.</span> <span class="toc-text">11. 函数的名字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0"><span class="toc-number">12.</span> <span class="toc-text">12. 箭头函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-%E5%AF%B9%E6%AF%94%E4%B8%A4%E4%B8%AA%E5%80%BC%E6%98%AF%E5%90%A6%E7%9B%B8%E7%AD%89%EF%BC%9A"><span class="toc-number">13.</span> <span class="toc-text">13. 对比两个值是否相等：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-Object-assign"><span class="toc-number">14.</span> <span class="toc-text">14. Object.assign</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-%E8%AE%BE%E7%BD%AE%E5%AF%B9%E8%B1%A1%E7%9A%84prototype"><span class="toc-number">15.</span> <span class="toc-text">15. 设置对象的prototype:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-proto"><span class="toc-number">16.</span> <span class="toc-text">16.proto</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-super"><span class="toc-number">17.</span> <span class="toc-text">17. super</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-interator%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-number">18.</span> <span class="toc-text">18. interator迭代器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-generators%E7%94%9F%E6%88%90%E5%99%A8"><span class="toc-number">19.</span> <span class="toc-text">19. generators生成器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-class-%E7%B1%BB"><span class="toc-number">20.</span> <span class="toc-text">20. class 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#21-get-set"><span class="toc-number">21.</span> <span class="toc-text">21. get set</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-static-%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E4%B8%8D%E9%9C%80%E8%A6%81%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%B0%B1%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">22.</span> <span class="toc-text">22. static 静态方法不需要实例化就可以使用的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-extends"><span class="toc-number">23.</span> <span class="toc-text">23. extends</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#24-Set-%E9%9B%86%E5%90%88-%E4%B8%8D%E8%83%BD%E6%9C%89%E9%87%8D%E5%A4%8D%E5%80%BC"><span class="toc-number">24.</span> <span class="toc-text">24. Set 集合(不能有重复值)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#25-Map"><span class="toc-number">25.</span> <span class="toc-text">25. Map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#26-module"><span class="toc-number">26.</span> <span class="toc-text">26. module</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        es6-es6知识点
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-01-19T09:39:20.000Z" itemprop="datePublished">2021-01-19</time>
+        
+        (Updated: <time datetime="2021-01-19T09:48:19.661Z" itemprop="dateModified">2021-01-19</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/es6/">es6</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="1-块作用域-let"><a href="#1-块作用域-let" class="headerlink" title="1. 块作用域-let {}"></a>1. 块作用域-let {}</h3><h3 id="2-恒量-const"><a href="#2-恒量-const" class="headerlink" title="2. 恒量-const"></a>2. 恒量-const</h3><h3 id="3-解构数组"><a href="#3-解构数组" class="headerlink" title="3. 解构数组"></a>3. 解构数组</h3><p>let arr = [1,2,3] console.log(…arr)</p>
+<h3 id="4-解构对象"><a href="#4-解构对象" class="headerlink" title="4. 解构对象"></a>4. 解构对象</h3><p>let obj = {a:a,b:b,c:c} = {a:1,b:2,c:3} console.log(a,b,c)// 1 2 3</p>
+<h3 id="5-模板字符串："><a href="#5-模板字符串：" class="headerlink" title="5. 模板字符串："></a>5. 模板字符串：</h3><p>let day = ‘sunnday’  <code>today is $&#123;day&#125;</code></p>
+<h3 id="6-带标签的模板字符串："><a href="#6-带标签的模板字符串：" class="headerlink" title="6. 带标签的模板字符串："></a>6. 带标签的模板字符串：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> dessert = <span class="string">&#x27;bread&#x27;</span>,drink=<span class="string">&#x27;milk&#x27;</span></span><br><span class="line"><span class="keyword">let</span> breakfast = kitcten<span class="string">`today&#x27;s breakfast is <span class="subst">$&#123;dessert&#125;</span> and <span class="subst">$&#123;drink&#125;</span>`</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">kitcen</span>(<span class="params">stings,...values</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(strings); <span class="comment">//[&#x27;today&#x27;s breakfast is&#x27;,&#x27;and&#x27;]</span></span><br><span class="line">    <span class="built_in">console</span>.log(values); <span class="comment">// [&#x27;bread&#x27;,&#x27;mill&#x27;]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="7-startsWith-endsWith-判断是否包含其他字符串-返回布尔值"><a href="#7-startsWith-endsWith-判断是否包含其他字符串-返回布尔值" class="headerlink" title="7. startsWith() endsWith() 判断是否包含其他字符串 返回布尔值"></a>7. startsWith() endsWith() 判断是否包含其他字符串 返回布尔值</h3><h3 id="8-默认参数："><a href="#8-默认参数：" class="headerlink" title="8. 默认参数："></a>8. 默认参数：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">breakfast</span>(<span class="params">dessert = <span class="string">&#x27;bread&#x27;</span>, drink=<span class="string">&#x27;milk&#x27;</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> dessert + drink</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="9-…展开操作符"><a href="#9-…展开操作符" class="headerlink" title="9. …展开操作符"></a>9. …展开操作符</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="string">&#x27;1&#x27;</span>,<span class="string">&#x27;2&#x27;</span>]</span><br><span class="line"><span class="built_in">console</span>.log(arr) <span class="comment">// [&#x27;1&#x27;,&#x27;2&#x27;]</span></span><br><span class="line"><span class="built_in">console</span>.log(...arr) <span class="comment">// 1  2</span></span><br></pre></td></tr></table></figure>
+<h3 id="10-…剩余操作符"><a href="#10-…剩余操作符" class="headerlink" title="10. …剩余操作符"></a>10. …剩余操作符</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fuction (dessert,drink,...foods)&#123;&#125;  breakfast(<span class="string">&#x27;bread&#x27;</span>,<span class="string">&#x27;milk&#x27;</span>,<span class="string">&#x27;orange&#x27;</span>,<span class="string">&#x27;apple&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="11-函数的名字"><a href="#11-函数的名字" class="headerlink" title="11. 函数的名字"></a>11. 函数的名字</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;&#125; <span class="built_in">console</span>.log(test.name)</span><br></pre></td></tr></table></figure>
+<h3 id="12-箭头函数"><a href="#12-箭头函数" class="headerlink" title="12. 箭头函数"></a>12. 箭头函数</h3><h3 id="13-对比两个值是否相等："><a href="#13-对比两个值是否相等：" class="headerlink" title="13. 对比两个值是否相等："></a>13. 对比两个值是否相等：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+<span class="number">0</span> == -<span class="number">0</span> <span class="comment">// true</span></span><br><span class="line">+<span class="number">0</span> === -<span class="number">0</span> <span class="comment">// true</span></span><br><span class="line"><span class="literal">NaN</span> == <span class="literal">NaN</span> <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Object</span>.is(<span class="literal">NaN</span>,<span class="literal">NaN</span>) <span class="comment">//true</span></span><br><span class="line"><span class="built_in">Object</span>.is(+<span class="number">0</span>,-<span class="number">0</span>) <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+<h3 id="14-Object-assign"><a href="#14-Object-assign" class="headerlink" title="14. Object.assign"></a>14. Object.assign</h3><h3 id="15-设置对象的prototype"><a href="#15-设置对象的prototype" class="headerlink" title="15. 设置对象的prototype:"></a>15. 设置对象的prototype:</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> breakfast = &#123;</span><br><span class="line">    <span class="function"><span class="title">getDrink</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;tea&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> dinner = &#123;</span><br><span class="line">    <span class="function"><span class="title">getDrink</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;beer&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> sunday = <span class="built_in">Object</span>.create(breakfast)</span><br><span class="line"><span class="built_in">console</span>.log(sunday.getDrink()); <span class="comment">//tea</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(sunday) === breakfast); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">Object</span>.setPrototypeOf(sunday,dinner)</span><br><span class="line"><span class="built_in">console</span>.log(sunday.getDrink()); <span class="comment">// beer</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(sunday) === dinner); <span class="comment">//true</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="16-proto"><a href="#16-proto" class="headerlink" title="16.proto"></a>16.<strong>proto</strong></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sunday = &#123;</span><br><span class="line">    __proto__: breakfast</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(sunday.breakfast); <span class="comment">// tea</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(sunday) === breakfast); <span class="comment">//true</span></span><br><span class="line">sunday.__proto__ = dinner</span><br><span class="line"><span class="built_in">console</span>.log(sunday.getDrink()); <span class="comment">// beer</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(sunday) === dinner); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<h3 id="17-super"><a href="#17-super" class="headerlink" title="17. super"></a>17. super</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sunday = &#123;</span><br><span class="line">    __proto__: breakfast,</span><br><span class="line">    <span class="function"><span class="title">getDrink</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.getDrink() + <span class="string">&#x27;milk&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(sunday.getDrink()) <span class="comment">// teamilk</span></span><br></pre></td></tr></table></figure>
+<h3 id="18-interator迭代器"><a href="#18-interator迭代器" class="headerlink" title="18. interator迭代器"></a>18. interator迭代器</h3><pre><code>每次返回一个对象&#123;value:xxx, done:true/false&#125;</code></pre>
+<h3 id="19-generators生成器"><a href="#19-generators生成器" class="headerlink" title="19. generators生成器"></a>19. generators生成器</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">foods</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    yeild <span class="string">&#x27;apple&#x27;</span></span><br><span class="line">    yeild <span class="string">&#x27;orange&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> test = foods();</span><br><span class="line"><span class="built_in">console</span>.log(test.next()) <span class="comment">// &#123;value:&#x27;apple&#x27;,done:false&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(test.next()) <span class="comment">// &#123;value:&#x27;apple&#x27;,done:false&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(test.next()) <span class="comment">// &#123;value:undefined,done:true&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="20-class-类"><a href="#20-class-类" class="headerlink" title="20. class 类"></a>20. class 类</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Chef</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">food</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.food = food</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">cook</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.food);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> test = <span class="keyword">new</span> Chef(<span class="string">&#x27;apple&#x27;</span>)</span><br><span class="line">test.cook() <span class="comment">//apple</span></span><br></pre></td></tr></table></figure>
+<h3 id="21-get-set"><a href="#21-get-set" class="headerlink" title="21. get set"></a>21. get set</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Chef</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">food</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.food = food</span><br><span class="line">        <span class="built_in">this</span>.dish = []</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">get</span> <span class="title">menu</span>()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.menu</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">set</span> <span class="title">menu</span>(<span class="params">dish</span>) &#123;</span><br><span class="line">        <span class="built_in">this</span>.dish.push(dish)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">cook</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.food);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> test = <span class="keyword">new</span> Chef()</span><br><span class="line">test.menu = <span class="string">&#x27;apple&#x27;</span></span><br><span class="line">test.menu = <span class="string">&#x27;banana&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(test.menu) <span class="comment">// [&#x27;apple&#x27;,&#x27;bannana&#x27;]</span></span><br></pre></td></tr></table></figure>
+<h3 id="22-static-静态方法不需要实例化就可以使用的方法"><a href="#22-static-静态方法不需要实例化就可以使用的方法" class="headerlink" title="22. static 静态方法不需要实例化就可以使用的方法"></a>22. static 静态方法不需要实例化就可以使用的方法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="function"><span class="title">cook</span>(<span class="params">foods</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.foods)</span><br><span class="line">&#125;</span><br><span class="line">Chef.cook(<span class="string">&#x27;apple&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="23-extends"><a href="#23-extends" class="headerlink" title="23. extends"></a>23. extends</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">name,birthday</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name</span><br><span class="line">        <span class="built_in">this</span>.birthday = birthday</span><br><span class="line">    &#125;</span><br><span class="line">    intro () &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span>,<span class="subst">$&#123;<span class="built_in">this</span>.birthday&#125;</span>`</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Chef</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">name,birthday</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(name,birthday)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> test = <span class="keyword">new</span> Chef(<span class="string">&#x27;zjy&#x27;</span>,<span class="string">&#x27;1995-2-8&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(test.intro()); <span class="comment">//zjy,1995-2-8</span></span><br></pre></td></tr></table></figure>
+<h3 id="24-Set-集合-不能有重复值"><a href="#24-Set-集合-不能有重复值" class="headerlink" title="24. Set 集合(不能有重复值)"></a>24. Set 集合(不能有重复值)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> desserts = <span class="keyword">new</span> <span class="built_in">Set</span>()</span><br><span class="line"><span class="built_in">console</span>.log(desserts); <span class="comment">// &#123;&#125;</span></span><br><span class="line">desserts.add(<span class="string">&#x27;apple&#x27;</span>)</span><br><span class="line">desserts.add(<span class="string">&#x27;apple&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(desserts); <span class="comment">//&#123;&#x27;apple&#x27;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(desserts.size) <span class="comment">//1</span></span><br><span class="line"><span class="built_in">console</span>.log(desserts.has(<span class="string">&#x27;apple&#x27;</span>)) <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(desserts.delete(<span class="string">&#x27;apple&#x27;</span>))l</span><br><span class="line">desserts.forEach(<span class="function"><span class="params">dessert</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(dessert)</span><br><span class="line">&#125;)</span><br><span class="line">desserts.clear()<span class="comment">//清空</span></span><br></pre></td></tr></table></figure>
+<h3 id="25-Map"><a href="#25-Map" class="headerlink" title="25. Map"></a>25. Map</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> food = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line"><span class="keyword">let</span> friut = &#123;&#125;,</span><br><span class="line">    cook = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">    dessert = <span class="string">&#x27;sweeatie&#x27;</span></span><br><span class="line"></span><br><span class="line">food.set(<span class="string">&#x27;friut&#x27;</span>,<span class="string">&#x27;lemon&#x27;</span>)</span><br><span class="line">food.set(<span class="string">&#x27;cook&#x27;</span>,<span class="string">&#x27;fork&#x27;</span>)</span><br><span class="line">food.set(<span class="string">&#x27;dessert&#x27;</span>,<span class="string">&#x27;bread&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(food); <span class="comment">//&#123;&quot;friut&quot; =&gt; &quot;lemon&quot;, &quot;cook&quot; =&gt; &quot;fork&quot;, &quot;dessert&quot; =&gt; &quot;bread&quot;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(food.size); <span class="comment">//3</span></span><br><span class="line"><span class="built_in">console</span>.log(food.get(fruit));</span><br><span class="line">food.delete(dessert)</span><br><span class="line">food.has(dessert)</span><br><span class="line">food.forEach(<span class="function">(<span class="params">value,key</span>)=&gt;</span>&#123;&#125;)</span><br><span class="line">food.clear()</span><br></pre></td></tr></table></figure>
+<h3 id="26-module"><a href="#26-module" class="headerlink" title="26. module"></a>26. module</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> &#123;xxx&#125;  <span class="keyword">import</span> &#123; xxx&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> </span><br><span class="line"><span class="keyword">export</span> &#123; xxx <span class="keyword">as</span> <span class="keyword">default</span> &#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span>  <span class="comment">//默认导出引用时不需&#123;&#125;</span></span><br></pre></td></tr></table></figure>
+  </div>
+  <div>
+      <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/es6-es6知识点.md" target="_blank">编辑</a>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9D%97%E4%BD%9C%E7%94%A8%E5%9F%9F-let"><span class="toc-number">1.</span> <span class="toc-text">1. 块作用域-let {}</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%81%92%E9%87%8F-const"><span class="toc-number">2.</span> <span class="toc-text">2. 恒量-const</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%A7%A3%E6%9E%84%E6%95%B0%E7%BB%84"><span class="toc-number">3.</span> <span class="toc-text">3. 解构数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%A7%A3%E6%9E%84%E5%AF%B9%E8%B1%A1"><span class="toc-number">4.</span> <span class="toc-text">4. 解构对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">5. 模板字符串：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%B8%A6%E6%A0%87%E7%AD%BE%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%9A"><span class="toc-number">6.</span> <span class="toc-text">6. 带标签的模板字符串：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-startsWith-endsWith-%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E5%85%B6%E4%BB%96%E5%AD%97%E7%AC%A6%E4%B8%B2-%E8%BF%94%E5%9B%9E%E5%B8%83%E5%B0%94%E5%80%BC"><span class="toc-number">7.</span> <span class="toc-text">7. startsWith() endsWith() 判断是否包含其他字符串 返回布尔值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%EF%BC%9A"><span class="toc-number">8.</span> <span class="toc-text">8. 默认参数：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E2%80%A6%E5%B1%95%E5%BC%80%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">9.</span> <span class="toc-text">9. …展开操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E2%80%A6%E5%89%A9%E4%BD%99%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">10.</span> <span class="toc-text">10. …剩余操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E5%87%BD%E6%95%B0%E7%9A%84%E5%90%8D%E5%AD%97"><span class="toc-number">11.</span> <span class="toc-text">11. 函数的名字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0"><span class="toc-number">12.</span> <span class="toc-text">12. 箭头函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-%E5%AF%B9%E6%AF%94%E4%B8%A4%E4%B8%AA%E5%80%BC%E6%98%AF%E5%90%A6%E7%9B%B8%E7%AD%89%EF%BC%9A"><span class="toc-number">13.</span> <span class="toc-text">13. 对比两个值是否相等：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-Object-assign"><span class="toc-number">14.</span> <span class="toc-text">14. Object.assign</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-%E8%AE%BE%E7%BD%AE%E5%AF%B9%E8%B1%A1%E7%9A%84prototype"><span class="toc-number">15.</span> <span class="toc-text">15. 设置对象的prototype:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-proto"><span class="toc-number">16.</span> <span class="toc-text">16.proto</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-super"><span class="toc-number">17.</span> <span class="toc-text">17. super</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-interator%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-number">18.</span> <span class="toc-text">18. interator迭代器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-generators%E7%94%9F%E6%88%90%E5%99%A8"><span class="toc-number">19.</span> <span class="toc-text">19. generators生成器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-class-%E7%B1%BB"><span class="toc-number">20.</span> <span class="toc-text">20. class 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#21-get-set"><span class="toc-number">21.</span> <span class="toc-text">21. get set</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-static-%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E4%B8%8D%E9%9C%80%E8%A6%81%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%B0%B1%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">22.</span> <span class="toc-text">22. static 静态方法不需要实例化就可以使用的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-extends"><span class="toc-number">23.</span> <span class="toc-text">23. extends</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#24-Set-%E9%9B%86%E5%90%88-%E4%B8%8D%E8%83%BD%E6%9C%89%E9%87%8D%E5%A4%8D%E5%80%BC"><span class="toc-number">24.</span> <span class="toc-text">24. Set 集合(不能有重复值)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#25-Map"><span class="toc-number">25.</span> <span class="toc-text">25. Map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#26-module"><span class="toc-number">26.</span> <span class="toc-text">26. module</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/&text=es6-es6知识点"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/&title=es6-es6知识点"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/&is_video=false&description=es6-es6知识点"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=es6-es6知识点&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/&title=es6-es6知识点"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/&title=es6-es6知识点"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/&title=es6-es6知识点"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/&title=es6-es6知识点"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/&name=es6-es6知识点&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/&t=es6-es6知识点"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

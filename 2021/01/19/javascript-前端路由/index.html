@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="什么是路由?简单的说 路由就是根据不同的url地址来展示不同的内容或页面. 前端路由的来源在很久很久以前~ 用户的每次更新操作都需要重新刷新页面,非常的影响交互体验,后来,为了解决这个问题,便有了Ajax(异步加载方案),Ajax给体验带来了极大的提升。虽然Ajax解决了用户交互时体验的痛点,但是多页面之间的跳转一样会有不好的体验,所以便有了spa(single-page application)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript-前端路由">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="什么是路由?简单的说 路由就是根据不同的url地址来展示不同的内容或页面. 前端路由的来源在很久很久以前~ 用户的每次更新操作都需要重新刷新页面,非常的影响交互体验,后来,为了解决这个问题,便有了Ajax(异步加载方案),Ajax给体验带来了极大的提升。虽然Ajax解决了用户交互时体验的痛点,但是多页面之间的跳转一样会有不好的体验,所以便有了spa(single-page application)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-19T15:03:20.000Z">
+<meta property="article:modified_time" content="2021-01-19T15:04:05.773Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>javascript-前端路由</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/19/javascript-%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/&text=javascript-前端路由"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/&title=javascript-前端路由"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/&is_video=false&description=javascript-前端路由"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=javascript-前端路由&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/&title=javascript-前端路由"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/&title=javascript-前端路由"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/&title=javascript-前端路由"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/&title=javascript-前端路由"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/&name=javascript-前端路由&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/&t=javascript-前端路由"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%B7%AF%E7%94%B1"><span class="toc-number">1.</span> <span class="toc-text">什么是路由?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1%E7%9A%84%E6%9D%A5%E6%BA%90"><span class="toc-number">2.</span> <span class="toc-text">前端路由的来源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">前端路由的两种实现原理</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        javascript-前端路由
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-01-19T15:03:20.000Z" itemprop="datePublished">2021-01-19</time>
+        
+        (Updated: <time datetime="2021-01-19T15:04:05.773Z" itemprop="dateModified">2021-01-19</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/Javascript/">Javascript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="什么是路由"><a href="#什么是路由" class="headerlink" title="什么是路由?"></a>什么是路由?</h3><p>简单的说 路由就是根据不同的url地址来展示不同的内容或页面.</p>
+<h3 id="前端路由的来源"><a href="#前端路由的来源" class="headerlink" title="前端路由的来源"></a>前端路由的来源</h3><p>在很久很久以前~ 用户的每次更新操作都需要重新刷新页面,非常的影响交互体验,后来,为了解决这个问题,便有了Ajax(异步加载方案),Ajax给体验带来了极大的提升。<br>虽然Ajax解决了用户交互时体验的痛点,但是多页面之间的跳转一样会有不好的体验,所以便有了spa(single-page application)使用的诞生。而spa应用便是基于前端路由实现的,所以便有了前端路由<br>如今比较火的vue-router/react-router 也是基于前端路由的原理实现的~</p>
+<h3 id="前端路由的两种实现原理"><a href="#前端路由的两种实现原理" class="headerlink" title="前端路由的两种实现原理"></a>前端路由的两种实现原理</h3><p>1.Hash模式</p>
+<pre><code>window对象提供了onhashchange事件来监听hash值的改变,一旦url中的hash值发生改变,便会触发该事件。
+window.onhashchange = function()&#123;&#125;</code></pre>
+<p>2.history模式</p>
+<pre><code>HTML5的History API 为浏览器的全局history对象增加的扩展方法。简单来说,history其实就是浏览器历史栈的一个接口
+window对象提供了onpopstate事件来监听历史栈的改变,一旦历史栈信息发生改变,便会触发该事件。
+需要特别注意的是,调用history.pushState()或history.replaceState()不会触发popstate事件。只有在做出浏览器动作时，才会触发该事件。
+window.onpopstate = function()&#123;
+// 历史栈 信息改变
+// do you want
+&#125;
+history提供了两个操作历史栈的API:history.pushState 和 history.replaceState：
+history.pushState(data[,title][,url]);//向历史记录中追加一条记录
+history.replaceState(data[,title][,url]);//替换当前页在历史记录中的信息。
+// data: 一个JavaScript对象，与用pushState()方法创建的新历史记录条目关联。无论何时用户导航到新创建的状态，popstate事件都会被触发，并且事件对象的state属性都包含历史记录条目的状态对象的拷贝。
+
+//title: FireFox浏览器目前会忽略该参数，虽然以后可能会用上。考虑到未来可能会对该方法进行修改，传一个空字符串会比较安全。或者，你也可以传入一个简短的标题，标明将要进入的状态。
+
+//url: 新的历史记录条目的地址。浏览器不会在调用pushState()方法后加载该地址，但之后，可能会试图加载，例如用户重启浏览器。新的URL不一定是绝对路径；如果是相对路径，它将以当前URL为基准；传入的URL与当前URL应该是同源的，否则，pushState()会抛出异常。该参数是可选的；不指定的话则为文档当前URL。
+pushState操作：
+    history.pushState(&#123;&quot;foo&quot;:bar&#125;,&quot;page 2&quot;,&quot;apply&quot;)
+
+    history.state;   //输出 &#123;foo:&quot;bar&quot;&#125;
+
+    window.onpopstate = function()&#123;
+        console.log(&#39;router&#39;);
+    &#125;
+    history.pushState(&#123;&quot;foo&quot;:&quot;bar1&quot;&#125;,&quot;page2&quot;,&quot;apply&quot;);// 此时执行不触发onpopstate方法
+
+    history.state； //输出 &#123;foo:&#39;bar1&#39;&#125;
+
+    history.back(); //做出后退操作，触发onpopstate事件，此时输出 &#39;router&#39;
+    history.state; //输出 &#123;foo:&quot;bar&quot;&#125;
+
+    history.forward(); //做前进操作，触发onpopstate事件，此时输出 &#39;router&#39;
+    history.state; //输出 &#123;foo:&quot;bar1&quot;&#125;
+
+replaceState操作：
+    history.back();
+    history.state; //输出 &#123;foo:bar&#125; 当前是bar
+
+
+    history.replaceState(&#123;&quot;foo&quot;:&quot;barreplace&quot;&#125;,&quot;page2&quot;,&quot;test&quot;);//不触发onpopstate事件， 此时浏览器地址改为test,并不重新加载
+    history.state; //输出：&#123;foo:&quot;barreplace&quot;&#125;
+
+    history.forward(); //触发onpopstate事件，输出&#39;router&#39;
+    history.state;  //输出： &#123;foo:&quot;bar1&quot;&#125;
+
+    history.back();//触发onpopstate事件，输出&#39;router&#39;,重新加载test
+    history.state; //输出：&#123;foo:&quot;barreplace&quot;&#125;</code></pre>
+
+  </div>
+  <div>
+      <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/javascript-前端路由.md" target="_blank">编辑</a>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%B7%AF%E7%94%B1"><span class="toc-number">1.</span> <span class="toc-text">什么是路由?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1%E7%9A%84%E6%9D%A5%E6%BA%90"><span class="toc-number">2.</span> <span class="toc-text">前端路由的来源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">前端路由的两种实现原理</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/&text=javascript-前端路由"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/&title=javascript-前端路由"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/&is_video=false&description=javascript-前端路由"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=javascript-前端路由&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/&title=javascript-前端路由"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/&title=javascript-前端路由"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/&title=javascript-前端路由"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/&title=javascript-前端路由"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/&name=javascript-前端路由&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/&t=javascript-前端路由"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

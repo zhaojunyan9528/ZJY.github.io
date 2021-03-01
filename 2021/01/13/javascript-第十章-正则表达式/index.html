@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="第十章-正则表达式正则表达式（regular expression）是一个描述字符模式的对象。javascript的RegExp类表示正则表达式。而String和RegExp都定义了使用正则表达式进行强大的模式匹配和文本检索与替换的函数。 1. 正则表达式的定义在javascript中，正则表达式由RegExp对象表示，当然可以使用RegExp()构造函数创建RegExp对象，不过通常用直接量语法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript-第十章-正则表达式">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="第十章-正则表达式正则表达式（regular expression）是一个描述字符模式的对象。javascript的RegExp类表示正则表达式。而String和RegExp都定义了使用正则表达式进行强大的模式匹配和文本检索与替换的函数。 1. 正则表达式的定义在javascript中，正则表达式由RegExp对象表示，当然可以使用RegExp()构造函数创建RegExp对象，不过通常用直接量语法">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-13T14:56:21.000Z">
+<meta property="article:modified_time" content="2021-01-14T02:03:35.940Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>javascript-第十章-正则表达式</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/14/javascript-%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0-javascript%E6%9B%B4%E5%A4%9A%E4%B8%BB%E9%A2%98/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E7%BB%84/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/&text=javascript-第十章-正则表达式"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/&title=javascript-第十章-正则表达式"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/&is_video=false&description=javascript-第十章-正则表达式"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=javascript-第十章-正则表达式&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/&title=javascript-第十章-正则表达式"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/&title=javascript-第十章-正则表达式"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/&title=javascript-第十章-正则表达式"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/&title=javascript-第十章-正则表达式"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/&name=javascript-第十章-正则表达式&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/&t=javascript-第十章-正则表达式"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">第十章-正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.</span> <span class="toc-text">1. 正则表达式的定义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-%E7%9B%B4%E6%8E%A5%E9%87%8F%E5%AD%97%E7%AC%A6"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 直接量字符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E5%AD%97%E7%AC%A6%E7%B1%BB"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2 字符类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E9%87%8D%E5%A4%8D"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.3 重复</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-%E9%80%89%E6%8B%A9-%E5%88%86%E7%BB%84%E5%92%8C%E5%BC%95%E7%94%A8"><span class="toc-number">1.1.4.</span> <span class="toc-text">1.4 选择&#x2F;分组和引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5%E6%8C%87%E5%AE%9A%E5%8C%B9%E9%85%8D%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.1.5.</span> <span class="toc-text">1.5指定匹配的位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-6%E6%A0%87%E5%BF%97"><span class="toc-number">1.1.6.</span> <span class="toc-text">1.6标志</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%94%A8%E4%BA%8E%E5%8C%B9%E9%85%8D%E6%A8%A1%E5%BC%8F%E7%9A%84String%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">2. 用于匹配模式的String方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-RegExp%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.3.</span> <span class="toc-text">3. RegExp对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E7%94%A8%E4%BA%8E%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%E7%9A%84RegExp%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 用于模式匹配的RegExp方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-RegExp%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2 RegExp的实例属性</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        javascript-第十章-正则表达式
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-01-13T14:56:21.000Z" itemprop="datePublished">2021-01-13</time>
+        
+        (Updated: <time datetime="2021-01-14T02:03:35.940Z" itemprop="dateModified">2021-01-14</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/Javascript/">Javascript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="第十章-正则表达式"><a href="#第十章-正则表达式" class="headerlink" title="第十章-正则表达式"></a>第十章-正则表达式</h2><p>正则表达式（regular expression）是一个描述字符模式的对象。javascript的RegExp类表示正则表达式。而String和RegExp都定义了使用正则表达式进行强大的模式匹配和文本检索与替换的函数。</p>
+<h3 id="1-正则表达式的定义"><a href="#1-正则表达式的定义" class="headerlink" title="1. 正则表达式的定义"></a>1. 正则表达式的定义</h3><p>在javascript中，正则表达式由RegExp对象表示，当然可以使用RegExp()构造函数创建RegExp对象，不过通常用直接量语法来创建RegExp对象。被定义在一堆斜杠之间的字符，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pattern = <span class="regexp">/s$/</span>; <span class="comment">//匹配所有以字母‘s’结尾的字符串</span></span><br></pre></td></tr></table></figure>
+<p>也可用构造函数表示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pattern = <span class="keyword">new</span> <span class="built_in">RegExp</span>(‘s$’);</span><br></pre></td></tr></table></figure>
+<h4 id="1-1-直接量字符"><a href="#1-1-直接量字符" class="headerlink" title="1.1 直接量字符"></a>1.1 直接量字符</h4><p>正则表达式的直接量字符</p>
+<table>
+<thead>
+<tr>
+<th align="center">字符</th>
+<th align="center">匹配</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">字母数字字符</td>
+<td align="center">匹配自己本身</td>
+</tr>
+<tr>
+<td align="center">\o</td>
+<td align="center">NUL字符(\u0000)</td>
+</tr>
+<tr>
+<td align="center">\t</td>
+<td align="center">制表符</td>
+</tr>
+<tr>
+<td align="center">\n</td>
+<td align="center">换行符</td>
+</tr>
+<tr>
+<td align="center">\v</td>
+<td align="center">垂直制表符</td>
+</tr>
+<tr>
+<td align="center">\v</td>
+<td align="center">换页符</td>
+</tr>
+<tr>
+<td align="center">\r</td>
+<td align="center">回车</td>
+</tr>
+<tr>
+<td align="center">\xnn</td>
+<td align="center">由十六进制数nn指定的拉丁字符</td>
+</tr>
+<tr>
+<td align="center">\uxxxx</td>
+<td align="center">由十六进制xxxx指定的unicode字符</td>
+</tr>
+<tr>
+<td align="center">\cX</td>
+<td align="center">控制字符^X</td>
+</tr>
+</tbody></table>
+<p>在正则中，许多标点符号具有特殊的含义：<br> ^ $ . * + ? = ! : | \ / () [] {}</p>
+<h4 id="1-2-字符类"><a href="#1-2-字符类" class="headerlink" title="1.2 字符类"></a>1.2 字符类</h4><p>正则表达式的字符类</p>
+<table>
+<thead>
+<tr>
+<th align="center">字符</th>
+<th align="center">匹配</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">[…]</td>
+<td align="center">位于括号之内的任意字符</td>
+</tr>
+<tr>
+<td align="center">[^…]</td>
+<td align="center">不在括号之中的任意字符</td>
+</tr>
+<tr>
+<td align="center">.</td>
+<td align="center">除换行符和其他unicode行终止符之外的任意字符</td>
+</tr>
+<tr>
+<td align="center">\w</td>
+<td align="center">任何ASCLL单字字符，等价于[a-zA-Z0-9]</td>
+</tr>
+<tr>
+<td align="center">\W</td>
+<td align="center">任何ASCLL非单字字符，等价于[^a-zA-Z0-9]</td>
+</tr>
+<tr>
+<td align="center">\s</td>
+<td align="center">任何unicode空白符</td>
+</tr>
+<tr>
+<td align="center">\S</td>
+<td align="center">任何非unicode空白符</td>
+</tr>
+<tr>
+<td align="center">\d</td>
+<td align="center">任何ASCLL数字，等价于[0-9]</td>
+</tr>
+<tr>
+<td align="center">\D</td>
+<td align="center">任何ASCLL数字之外的任何字符，等价于[^0-9]</td>
+</tr>
+<tr>
+<td align="center">[\b]</td>
+<td align="center">退格直接量</td>
+</tr>
+</tbody></table>
+<h4 id="1-3-重复"><a href="#1-3-重复" class="headerlink" title="1.3 重复"></a>1.3 重复</h4><p>正则表达式的重复字符</p>
+<table>
+<thead>
+<tr>
+<th align="center">字符</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">{n,m}</td>
+<td align="center">匹配前一项至少n次，但是不能超过m次</td>
+</tr>
+<tr>
+<td align="center">{n,}</td>
+<td align="center">匹配前一项n次或更多次</td>
+</tr>
+<tr>
+<td align="center">{n}</td>
+<td align="center">匹配前一项正好n次</td>
+</tr>
+<tr>
+<td align="center">?</td>
+<td align="center">匹配前一项0次或1次，等价于{0,1}</td>
+</tr>
+<tr>
+<td align="center">+</td>
+<td align="center">匹配前一项一次或多次，等价于{1,}</td>
+</tr>
+<tr>
+<td align="center">*</td>
+<td align="center">匹配前一项0次或多次，等价于{0,}</td>
+</tr>
+</tbody></table>
+<h4 id="1-4-选择-分组和引用"><a href="#1-4-选择-分组和引用" class="headerlink" title="1.4 选择/分组和引用"></a>1.4 选择/分组和引用</h4><p>字符“｜”用于分隔供选择的字符，例如，/ab|cd|ef/既匹配字符串”ab”,又匹配”cd”,又或者是”ef”. 选择项从左到右考虑，直到发现了匹配项，如果左边选项匹配，就忽略右边的匹配项。</p>
+<h4 id="1-5指定匹配的位置"><a href="#1-5指定匹配的位置" class="headerlink" title="1.5指定匹配的位置"></a>1.5指定匹配的位置</h4><table>
+<thead>
+<tr>
+<th align="center">字符</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">^</td>
+<td align="center">匹配字符串的开头</td>
+</tr>
+<tr>
+<td align="center">$</td>
+<td align="center">匹配字符串的结尾</td>
+</tr>
+<tr>
+<td align="center">\b</td>
+<td align="center">匹配一个词语的边界</td>
+</tr>
+<tr>
+<td align="center">\B</td>
+<td align="center">匹配非词语边界的字符</td>
+</tr>
+</tbody></table>
+<h4 id="1-6标志"><a href="#1-6标志" class="headerlink" title="1.6标志"></a>1.6标志</h4><table>
+<thead>
+<tr>
+<th align="center">字符</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">i</td>
+<td align="center">执行大小写不敏感的匹配</td>
+</tr>
+<tr>
+<td align="center">g</td>
+<td align="center">执行全局匹配</td>
+</tr>
+<tr>
+<td align="center">m</td>
+<td align="center">多行模式</td>
+</tr>
+</tbody></table>
+<h3 id="2-用于匹配模式的String方法"><a href="#2-用于匹配模式的String方法" class="headerlink" title="2. 用于匹配模式的String方法"></a>2. 用于匹配模式的String方法</h3><p>类String支持四种利用正则表达式的方法</p>
+<ul>
+<li>search(),该方法以正则表达式为参数，返回第一个与之匹配的子串的开始字符的位置，没有没有匹配子串，返回-1，例如：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">“JavaScript”.search(<span class="regexp">/script/i</span>); <span class="comment">//4</span></span><br></pre></td></tr></table></figure>
+<p>如果参数不是正则表达式，会传递给RegExp构造函数转换成正则表达式。search不支持全局检索。</p>
+<ul>
+<li><p>方法replace()执行检索和替换操作，第一个参数是正则表达式，第二个参数是要进行替换的字符串。如果正则表达式中设置类标记g，将用替换字符串替换被检索的字符串中所有与模式匹配的子串，否则只替换第一个与模式匹配的子串。如果第一个参数是字符串，则直接检索该字符串。例如：</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text.replace(<span class="regexp">/javascript/gi</span>,”JavaScript”);</span><br></pre></td></tr></table></figure>
+<p>  第二个参数可以是函数，能够动态地计算替换字符串。</p>
+</li>
+<li><p>方法match()，唯一的参数就是正则表达式（或者参数传递给构造函数RegExp以转换成正则表达式），返回包含匹配结果的数组，例如：</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">“<span class="number">1</span> plus <span class="number">2</span> equals <span class="number">3</span>”.match(<span class="regexp">/\d+/g</span>); <span class="comment">//[“1”,”2”,”3”]</span></span><br></pre></td></tr></table></figure>
+<p>  如果不设置标志g，只检索第一个匹配，返回的也是数组</p>
+</li>
+<li><p>split()方法可以把调用它的字符串分解为一个子串数组，使用分隔符作为参数，例如：</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">“<span class="number">123</span>,<span class="number">456</span>,<span class="number">789</span>”.split(‘,’); <span class="comment">//[“123”,”456”,”789”]</span></span><br></pre></td></tr></table></figure>
+<p>  也可以用正则表达式为参数，指定分隔符，允许两个有任意多个空白符：</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">“<span class="number">1</span>,<span class="number">2</span>, <span class="number">3</span> , <span class="number">4</span> ,<span class="number">5</span>”.split(<span class="regexp">/\s*,\s*/</span>); <span class="comment">//[“1”,”2”,”3”,”4”,”5”]</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="3-RegExp对象"><a href="#3-RegExp对象" class="headerlink" title="3. RegExp对象"></a>3. RegExp对象</h3><p>构造函数RegExp()有一个或2个字符串参数，第一个是包含正则表达式主体的字符串，即正则表达式斜杠之间的文本，用<code>\\</code>代表转义的\字符，第二个参数可选，是表达式的标志，“g”,”i”,”m”或它们的组合，例如:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> zipcode = <span class="keyword">new</span> <span class="built_in">RegExp</span>(“\\d&#123;<span class="number">5</span>&#125;”,”g”);<span class="comment">//找到字符串中5个数字</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-1-用于模式匹配的RegExp方法"><a href="#3-1-用于模式匹配的RegExp方法" class="headerlink" title="3.1 用于模式匹配的RegExp方法"></a>3.1 用于模式匹配的RegExp方法</h4><p>RegExp对象定义类2个用于执行模式匹配操作的方法。</p>
+<ul>
+<li><p>exec()对一个指定的字符串执行正则表达式，就是在一个字符串中检索匹配，如果没有找到就返回null，如果找到一个匹配就返回一个数组。这个数组的元素0包含的是正则表达式相匹配的字符串，余下的所有元素包含的是与括号扩起来的子表达式相匹配的子串。而且，属性index包含类匹配发生的字符的位置，属性input引用的是被检索的字符串。</p>
+</li>
+<li><p>test()参数是一个字符串，如果这个字符串包含正则表达式的一个匹配就返回true</p>
+</li>
+</ul>
+<h4 id="3-2-RegExp的实例属性"><a href="#3-2-RegExp的实例属性" class="headerlink" title="3.2 RegExp的实例属性"></a>3.2 RegExp的实例属性</h4><p>每个RegExp对象都有5个属性.</p>
+<ul>
+<li>属性source是一个只读字符串，存放的是正则表达式的文本。</li>
+<li>属性global是一个只读的布尔值，说明该表达式是否有标志g。</li>
+<li>属性ignoreCase是一个只读的布尔值，说明该表达式是否有标志i。</li>
+<li>属性multiline是一个只读的布尔值，说明该表达式是否有标志m。</li>
+<li>最后一个属性是lastIndex，可读写的整数。</li>
+</ul>
+
+  </div>
+  <div>
+      <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/javascript-第十章-正则表达式.md" target="_blank">编辑</a>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">第十章-正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.</span> <span class="toc-text">1. 正则表达式的定义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-%E7%9B%B4%E6%8E%A5%E9%87%8F%E5%AD%97%E7%AC%A6"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 直接量字符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E5%AD%97%E7%AC%A6%E7%B1%BB"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2 字符类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E9%87%8D%E5%A4%8D"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.3 重复</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-%E9%80%89%E6%8B%A9-%E5%88%86%E7%BB%84%E5%92%8C%E5%BC%95%E7%94%A8"><span class="toc-number">1.1.4.</span> <span class="toc-text">1.4 选择&#x2F;分组和引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5%E6%8C%87%E5%AE%9A%E5%8C%B9%E9%85%8D%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.1.5.</span> <span class="toc-text">1.5指定匹配的位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-6%E6%A0%87%E5%BF%97"><span class="toc-number">1.1.6.</span> <span class="toc-text">1.6标志</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%94%A8%E4%BA%8E%E5%8C%B9%E9%85%8D%E6%A8%A1%E5%BC%8F%E7%9A%84String%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">2. 用于匹配模式的String方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-RegExp%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.3.</span> <span class="toc-text">3. RegExp对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E7%94%A8%E4%BA%8E%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%E7%9A%84RegExp%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 用于模式匹配的RegExp方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-RegExp%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2 RegExp的实例属性</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/&text=javascript-第十章-正则表达式"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/&title=javascript-第十章-正则表达式"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/&is_video=false&description=javascript-第十章-正则表达式"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=javascript-第十章-正则表达式&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/&title=javascript-第十章-正则表达式"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/&title=javascript-第十章-正则表达式"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/&title=javascript-第十章-正则表达式"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/&title=javascript-第十章-正则表达式"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/&name=javascript-第十章-正则表达式&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%8D%81%E7%AB%A0-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/&t=javascript-第十章-正则表达式"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

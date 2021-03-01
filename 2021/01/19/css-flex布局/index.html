@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="flexbox 布局Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。 任何一个容器都可以指定为 Flex 布局 flex:包含两部分：flex-container容器 和 flex-item 容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。 主轴的开始位置（与边框的交叉点）叫做main start，结束位">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css-flex布局">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="flexbox 布局Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。 任何一个容器都可以指定为 Flex 布局 flex:包含两部分：flex-container容器 和 flex-item 容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。 主轴的开始位置（与边框的交叉点）叫做main start，结束位">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-19T08:49:28.000Z">
+<meta property="article:modified_time" content="2021-01-19T08:51:51.381Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>css-flex布局</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/19/css-grid%E5%B8%83%E5%B1%80/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/19/css-css3%E9%80%89%E6%8B%A9%E5%99%A8/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/&text=css-flex布局"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/&title=css-flex布局"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/&is_video=false&description=css-flex布局"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=css-flex布局&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/&title=css-flex布局"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/&title=css-flex布局"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/&title=css-flex布局"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/&title=css-flex布局"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/&name=css-flex布局&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/&t=css-flex布局"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#flexbox-%E5%B8%83%E5%B1%80"><span class="toc-number">1.</span> <span class="toc-text">flexbox 布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#container%E5%B1%9E%E6%80%A7"><span class="toc-number">2.</span> <span class="toc-text">container属性:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#item%E5%B1%9E%E6%80%A7%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">item属性：</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        css-flex布局
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-01-19T08:49:28.000Z" itemprop="datePublished">2021-01-19</time>
+        
+        (Updated: <time datetime="2021-01-19T08:51:51.381Z" itemprop="dateModified">2021-01-19</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/css/">css</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="flexbox-布局"><a href="#flexbox-布局" class="headerlink" title="flexbox 布局"></a>flexbox 布局</h3><p>Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。</p>
+<p>任何一个容器都可以指定为 Flex 布局</p>
+<p>flex:包含两部分：flex-container容器 和 flex-item</p>
+<p>容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。</p>
+<p>主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；交叉轴的开始位置叫做cross start，结束位置叫做cross end</p>
+<p>项目默认沿主轴排列。单个项目占据的主轴空间叫做main size，占据的交叉轴空间叫做cross size。</p>
+<h3 id="container属性"><a href="#container属性" class="headerlink" title="container属性:"></a>container属性:</h3><pre><code>flex-direction
+flex-wrap
+flex-flow
+justify-content
+align-items
+align-content</code></pre>
+<p>1.display属性：</p>
+<pre><code>flex
+inline-flex 行内容器
+-webkit-flex Webkit 内核的浏览器，必须加上-webkit前缀。</code></pre>
+<p>注意，设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效</p>
+<p>2.flex-direction:</p>
+<pre><code>row 水平方向从左向右
+column 垂直方向 从上往下
+row-reverse 水平方向从右向左
+column-reverse 垂直方向 从下向上</code></pre>
+<p>3.flex-wrap: 默认情况下，项目都排在一条线（又称”轴线”）上。flex-wrap属性定义，如果一条轴线排不下，如何换行</p>
+<pre><code>nowrap 不换行 默认值
+wrap 换行,第一行在上方。
+wrap-reverse 换行，第一行在下方。</code></pre>
+<p>4.flex-flow: flex-direction 和 flex-wrap 结合</p>
+<pre><code>row nowrap 两个参数对应</code></pre>
+<p>5.justify-content： 定义了项目在主轴上的对齐方式</p>
+<pre><code>center
+space-between
+space-around
+space-evenly
+flex-start
+flex-end</code></pre>
+<!-- ![avatar](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071010.png) -->
+
+<p>6.align-item：属性定义项目在交叉轴上如何对齐</p>
+<pre><code>stretch 拉伸 如果项目未设置高度或设为auto，将占满整个容器的高度。
+flex-start 交叉轴的起点对齐。
+flex-end 交叉轴的终点对齐。
+center 交叉轴的中点对齐
+baseline 项目的第一行文字的基线对齐</code></pre>
+<p>7.align-content: 多行显示设置垂直对齐方式 属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用</p>
+<pre><code>stretch
+flex-start
+flex-end
+center
+space-between 行与行之间添加间隔
+space-around 行周围间隔</code></pre>
+<h3 id="item属性："><a href="#item属性：" class="headerlink" title="item属性："></a>item属性：</h3><p>1.order: 控制item在容器里的位置 给item设置</p>
+<pre><code>默认为0
+值越大排越后</code></pre>
+<p>2.flex-grow： 控制item的宽度 值越大，宽度越宽,定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。</p>
+<pre><code>flex-grow: 1; </code></pre>
+<p>3.flex-basies: 设置item的宽度,定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。</p>
+<pre><code>flex-basies: 100px
+auto 默认值</code></pre>
+<p>4.flex-shrink: 设置item缩小的比例,默认为1，即如果空间不足，该项目将缩小</p>
+<pre><code>flex-shrink: 0; 设置不缩小
+设置比1大的数可设置缩小比例更大些
+如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小</code></pre>
+<p>5.flex: 0 1 auto;分别对应 flex-grow flex-shrink flex-basies</p>
+<p>6.align-self: 属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。</p>
+<pre><code>align-self: auto/flex-start/flex-end/center/stretch/baseline </code></pre>
+
+  </div>
+  <div>
+      <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/css-flex布局.md" target="_blank">编辑</a>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#flexbox-%E5%B8%83%E5%B1%80"><span class="toc-number">1.</span> <span class="toc-text">flexbox 布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#container%E5%B1%9E%E6%80%A7"><span class="toc-number">2.</span> <span class="toc-text">container属性:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#item%E5%B1%9E%E6%80%A7%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">item属性：</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/&text=css-flex布局"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/&title=css-flex布局"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/&is_video=false&description=css-flex布局"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=css-flex布局&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/&title=css-flex布局"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/&title=css-flex布局"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/&title=css-flex布局"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/&title=css-flex布局"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/&name=css-flex布局&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/css-flex%E5%B8%83%E5%B1%80/&t=css-flex布局"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

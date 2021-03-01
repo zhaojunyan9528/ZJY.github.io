@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="项目运行:微信小程序： npm run dev:weapp H5: npm run dev:h5 项目打包微信小程序： npm run build:weapp H5: npm run build:h5 tips在 Taro 中尺寸单位建议使用 px、 百分比 %，Taro 默认会对所有单位进行转换。在 Taro 中书写尺寸按照 1:1 的关系来进行书写 如果你希望部分 px 单位不被转换成 rpx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="taro-taro的基本使用">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="项目运行:微信小程序： npm run dev:weapp H5: npm run dev:h5 项目打包微信小程序： npm run build:weapp H5: npm run build:h5 tips在 Taro 中尺寸单位建议使用 px、 百分比 %，Taro 默认会对所有单位进行转换。在 Taro 中书写尺寸按照 1:1 的关系来进行书写 如果你希望部分 px 单位不被转换成 rpx">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-19T14:15:02.000Z">
+<meta property="article:modified_time" content="2021-01-19T14:18:30.441Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>taro-taro的基本使用</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/19/vue-vue%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%82%B9/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/19/css-scss%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/&text=taro-taro的基本使用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/&title=taro-taro的基本使用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/&is_video=false&description=taro-taro的基本使用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=taro-taro的基本使用&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/&title=taro-taro的基本使用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/&title=taro-taro的基本使用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/&title=taro-taro的基本使用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/&title=taro-taro的基本使用"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/&name=taro-taro的基本使用&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/&t=taro-taro的基本使用"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E8%BF%90%E8%A1%8C"><span class="toc-number">1.</span> <span class="toc-text">项目运行:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85"><span class="toc-number">2.</span> <span class="toc-text">项目打包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tips"><span class="toc-number">3.</span> <span class="toc-text">tips</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#react%E7%BB%84%E4%BB%B6%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">react组件的生命周期：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%B5%81%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">生命周期流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#taro-ui%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="toc-number">6.</span> <span class="toc-text">taro-ui使用方式：</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        taro-taro的基本使用
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-01-19T14:15:02.000Z" itemprop="datePublished">2021-01-19</time>
+        
+        (Updated: <time datetime="2021-01-19T14:18:30.441Z" itemprop="dateModified">2021-01-19</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/taro/">taro</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="项目运行"><a href="#项目运行" class="headerlink" title="项目运行:"></a>项目运行:</h3><pre><code>微信小程序：
+npm run dev:weapp
+H5:
+npm run dev:h5</code></pre>
+<h3 id="项目打包"><a href="#项目打包" class="headerlink" title="项目打包"></a>项目打包</h3><pre><code>微信小程序：
+npm run build:weapp
+H5:
+npm run build:h5</code></pre>
+<h3 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h3><p>在 Taro 中尺寸单位建议使用 px、 百分比 %，Taro 默认会对所有单位进行转换。在 Taro 中书写尺寸按照 1:1 的关系来进行书写</p>
+<p>如果你希望部分 px 单位不被转换成 rpx 或者 rem ，最简单的做法就是在 px 单位中增加一个大写字母，例如 Px 或者 PX 这样，则会被转换插件忽略</p>
+<p>Taro 默认以 750px 作为换算尺寸标准</p>
+<p>Taro 提供了 API Taro.pxTransform 来做运行时的尺寸转换:Taro.pxTransform(10) // 小程序：rpx，H5：rem</p>
+<p>对于头部包含注释 /<em>postcss-pxtransform disable</em>/ 的文件，插件不予处理。</p>
+<p>externalClasses 需要使用 短横线命名法 (kebab-case)，而不是 React 惯用的 驼峰命名法 (camelCase)。否则无效。</p>
+<p> Taro 中，所有组件都应当首字母大写并且使用大驼峰式命名法（Camel-Case）</p>
+<p> Taro只能使用map,forEach,reduce等无效</p>
+<p> setState() 函数是唯一能够更新 this.state 的地方。taro的状态更新一定是异步的，可以在回调中取得更新后的值，react的setState不总是异步的</p>
+<p> 在 Taro 中不能使用 catchEvent 的方式阻止事件冒泡。你必须明确的使用 stopPropagation</p>
+<p> 在 Taro 的页面和组件类中，this 指向的是 Taro 页面或组件的实例,要获取对应的小程序原生页面和组件的实例，通过this.$scope</p>
+<h3 id="react组件的生命周期："><a href="#react组件的生命周期：" class="headerlink" title="react组件的生命周期："></a>react组件的生命周期：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clock</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// constructor，顾名思义，组件的构造函数。一般会在这里进行 state 的初始化，事件的绑定等等</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">super</span>(props);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">this</span>.state = &#123;<span class="attr">date</span>: <span class="keyword">new</span> <span class="built_in">Date</span>()&#125;;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 是当组件在进行挂载操作前，执行的函数，一般紧跟着 constructor 函数后执行</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">componentWillMount</span>(<span class="params"></span>)</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 是当组件挂载在 dom 节点后执行。一般会在这里执行一些异步数据的拉取等动作</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">componentDidMount</span>(<span class="params"></span>)</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当组件在进行更新之前，会执行的函数</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">componentWillUpdate</span>(<span class="params">nextProps, nextState</span>)</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当组件收到新的 props 时会执行的函数，传入的参数就是 nextProps ，你可以在这里根据新的 props 来执行一些相关的操作，例如某些功能初始化等</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">componentWillReceiveProps</span>(<span class="params">nextProps</span>)</span> &#123;&#125;  </span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当组件完成更新时，会执行的函数，传入两个参数是 prevProps 、prevState</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">componentDidUpdate</span>(<span class="params">prevProps, prevState</span>)</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 返回 false 时，组件将不会进行更新，可用于渲染优化</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">shouldComponentUpdate</span>(<span class="params">nextProps, nextState</span>)</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当组件准备销毁时执行。在这里一般可以执行一些回收的工作，例如 clearInterval(this.timer) 这种对定时器的回收操作</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">componentWillUnmount</span>(<span class="params"></span>)</span> &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line"></span><br><span class="line">        &lt;div&gt;</span><br><span class="line"></span><br><span class="line">            &lt;h1&gt;Hello, world!&lt;/h1&gt;</span><br><span class="line"></span><br><span class="line">            &lt;h2&gt;It is &#123;<span class="built_in">this</span>.state.date.toLocaleTimeString()&#125;.&lt;/h2&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>props：父组件传给子组件的数据，会挂载在子组件的 this.props 上</p>
+<p>state：与 props 不同，是属于组件自己内部的数据状态，一般在 constructor 构造函数里初始化定义 state</p>
+<p>react组件的三个声明周期状态：</p>
+<pre><code>*Mount: 插入真实Dom
+*Update: 被重新渲染
+*Unmount：被移除真实Dom</code></pre>
+<h3 id="生命周期流程"><a href="#生命周期流程" class="headerlink" title="生命周期流程"></a>生命周期流程</h3><pre><code>第一次初始化渲染显示：ReactDom.render()
+
+    *constructor: 创建对象初始化state
+    *componentWillMount(): 将要插入回调
+    * render() : 用于插入虚拟 DOM 回调
+    * componentDidMount() : 已经插入回调
+
+每次更新 state: this.setSate() 
+
+    * componentWillUpdate() : 将要更新回调
+    * render() : 更新(重新渲染
+    * componentDidUpdate() : 已经更新回调</code></pre>
+<h3 id="taro-ui使用方式："><a href="#taro-ui使用方式：" class="headerlink" title="taro-ui使用方式："></a>taro-ui使用方式：</h3><pre><code>在页面test.tsx中：
+    import &#123; AtButton &#125; from &#39;taro-ui&#39;
+    按需引入：@import &quot;~taro-ui/dist/style/components/button.scss&quot;;
+全局引入使用：
+    在app.scss中：@import &quot;~taro-ui/dist/style/index.scss&quot;;
+    在页面：import &#123; AtButton &#125; from &#39;taro-ui&#39;</code></pre>
+
+  </div>
+  <div>
+      <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/taro-taro的基本使用.md" target="_blank">编辑</a>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E8%BF%90%E8%A1%8C"><span class="toc-number">1.</span> <span class="toc-text">项目运行:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85"><span class="toc-number">2.</span> <span class="toc-text">项目打包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tips"><span class="toc-number">3.</span> <span class="toc-text">tips</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#react%E7%BB%84%E4%BB%B6%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%EF%BC%9A"><span class="toc-number">4.</span> <span class="toc-text">react组件的生命周期：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%B5%81%E7%A8%8B"><span class="toc-number">5.</span> <span class="toc-text">生命周期流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#taro-ui%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="toc-number">6.</span> <span class="toc-text">taro-ui使用方式：</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/&text=taro-taro的基本使用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/&title=taro-taro的基本使用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/&is_video=false&description=taro-taro的基本使用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=taro-taro的基本使用&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/&title=taro-taro的基本使用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/&title=taro-taro的基本使用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/&title=taro-taro的基本使用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/&title=taro-taro的基本使用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/&name=taro-taro的基本使用&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/taro-taro%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/&t=taro-taro的基本使用"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

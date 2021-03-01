@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="第三章 数据类型和值计算机程序是通过操作值来运行的。能够表示并操作的值的类型称为数据类型。 javascript允许使用3种基本数据类型：数字、字符串、布尔。此外还支持另外2种小数据类型：null（空）和undefined（未定义），只定义了一个值。 除了基本数据类型外，javascript还支持复合数据类型-对象，是值的集合。对象有两种，一种是已命名的值的无序集合，另一种是有编号的值的有序集合。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript-第三章-数据类型和值">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="第三章 数据类型和值计算机程序是通过操作值来运行的。能够表示并操作的值的类型称为数据类型。 javascript允许使用3种基本数据类型：数字、字符串、布尔。此外还支持另外2种小数据类型：null（空）和undefined（未定义），只定义了一个值。 除了基本数据类型外，javascript还支持复合数据类型-对象，是值的集合。对象有两种，一种是已命名的值的无序集合，另一种是有编号的值的有序集合。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-10T13:19:21.000Z">
+<meta property="article:modified_time" content="2021-01-10T13:51:36.004Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>javascript-第三章-数据类型和值</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E5%8F%98%E9%87%8F/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%AF%8D%E6%B3%95%E7%BB%93%E6%9E%84/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/&text=javascript-第三章-数据类型和值"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/&title=javascript-第三章-数据类型和值"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/&is_video=false&description=javascript-第三章-数据类型和值"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=javascript-第三章-数据类型和值&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/&title=javascript-第三章-数据类型和值"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/&title=javascript-第三章-数据类型和值"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/&title=javascript-第三章-数据类型和值"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/&title=javascript-第三章-数据类型和值"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/&name=javascript-第三章-数据类型和值&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/&t=javascript-第三章-数据类型和值"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC"><span class="toc-number">1.</span> <span class="toc-text">第三章 数据类型和值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%95%B0%E5%AD%97"><span class="toc-number">1.1.</span> <span class="toc-text">1.数字</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-%E6%95%B4%E5%9E%8B%E7%9B%B4%E6%8E%A5%E9%87%8F-%E5%8D%81%E8%BF%9B%E5%88%B6"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 整型直接量(十进制)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2%E5%85%AB%E8%BF%9B%E5%88%B6%E5%92%8C%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E7%9B%B4%E6%8E%A5%E9%87%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2八进制和十六进制直接量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3%E6%B5%AE%E7%82%B9%E5%9E%8B%E7%9B%B4%E6%8E%A5%E9%87%8F"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.3浮点型直接量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4%E7%89%B9%E6%AE%8A%E6%95%B0%E5%80%BC"><span class="toc-number">1.1.4.</span> <span class="toc-text">1.4特殊数值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.2.</span> <span class="toc-text">2.字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B4%E6%8E%A5%E9%87%8F"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 字符串直接量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B4%E6%8E%A5%E9%87%8F%E4%B8%AD%E7%9A%84%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 字符串直接量中的转义字符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%B8%83%E5%B0%94%E5%80%BC"><span class="toc-number">1.3.</span> <span class="toc-text">3.布尔值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%87%BD%E6%95%B0"><span class="toc-number">1.4.</span> <span class="toc-text">4.函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-%E5%87%BD%E6%95%B0%E7%9B%B4%E6%8E%A5%E9%87%8F"><span class="toc-number">1.4.1.</span> <span class="toc-text">4.1 函数直接量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.5.</span> <span class="toc-text">5.对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.5.1.</span> <span class="toc-text">5.1 创建对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-%E5%AF%B9%E8%B1%A1%E7%9B%B4%E6%8E%A5%E9%87%8F"><span class="toc-number">1.5.2.</span> <span class="toc-text">5.2 对象直接量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E6%95%B0%E7%BB%84"><span class="toc-number">1.6.</span> <span class="toc-text">6.数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-%E6%95%B0%E7%BB%84%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-number">1.6.1.</span> <span class="toc-text">6.1 数组的创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-%E6%95%B0%E7%BB%84%E7%9B%B4%E6%8E%A5%E9%87%8F"><span class="toc-number">1.6.2.</span> <span class="toc-text">6.2 数组直接量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-null"><span class="toc-number">1.7.</span> <span class="toc-text">7.null</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-undefined"><span class="toc-number">1.8.</span> <span class="toc-text">8.undefined</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-Date%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.9.</span> <span class="toc-text">9.Date对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.10.</span> <span class="toc-text">10.正则表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-Error"><span class="toc-number">1.11.</span> <span class="toc-text">11.Error</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%8C%85%E8%A3%85%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.12.</span> <span class="toc-text">12.基本数据类型的包装对象</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        javascript-第三章-数据类型和值
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-01-10T13:19:21.000Z" itemprop="datePublished">2021-01-10</time>
+        
+        (Updated: <time datetime="2021-01-10T13:51:36.004Z" itemprop="dateModified">2021-01-10</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/Javascript/">Javascript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="第三章-数据类型和值"><a href="#第三章-数据类型和值" class="headerlink" title="第三章 数据类型和值"></a>第三章 数据类型和值</h2><p>计算机程序是通过操作值来运行的。能够表示并操作的值的类型称为数据类型。</p>
+<p>javascript允许使用3种基本数据类型：数字、字符串、布尔。此外还支持另外2种小数据类型：null（空）和undefined（未定义），只定义了一个值。</p>
+<p>除了基本数据类型外，javascript还支持复合数据类型-对象，是值的集合。对象有两种，一种是已命名的值的无序集合，另一种是有编号的值的有序集合。后者称为数组。</p>
+<p>javascript还定义了另一种特殊的类型-函数，是具有可执行代码的对象。js为函数定义了专用的语法。</p>
+<p>除了数组和函数还定义了其他专用的对象，这些对象不是新的数据类型而是新的对象类。Date类定义的表示日期的对象。</p>
+<p>RegExp类定义的表示正则表达式的对象。Error类定义的是js程序中发生的语法和运行时错误的对象。</p>
+<h3 id="1-数字"><a href="#1-数字" class="headerlink" title="1.数字"></a>1.数字</h3><p>在js中，不区分整点型和浮点型数字，所有数字都是浮点型的，采用ieee 754标准的64位浮点格式表示</p>
+<h4 id="1-1-整型直接量-十进制"><a href="#1-1-整型直接量-十进制" class="headerlink" title="1.1 整型直接量(十进制)"></a>1.1 整型直接量(十进制)</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>   <span class="number">3</span>   <span class="number">1000</span></span><br></pre></td></tr></table></figure>
+<p>整数表示从2<sup>-53</sup> 到2 <sup>53</sup>,使用超过尾数范围的数字，就会失去精确性，<br>有些整数的运算，是对32位进行的，（2<sup>-31</sup> 到 2<sup>31-1</sup>)</p>
+<h4 id="1-2八进制和十六进制直接量"><a href="#1-2八进制和十六进制直接量" class="headerlink" title="1.2八进制和十六进制直接量"></a>1.2八进制和十六进制直接量</h4><p>除了10进制的整型直接量，js还支持8进制和16进制直接量。</p>
+<p>16进制中数字可以用0-9表示，字母可以用a(A)-f(F)表示，代表0-15之间数字。16进制直接量由’0x’ 或‘0X’开头，后面跟16进制数字串。</p>
+<p>0x123 基数是16 //1<em>16</em>16+2*16+3</p>
+<p>尽管ECMAScript标准不支持8进制的直接量，但是javascript的某些实现却允许你使用8进制的直接量。8进制是以0开头，后面跟随0-7直接的数字，</p>
+<p>0377 基数是8 // 3<em>8</em>8+7*8+7</p>
+<p>由于某些js实现支持8进制有些不支持，所以尽量不要使用0开头的整型直接量。</p>
+<h4 id="1-3浮点型直接量"><a href="#1-3浮点型直接量" class="headerlink" title="1.3浮点型直接量"></a>1.3浮点型直接量</h4><p>由整数部分，小数点，小数部分组成，此外还可以用指数计数法表示浮点型直接量，即实数后面跟字母e或者E，后面跟正号和负号，再加一个整型指数。表示前面的实数乘以10的指数次幂。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3.14</span></span><br><span class="line"><span class="number">344.89</span></span><br><span class="line"><span class="number">6.34e12</span> <span class="comment">//6.34*1012</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-4特殊数值"><a href="#1-4特殊数值" class="headerlink" title="1.4特殊数值"></a>1.4特殊数值</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">Infinity</span>  无穷大</span><br><span class="line">-<span class="literal">Infinity</span>  负无穷大</span><br><span class="line"><span class="literal">NaN</span>    非数字的特殊值，和任何值都不相等，包括自己，用专门的<span class="built_in">isNaN</span>()函数来检测这个值。</span><br><span class="line"><span class="built_in">isFinite</span>()函数来测试一个值是否是<span class="literal">NaN</span>，正无穷大或负无穷大。</span><br><span class="line"><span class="built_in">Number</span>.MAX_VALUE  可表示的最大数字</span><br><span class="line"><span class="built_in">Number</span>.MIN_VALUE   可表示的最小数字（接近于<span class="number">0</span>）</span><br><span class="line"><span class="built_in">Number</span>.NaN  非数字的特殊值</span><br><span class="line"><span class="built_in">Number</span>.POSITION_INFINITY 表示正无穷大的特殊值</span><br><span class="line"><span class="built_in">Number</span>.NEGATIVE_INFINITY 表示负无穷大的特殊值</span><br></pre></td></tr></table></figure>
+<h3 id="2-字符串"><a href="#2-字符串" class="headerlink" title="2.字符串"></a>2.字符串</h3><p>由unicode字符、数字和标点符号组成的序列，表示文本的数据类型。</p>
+<h4 id="2-1-字符串直接量"><a href="#2-1-字符串直接量" class="headerlink" title="2.1 字符串直接量"></a>2.1 字符串直接量</h4><p>由单引号或者双引号扩起来的unicdoe字符序列。可以包含0个或多个字符序列</p>
+<h4 id="2-2-字符串直接量中的转义字符"><a href="#2-2-字符串直接量中的转义字符" class="headerlink" title="2.2 字符串直接量中的转义字符"></a>2.2 字符串直接量中的转义字符</h4><p>反斜杠\后加一个字母就可以表示特殊的用法。\n表示换行符<br>‘you&#39;re right’, \’表示单引号或者撇号</p>
+<h3 id="3-布尔值"><a href="#3-布尔值" class="headerlink" title="3.布尔值"></a>3.布尔值</h3><p>true和false两个值，通常用于控制结果</p>
+<h3 id="4-函数"><a href="#4-函数" class="headerlink" title="4.函数"></a>4.函数</h3><p>一段可执行的代码段，由js定义或由js预定义，可多次执行和调用。js函数是一个真正的数据类型，可以对函数进行操作。</p>
+<p>Math.sin()预定义函数</p>
+<h4 id="4-1-函数直接量"><a href="#4-1-函数直接量" class="headerlink" title="4.1 函数直接量"></a>4.1 函数直接量</h4><p>有关键字function和可选对参数名、用括号括起来对参数列表和花括号括起来定义的。</p>
+<p>除了用函数定义来定义函数：</p>
+<p>function square(x){ return x*x }</p>
+<p>还可以用函数直接量类定义：</p>
+<p>var square = funtion(x) { return x*x }</p>
+<p>如果一个函数值存储在某个对象的属性中，那个这个函数通常被称为方法，属性名称被称为方法名。</p>
+<h3 id="5-对象"><a href="#5-对象" class="headerlink" title="5.对象"></a>5.对象</h3><p>已命名的数据的集合，每个数值都有一个名字,称为对象的属性，通过”.”操作符和属性名访问。</p>
+<h4 id="5-1-创建对象"><a href="#5-1-创建对象" class="headerlink" title="5.1 创建对象"></a>5.1 创建对象</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"><span class="keyword">var</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="regexp">/javascript/gi</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="5-2-对象直接量"><a href="#5-2-对象直接量" class="headerlink" title="5.2 对象直接量"></a>5.2 对象直接量</h4><p>var point = {x: 1,y:3}，<br>对象直接量可以嵌套，属性值可以不是常量。</p>
+<h3 id="6-数组"><a href="#6-数组" class="headerlink" title="6.数组"></a>6.数组</h3><p>数值的集合，数组的每个数值都有一个下标，js不支持多维数组，但数组元素可以是数组。数组下标是非负整数</p>
+<h4 id="6-1-数组的创建"><a href="#6-1-数组的创建" class="headerlink" title="6.1 数组的创建"></a>6.1 数组的创建</h4><p>可以通过构造函数Array()创建:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">arr[<span class="number">0</span>] = <span class="number">1.2</span>;</span><br><span class="line">arr[<span class="number">1</span>] = ‘javascript’;</span><br><span class="line"><span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">1.2</span>,’javascript’);</span><br><span class="line"><span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">10</span>); 创建的是表示<span class="number">10</span>个未定义的数组</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="6-2-数组直接量"><a href="#6-2-数组直接量" class="headerlink" title="6.2 数组直接量"></a>6.2 数组直接量</h4><p>var arr = [1,2,3,4];<br>数组可以嵌套，var arr = [[1,2,3],2];<br>数组元素不局限于常量：var arr = [1024,1024+1]<br>数组可以存放未定义的元素：var arr = [1,,,,5]</p>
+<h3 id="7-null"><a href="#7-null" class="headerlink" title="7.null"></a>7.null</h3><p>表示“无”值，尝被看作对象类型的特殊值，表示“无对象”的值。js保留字</p>
+<h3 id="8-undefined"><a href="#8-undefined" class="headerlink" title="8.undefined"></a>8.undefined</h3><p>当你使用一个未定义的值，或已定义未赋值的值，或不存在的对象属性时，返回这个值。</p>
+<p>null == undefined  //true</p>
+<p>如果要区分null和undefined可用 === 或者typeof区分</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span> <span class="comment">// “object”  </span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">undefined</span> <span class="comment">// undefined</span></span><br><span class="line"><span class="literal">null</span> === <span class="literal">undefined</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">undefined</span> 不是js保留字</span><br><span class="line">ECMAScript v3 定义了名为<span class="literal">undefined</span>的全局变量，值为<span class="literal">undefined</span></span><br></pre></td></tr></table></figure>
+<h3 id="9-Date对象"><a href="#9-Date对象" class="headerlink" title="9.Date对象"></a>9.Date对象</h3><p>表示日期和时间的对象类。可以用运算符new和构造函数Date()创建Date对象</p>
+<h3 id="10-正则表达式"><a href="#10-正则表达式" class="headerlink" title="10.正则表达式"></a>10.正则表达式</h3><p>用于模式匹配和查找替换操作，正则表达式直接量：/^html/</p>
+<h3 id="11-Error"><a href="#11-Error" class="headerlink" title="11.Error"></a>11.Error</h3><p>表示错误的类,每个Error对象都有一个message属性，存放js特定错误消息。预定义的错误对象的类型有Error, EvalError, RangeError, ReferenceError, SyntaxError, TypeError和URIError.</p>
+<h3 id="12-基本数据类型的包装对象"><a href="#12-基本数据类型的包装对象" class="headerlink" title="12.基本数据类型的包装对象"></a>12.基本数据类型的包装对象</h3><p>var str =”lfjlajdfasd”;<br>var result = str.substring(1,4);<br>三个基本的数据类型都有一个相应的对象类，js不仅有数字、字符串、布尔类型，还有Number、String、Bool类，这些类是基本数据类型的包装，这些类不仅有基本数据类型的值，还定义了用来运算的属性和方法</p>
+
+  </div>
+  <div>
+      <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/javascript-第三章-数据类型和值.md" target="_blank">编辑</a>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC"><span class="toc-number">1.</span> <span class="toc-text">第三章 数据类型和值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%95%B0%E5%AD%97"><span class="toc-number">1.1.</span> <span class="toc-text">1.数字</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-%E6%95%B4%E5%9E%8B%E7%9B%B4%E6%8E%A5%E9%87%8F-%E5%8D%81%E8%BF%9B%E5%88%B6"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 整型直接量(十进制)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2%E5%85%AB%E8%BF%9B%E5%88%B6%E5%92%8C%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E7%9B%B4%E6%8E%A5%E9%87%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2八进制和十六进制直接量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3%E6%B5%AE%E7%82%B9%E5%9E%8B%E7%9B%B4%E6%8E%A5%E9%87%8F"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.3浮点型直接量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4%E7%89%B9%E6%AE%8A%E6%95%B0%E5%80%BC"><span class="toc-number">1.1.4.</span> <span class="toc-text">1.4特殊数值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.2.</span> <span class="toc-text">2.字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B4%E6%8E%A5%E9%87%8F"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 字符串直接量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B4%E6%8E%A5%E9%87%8F%E4%B8%AD%E7%9A%84%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 字符串直接量中的转义字符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%B8%83%E5%B0%94%E5%80%BC"><span class="toc-number">1.3.</span> <span class="toc-text">3.布尔值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%87%BD%E6%95%B0"><span class="toc-number">1.4.</span> <span class="toc-text">4.函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-%E5%87%BD%E6%95%B0%E7%9B%B4%E6%8E%A5%E9%87%8F"><span class="toc-number">1.4.1.</span> <span class="toc-text">4.1 函数直接量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.5.</span> <span class="toc-text">5.对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.5.1.</span> <span class="toc-text">5.1 创建对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-%E5%AF%B9%E8%B1%A1%E7%9B%B4%E6%8E%A5%E9%87%8F"><span class="toc-number">1.5.2.</span> <span class="toc-text">5.2 对象直接量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E6%95%B0%E7%BB%84"><span class="toc-number">1.6.</span> <span class="toc-text">6.数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-%E6%95%B0%E7%BB%84%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-number">1.6.1.</span> <span class="toc-text">6.1 数组的创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-%E6%95%B0%E7%BB%84%E7%9B%B4%E6%8E%A5%E9%87%8F"><span class="toc-number">1.6.2.</span> <span class="toc-text">6.2 数组直接量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-null"><span class="toc-number">1.7.</span> <span class="toc-text">7.null</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-undefined"><span class="toc-number">1.8.</span> <span class="toc-text">8.undefined</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-Date%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.9.</span> <span class="toc-text">9.Date对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.10.</span> <span class="toc-text">10.正则表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-Error"><span class="toc-number">1.11.</span> <span class="toc-text">11.Error</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%8C%85%E8%A3%85%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.12.</span> <span class="toc-text">12.基本数据类型的包装对象</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/&text=javascript-第三章-数据类型和值"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/&title=javascript-第三章-数据类型和值"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/&is_video=false&description=javascript-第三章-数据类型和值"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=javascript-第三章-数据类型和值&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/&title=javascript-第三章-数据类型和值"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/&title=javascript-第三章-数据类型和值"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/&title=javascript-第三章-数据类型和值"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/&title=javascript-第三章-数据类型和值"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/&name=javascript-第三章-数据类型和值&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/10/javascript-%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC/&t=javascript-第三章-数据类型和值"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="1.云开发： 云开发是原生Serverless云服务。云开发与传统模式相比少了后端开发这一块。 2.云开发能力： 存储云函数云数据库音视频服务智能图像服务一天多交付，快速迭代产品 3.初始化 12345678wx.cloud.init(&amp;#123;    &#x2F;&#x2F; env 参数说明：    &#x2F;&#x2F;   env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会默认请求到哪个云环境的资源">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript-小程序云开发">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="1.云开发： 云开发是原生Serverless云服务。云开发与传统模式相比少了后端开发这一块。 2.云开发能力： 存储云函数云数据库音视频服务智能图像服务一天多交付，快速迭代产品 3.初始化 12345678wx.cloud.init(&amp;#123;    &#x2F;&#x2F; env 参数说明：    &#x2F;&#x2F;   env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会默认请求到哪个云环境的资源">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-19T14:53:12.000Z">
+<meta property="article:modified_time" content="2021-01-19T15:01:46.768Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>javascript-小程序云开发</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/19/javascript-%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/&text=javascript-小程序云开发"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/&title=javascript-小程序云开发"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/&is_video=false&description=javascript-小程序云开发"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=javascript-小程序云开发&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/&title=javascript-小程序云开发"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/&title=javascript-小程序云开发"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/&title=javascript-小程序云开发"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/&title=javascript-小程序云开发"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/&name=javascript-小程序云开发&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/&t=javascript-小程序云开发"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        javascript-小程序云开发
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-01-19T14:53:12.000Z" itemprop="datePublished">2021-01-19</time>
+        
+        (Updated: <time datetime="2021-01-19T15:01:46.768Z" itemprop="dateModified">2021-01-19</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/Javascript/">Javascript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>1.云开发：</p>
+<p>云开发是原生Serverless云服务。<br>云开发与传统模式相比少了后端开发这一块。</p>
+<p>2.云开发能力：</p>
+<p>存储<br>云函数<br>云数据库<br>音视频服务<br>智能图像服务<br>一天多交付，快速迭代产品</p>
+<p>3.初始化</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">wx.cloud.init(&#123;</span><br><span class="line">    <span class="comment">// env 参数说明：</span></span><br><span class="line">    <span class="comment">//   env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会默认请求到哪个云环境的资源</span></span><br><span class="line">    <span class="comment">//   此处请填入环境 ID, 环境 ID 可打开云控制台查看</span></span><br><span class="line">    <span class="comment">//   如不填则使用默认环境（第一个创建的环境）</span></span><br><span class="line">    env: <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    traceUser: <span class="literal">true</span>, <span class="comment">//是否在云开发控制台可见用户信息</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>4.数据库</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> db = wx.cloud.database();</span><br><span class="line"><span class="keyword">const</span> _ = db.command</span><br><span class="line">db.collection(<span class="string">&#x27;集合名&#x27;</span>).get().then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
+<p>1.get()查询<br>2.where条件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">counter不等于<span class="number">1</span>  <span class="number">3</span>  <span class="number">4</span>的记录</span><br><span class="line">where(&#123;</span><br><span class="line">    counter: _.nin([<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line">&#125;)</span><br><span class="line">counter等于<span class="number">1</span>  <span class="number">3</span>  <span class="number">4</span>的记录</span><br><span class="line">where(&#123;</span><br><span class="line">    counter: _.in([<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>3.字段类型查询</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">db.collection(<span class="string">&quot;data&quot;</span>)</span><br><span class="line">.field(&#123;</span><br><span class="line">    desc: <span class="literal">true</span></span><br><span class="line">&#125;)</span><br><span class="line">.get().then(<span class="built_in">console</span>.log)</span><br><span class="line">查询所有数据但只显示有desc字段的内容，例如：</span><br><span class="line"><span class="number">0</span>: &#123;<span class="attr">_id</span>: <span class="string">&quot;dbbb40a0-a4e0-479d-8432-926d05b002a8&quot;</span>&#125;</span><br><span class="line"><span class="number">1</span>: &#123;<span class="attr">_id</span>: <span class="string">&quot;37aa3ea0-db49-4c12-849f-34e5342966da&quot;</span>, <span class="attr">desc</span>: <span class="string">&quot;name2&quot;</span>&#125;</span><br><span class="line"><span class="number">2</span>: &#123;<span class="attr">_id</span>: <span class="string">&quot;1d6ff516-5714-4970-9a28-a0f8b3f7a3e6&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>4.正则查询<br>可以使用原生的正则对象：<br>    /miniprogram/i<br>db.RegExp对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.RegExp(&#123;</span><br><span class="line">    regexp: <span class="string">&#x27;miniprogram&#x27;</span>,</span><br><span class="line">    options: <span class="string">&#x27;i&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>查询name值以name-0开头的数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    db.collection(<span class="string">&quot;data&quot;</span>)</span><br><span class="line">    .where(&#123;</span><br><span class="line">        name: <span class="keyword">new</span> db.RegExp(&#123;</span><br><span class="line">            regexp: <span class="string">&#x27;name-0[1-9]&#x27;</span>,</span><br><span class="line">            options: <span class="string">&#x27;i&#x27;</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    .get().then(<span class="built_in">console</span>.log)</span><br><span class="line"><span class="number">0</span>: &#123;<span class="attr">_id</span>: <span class="string">&quot;dbbb40a0-a4e0-479d-8432-926d05b002a8&quot;</span>, <span class="attr">counter</span>: <span class="number">1</span>, <span class="attr">name</span>: <span class="string">&quot;name-01&quot;</span>&#125;</span><br><span class="line"><span class="number">1</span>: &#123;<span class="attr">_id</span>: <span class="string">&quot;37aa3ea0-db49-4c12-849f-34e5342966da&quot;</span>, <span class="attr">counter</span>: <span class="number">2</span>, <span class="attr">name</span>: <span class="string">&quot;name-02&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>5.地理位置查询</p>
+<p>添加：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.collection(<span class="string">&#x27;location&#x27;</span>).add(&#123;</span><br><span class="line">    data: &#123;</span><br><span class="line">        location: db.Geo.Point(<span class="number">100.2333</span>,<span class="number">10.9978</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>查询：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.collection(<span class="string">&#x27;location&#x27;</span>).get().then( <span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res.data[<span class="number">0</span>].location)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>6.云开发数据库权限：</p>
+<p>1.仅创建者可写，所有人可读<br>2.仅创建者可读写<br>3.仅管理端可写，所有人可读<br>4.仅管理端可读写</p>
+<p>存储：</p>
+<p>可使用fileid引用存储的资源</p>
+<p>生成文件的临时链接：</p>
+<p>为什么生成临时链接： fileid无法在小程序以外的平台使用<br>如何生成：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wx.cloud.getTempFileURL(&#123;</span><br><span class="line">    fileList: [<span class="string">&#x27;cloud://zjy20200115-8v2oc.7a6a-zjy20200115-8v2oc-1258009129/oL40f5Rxp9wplmcEtUO3Av-4Yr9M/0.5019968125178349_1579073268192.jpg&#x27;</span>],<span class="comment">//fileid</span></span><br><span class="line">    success:<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(res.fileList[<span class="number">0</span>].tempFileURL)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>使用云函数定时器：</p>
+<p>1.在云函数目录下创建config.json文件，并设置触发器<br>2.上传触发器<br>步骤：<br>    1.创建云函数trigger<br>    2.上传云函数<br>    3.云函数目录下trigger创建config.json文件：添加</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;triggers&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&quot;name&quot;</span>: <span class="string">&quot;trigger&quot;</span>, <span class="comment">//触发器名字</span></span><br><span class="line">            <span class="string">&quot;type&quot;</span>: <span class="string">&quot;timer&quot;</span>, <span class="comment">//类型：定时器</span></span><br><span class="line">            <span class="string">&quot;config&quot;</span>: <span class="string">&quot;* * * * * * *&quot;</span> <span class="comment">//触发事件配置，七位从右到左代表：年 星期 月 日 时 分 秒 ；七个*代表每秒钟执行一次</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4.上传触发器<br>5.在云开发控制台-云函数-日志可查看</p>
+<p>获取集合中指定记录的引用</p>
+<p>db.collection(‘todos’).doc(‘my-todo-id’)<br>方法接受一个 id 参数，指定需引用的记录的 _id</p>
+<p>limit(number):指定查询结果集数量上限:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.collection(<span class="string">&#x27;todos&#x27;</span>).limit(<span class="number">10</span>)</span><br><span class="line">.get()</span><br><span class="line">.then(<span class="built_in">console</span>.log)</span><br><span class="line">.catch(<span class="built_in">console</span>.error)</span><br></pre></td></tr></table></figure>
+<p>skip(offset:number): 指定查询返回结果时从指定序列后的结果开始返回，常用于分页</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.collection(<span class="string">&#x27;todos&#x27;</span>).skip(<span class="number">10</span>)</span><br><span class="line">.get()</span><br><span class="line">.then(<span class="built_in">console</span>.log)</span><br><span class="line">.catch(<span class="built_in">console</span>.error)</span><br></pre></td></tr></table></figure>
+<p>云上传：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">wx.chooseImage(&#123;</span><br><span class="line">    success: <span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">        wx.cloud.uploadFile(&#123;</span><br><span class="line">            cloudPath: <span class="string">&#x27;images/xx.png&#x27;</span>,</span><br><span class="line">            filePath: res.tempFilePaths[<span class="number">0</span>],</span><br><span class="line">        &#125;).then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(res.fileID)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>定位：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">wx.chooseLocation(&#123;</span><br><span class="line">    success: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(res)</span><br><span class="line">        that.setData(&#123;</span><br><span class="line">            location:&#123;</span><br><span class="line">                name: res.name,</span><br><span class="line">                latitude: res.latitude,</span><br><span class="line">                longitude: res.longitude,</span><br><span class="line">                address: res.address</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>查看定位：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wx.openLocation(&#123;</span><br><span class="line">    latitude: <span class="built_in">this</span>.data.todoInfo.location.latitude,</span><br><span class="line">    longitude: <span class="built_in">this</span>.data.todoInfo.location.longitude,</span><br><span class="line">    name: <span class="built_in">this</span>.data.todoInfo.location.name,</span><br><span class="line">    address: <span class="built_in">this</span>.data.todoInfo.location.address   </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>report-submit： true,给表单此属性设置为true,会返回formId,用于发送模板消息</p>
+<p>云函数查询数据：</p>
+<p>新建云函数：query：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cloud = <span class="built_in">require</span>(<span class="string">&#x27;wx-server-sdk&#x27;</span>)</span><br><span class="line">cloud.init()</span><br><span class="line"><span class="keyword">const</span> db = cloud.database()</span><br><span class="line"><span class="comment">// 云函数入口函数</span></span><br><span class="line"><span class="built_in">exports</span>.main = <span class="keyword">async</span> (event, context) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> db.collection(<span class="string">&#x27;todos&#x27;</span>).get();</span><br><span class="line">&#125;</span><br><span class="line">页面查询触发：</span><br><span class="line">wx.cloud.callFunction(&#123;</span><br><span class="line">    name: <span class="string">&#x27;query&#x27;</span>,</span><br><span class="line">&#125;).then(<span class="built_in">console</span>.log)</span><br><span class="line"></span><br><span class="line">添加： add(&#123;<span class="attr">data</span>:&#123;&#125;&#125;)</span><br><span class="line">删除： remove()</span><br><span class="line">编辑： update(&#123;</span><br><span class="line">    data:&#123;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>在云函数中使用存储资源：</p>
+<p>1.上传文件： uploadFile</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exports</span>.main = <span class="keyword">async</span> (event, context) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> fileStream = fs.createReadStream(path.join(__dirname, <span class="string">&#x27;demo.jpg&#x27;</span>))</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> cloud.uploadFile(&#123;</span><br><span class="line">        cloudPath: <span class="string">&#x27;demo.jpg&#x27;</span>,</span><br><span class="line">        fileContent: fileStream,</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.下载文件： downloadFile<br>3.获取临时文件链接： getTempFileURL<br>4.删除文件： deleteFile</p>
+<p>云函数访问第三方服务器:</p>
+<p>1.安装got （版本9.6.0，10以上版本调用失败）<br>2.开启npm 模块<br>3.云函数修改后需重新上传</p>
+<p>云函数访问数据库：</p>
+<p>1.安装mysql2: npm i mysql2<br>2.引入： const mysql2 = require(‘mysql2’);<br>3.连接：<br>    const connection = await mysql.createConnection({<br>        host: ‘192.168.3.66’,<br>        port: ‘3306’,<br>        user: ‘root’,<br>        database: ‘sample’,<br>        password: ‘123456’<br>    })<br>    await connection.execute(“SELECT version();”)</p>
+<p>云函数中生成小程序二维码：</p>
+<p>1.引用安装wx-js-utils：npm install wx-js-utils<br>2.获取token和小程序id等信息：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;</span><br><span class="line">    WXMINIUser,</span><br><span class="line">    WXMINIQR</span><br><span class="line">&#125; = <span class="built_in">require</span>(<span class="string">&#x27;wx-js-utils&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> appId = <span class="string">&#x27;&#x27;</span>; <span class="comment">// 小程序 appId</span></span><br><span class="line"><span class="keyword">const</span> secret = <span class="string">&#x27;&#x27;</span>; <span class="comment">// 小程序 secret</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取小程序码，A接口</span></span><br><span class="line"><span class="keyword">let</span> wXMINIUser = <span class="keyword">new</span> WXMINIUser(&#123;</span><br><span class="line">    appId,</span><br><span class="line">    secret</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一般需要先获取 access_token</span></span><br><span class="line"><span class="keyword">let</span> access_token = <span class="keyword">await</span> wXMINIUser.getAccessToken();</span><br><span class="line"><span class="keyword">let</span> wXMINIQR = <span class="keyword">new</span> WXMINIQR();</span><br></pre></td></tr></table></figure>
+<p>3.获取二维码api: getQR</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">options: &#123;</span><br><span class="line">    access_token,</span><br><span class="line">    path,<span class="comment">//</span></span><br><span class="line">    width</span><br><span class="line">&#125;</span><br><span class="line">示例：</span><br><span class="line"><span class="keyword">let</span> qrResult = <span class="keyword">await</span> wXMINIQR.getQR(&#123;</span><br><span class="line">    access_token,</span><br><span class="line">    path: <span class="string">&#x27;pages/index/index&#x27;</span></span><br><span class="line">&#125;);</span><br><span class="line">上传：</span><br><span class="line">wx.cloud.uploadFile(&#123;bn </span><br><span class="line">    cloudPath: <span class="string">&#x27;qr/qr.png&#x27;</span>,</span><br><span class="line">    fileConent: qrResult</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>腾讯云短信sdk: qcloudsms_js</p>
+<p>npm i qcloudsms_js</p>
+<p>微信支付： node tenpay</p>
+<p>npm i tenpay</p>
+
+  </div>
+  <div>
+      <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/javascript-小程序云开发.md" target="_blank">编辑</a>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/&text=javascript-小程序云开发"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/&title=javascript-小程序云开发"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/&is_video=false&description=javascript-小程序云开发"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=javascript-小程序云开发&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/&title=javascript-小程序云开发"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/&title=javascript-小程序云开发"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/&title=javascript-小程序云开发"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/&title=javascript-小程序云开发"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/&name=javascript-小程序云开发&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/&t=javascript-小程序云开发"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

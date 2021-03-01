@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="使用lodash:是一个一致性、模块化、高性能的 JavaScript 实用工具库。要使用lodash 需要本地安装 1--npm install --save lodash 在安装一个要打包到生产环境的安装包时，你应该使用 npm install –save，如果你在安装一个用于开发环境的安装包（例如，linter, 测试库等），你应该使用 npm install –save-dev。请在 np">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack-webpack基础使用">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="使用lodash:是一个一致性、模块化、高性能的 JavaScript 实用工具库。要使用lodash 需要本地安装 1--npm install --save lodash 在安装一个要打包到生产环境的安装包时，你应该使用 npm install –save，如果你在安装一个用于开发环境的安装包（例如，linter, 测试库等），你应该使用 npm install –save-dev。请在 np">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-19T14:43:37.000Z">
+<meta property="article:modified_time" content="2021-01-19T14:50:46.198Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>webpack-webpack基础使用</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/19/javascript-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/19/vue-vue%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%82%B9/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/&text=webpack-webpack基础使用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/&title=webpack-webpack基础使用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/&is_video=false&description=webpack-webpack基础使用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=webpack-webpack基础使用&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/&title=webpack-webpack基础使用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/&title=webpack-webpack基础使用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/&title=webpack-webpack基础使用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/&title=webpack-webpack基础使用"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/&name=webpack-webpack基础使用&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/&t=webpack-webpack基础使用"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8lodash-%E6%98%AF%E4%B8%80%E4%B8%AA%E4%B8%80%E8%87%B4%E6%80%A7%E3%80%81%E6%A8%A1%E5%9D%97%E5%8C%96%E3%80%81%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84-JavaScript-%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7%E5%BA%93%E3%80%82"><span class="toc-number">1.</span> <span class="toc-text">使用lodash:是一个一致性、模块化、高性能的 JavaScript 实用工具库。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9C%A8%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E8%A6%81%E6%89%93%E5%8C%85%E5%88%B0%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85%E6%97%B6%EF%BC%8C%E4%BD%A0%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8-npm-install-%E2%80%93save%EF%BC%8C%E5%A6%82%E6%9E%9C%E4%BD%A0%E5%9C%A8%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E7%94%A8%E4%BA%8E%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85%EF%BC%88%E4%BE%8B%E5%A6%82%EF%BC%8Clinter-%E6%B5%8B%E8%AF%95%E5%BA%93%E7%AD%89%EF%BC%89%EF%BC%8C%E4%BD%A0%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8-npm-install-%E2%80%93save-dev%E3%80%82%E8%AF%B7%E5%9C%A8-npm-%E6%96%87%E6%A1%A3-%E4%B8%AD%E6%9F%A5%E6%89%BE%E6%9B%B4%E5%A4%9A%E4%BF%A1%E6%81%AF%E3%80%82"><span class="toc-number">2.</span> <span class="toc-text">在安装一个要打包到生产环境的安装包时，你应该使用 npm install –save，如果你在安装一个用于开发环境的安装包（例如，linter, 测试库等），你应该使用 npm install –save-dev。请在 npm 文档 中查找更多信息。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BDcss"><span class="toc-number">3.</span> <span class="toc-text">加载css</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87%EF%BC%9A-%E5%9C%A8Css%E4%B8%AD%E6%9C%89%E8%83%8C%E6%99%AF%E5%92%8C%E5%9B%BE%E6%A0%87%E7%AD%89%E5%9B%BE%E7%89%87%EF%BC%8C%E9%9C%80%E8%A6%81%E5%AE%89%E8%A3%85file-loader%E6%9D%A5%E5%A4%84%E7%90%86%EF%BC%9A"><span class="toc-number"></span> <span class="toc-text">加载图片：  在Css中有背景和图标等图片，需要安装file-loader来处理：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E5%AD%97%E4%BD%93%EF%BC%9A-file-loader-%E5%92%8C-url-loader-%E5%8F%AF%E4%BB%A5%E6%8E%A5%E6%94%B6%E5%B9%B6%E5%8A%A0%E8%BD%BD%E4%BB%BB%E4%BD%95%E6%96%87%E4%BB%B6%EF%BC%8C%E7%84%B6%E5%90%8E%E5%B0%86%E5%85%B6%E8%BE%93%E5%87%BA%E5%88%B0%E6%9E%84%E5%BB%BA%E7%9B%AE%E5%BD%95"><span class="toc-number"></span> <span class="toc-text">加载字体： file-loader 和 url-loader 可以接收并加载任何文件，然后将其输出到构建目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#html-webpack-plugin"><span class="toc-number"></span> <span class="toc-text">html-webpack-plugin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#clean-webpack-plugin"><span class="toc-number"></span> <span class="toc-text">clean-webpack-plugin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#source-map"><span class="toc-number"></span> <span class="toc-text">source map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack%E7%BC%96%E8%AF%91%E6%A8%A1%E5%BC%8F"><span class="toc-number"></span> <span class="toc-text">webpack编译模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tree-shaking%E6%98%AF%E4%B8%80%E4%B8%AA%E6%9C%AF%E8%AF%AD%EF%BC%8C%E9%80%9A%E5%B8%B8%E7%94%A8%E4%BA%8E%E6%8F%8F%E8%BF%B0%E7%A7%BB%E9%99%A4-JavaScript-%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%AD%E7%9A%84%E6%9C%AA%E5%BC%95%E7%94%A8%E4%BB%A3%E7%A0%81-dead-code"><span class="toc-number"></span> <span class="toc-text">tree shaking是一个术语，通常用于描述移除 JavaScript 上下文中的未引用代码(dead-code)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#glifyJsPlugin-%E7%94%A8%E6%9D%A5%E5%AF%B9js%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E5%8E%8B%E7%BC%A9%EF%BC%8C%E4%BB%8E%E8%80%8C%E5%87%8F%E5%B0%8Fjs%E6%96%87%E4%BB%B6%E7%9A%84%E5%A4%A7%E5%B0%8F%EF%BC%8C%E5%8A%A0%E9%80%9Fload%E9%80%9F%E5%BA%A6%E3%80%82"><span class="toc-number"></span> <span class="toc-text">glifyJsPlugin 用来对js文件进行压缩，从而减小js文件的大小，加速load速度。</span></a>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        webpack-webpack基础使用
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-01-19T14:43:37.000Z" itemprop="datePublished">2021-01-19</time>
+        
+        (Updated: <time datetime="2021-01-19T14:50:46.198Z" itemprop="dateModified">2021-01-19</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/webpack/">webpack</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h5 id="使用lodash-是一个一致性、模块化、高性能的-JavaScript-实用工具库。"><a href="#使用lodash-是一个一致性、模块化、高性能的-JavaScript-实用工具库。" class="headerlink" title="使用lodash:是一个一致性、模块化、高性能的 JavaScript 实用工具库。"></a>使用lodash:是一个一致性、模块化、高性能的 JavaScript 实用工具库。</h5><p>要使用lodash 需要本地安装</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--npm install --save lodash</span><br></pre></td></tr></table></figure>
+<h5 id="在安装一个要打包到生产环境的安装包时，你应该使用-npm-install-–save，如果你在安装一个用于开发环境的安装包（例如，linter-测试库等），你应该使用-npm-install-–save-dev。请在-npm-文档-中查找更多信息。"><a href="#在安装一个要打包到生产环境的安装包时，你应该使用-npm-install-–save，如果你在安装一个用于开发环境的安装包（例如，linter-测试库等），你应该使用-npm-install-–save-dev。请在-npm-文档-中查找更多信息。" class="headerlink" title="在安装一个要打包到生产环境的安装包时，你应该使用 npm install –save，如果你在安装一个用于开发环境的安装包（例如，linter, 测试库等），你应该使用 npm install –save-dev。请在 npm 文档 中查找更多信息。"></a>在安装一个要打包到生产环境的安装包时，你应该使用 npm install –save，如果你在安装一个用于开发环境的安装包（例如，linter, 测试库等），你应该使用 npm install –save-dev。请在 npm 文档 中查找更多信息。</h5><h5 id="加载css"><a href="#加载css" class="headerlink" title="加载css"></a>加载css</h5><p>为了从 JavaScript 模块中 import 一个 CSS 文件，你需要在 module 配置中 安装并添加 style-loader 和 css-loader：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--npm install --save-dev style-loader css-loader</span><br></pre></td></tr></table></figure>
+<p>在webpack.config.js中配置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>:&#123;</span><br><span class="line">        rules:[</span><br><span class="line">            &#123;</span><br><span class="line">                test:<span class="regexp">/\.css$/</span>,</span><br><span class="line">                user:[</span><br><span class="line">                    <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">                    <span class="string">&#x27;css-loader&#x27;</span></span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="加载图片：-在Css中有背景和图标等图片，需要安装file-loader来处理："><a href="#加载图片：-在Css中有背景和图标等图片，需要安装file-loader来处理：" class="headerlink" title="加载图片：  在Css中有背景和图标等图片，需要安装file-loader来处理："></a>加载图片：  在Css中有背景和图标等图片，需要安装file-loader来处理：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev file-loader</span><br></pre></td></tr></table></figure>
+<p>在配置文件中配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">        test:<span class="regexp">/\.(png|svg|jpg|gif)&amp;/</span>,</span><br><span class="line">        use:[</span><br><span class="line">            <span class="string">&#x27;file-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="加载字体：-file-loader-和-url-loader-可以接收并加载任何文件，然后将其输出到构建目录"><a href="#加载字体：-file-loader-和-url-loader-可以接收并加载任何文件，然后将其输出到构建目录" class="headerlink" title="加载字体： file-loader 和 url-loader 可以接收并加载任何文件，然后将其输出到构建目录"></a>加载字体： file-loader 和 url-loader 可以接收并加载任何文件，然后将其输出到构建目录</h3><p>在配置文件中配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">        test:<span class="regexp">/\.(woff|woff2|eot|ttf|otf)$/</span>,</span><br><span class="line">        use:[</span><br><span class="line">            <span class="string">&#x27;file-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>此外，可以加载的有用资源还有数据，如 JSON 文件，CSV、TSV 和 XML。类似于 NodeJS，JSON 支持实际上是内置的，也就是说 import Data from ‘./data.json’ 默认将正常运行。要导入 CSV、TSV 和 XML，你可以使用 csv-loader 和 xml-loader：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev csv-loader xml-loader</span><br></pre></td></tr></table></figure>
+<p>在配置文件中配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">        test:<span class="regexp">/\.(csv|tsv)$/</span>,</span><br><span class="line">        use:[</span><br><span class="line">            <span class="string">&#x27;csv-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,&#123;</span><br><span class="line">        test:<span class="regexp">/\.xml$/</span>,</span><br><span class="line">        use:[</span><br><span class="line">            <span class="string">&#x27;xml-loader&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="html-webpack-plugin"><a href="#html-webpack-plugin" class="headerlink" title="html-webpack-plugin"></a>html-webpack-plugin</h3><p>如果我们更改了我们的一个入口起点的名称，甚至添加了一个新的名称，会发生什么？生成的包将被重命名在一个构建中，但是我们的index.html文件仍然会引用旧的名字。我们用 HtmlWebpackPlugin 来解决这个问题。首先安装插件，并且调整 webpack.config.js 文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev html-webpack-plugin</span><br><span class="line">webpack.config.js:</span><br><span class="line">    <span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">&#x27;html-webpack-plugin&#x27;</span>);</span><br><span class="line">    plugins: [</span><br><span class="line">       <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">       title: <span class="string">&#x27;Output Management&#x27;</span></span><br><span class="line">     &#125;)</span><br><span class="line">   ],</span><br></pre></td></tr></table></figure>
+<h3 id="clean-webpack-plugin"><a href="#clean-webpack-plugin" class="headerlink" title="clean-webpack-plugin"></a>clean-webpack-plugin</h3><p>清理 /dist 文件夹:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">npm install clean-webpack-plugin --save-dev</span><br><span class="line">webpack.config.js:</span><br><span class="line">    <span class="keyword">const</span> &#123;CleanWebpackPlugin&#125; = <span class="built_in">require</span>(<span class="string">&#x27;clean-webpack-plugin&#x27;</span>);</span><br><span class="line">    plugins: [</span><br><span class="line">      <span class="keyword">new</span> CleanWebpackPlugin(), /+</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+<p>通过 manifest，webpack 能够对「你的模块映射到输出 bundle 的过程」保持追踪</p>
+<h3 id="source-map"><a href="#source-map" class="headerlink" title="source map"></a>source map</h3><p>使用 source map: 为了更容易地追踪错误和警告，JavaScript 提供了 source map 功能，将编译后的代码映射回原始源代码。如果一个错误来自于 b.js，source map 就会明确的告诉你。ource map 有很多不同的选项可用,对于本指南，我们使用 inline-source-map 选项</p>
+<p>devtool: ‘inline-source-map’</p>
+<h3 id="webpack编译模式"><a href="#webpack编译模式" class="headerlink" title="webpack编译模式"></a>webpack编译模式</h3><p>每次要编译代码时，手动运行 npm run build 就会变得很麻烦,webpack 中有几个不同的选项，可以帮助你在代码发生变化后自动编译代码：</p>
+<ul>
+<li><p>1.webpack’s Watch Mode 使用观察模式 依赖图中的所有文件以进行更改。如果其中一个文件被更新，代码将被重新编译，所以你不必手动运行整个构建。<br>  scripts中添加”watch”: “webpack –watch”,唯一的缺点是，为了看到修改后的实际效果，你需要刷新浏览器。如果能够自动刷新浏览器就更好了，<br>  可以尝试使用 webpack-dev-server，恰好可以实现我们想要的功能</p>
+</li>
+<li><p>2.webpack-dev-server: 为你提供了一个简单的 web 服务器，并且能够实时重新加载(live reloading)让我们设置以下：npm install –save-dev webpack-dev-server<br>  修改配置文件，告诉开发服务器(dev server)，在哪里查找文件,webpack.config.js:<br>  devServer: {<br>   contentBase: ‘./dist’<br>  },<br>  以上配置告知 webpack-dev-server，在 localhost:8080 下建立服务，将 dist 目录   下的文件，作为可访问文件。在package.json中添加一个script脚本可直接运行开发服务器。</p>
+</li>
+<li><p>3.webpack-dev-middleware 是一个容器(wrapper)，它可以把 webpack 处理后的文件传递给一个服务器(server)。 webpack-dev-server 在内部使用了它，同时，它也可以作为一个单独的包来使用，以便进行更多自定义设置来实现更多的需求。接下来是一个 webpack-dev-middleware 配合 express server 的示例:<br>  首先，安装 express 和 webpack-dev-middleware:<br>  npm install –save-dev express webpack-dev-middleware<br>  webpack.config.js: output:{publicPath:’/‘}<br>  新建server.js,再添加一个npm script :”server”: “node server.js”,运行npm run server</p>
+</li>
+</ul>
+<h3 id="tree-shaking是一个术语，通常用于描述移除-JavaScript-上下文中的未引用代码-dead-code"><a href="#tree-shaking是一个术语，通常用于描述移除-JavaScript-上下文中的未引用代码-dead-code" class="headerlink" title="tree shaking是一个术语，通常用于描述移除 JavaScript 上下文中的未引用代码(dead-code)"></a>tree shaking是一个术语，通常用于描述移除 JavaScript 上下文中的未引用代码(dead-code)</h3><h3 id="glifyJsPlugin-用来对js文件进行压缩，从而减小js文件的大小，加速load速度。"><a href="#glifyJsPlugin-用来对js文件进行压缩，从而减小js文件的大小，加速load速度。" class="headerlink" title="glifyJsPlugin 用来对js文件进行压缩，从而减小js文件的大小，加速load速度。"></a>glifyJsPlugin 用来对js文件进行压缩，从而减小js文件的大小，加速load速度。</h3><p>uglifyJsPlugin会拖慢webpack的编译速度，所有建议在开发简单将其关闭，部署的时候再将其打开。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--npm install uglifyjs-webpack-plugin --save-dev</span><br></pre></td></tr></table></figure>
+<p>通过webpack-merge配置不同环境的构建配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--npm install --save-dev webpack-merge</span><br></pre></td></tr></table></figure>
+<p>多数情况下，你也可以进行 CSS 分离，以便在生产环境中节省加载时间:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--npm install --save-dev extract-text-webpack-plugin</span><br></pre></td></tr></table></figure>
+<p>它会将所有的入口 chunk(entry chunks)中引用的 *.css，移动到独立分离的 CSS 文件。因此，你的样式将不再内嵌到 JS bundle 中，而是会放到一个单独的 CSS 文件（即 styles.css）当中。 如果你的样式文件大小较大，这会做更快提前加载，因为 CSS bundle 会跟 JS bundle 并行加载。</p>
+<p>代码分离是 webpack 中最引人注目的特性之一。此特性能够把代码分离到不同的 bundle 中，然后可以按需加载或并行加载这些文件。代码分离可以用于获取更小的 bundle，以及控制资源加载优先级，如果使用合理，会极大影响加载时间。有三种常用的代码分离方法：</p>
+<ul>
+<li><p>1.入口起点：使用 entry 配置手动地分离代码。</p>
+</li>
+<li><p>2.防止重复(prevent duplication): 通过使用 CommonsChunkPlugin 来移除重复的模块</p>
+</li>
+<li><p>3.动态导入(dynamic imports):</p>
+<p>  涉及到动态代码拆分时，webpack 提供了两个类似的技术。对于动态导入，第一种，也是优先选择的方式是，使用符合 ECMAScript 提案 的 import() 语法。第二种，则是使用 webpack 特定的 require.ensure<br>  import() 调用会在内部用到 promises:使用： import().then(),由于import（）会返回一个promise函数，因此可以和async函数一起使用，但是需要使用像babel这样的预处理器和Syntax Dynamic Import Babel Plugin：</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--npm install --save-dev @babel/plugin-syntax-dynamic-<span class="keyword">import</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+  </div>
+  <div>
+      <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/webpack-webpack基础使用.md" target="_blank">编辑</a>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8lodash-%E6%98%AF%E4%B8%80%E4%B8%AA%E4%B8%80%E8%87%B4%E6%80%A7%E3%80%81%E6%A8%A1%E5%9D%97%E5%8C%96%E3%80%81%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84-JavaScript-%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7%E5%BA%93%E3%80%82"><span class="toc-number">1.</span> <span class="toc-text">使用lodash:是一个一致性、模块化、高性能的 JavaScript 实用工具库。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9C%A8%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E8%A6%81%E6%89%93%E5%8C%85%E5%88%B0%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85%E6%97%B6%EF%BC%8C%E4%BD%A0%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8-npm-install-%E2%80%93save%EF%BC%8C%E5%A6%82%E6%9E%9C%E4%BD%A0%E5%9C%A8%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E7%94%A8%E4%BA%8E%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85%EF%BC%88%E4%BE%8B%E5%A6%82%EF%BC%8Clinter-%E6%B5%8B%E8%AF%95%E5%BA%93%E7%AD%89%EF%BC%89%EF%BC%8C%E4%BD%A0%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8-npm-install-%E2%80%93save-dev%E3%80%82%E8%AF%B7%E5%9C%A8-npm-%E6%96%87%E6%A1%A3-%E4%B8%AD%E6%9F%A5%E6%89%BE%E6%9B%B4%E5%A4%9A%E4%BF%A1%E6%81%AF%E3%80%82"><span class="toc-number">2.</span> <span class="toc-text">在安装一个要打包到生产环境的安装包时，你应该使用 npm install –save，如果你在安装一个用于开发环境的安装包（例如，linter, 测试库等），你应该使用 npm install –save-dev。请在 npm 文档 中查找更多信息。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BDcss"><span class="toc-number">3.</span> <span class="toc-text">加载css</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87%EF%BC%9A-%E5%9C%A8Css%E4%B8%AD%E6%9C%89%E8%83%8C%E6%99%AF%E5%92%8C%E5%9B%BE%E6%A0%87%E7%AD%89%E5%9B%BE%E7%89%87%EF%BC%8C%E9%9C%80%E8%A6%81%E5%AE%89%E8%A3%85file-loader%E6%9D%A5%E5%A4%84%E7%90%86%EF%BC%9A"><span class="toc-number"></span> <span class="toc-text">加载图片：  在Css中有背景和图标等图片，需要安装file-loader来处理：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E5%AD%97%E4%BD%93%EF%BC%9A-file-loader-%E5%92%8C-url-loader-%E5%8F%AF%E4%BB%A5%E6%8E%A5%E6%94%B6%E5%B9%B6%E5%8A%A0%E8%BD%BD%E4%BB%BB%E4%BD%95%E6%96%87%E4%BB%B6%EF%BC%8C%E7%84%B6%E5%90%8E%E5%B0%86%E5%85%B6%E8%BE%93%E5%87%BA%E5%88%B0%E6%9E%84%E5%BB%BA%E7%9B%AE%E5%BD%95"><span class="toc-number"></span> <span class="toc-text">加载字体： file-loader 和 url-loader 可以接收并加载任何文件，然后将其输出到构建目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#html-webpack-plugin"><span class="toc-number"></span> <span class="toc-text">html-webpack-plugin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#clean-webpack-plugin"><span class="toc-number"></span> <span class="toc-text">clean-webpack-plugin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#source-map"><span class="toc-number"></span> <span class="toc-text">source map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack%E7%BC%96%E8%AF%91%E6%A8%A1%E5%BC%8F"><span class="toc-number"></span> <span class="toc-text">webpack编译模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tree-shaking%E6%98%AF%E4%B8%80%E4%B8%AA%E6%9C%AF%E8%AF%AD%EF%BC%8C%E9%80%9A%E5%B8%B8%E7%94%A8%E4%BA%8E%E6%8F%8F%E8%BF%B0%E7%A7%BB%E9%99%A4-JavaScript-%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%AD%E7%9A%84%E6%9C%AA%E5%BC%95%E7%94%A8%E4%BB%A3%E7%A0%81-dead-code"><span class="toc-number"></span> <span class="toc-text">tree shaking是一个术语，通常用于描述移除 JavaScript 上下文中的未引用代码(dead-code)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#glifyJsPlugin-%E7%94%A8%E6%9D%A5%E5%AF%B9js%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E5%8E%8B%E7%BC%A9%EF%BC%8C%E4%BB%8E%E8%80%8C%E5%87%8F%E5%B0%8Fjs%E6%96%87%E4%BB%B6%E7%9A%84%E5%A4%A7%E5%B0%8F%EF%BC%8C%E5%8A%A0%E9%80%9Fload%E9%80%9F%E5%BA%A6%E3%80%82"><span class="toc-number"></span> <span class="toc-text">glifyJsPlugin 用来对js文件进行压缩，从而减小js文件的大小，加速load速度。</span></a>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/&text=webpack-webpack基础使用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/&title=webpack-webpack基础使用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/&is_video=false&description=webpack-webpack基础使用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=webpack-webpack基础使用&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/&title=webpack-webpack基础使用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/&title=webpack-webpack基础使用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/&title=webpack-webpack基础使用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/&title=webpack-webpack基础使用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/&name=webpack-webpack基础使用&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/webpack-webpack%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/&t=webpack-webpack基础使用"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

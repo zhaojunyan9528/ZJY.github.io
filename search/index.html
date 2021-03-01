@@ -7,12 +7,12 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/about/index.html">
+<meta property="og:title" content="Search">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/search/index.html">
 <meta property="og:site_name" content="ZJY">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-01-10T05:20:35.000Z">
-<meta property="article:modified_time" content="2021-01-10T05:20:35.885Z">
+<meta property="article:published_time" content="2021-01-14T09:02:50.000Z">
+<meta property="article:modified_time" content="2021-01-14T09:11:42.029Z">
 <meta property="article:author" content="ZJY">
 <meta name="twitter:card" content="summary">
     
@@ -34,7 +34,7 @@
       
     
     <!-- title -->
-    <title>about</title>
+    <title>Search</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/ZJY.github.io/css/style.css">
@@ -91,8 +91,15 @@
 
   <div class="content" itemprop="articleBody">
       
-          
-        
+        <section id="search">
+  <form>
+    <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+  </form>
+  <div id="search-result"></div>
+  <p class="search-no-result">抱歉，没有符合您搜索条件的结果。请换其它关键词再试。</p>
+</section>
+
+      
   </div>
 </article>
 
@@ -146,6 +153,45 @@
 <script src="/ZJY.github.io/js/main.js"></script>
 
 <!-- search -->
+
+  
+<script src="/ZJY.github.io/js/search.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+
+    var $inputArea = $("input#search-input");
+    var $resultArea = document.querySelector("div#search-result");
+
+    $inputArea.focus(function() {
+      var search_path = "search.xml";
+      if (search_path.length == 0) {
+        search_path = "search.xml";
+      }
+      var path = "/ZJY.github.io/" + search_path;
+      searchFunc(path, 'search-input', 'search-result');
+    });
+
+    $inputArea.keydown(function(e) {
+      if (e.which == 13) {
+        e.preventDefault();
+      }
+    });
+
+    var observer = new MutationObserver(function(mutationsList, observer) {
+      if (mutationsList.length == 1) {
+        if (mutationsList[0].addedNodes.length) {
+          $(".search-no-result").hide();
+        } else if (mutationsList[0].removedNodes.length) {
+          $(".search-no-result").show(200);
+        }
+      }
+    });
+
+    observer.observe($resultArea, { childList: true });
+
+  });
+  </script>
 
 <!-- Google Analytics -->
 

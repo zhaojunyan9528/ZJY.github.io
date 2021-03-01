@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="第八章-对象1. 对象和属性对象是一种复合数据类型，将多个数据值存储在一个单元中，并使用名字来存取这些值。解释对象的另一种方式就是，对象是一个无序的属性集合，每个属性都有自己的名字和值，存储在对象中已命名的值既可以是数字字符串也可以是对象。 1.1 对象的创建对象是由运算符new创建的，在这个运算符之后必须有用于初始化对象的构造函数名，可以用如下代码创建空对象（没有属性的对象）： 1var o &#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript-第八章-对象">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="第八章-对象1. 对象和属性对象是一种复合数据类型，将多个数据值存储在一个单元中，并使用名字来存取这些值。解释对象的另一种方式就是，对象是一个无序的属性集合，每个属性都有自己的名字和值，存储在对象中已命名的值既可以是数字字符串也可以是对象。 1.1 对象的创建对象是由运算符new创建的，在这个运算符之后必须有用于初始化对象的构造函数名，可以用如下代码创建空对象（没有属性的对象）： 1var o &#x3D;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-13T09:08:42.000Z">
+<meta property="article:modified_time" content="2021-01-13T09:46:28.264Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>javascript-第八章-对象</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E4%B9%9D%E7%AB%A0-%E6%95%B0%E7%BB%84/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%87%BD%E6%95%B0/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/&text=javascript-第八章-对象"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/&title=javascript-第八章-对象"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/&is_video=false&description=javascript-第八章-对象"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=javascript-第八章-对象&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/&title=javascript-第八章-对象"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/&title=javascript-第八章-对象"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/&title=javascript-第八章-对象"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/&title=javascript-第八章-对象"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/&name=javascript-第八章-对象&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/&t=javascript-第八章-对象"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.</span> <span class="toc-text">第八章-对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%B1%9E%E6%80%A7"><span class="toc-number">1.1.</span> <span class="toc-text">1. 对象和属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 对象的创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E5%B1%9E%E6%80%A7%E7%9A%84%E8%AE%BE%E7%BD%AE%E5%92%8C%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2 属性的设置和查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E5%B1%9E%E6%80%A7%E7%9A%84%E6%9E%9A%E4%B8%BE"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.3 属性的枚举</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-%E6%9C%AA%E5%AE%9A%E4%B9%89%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-number">1.1.4.</span> <span class="toc-text">1.4 未定义的属性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text">2. 构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">3. 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%8E%9F%E5%9E%8B%E5%AF%B9%E8%B1%A1%E5%92%8C%E7%BB%A7%E6%89%BF"><span class="toc-number">1.4.</span> <span class="toc-text">4.原型对象和继承</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%86%85%E9%83%A8%E7%B1%BB"><span class="toc-number">1.4.1.</span> <span class="toc-text">4.1 原型和内部类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84javascript"><span class="toc-number">1.5.</span> <span class="toc-text">5. 面向对象的javascript</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-%E5%AE%9E%E4%BE%8B%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-number">1.5.1.</span> <span class="toc-text">5.1 实例的属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.2.</span> <span class="toc-text">5.2 实例方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-3-%E7%B1%BB%E5%B1%9E%E6%80%A7"><span class="toc-number">1.5.3.</span> <span class="toc-text">5.3 类属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-4-%E7%B1%BB%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.4.</span> <span class="toc-text">5.4 类方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-5-%E4%BE%8B%E5%AD%90%EF%BC%8C%E7%B1%BBCircle"><span class="toc-number">1.5.5.</span> <span class="toc-text">5.5 例子，类Circle()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-6-%E4%BE%8B%E5%AD%90%EF%BC%8C%E7%B1%BBComplex%E5%A4%8D%E6%95%B0"><span class="toc-number">1.5.6.</span> <span class="toc-text">5.6 例子，类Complex复数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-7-%E8%B6%85%E7%B1%BB%E5%92%8C%E5%AD%90%E7%B1%BB"><span class="toc-number">1.5.7.</span> <span class="toc-text">5.7 超类和子类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95"><span class="toc-number">1.6.</span> <span class="toc-text">6. 对象的属性和方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-constructor%E5%B1%9E%E6%80%A7"><span class="toc-number">1.6.1.</span> <span class="toc-text">6.1 constructor属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-toString%E6%96%B9%E6%B3%95"><span class="toc-number">1.6.2.</span> <span class="toc-text">6.2 toString方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-3-toLocaelString%E6%96%B9%E6%B3%95"><span class="toc-number">1.6.3.</span> <span class="toc-text">6.3 toLocaelString方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-4-valueOf%E6%96%B9%E6%B3%95"><span class="toc-number">1.6.4.</span> <span class="toc-text">6.4 valueOf方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-5-hasOwnProperty"><span class="toc-number">1.6.5.</span> <span class="toc-text">6.5 hasOwnProperty</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-6-propertyIsEnumerable-%E6%96%B9%E6%B3%95"><span class="toc-number">1.6.6.</span> <span class="toc-text">6.6 propertyIsEnumerable()方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-7-isPrototypeOf%E6%96%B9%E6%B3%95"><span class="toc-number">1.6.7.</span> <span class="toc-text">6.7 isPrototypeOf方法</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        javascript-第八章-对象
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-01-13T09:08:42.000Z" itemprop="datePublished">2021-01-13</time>
+        
+        (Updated: <time datetime="2021-01-13T09:46:28.264Z" itemprop="dateModified">2021-01-13</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/Javascript/">Javascript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="第八章-对象"><a href="#第八章-对象" class="headerlink" title="第八章-对象"></a>第八章-对象</h2><h3 id="1-对象和属性"><a href="#1-对象和属性" class="headerlink" title="1. 对象和属性"></a>1. 对象和属性</h3><p>对象是一种复合数据类型，将多个数据值存储在一个单元中，并使用名字来存取这些值。<br>解释对象的另一种方式就是，对象是一个无序的属性集合，每个属性都有自己的名字和值，存储在对象中已命名的值既可以是数字字符串也可以是对象。</p>
+<h4 id="1-1-对象的创建"><a href="#1-1-对象的创建" class="headerlink" title="1.1 对象的创建"></a>1.1 对象的创建</h4><p>对象是由运算符new创建的，在这个运算符之后必须有用于初始化对象的构造函数名，可以用如下代码创建空对象（没有属性的对象）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br></pre></td></tr></table></figure>
+<p>javascript还支持内部构造函数，例如： var now  = new Date();<br>对象直接量定义了另一种初始化对象的方式。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> object = &#123;</span><br><span class="line">    x:<span class="number">0</span>,</span><br><span class="line">    y:<span class="number">0</span>,</span><br><span class="line">    radius:<span class="number">10</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="1-2-属性的设置和查询"><a href="#1-2-属性的设置和查询" class="headerlink" title="1.2 属性的设置和查询"></a>1.2 属性的设置和查询</h4><p>通常使用“.”运算符来存取对象的属性。位于“.”运算符左边的是对象的引用，右边的是对象的属性，是一个标识符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> book = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">book.title = <span class="string">&#x27;javascript高级程序设计&#x27;</span>;<span class="comment">//设置属性</span></span><br><span class="line">book.title ; <span class="comment">//属性查询</span></span><br></pre></td></tr></table></figure>
+<h4 id="1-3-属性的枚举"><a href="#1-3-属性的枚举" class="headerlink" title="1.3 属性的枚举"></a>1.3 属性的枚举</h4><p>可以通过for/in来遍历对象的属性：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getObjNames</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> names = “”;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> name <span class="keyword">in</span> obj) names+= name ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>for/in循环属性并没有特定的顺序，虽然能枚举出用户定义的属性，但不能枚举出某些预定义的属性和方法</p>
+<h4 id="1-4-未定义的属性"><a href="#1-4-未定义的属性" class="headerlink" title="1.4 未定义的属性"></a>1.4 未定义的属性</h4><p>如果要读取一个未定义的属性，那么读取的值是undefined.<br>可以用运算符delete来删除对象的属性：<br>delete book.title;<br>删除一个属性不仅仅是将属性值设置为undefined,而是真正从该对象中移除该属性。用for/in循环可以证明两者区别，它只能枚举出来被设定为undefined的属性，不能枚举已删除的属性。</p>
+<h3 id="2-构造函数"><a href="#2-构造函数" class="headerlink" title="2. 构造函数"></a>2. 构造函数</h3><p>在javascript中，使用new运算符和预定义的构造函数（Date(),Object(),Function()等）可以创建并初始化一个对象。</p>
+<p>要创建已经定义了属性的对象，需要编写一个构造函数在新的对象中创建并初始化这些属性。构造函数是具有2个特性的javascript函数：</p>
+<ul>
+<li>由new运算符调用</li>
+<li>传递给它的是对一个新创建的空对象的引用，将该引用作为关键字this的值，而且还要对新创建的对象进行初始化</li>
+</ul>
+<p>如下例子说明如何定义并调用Rectangle对象的构造函数<br>Rectangle对象的构造函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/定义构造函数</span><br><span class="line"><span class="comment">//注意如何初始化this引用的对象</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Rectangle</span>(<span class="params">w,h</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.width = w;</span><br><span class="line">    <span class="built_in">this</span>.height = h;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//调用构造函数创建2个Rectangle对象</span></span><br><span class="line"><span class="comment">//注意把宽和高传递给构造函数，这样就能初始化对象</span></span><br><span class="line"><span class="keyword">var</span> rect1 = <span class="keyword">new</span> Rectangle(<span class="number">2</span>,<span class="number">4</span>);</span><br><span class="line"><span class="keyword">var</span> rect2 = <span class="keyword">new</span> Rectangle(<span class="number">8</span>,<span class="number">9</span>);</span><br></pre></td></tr></table></figure>
+<p>构造函数只是初始化了对象，并不返回这个对象。构造函数通常没有返回值，只是初始化由this值传递进来的对象。<br>但是，构造函数可以返回一个对象值，如果这样做，被返回的对象就成了new表达式的值，this所引用的对象就被丢弃了。</p>
+<h3 id="3-方法"><a href="#3-方法" class="headerlink" title="3. 方法"></a>3. 方法</h3><p>所谓方法（method）就是通过对象调用的javascript函数。函数就是数值，可以将函数赋值给任何变量，设置对象的属性。如果一个函数f和一个对象o，可以定义一个名为m的方法：o.m = f;<br>定义m方法之后可以通过o.m()调用它。</p>
+<p>方法有一个重要的属性，即函数主体内部，关键字this变成了调用该方法的对象。例如，在o.m()中，主体可以使用关键字this来引用对象o.</p>
+<p>任何一个用作方法的函数都会得到一个额外的实际参数，即调用该方法的对象。</p>
+<p>由于方法通常是对对象执行某种操作，要表达函数作用于对象，最好采用方法的调用的方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rect.setSize(width,height);</span><br><span class="line">setRectSize(rect, width, height);</span><br></pre></td></tr></table></figure>
+<p>虽然这两行代码都是对对象做同样的操作，但第一行采用方法的调用语法。表达rect是操作的焦点。</p>
+<p>虽然有区别地对特函数和方法比较有用，但实际上它们之间的差别井没有最初时那么大了。<br>回忆一下，函数是储存在变量中的值，而那个变量也不过是全局对象的一个属性。因此，当你调用一个函数时，实际上调用的是全局对象的一个方法。<br>在这样的函数中，关键字this引用的是全局对象。所以在函数和方法之间井设有件么技术上的差别。<br>真正的差别存在于设计和目的上，方法是用来对上this对象进行操作的，而函数通常是独立的，并不需要使用this对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例8-2方法的定义和调用</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compute_area</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.width * <span class="built_in">this</span>.height;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> page = <span class="keyword">new</span> Rectangle(<span class="number">9</span>,<span class="number">88</span>);</span><br><span class="line">page.area = compute_area; <span class="comment">//通过把函数赋予对象的属性，来定义一个方法。</span></span><br><span class="line"><span class="keyword">var</span> a = page.area();</span><br></pre></td></tr></table></figure>
+<p>在例8-2中有一个明显的缺点，那就是在调用rect对象的方法area()之前，必须先将该方法赋给rect对象的一个属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">例<span class="number">8</span>-<span class="number">3</span> 用构造函数定义方法</span><br><span class="line"><span class="comment">//首页定义一些函数，它们将被用作方法。</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Rectangle_area</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="built_in">this</span>.width * <span class="built_in">this</span>.height; &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Rectangle_perimeter</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="number">2</span>*<span class="built_in">this</span>.width + <span class="number">2</span>*<span class="built_in">this</span>.height; &#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Rectangle_set_size</span>(<span class="params">w,h</span>) </span>&#123; <span class="built_in">this</span>.width = w; <span class="built_in">this</span>.height = h; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//为Rectangle对象定义一个构造函数，不仅要初始化属性还要给方法赋值。</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Rectangle</span>(<span class="params">w,h</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//初始化对象的属性</span></span><br><span class="line">    <span class="built_in">this</span>.width = w;</span><br><span class="line">    <span class="built_in">this</span>.height = h;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义对象的方法</span></span><br><span class="line">    <span class="built_in">this</span>.area = Rectangle;</span><br><span class="line">    <span class="built_in">this</span>.perimeter = Rectangle_perimeter;</span><br><span class="line">    <span class="built_in">this</span>.set_size = Rectangle_set_size;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//一旦创建Rectangle对象，就可以直接调用它的方法</span></span><br><span class="line"><span class="keyword">var</span> r = <span class="keyword">new</span> Rectangle(<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line"><span class="keyword">var</span> a = r.area();</span><br><span class="line"><span class="keyword">var</span> p = r.perimeter();</span><br></pre></td></tr></table></figure>
+<p>例8-3说明的方法还是有缺点，构造函数Rectangle()要对它所有属性都进行设置。由于每个属性都占用一定内存空间，所以给每个Rectangle类添加方法，内存占用就会增加。</p>
+<h3 id="4-原型对象和继承"><a href="#4-原型对象和继承" class="headerlink" title="4.原型对象和继承"></a>4.原型对象和继承</h3><p>我们已经知道，用构造函数把方法赋予它要初始化的对象效率低下。<br>javascript对象都继承原型对象的属性。每个对象都有原型对象，原型对象的所有属性都是以它为原型的对象的属性。也就是说，每个对象都继承原型对象的所有属性。</p>
+<p>一个对象的原型是由创建并初始化该对象的构造函数定义的。<br>javascript中所有函数都有prototype属性，它引用了一个对象。虽然原型对象初始化是空的，但你在其中定义的任何属性都会被该构造函数创建的所有对象继承。<br>因为原型对象的属性被一个类的所有对象共享，所有通常只用它们来定义类中所有相同的属性。这使得原型对象适用于方法定义，另外原型属性还适合于那些具有常量值的属性定义。</p>
+<h4 id="4-1-原型和内部类"><a href="#4-1-原型和内部类" class="headerlink" title="4.1 原型和内部类"></a>4.1 原型和内部类</h4><p>不只是用户定义的类具有原型对象，像String和Date这样的内部类同样具有原型对象，也可以给它们赋值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>.prototype.endsWith = <span class="function"><span class="keyword">function</span>(<span class="params">c</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (c == <span class="built_in">this</span>.charAt(<span class="built_in">this</span>.length - <span class="number">1</span>))</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> message = “hello world”;</span><br><span class="line">message.endsWith(‘h’); <span class="comment">//false</span></span><br><span class="line">message.endsWith(‘d’); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<h3 id="5-面向对象的javascript"><a href="#5-面向对象的javascript" class="headerlink" title="5. 面向对象的javascript"></a>5. 面向对象的javascript</h3><p>javascript采取以原型对象为基础的继承机制，而不是采取类为基础的继承机制。</p>
+<h4 id="5-1-实例的属性"><a href="#5-1-实例的属性" class="headerlink" title="5.1 实例的属性"></a>5.1 实例的属性</h4><p>每个对象都有它自己单独的属性副本。如果有10个给定的类的对象，那么每个实例属性就有10个副本。<br>在默认情况下，javascript对象的属性都是实例属性，但是为了更真实的模拟面向对象的设计语言，我们说javascript的实例属性都是在对象中用构造函数创建的或初始化的属性。</p>
+<h4 id="5-2-实例方法"><a href="#5-2-实例方法" class="headerlink" title="5.2 实例方法"></a>5.2 实例方法</h4><p>实例方法和实例属性十分相似，只不过是方法而不是数值。实例方法由特定方法和实例对象调用的。<br>实例方法使用了this来引用它们要操作的对象或实例。虽然类的任何实例都可以调用实例方法，但是并不意味着每个对象都像实例属性那样含有自己专有的方法副本。相反，每个实例方法都是由类的所有实例所共享的。<br>在javascript中，给类定义一个实例方法，是通过把构造函数的原型对象的一个属性设置为函数值来实现的。</p>
+<h4 id="5-3-类属性"><a href="#5-3-类属性" class="headerlink" title="5.3 类属性"></a>5.3 类属性</h4><p>在Java中，类属性是和类相关联的的变量。而不是和类的每个实例相关联的变量。无论类创建多少个实例，每个类属性就只有一个副本。就像实例属性是通过实例存取一样，类属性是通过类存取的。在javascript中，Number.MAX_VALUE就是类属性的一个例子，因为MAX_VALUE就是通过类Number存取的.</p>
+<h4 id="5-4-类方法"><a href="#5-4-类方法" class="headerlink" title="5.4 类方法"></a>5.4 类方法</h4><p>类方法是一个与类关联的一起的方法，而不是和类的实例关联在一起的方法。要调用类方法就必须使用类本身，而不能使用类的实例。方法Date.parse()就是一个类方法。和类属性一样，类方法是全局性的。<br>因为类方法不是对特定对象进行操作的所以类方法更容易被认为是由类调用的函数。在javascript中，要定义一个类方法，只需要用合适的函数作为构造函数的属性即可。</p>
+<h4 id="5-5-例子，类Circle"><a href="#5-5-例子，类Circle" class="headerlink" title="5.5 例子，类Circle()"></a>5.5 例子，类Circle()</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义构造函数本身</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Circle</span>(<span class="params">radius</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.r = radius;</span><br><span class="line">    <span class="comment">//r是构造函数定义并初始化的一个实例属性</span></span><br><span class="line">&#125;</span><br><span class="line">Circle.PI = <span class="number">3.14159</span>;<span class="comment">//定义类属性，是构造函数的一个属性</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cricle_area</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Circle.PI * <span class="built_in">this</span>.r * <span class="built_in">this</span>.r;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Circle.prototype.area = Cricle_area();<span class="comment">//通过把函数赋给构造函数的原型对象来定义一个实例方法。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Circle_max</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(a.r &gt; b.r) <span class="keyword">return</span> a;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> b;</span><br><span class="line">&#125;</span><br><span class="line">Circle.max = Circle_max;<span class="comment">//将函数赋给构造函数的属性，使之成为类方法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c = <span class="keyword">new</span> Circle(<span class="number">1.0</span>);<span class="comment">//创建Circle类的一个实例</span></span><br><span class="line">c.r = <span class="number">2.2</span>; <span class="comment">//修改类实例属性值</span></span><br><span class="line"><span class="keyword">var</span> a = c.crea(); <span class="comment">//调用实例方法</span></span><br><span class="line"><span class="keyword">var</span> d = <span class="keyword">new</span> Circle(<span class="number">1.2</span>);</span><br><span class="line"><span class="keyword">var</span> bigger = Circle.max(c,d); <span class="comment">//调用类方法</span></span><br></pre></td></tr></table></figure>
+<h4 id="5-6-例子，类Complex复数"><a href="#5-6-例子，类Complex复数" class="headerlink" title="5.6 例子，类Complex复数"></a>5.6 例子，类Complex复数</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">复数就是一个实数和一个虚数的和</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 定义类的第一步就是定义该类的构造函数</span></span><br><span class="line"><span class="comment">* 这个构造函数要初始化对象的所有实例属性</span></span><br><span class="line"><span class="comment">* 这些属性是核心的状态变量，是它们使每个类实例不同</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Complex</span>(<span class="params">real, imaginary</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.x = real;<span class="comment">//复数的实数部分</span></span><br><span class="line">    <span class="built_in">this</span>.y = imaginary; <span class="comment">//复数的虚数部分</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 定义类的第二部是在构造函数的原型对象定义他的实例方法（或属性）</span></span><br><span class="line"><span class="comment">* 该对象定义的任何属性都被类的实例所继承</span></span><br><span class="line"><span class="comment">* 返回复数的大小</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">Complex.prototype.maginary = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.sqrt(<span class="built_in">this</span>.x * <span class="built_in">this</span>.x,<span class="built_in">this</span>.y * <span class="built_in">this</span>.y);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//返回复数的相反数</span></span><br><span class="line">Complex.prototype.negative = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Complex(-<span class="built_in">this</span>.x, -<span class="built_in">this</span>.y);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//将Complex对象转化成一个字符串</span></span><br><span class="line">Complex.prototyoe.toString = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&#123;&quot;</span>+ <span class="built_in">this</span>.x+<span class="string">&#x27;,&#x27;</span>+<span class="built_in">this</span>.y+<span class="string">&quot;&#125;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回一个复数的实数部分</span></span><br><span class="line">Complex.prototyoe.valueOf = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 定义类的第二部是定义类方法</span></span><br><span class="line"><span class="comment">* 常量和其他必要属性作为构造函数的属性而不是构造函数原型对象的属性</span></span><br><span class="line"><span class="comment">* 注意，类方法没有使用this关键字，因为它们只对实际参数进行操作</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">Complex.add = <span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Complex(a.x+b.x,a.y+b.y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Complex.subtract = <span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Complex(a.x-b.x,a.y-b.y);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 下面是预定义复数</span></span><br><span class="line"><span class="comment">* 被定义为类属性，可以被用作常量，实际上并不是只读的</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">Complex.zero = <span class="keyword">new</span> Complex(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">Complex.one = <span class="keyword">new</span> Complex(<span class="number">1</span>,<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-7-超类和子类"><a href="#5-7-超类和子类" class="headerlink" title="5.7 超类和子类"></a>5.7 超类和子类</h4><p>在javascript中，类Object是最通用的类，其他所有类都是专用化了的类，或者说是Object的子类。<br>另一种解释就是Object是所有内部类的超类。所有类都继承类Object的基本方法。<br>对象从他的构造函数的原型对象中继承属性，原型对象本身就是一个对象，由构造函数Object()创建。这就意味着原型对象继承了Object.prototype属性，因此类Complex就继承了Complex.prototype的属性，而后者又继承了Object.prototype属性。因此，Complex继承了两个对象的属性，在Complex中查询某个属性时，首先查询这个对象本身，如果没有查询到，就查询Complex.prototype的对象，如果还未查询到，就查询Object.prototype对象。</p>
+<h3 id="6-对象的属性和方法"><a href="#6-对象的属性和方法" class="headerlink" title="6. 对象的属性和方法"></a>6. 对象的属性和方法</h3><p>在javascript中，所有对象都是Object类创建而来，虽然一些专用的类比如String和用户自定义的类Complex都定义了自己的属性和方法，但是都支持Object类定义的属性和方法。</p>
+<h4 id="6-1-constructor属性"><a href="#6-1-constructor属性" class="headerlink" title="6.1 constructor属性"></a>6.1 constructor属性</h4><p>每个对象都有constructor属性，它引用的是初始化该对象的构造函数，例如用构造函数Complex创建类一个对象o，那么o.constructor引用的就是Complex，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> Complex(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">o.constructor == Complex;</span><br></pre></td></tr></table></figure>
+<h4 id="6-2-toString方法"><a href="#6-2-toString方法" class="headerlink" title="6.2 toString方法"></a>6.2 toString方法</h4><p>方法toString没有任何实际参数，它返回的是一个字符串，该方法返回的是调用它的对象的类型或值。当使用“+”运算符把一个字符串和一个对象连接一起或把一个对象传递给alert()或document.write()时，会调用toString方法。</p>
+<p>由类Object定义的默认的toString方法揭示了有关内置对象的内部类型信息。<br>默认的toString方法返回的字符串形式总是[object class]，class是对象的内部类型，通常对应于该对象的构造函数名。例如，Array对像的class值是Array，Function对象的class值是“Function”，Date对象的class值是“Date”，内部Math对象的class值是“Math”，所有Error对象的的class值是“Error”，用户定义的对象（例如Complex）的class值是“Object”。</p>
+<h4 id="6-3-toLocaelString方法"><a href="#6-3-toLocaelString方法" class="headerlink" title="6.3 toLocaelString方法"></a>6.3 toLocaelString方法</h4><p>除了toString外，Object类还定义了toLocaleString方法，该方法返回该对象局部化的字符串表示。Object类默认定义的toLocaelString方法，本身并不做任何局部化，返回值和toString一样。但是Object的子类可以定义自己的toLocaleString方法，Array，Number,Date都定义了自己的toLocaelString方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">let now &#x3D; new Date();</span><br><span class="line">now.toString()</span><br><span class="line">&quot;Fri Jan 08 2021 14:05:09 GMT+0800 (中国标准时间)&quot;</span><br><span class="line">now.toLocaleString()</span><br><span class="line">&quot;2021&#x2F;1&#x2F;8 下午2:05:09&quot;</span><br><span class="line"></span><br><span class="line">let num &#x3D; new Number(1);</span><br><span class="line">num.toString()</span><br><span class="line">&quot;1&quot;</span><br><span class="line">num.toLocaleString()</span><br><span class="line">&quot;1&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="6-4-valueOf方法"><a href="#6-4-valueOf方法" class="headerlink" title="6.4 valueOf方法"></a>6.4 valueOf方法</h4><p>valueOf方法和toString方法非常相似，当需要把对象转化为非字符串之外的原始类型（通常是数字）时，就需要调用它。这个函数返回的是能代表this关键字所引用的对象的值的类型。</p>
+<p>由于对象没有定义为原始类型的值，所以大多数对象都没有等价的原始值，因此由Object定义的valueOf方法不执行任何转换，只是返回调用它的对象。像Number和Boolean这样的类具有明显的原始等价值。</p>
+<p>有时你可以定义一个合理的原始等价类型的类，需要为类定义一个valueOf方法，例如Complex，就定义了一个valueOf方法，返回实数部分。定义valueOf方法时，当某些环境中，当执行对象转字符串时，方法valueOf的优先级比toString高，这样当你定义了一个valueOf方法时，如果想转为字符串需要明确的调用toString方法，以Complex为例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> c = <span class="keyword">new</span> Complex(<span class="number">3</span>,<span class="number">3</span>);</span><br><span class="line">alert(“c”+c);<span class="comment">//调用valueOf方法显示“c=3”</span></span><br><span class="line">alert(“c”+c.toString);<span class="comment">//显示“c=&#123;3,3&#125;”</span></span><br></pre></td></tr></table></figure>
+<h4 id="6-5-hasOwnProperty"><a href="#6-5-hasOwnProperty" class="headerlink" title="6.5 hasOwnProperty"></a>6.5 hasOwnProperty</h4><p>如果对象局部定义了一个非继承的属性，属性名是由字符串实际参数指定的，那么该值返回true，否则返回false，例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">o.hasOwnProperty(“unde”);<span class="comment">//false</span></span><br><span class="line">o.hasOwnProperty(“toString”);<span class="comment">//false,toString 是一个继承属性</span></span><br><span class="line"><span class="built_in">Math</span>.hasOwnProperty(“cos”);<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<h4 id="6-6-propertyIsEnumerable-方法"><a href="#6-6-propertyIsEnumerable-方法" class="headerlink" title="6.6 propertyIsEnumerable()方法"></a>6.6 propertyIsEnumerable()方法</h4><p>如果对象定义了一个属性，由字符串实际参数指定的，而且该属性可以用for/in遍历出来，那么该方法返回true，否则返回false，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;<span class="attr">x</span>:<span class="number">1</span>&#125;;</span><br><span class="line">o.propertyIsEnumerable(“x”); <span class="comment">//true</span></span><br><span class="line">o.propertyIsEnumerable(“y”); <span class="comment">//false</span></span><br><span class="line">o.propertyIsEnumerable(“valueOf”); <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+<p>ECMAScript标准规定该方法只考虑对象直接定义的属性，不考虑对象的继承属性。</p>
+<h4 id="6-7-isPrototypeOf方法"><a href="#6-7-isPrototypeOf方法" class="headerlink" title="6.7 isPrototypeOf方法"></a>6.7 isPrototypeOf方法</h4><p>如果调用对象是实际参数指定对象的原型对象，那么返回true，否则返回false，该方法用途和constructor属性相似：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span>  o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"><span class="built_in">Object</span>.prototype.isPrototypeOf(o);<span class="comment">//true  o.constructor == Object</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Function</span>.prototype.isPrototypeOf(<span class="built_in">Object</span>); <span class="comment">//true  Object.constructor == Function</span></span><br></pre></td></tr></table></figure>
+
+  </div>
+  <div>
+      <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/javascript-第八章-对象.md" target="_blank">编辑</a>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.</span> <span class="toc-text">第八章-对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%B1%9E%E6%80%A7"><span class="toc-number">1.1.</span> <span class="toc-text">1. 对象和属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 对象的创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E5%B1%9E%E6%80%A7%E7%9A%84%E8%AE%BE%E7%BD%AE%E5%92%8C%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2 属性的设置和查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E5%B1%9E%E6%80%A7%E7%9A%84%E6%9E%9A%E4%B8%BE"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.3 属性的枚举</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-%E6%9C%AA%E5%AE%9A%E4%B9%89%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-number">1.1.4.</span> <span class="toc-text">1.4 未定义的属性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text">2. 构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">3. 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%8E%9F%E5%9E%8B%E5%AF%B9%E8%B1%A1%E5%92%8C%E7%BB%A7%E6%89%BF"><span class="toc-number">1.4.</span> <span class="toc-text">4.原型对象和继承</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%86%85%E9%83%A8%E7%B1%BB"><span class="toc-number">1.4.1.</span> <span class="toc-text">4.1 原型和内部类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84javascript"><span class="toc-number">1.5.</span> <span class="toc-text">5. 面向对象的javascript</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-%E5%AE%9E%E4%BE%8B%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-number">1.5.1.</span> <span class="toc-text">5.1 实例的属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.2.</span> <span class="toc-text">5.2 实例方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-3-%E7%B1%BB%E5%B1%9E%E6%80%A7"><span class="toc-number">1.5.3.</span> <span class="toc-text">5.3 类属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-4-%E7%B1%BB%E6%96%B9%E6%B3%95"><span class="toc-number">1.5.4.</span> <span class="toc-text">5.4 类方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-5-%E4%BE%8B%E5%AD%90%EF%BC%8C%E7%B1%BBCircle"><span class="toc-number">1.5.5.</span> <span class="toc-text">5.5 例子，类Circle()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-6-%E4%BE%8B%E5%AD%90%EF%BC%8C%E7%B1%BBComplex%E5%A4%8D%E6%95%B0"><span class="toc-number">1.5.6.</span> <span class="toc-text">5.6 例子，类Complex复数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-7-%E8%B6%85%E7%B1%BB%E5%92%8C%E5%AD%90%E7%B1%BB"><span class="toc-number">1.5.7.</span> <span class="toc-text">5.7 超类和子类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95"><span class="toc-number">1.6.</span> <span class="toc-text">6. 对象的属性和方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-constructor%E5%B1%9E%E6%80%A7"><span class="toc-number">1.6.1.</span> <span class="toc-text">6.1 constructor属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-toString%E6%96%B9%E6%B3%95"><span class="toc-number">1.6.2.</span> <span class="toc-text">6.2 toString方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-3-toLocaelString%E6%96%B9%E6%B3%95"><span class="toc-number">1.6.3.</span> <span class="toc-text">6.3 toLocaelString方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-4-valueOf%E6%96%B9%E6%B3%95"><span class="toc-number">1.6.4.</span> <span class="toc-text">6.4 valueOf方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-5-hasOwnProperty"><span class="toc-number">1.6.5.</span> <span class="toc-text">6.5 hasOwnProperty</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-6-propertyIsEnumerable-%E6%96%B9%E6%B3%95"><span class="toc-number">1.6.6.</span> <span class="toc-text">6.6 propertyIsEnumerable()方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-7-isPrototypeOf%E6%96%B9%E6%B3%95"><span class="toc-number">1.6.7.</span> <span class="toc-text">6.7 isPrototypeOf方法</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/&text=javascript-第八章-对象"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/&title=javascript-第八章-对象"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/&is_video=false&description=javascript-第八章-对象"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=javascript-第八章-对象&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/&title=javascript-第八章-对象"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/&title=javascript-第八章-对象"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/&title=javascript-第八章-对象"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/&title=javascript-第八章-对象"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/&name=javascript-第八章-对象&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/13/javascript-%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%AF%B9%E8%B1%A1/&t=javascript-第八章-对象"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

@@ -425,14 +425,15 @@ body table {
 }
 body th {
   padding: 8px;
-  border-bottom: 1px dashed #666;
+  border: 1px dashed #666;
   color: #383838;
   font-weight: bold;
   font-size: 13px;
+  background-color: #eee;
 }
 body td {
-  padding: 0 8px;
-  border-bottom: none;
+  padding: 10px 8px;
+  border: 1px dashed #666;
 }
 @font-face {
   font-style: normal;
@@ -1576,6 +1577,9 @@ code {
   font-family: "Menlo", "Meslo LG", monospace;
   -webkit-border-radius: 4px;
 }
+.highlight table td.code {
+  border: none;
+}
 .highlight figcaption {
   margin: -5px 0 5px;
   color: #757575;
@@ -1627,6 +1631,7 @@ code {
 .highlight td.gutter {
   text-align: right;
   opacity: 0.2;
+  border: none;
 }
 .highlight .line {
   height: 22px;

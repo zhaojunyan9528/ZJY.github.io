@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="1.javascript是单线程语言12345678910111213141516171819let a &#x3D; 1;console.log(a);let b &#x3D; 2;console.log(b);&#x2F;&#x2F; 1&#x2F;&#x2F; 2setTimeout(function()&amp;#123;    console.log(&amp;#x27;定时器开始啦&amp;#x27;);&amp;#125;)new Promise(function(reso">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js事件执行机制-事件循环">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="1.javascript是单线程语言12345678910111213141516171819let a &#x3D; 1;console.log(a);let b &#x3D; 2;console.log(b);&#x2F;&#x2F; 1&#x2F;&#x2F; 2setTimeout(function()&amp;#123;    console.log(&amp;#x27;定时器开始啦&amp;#x27;);&amp;#125;)new Promise(function(reso">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-20T03:52:17.000Z">
+<meta property="article:modified_time" content="2021-01-20T03:55:12.069Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>js事件执行机制-事件循环</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/20/javascript%E5%9F%BA%E7%A1%80%E9%A2%98/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/20/vue-%E9%9D%A2%E8%AF%95%E7%82%B9/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/&text=js事件执行机制-事件循环"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/&title=js事件执行机制-事件循环"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/&is_video=false&description=js事件执行机制-事件循环"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=js事件执行机制-事件循环&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/&title=js事件执行机制-事件循环"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/&title=js事件执行机制-事件循环"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/&title=js事件执行机制-事件循环"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/&title=js事件执行机制-事件循环"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/&name=js事件执行机制-事件循环&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/&t=js事件执行机制-事件循环"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-javascript%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B%E8%AF%AD%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">1.javascript是单线程语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Js%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">2.Js事件循环：</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        js事件执行机制-事件循环
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-01-20T03:52:17.000Z" itemprop="datePublished">2021-01-20</time>
+        
+        (Updated: <time datetime="2021-01-20T03:55:12.069Z" itemprop="dateModified">2021-01-20</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E9%9D%A2%E8%AF%95/">面试</a> › <a class="category-link" href="/ZJY.github.io/categories/%E9%9D%A2%E8%AF%95/Javascript/">Javascript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="1-javascript是单线程语言"><a href="#1-javascript是单线程语言" class="headerlink" title="1.javascript是单线程语言"></a>1.javascript是单线程语言</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(b);</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;定时器开始啦&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;马上开始执行for循环&#x27;</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">100</span>;i++)&#123;</span><br><span class="line">        i==<span class="number">99</span> &amp;&amp; resolve();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">&#x27;执行then函数&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;代码执行结束&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>结果：<br>马上开始执行for循环<br>代码执行结束<br>执行then函数<br>定时器开始啦</p>
+<h3 id="2-Js事件循环："><a href="#2-Js事件循环：" class="headerlink" title="2.Js事件循环："></a>2.Js事件循环：</h3><ul>
+<li>同步任务</li>
+<li>异步任务</li>
+</ul>
+<p>同步和异步任务分别进入不同的执行”场所”，同步的进入主线程，异步的进入Event Table并注册函数。<br>当指定的事情完成时，Event Table会将这个函数移入Event Queue。<br>主线程内的任务执行完毕为空，会去Event Queue读取对应的函数，进入主线程执行。<br>上述过程会不断重复，也就是常说的Event Loop(事件循环)。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data = [];</span><br><span class="line">$.ajax(&#123;</span><br><span class="line">    url:www.javascript.com,</span><br><span class="line">    data:data,</span><br><span class="line">    success:<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;发送成功!&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;代码执行结束&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ajax进入Event Table，注册回调函数success。</li>
+<li>执行console.log(‘代码执行结束’)。</li>
+<li>ajax事件完成，回调函数success进入Event Queue。</li>
+<li>主线程从Event Queue读取回调函数success并执行</li>
+</ul>
+<p>除了广义的同步任务和异步任务，我们对任务有更精细的定义：</p>
+<ul>
+<li>macro-task(宏任务)：包括整体代码script，setTimeout，setInterval</li>
+<li>micro-task(微任务)：Promise，process.nextTick</li>
+</ul>
+<p>事件循环的顺序，决定js代码的执行顺序。进入整体代码(宏任务)后，开始第一次循环。接着执行所有的微任务。然后再次从宏任务开始，找到其中一个任务队列执行完毕，再执行所有的微任务</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;1&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;   <span class="comment">//宏任务timeout1</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;2&#x27;</span>);</span><br><span class="line">    process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="comment">//微任务process2</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;3&#x27;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;4&#x27;</span>);</span><br><span class="line">        resolve();</span><br><span class="line">    &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="comment">//微任务then2</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;5&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="comment">//微任务process1</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;6&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;7&#x27;</span>);</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="comment">//微任务then1</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;8&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="comment">//宏任务timeout2</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;9&#x27;</span>);</span><br><span class="line">    process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; 微任务process3</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;10&#x27;</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;11&#x27;</span>);</span><br><span class="line">        resolve();</span><br><span class="line">    &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="comment">//微任务then3</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;12&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>宏任务：timeout1—timeout2<br>微任务：process1—then1—process2—then2—process3—then3<br>输出顺序：1—7—整个script宏任务执行完毕，执行所有微任务process1，then1，—6—8—执行宏任务timeout1—2—4—执行所有微任务process2，then2—3—5—执行宏任务timout2—9—11—执行所有微任务process3，then3—10—12</p>
+<p>1、7、6、8、2、4、3、5、9、11、10、12</p>
+<p>事件循环Event loop是js实现异步的一种方法，也是js的执行机制</p>
+<p>Javascript是一门单线程语言，事件循环是javascript的执行机制</p>
+
+  </div>
+  <div>
+      <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/js事件执行机制-事件循环.md" target="_blank">编辑</a>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-javascript%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B%E8%AF%AD%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">1.javascript是单线程语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Js%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">2.Js事件循环：</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/&text=js事件执行机制-事件循环"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/&title=js事件执行机制-事件循环"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/&is_video=false&description=js事件执行机制-事件循环"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=js事件执行机制-事件循环&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/&title=js事件执行机制-事件循环"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/&title=js事件执行机制-事件循环"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/&title=js事件执行机制-事件循环"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/&title=js事件执行机制-事件循环"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/&name=js事件执行机制-事件循环&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/20/js%E4%BA%8B%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/&t=js事件执行机制-事件循环"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

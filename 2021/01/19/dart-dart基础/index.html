@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="1.安装dart sdkhttps:&#x2F;&#x2F;dart.dev&#x2F;get-dart终端输入dart –version 测试是否安装成功 2.配置vscode支持dart语法提示：1.安装插件dart2.安装插件code runner  可以运行文件 3.vscode运行dart文件中文乱码：1.在settings.json添加：”code-runner.runInTerminal”: true,2.重启v">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dart-dart基础">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="1.安装dart sdkhttps:&#x2F;&#x2F;dart.dev&#x2F;get-dart终端输入dart –version 测试是否安装成功 2.配置vscode支持dart语法提示：1.安装插件dart2.安装插件code runner  可以运行文件 3.vscode运行dart文件中文乱码：1.在settings.json添加：”code-runner.runInTerminal”: true,2.重启v">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-19T09:17:43.000Z">
+<meta property="article:modified_time" content="2021-01-19T09:38:03.317Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>dart-dart基础</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/19/es6-es6%E7%9F%A5%E8%AF%86%E7%82%B9/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/19/css-grid%E5%B8%83%E5%B1%80/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/&text=dart-dart基础"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/&title=dart-dart基础"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/&is_video=false&description=dart-dart基础"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=dart-dart基础&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/&title=dart-dart基础"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/&title=dart-dart基础"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/&title=dart-dart基础"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/&title=dart-dart基础"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/&name=dart-dart基础&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/&t=dart-dart基础"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85dart-sdk"><span class="toc-number">1.</span> <span class="toc-text">1.安装dart sdk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%85%8D%E7%BD%AEvscode%E6%94%AF%E6%8C%81dart%E8%AF%AD%E6%B3%95%E6%8F%90%E7%A4%BA%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">2.配置vscode支持dart语法提示：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-vscode%E8%BF%90%E8%A1%8Cdart%E6%96%87%E4%BB%B6%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">3.vscode运行dart文件中文乱码：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%85%A5%E5%8F%A3%E6%96%B9%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">4.入口方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%B3%A8%E9%87%8A"><span class="toc-number">5.</span> <span class="toc-text">5.注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%A3%B0%E6%98%8E%E5%8F%98%E9%87%8F%EF%BC%9A"><span class="toc-number">6.</span> <span class="toc-text">6.声明变量：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%B8%B8%E9%87%8F%EF%BC%9A-const-%E5%92%8C-final"><span class="toc-number">7.</span> <span class="toc-text">7.常量： const 和 final</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-dart-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="toc-number">8.</span> <span class="toc-text">8.dart 数据类型：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">9.</span> <span class="toc-text">9.运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%9A"><span class="toc-number">10.</span> <span class="toc-text">10.类型转换：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-List%E5%B1%9E%E6%80%A7%EF%BC%9A"><span class="toc-number">11.</span> <span class="toc-text">11.List属性：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-List%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-number">12.</span> <span class="toc-text">12.List方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-Set%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD%E6%98%AF%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D"><span class="toc-number">13.</span> <span class="toc-text">13.Set主要功能是数组去重</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-Maps-%E6%98%A0%E5%B0%84"><span class="toc-number">14.</span> <span class="toc-text">14.Maps 映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-%E5%BE%AA%E7%8E%AF%EF%BC%9A"><span class="toc-number">15.</span> <span class="toc-text">15.循环：</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        dart-dart基础
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-01-19T09:17:43.000Z" itemprop="datePublished">2021-01-19</time>
+        
+        (Updated: <time datetime="2021-01-19T09:38:03.317Z" itemprop="dateModified">2021-01-19</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/dart/">dart</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="1-安装dart-sdk"><a href="#1-安装dart-sdk" class="headerlink" title="1.安装dart sdk"></a>1.安装dart sdk</h3><p><a target="_blank" rel="noopener" href="https://dart.dev/get-dart">https://dart.dev/get-dart</a><br>终端输入dart –version 测试是否安装成功</p>
+<h3 id="2-配置vscode支持dart语法提示："><a href="#2-配置vscode支持dart语法提示：" class="headerlink" title="2.配置vscode支持dart语法提示："></a>2.配置vscode支持dart语法提示：</h3><p>1.安装插件dart<br>2.安装插件code runner  可以运行文件</p>
+<h3 id="3-vscode运行dart文件中文乱码："><a href="#3-vscode运行dart文件中文乱码：" class="headerlink" title="3.vscode运行dart文件中文乱码："></a>3.vscode运行dart文件中文乱码：</h3><p>1.在settings.json添加：”code-runner.runInTerminal”: true,<br>2.重启vscode</p>
+<h3 id="4-入口方法"><a href="#4-入口方法" class="headerlink" title="4.入口方法"></a>4.入口方法</h3><p>main(){};<br>void main(){};//没有返回值</p>
+<h3 id="5-注释"><a href="#5-注释" class="headerlink" title="5.注释"></a>5.注释</h3><p>//注释<br>///注释<br>/<em>注释</em>/</p>
+<h3 id="6-声明变量："><a href="#6-声明变量：" class="headerlink" title="6.声明变量："></a>6.声明变量：</h3><p>1.通过var声明： var str = “aaa”; //dart强类型校验，可以不预先声明变量类型，自行判断类型<br>2.通过类型声明  String str = “aaa”</p>
+<p>变量命名规则：<br>        1.必须由数字/字母/下划线和$组成<br>        2.不能以数字开头<br>        3.不能是保留字和关键字<br>        4.区分大小写</p>
+<h3 id="7-常量：-const-和-final"><a href="#7-常量：-const-和-final" class="headerlink" title="7.常量： const 和 final"></a>7.常量： const 和 final</h3><p>1.const 和finnal 赋值都不可以修改<br>2.区别： final可以开始不赋值，只能赋值一次，final不仅有const的编译时常量的特性，最重要的是它是编译时赋值<br>        例如：<br>        final date = new DateTime.now(); //正常 编译时赋值，只能赋值一次<br>        const date = new DateTime.now(); //报错 定义时赋值</p>
+<h3 id="8-dart-数据类型："><a href="#8-dart-数据类型：" class="headerlink" title="8.dart 数据类型："></a>8.dart 数据类型：</h3><p>常用数据类型：</p>
+<pre><code>    Numbers(数值)：int double
+    Strings(字符串)： String
+    Booleans(布尔值): bool
+    List(数组): 列表对象
+    Maps(字典)： Map是一个键值对相关的对象</code></pre>
+<p>1.字符串</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span> str = <span class="string">&quot;falds&quot;</span></span><br><span class="line"><span class="built_in">String</span> str = <span class="string">&quot;&quot;</span><span class="string">&quot;flasjd</span></span><br><span class="line"><span class="string">flad</span></span><br><span class="line"><span class="string">d;fja&quot;</span><span class="string">&quot;&quot;</span> <span class="comment">//三个单引号或者三个双引号字符串可换行</span></span><br><span class="line"><span class="comment">// &lt;!-- 字符串拼接： --&gt;</span></span><br><span class="line">    print(<span class="string">&quot;$str $str&quot;</span>);</span><br><span class="line">    print(str +<span class="string">&quot; &quot;</span>+ str);</span><br></pre></td></tr></table></figure>
+<p>2.数值类型：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int a = <span class="number">12</span>; <span class="comment">//只可以是整型</span></span><br><span class="line">double = <span class="number">12.23</span>  <span class="comment">//既可以是整型也可以是浮点型</span></span><br></pre></td></tr></table></figure>
+
+<p>3.布尔类型：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bool flag = <span class="literal">true</span>/<span class="literal">false</span> ; <span class="comment">//布尔类型的值只能是true/false</span></span><br><span class="line">条件判断不会对变量进行类型转换： <span class="number">123</span> != <span class="string">&#x27;123&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>4.数组类型</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr1 = [<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>]</span><br><span class="line"><span class="keyword">var</span> arr2 = <span class="keyword">new</span> List();</span><br><span class="line">arr2.add(<span class="string">&quot;a&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>3.指定数组元素类型</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr3 = <span class="keyword">new</span> List&lt;<span class="built_in">String</span>&gt;();</span><br><span class="line">arr3.add(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">arr3.add(<span class="number">1</span>); <span class="comment">//错误</span></span><br></pre></td></tr></table></figure>
+<p>5.Maps</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    <span class="string">&quot;name&quot;</span>:<span class="string">&quot;test&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>访问： person[“name”]</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">p[<span class="string">&quot;name&quot;</span>] = <span class="string">&quot;test&quot;</span></span><br></pre></td></tr></table></figure>
+<p>6.is关键词判断数据类型：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">&#x27;ad&#x27;</span>;</span><br><span class="line">print(str is <span class="built_in">String</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="9-运算符"><a href="#9-运算符" class="headerlink" title="9.运算符"></a>9.运算符</h3><ul>
+<li><p>算术运算符</p>
+<ol>
+<li>+</li>
+<li>-</li>
+<li>*</li>
+<li>/</li>
+<li>% 取余</li>
+<li>~/ 取整</li>
+</ol>
+</li>
+<li><p>关系运算符：</p>
+<ol>
+<li>==</li>
+<li>!=</li>
+<li>&lt;</li>
+<li><code>&gt;</code></li>
+<li>&lt;=</li>
+<li><code> &gt;=</code></li>
+</ol>
+</li>
+<li><p>逻辑运算符：<br>  !<br>  &amp;&amp;<br>  ||</p>
+</li>
+<li><p>赋值运算符：<br>  <code>=</code><br>  <code>??=</code>  // int b; b??=23 如果b等于空的话，把23赋值给b</p>
+</li>
+<li><p>复合赋值运算符：<br>  +=<br>  -=<br>  *-<br>  /=<br>  ~/=</p>
+</li>
+<li><p>条件表达式：<br>  if… else<br>  if… else if<br>  swtich… case</p>
+<p>  三目运算符 ? :<br>  ??运算符 b= a ?? 10 //a不为空时b等于a，a为空时b等于10</p>
+<p>  b=a++ 赋值运算中： ++写在后面 先赋值后运算 ++a 写在前面先运算后赋值</p>
+</li>
+</ul>
+<h3 id="10-类型转换："><a href="#10-类型转换：" class="headerlink" title="10.类型转换："></a>10.类型转换：</h3><ul>
+<li>int.parse</li>
+<li>double.parge</li>
+<li>toString</li>
+<li>str.isEmpty</li>
+<li>num.isNaN</li>
+</ul>
+<h3 id="11-List属性："><a href="#11-List属性：" class="headerlink" title="11.List属性："></a>11.List属性：</h3><ul>
+<li>length</li>
+<li>isEmpty</li>
+<li>isNotEmpty</li>
+<li>reversed 翻转列表 [1,2,3].reversed //(3,2,1) [1,2,3].reversed.toList() //[3,2,1]</li>
+</ul>
+<h3 id="12-List方法："><a href="#12-List方法：" class="headerlink" title="12.List方法："></a>12.List方法：</h3><ul>
+<li>add 数组添加 add(1)</li>
+<li>addAll([1,2]) //拼接数组</li>
+<li>indexOf 返回索引值</li>
+<li>remove 移除值，参数为值</li>
+<li>removeAt 参数为索引值</li>
+<li>fillRange int start,int end,修改后的值</li>
+<li>insert(int index,value)指定位置插入值</li>
+<li>insertAll(index,interable)  insertAll(1,[1,2]) </li>
+<li>join(分割符) 以分隔符拼接转换成字符串</li>
+<li>split(分隔符) 将string以分隔符切割成数组</li>
+<li>toList() 将其他类型对象转换为数组</li>
+</ul>
+<h3 id="13-Set主要功能是数组去重"><a href="#13-Set主要功能是数组去重" class="headerlink" title="13.Set主要功能是数组去重"></a>13.Set主要功能是数组去重</h3><p>set是不能重复且没有顺序的对象</p>
+<h3 id="14-Maps-映射"><a href="#14-Maps-映射" class="headerlink" title="14.Maps 映射"></a>14.Maps 映射</h3><ul>
+<li>key   var person={“a”:1,”b”:2} person.keys.toList()</li>
+<li>value</li>
+<li>isEmpty</li>
+<li>isNotEmpty</li>
+<li>addAll() 添加多个</li>
+<li>remove(key)</li>
+<li>containsValue(value) 是否存在某个值</li>
+</ul>
+<h3 id="15-循环："><a href="#15-循环：" class="headerlink" title="15.循环："></a>15.循环：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">forEach</span><br><span class="line">map  用于修改数据 <span class="keyword">var</span> newList = list.map((value)&#123; <span class="keyword">return</span> value*<span class="number">2</span>&#125;)</span><br><span class="line">where  <span class="keyword">var</span> newList = list.where((value)&#123; <span class="keyword">return</span> value &gt; <span class="number">5</span>&#125;) 返回符合条件的数组</span><br><span class="line">any  <span class="keyword">var</span> newList = list.any((value)&#123; <span class="keyword">return</span> value &gt; <span class="number">5</span>&#125;) 有一个满足条件返回<span class="literal">true</span></span><br><span class="line">some ar newList = list.some((value)&#123; <span class="keyword">return</span> value &gt; <span class="number">5</span>&#125;) 满足所有条件返回<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+  </div>
+  <div>
+      <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/dart-dart基础.md" target="_blank">编辑</a>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85dart-sdk"><span class="toc-number">1.</span> <span class="toc-text">1.安装dart sdk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%85%8D%E7%BD%AEvscode%E6%94%AF%E6%8C%81dart%E8%AF%AD%E6%B3%95%E6%8F%90%E7%A4%BA%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">2.配置vscode支持dart语法提示：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-vscode%E8%BF%90%E8%A1%8Cdart%E6%96%87%E4%BB%B6%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">3.vscode运行dart文件中文乱码：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%85%A5%E5%8F%A3%E6%96%B9%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">4.入口方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%B3%A8%E9%87%8A"><span class="toc-number">5.</span> <span class="toc-text">5.注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%A3%B0%E6%98%8E%E5%8F%98%E9%87%8F%EF%BC%9A"><span class="toc-number">6.</span> <span class="toc-text">6.声明变量：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%B8%B8%E9%87%8F%EF%BC%9A-const-%E5%92%8C-final"><span class="toc-number">7.</span> <span class="toc-text">7.常量： const 和 final</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-dart-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="toc-number">8.</span> <span class="toc-text">8.dart 数据类型：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">9.</span> <span class="toc-text">9.运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%9A"><span class="toc-number">10.</span> <span class="toc-text">10.类型转换：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-List%E5%B1%9E%E6%80%A7%EF%BC%9A"><span class="toc-number">11.</span> <span class="toc-text">11.List属性：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-List%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-number">12.</span> <span class="toc-text">12.List方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-Set%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD%E6%98%AF%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D"><span class="toc-number">13.</span> <span class="toc-text">13.Set主要功能是数组去重</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-Maps-%E6%98%A0%E5%B0%84"><span class="toc-number">14.</span> <span class="toc-text">14.Maps 映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-%E5%BE%AA%E7%8E%AF%EF%BC%9A"><span class="toc-number">15.</span> <span class="toc-text">15.循环：</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/&text=dart-dart基础"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/&title=dart-dart基础"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/&is_video=false&description=dart-dart基础"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=dart-dart基础&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/&title=dart-dart基础"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/&title=dart-dart基础"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/&title=dart-dart基础"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/&title=dart-dart基础"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/&name=dart-dart基础&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/19/dart-dart%E5%9F%BA%E7%A1%80/&t=dart-dart基础"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

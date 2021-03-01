@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="BOX： css布局的基本单位&amp;盒模型 盒模型–块级盒&#x2F;行内盒一个盒包含：内容（content）&#x2F;边（border）&#x2F;内边距（padding）&#x2F;外边距（margin）盒的尺寸（width和height–计算得到offsetWidth和offsetHeight）定义受到box-sizing属性的影响w3c标准盒模型-块级盒-border-box：width &#x3D; content + paddi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css-BFC块级格式化上下文">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="BOX： css布局的基本单位&amp;盒模型 盒模型–块级盒&#x2F;行内盒一个盒包含：内容（content）&#x2F;边（border）&#x2F;内边距（padding）&#x2F;外边距（margin）盒的尺寸（width和height–计算得到offsetWidth和offsetHeight）定义受到box-sizing属性的影响w3c标准盒模型-块级盒-border-box：width &#x3D; content + paddi">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-14T09:57:42.000Z">
+<meta property="article:modified_time" content="2021-01-19T08:38:54.283Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>css-BFC块级格式化上下文</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/19/css-css3%E5%8A%A8%E7%94%BB/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/14/css-BEM/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/&text=css-BFC块级格式化上下文"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/&title=css-BFC块级格式化上下文"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/&is_video=false&description=css-BFC块级格式化上下文"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=css-BFC块级格式化上下文&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/&title=css-BFC块级格式化上下文"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/&title=css-BFC块级格式化上下文"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/&title=css-BFC块级格式化上下文"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/&title=css-BFC块级格式化上下文"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/&name=css-BFC块级格式化上下文&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/&t=css-BFC块级格式化上下文"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#BOX%EF%BC%9A-css%E5%B8%83%E5%B1%80%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8D%95%E4%BD%8D-amp-%E7%9B%92%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">BOX： css布局的基本单位&amp;盒模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOX"><span class="toc-number">2.</span> <span class="toc-text">BOX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">格式化上下文：</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        css-BFC块级格式化上下文
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-01-14T09:57:42.000Z" itemprop="datePublished">2021-01-14</time>
+        
+        (Updated: <time datetime="2021-01-19T08:38:54.283Z" itemprop="dateModified">2021-01-19</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/css/">css</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="BOX：-css布局的基本单位-amp-盒模型"><a href="#BOX：-css布局的基本单位-amp-盒模型" class="headerlink" title="BOX： css布局的基本单位&amp;盒模型"></a>BOX： css布局的基本单位&amp;盒模型</h3><ul>
+<li><p>盒模型–块级盒/行内盒<br>一个盒包含：内容（content）/边（border）/内边距（padding）/外边距（margin）<br>盒的尺寸（width和height–计算得到offsetWidth和offsetHeight）定义受到box-sizing属性的影响<br>w3c标准盒模型-块级盒-border-box：width = content + padding + margin<br>IE盒子模型-块级盒-content-box：width = content</p>
+</li>
+<li><p>行内盒：</p>
+<ul>
+<li>width/height 不起作用，盒子高度由内容决定（font-size/line-height）</li>
+<li>margin-top/margin-bottom padding-top/padding-bottom不起作用</li>
+</ul>
+</li>
+</ul>
+<p>tips：</p>
+<ul>
+<li>两类块级盒子可用过设置box-sizing转换</li>
+<li>行内盒与块级盒转换可通过设置display属性来修改</li>
+<li>行内盒参与IFC布局，块级盒参与BFC布局，如果块级盒包含行内盒，但是由于BFC内只有块级盒参与，因此行内盒会被匿名块级盒包含</li>
+</ul>
+<h3 id="BOX"><a href="#BOX" class="headerlink" title="BOX"></a>BOX</h3><p>Box 是 CSS 布局的对象和基本单位， 直观点来说，就是一个页面是由很多个 Box 组成的。元素的类型和 display 属性，决定了这个 Box 的类型。<br>不同类型的 Box， 会参与不同的 Formatting Context（一个决定如何渲染文档的容器），因此Box内的元素会以不同的方式渲染</p>
+<ul>
+<li>block-level：box的display 属性为block, list-item, table 的元素，会生成 block-level box。并且参与（BFC）block fomatting context；</li>
+<li>inline-level：box的display 属性为inline, inline-block, inline-table 的元素，会生成 inline-level box。并且参与 inline formatting context；</li>
+</ul>
+<h3 id="格式化上下文："><a href="#格式化上下文：" class="headerlink" title="格式化上下文："></a>格式化上下文：</h3><ul>
+<li>块级格式化上下文( Block formatting contexts )( BFC )</li>
+<li>行内格式化上下文( Inline formatting contexts ) ( IFC )</li>
+<li>自适应格式化上下文( Flex Formatting Contexts )( FFC )</li>
+<li>网格布局格式化上下文( GridLayout Formatting Contexts )( GFC )</li>
+</ul>
+<p>有一类盒被称为块容器，它们能够包含块级盒。块容器要么创建BFC，这样它内部仅仅包含块级盒，要么创建一个IFC，这样它内部仅仅包含行内级元素。</p>
+<p>（也就是说，块容器中不可能既包含块级盒，又包含行内级盒，一旦他的子盒中有块级盒，所有行内级盒都会被自动创建匿名盒包裹）。</p>
+<p>在非块级格式化上下文中的块容器总是会创建新的BFC：如display为inline-blocks, table-cells, 和table-captions所生成的盒。</p>
+<p>而自身也在块级格式化上下文中的块容器，则只有overflow不为visible的情形下才会创建新的BFC</p>
+<ul>
+<li>绝对定位和浮动的块容器则总是会创建新的块级格式化上下文。</li>
+<li>display值为table或者inline-table的元素将会生成表格（table），表格内部会使用特殊的格式化方式来排布其内部元素。</li>
+<li>display值为grid或者inline-grid的元素将会生成格元素（grid element），与table情形类似，它内部也是使用特殊的格式化方式来排布其内部元素，</li>
+<li>display值为flex或者inline-flex的元素将会生成自适应容器（flex container），自适应容器在其内部产生自适应格式化上下文（flex formatting context）</li>
+</ul>
+<p>FC的全称是：Formatting Contexts，是W3C CSS2.1规范中的一个概念。它是页面中的一块渲染区域，并且有一套渲染规则，它决定了其子元素将如何定位，以及和其他元素的关系和相互作用。</p>
+<p>BFC:BFC(Block Formatting Contexts)直译为”块级格式化上下文”。<br>Block Formatting Contexts就是页面上的一个隔离的渲染区域，容器里面的子元素不会在布局上影响到外面的元素，反之也是如此。<br>浮动元素和绝对定位元素，非块级盒子的块级容器（例如 inline-blocks, table-cells, 和 table-captions），以及overflow值不为“visiable”的块级盒子，都会为他们的内容创建新的BFC（块级格式上下文）。</p>
+<p>BFC布局规则：</p>
+<ul>
+<li>内部的Box会在垂直方向，一个接一个地放置。</li>
+<li>Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生重叠</li>
+<li>每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。</li>
+<li>BFC的区域不会与float box重叠。</li>
+<li>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。</li>
+<li>计算BFC的高度时，浮动元素也参与计算</li>
+</ul>
+<p>那些元素生成BFC</p>
+<ul>
+<li>根元素</li>
+<li>float属性不为none</li>
+<li>position为absolute或fixed</li>
+<li>display为inline-block, table-cell, table-caption, flex, inline-flex</li>
+<li>overflow不为visible</li>
+</ul>
+<p>元素与盒</p>
+<ul>
+<li>在HTML中常常使用的概念是元素，而在CSS中，布局的基本单位是盒，盒总是矩形的。</li>
+<li>元素与盒并非一一对应的关系，一个元素可能生成多个盒，CSS规则中的伪元素也可能生成盒，display属性为none的元素则不生成盒。</li>
+<li>除了元素之外，HTML中的文本节点也可能会生成盒。</li>
+</ul>
+<p>正常流</p>
+<ul>
+<li>正常流是页面，大部分盒排布于正常流中。正常流中的盒必定位于某一格式化上下文中，正常流中有两种格式化上下文：块级格式化上下文（block formatting context，简称BFC）和行内格式化上下文（inline formatting context,IFC）。</li>
+<li>在块级格式化上下文中，盒呈纵向排布，在行内格式化上下文中，盒则呈横向排布。</li>
+<li>正常流根容器中是块级格式化上下文，不同的盒可能会在内部产生行内格式化上下文或者块级格式化上下文。</li>
+</ul>
+<p>块级与行内级</p>
+<ul>
+<li><p>正常流中的盒分为块级与行内级两种，任何一个行内级盒都不能够直接被放入块级格式化上下文中。如果有一个HTML元素生成了一个行内盒，而其所在的上下文是块级的话，那么应当为它生成一个匿名块级盒，匿名块级盒会在内部生成行内格式化上下文。</p>
+</li>
+<li><p>元素的display属性会决定盒是行内级还是块级：<br>block, table, flex, grid, list-item 为块级<br>inline, inline-block, inline-table, inline-flex, inline-grid 为行内级</p>
+</li>
+</ul>
+<p>产生垂直外边距合并的必备条件,两个margin是邻接的必须满足以下条件:</p>
+<ul>
+<li>必须是处于常规文档流（非float和绝对定位）的块级盒子,并且处于同一个BFC当中<br>没有线盒，没有空隙（clearance，下面会讲到），没有padding和border将他们分隔开,都属于垂直方向上相邻的外边距，可以是下面任意一种情况:<ul>
+<li>元素的margin-top与其第一个常规文档流的子元素的margin-top</li>
+<li>元素的margin-bottom与其下一个常规文档流的兄弟元素的margin-top</li>
+<li>height为auto的元素的margin-bottom与其最后一个常规文档流的子元素的margin-bottom</li>
+<li>高度为0并且最小高度也为0，不包含常规文档流的子元素，并且自身没有建立新的BFC的元素的margin-top和margin-bottom</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+      <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/css-BFC.md" target="_blank">编辑</a>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#BOX%EF%BC%9A-css%E5%B8%83%E5%B1%80%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8D%95%E4%BD%8D-amp-%E7%9B%92%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">BOX： css布局的基本单位&amp;盒模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOX"><span class="toc-number">2.</span> <span class="toc-text">BOX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">格式化上下文：</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/&text=css-BFC块级格式化上下文"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/&title=css-BFC块级格式化上下文"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/&is_video=false&description=css-BFC块级格式化上下文"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=css-BFC块级格式化上下文&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/&title=css-BFC块级格式化上下文"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/&title=css-BFC块级格式化上下文"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/&title=css-BFC块级格式化上下文"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/&title=css-BFC块级格式化上下文"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/&name=css-BFC块级格式化上下文&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/&t=css-BFC块级格式化上下文"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
