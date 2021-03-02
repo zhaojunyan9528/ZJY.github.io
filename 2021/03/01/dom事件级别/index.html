@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="DOM事件级别DOM级别一共可以分为四个级别：DOM0级、DOM1级、DOM2级和DOM3级。而DOM事件分为3个级别：DOM 0级事件处理，DOM 2级事件处理和DOM 3级事件处理。由于DOM 1级中没有事件的相关内容，所以没有DOM 1级事件 dom0级事件不允许为同个元素绑定多个同类dom0级事件，给元素的事件行为绑定方法，这些方法都是在当前元素事件的冒泡或者目标阶段执行的 1&lt;in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dom事件级别">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="DOM事件级别DOM级别一共可以分为四个级别：DOM0级、DOM1级、DOM2级和DOM3级。而DOM事件分为3个级别：DOM 0级事件处理，DOM 2级事件处理和DOM 3级事件处理。由于DOM 1级中没有事件的相关内容，所以没有DOM 1级事件 dom0级事件不允许为同个元素绑定多个同类dom0级事件，给元素的事件行为绑定方法，这些方法都是在当前元素事件的冒泡或者目标阶段执行的 1&lt;in">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-01T13:40:34.000Z">
+<meta property="article:modified_time" content="2021-03-02T08:43:41.232Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>dom事件级别</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/03/01/javascript%E4%B8%ADthis%E7%9A%84%E6%8C%87%E5%90%91/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/02/28/javascript%E7%9A%84%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/&text=dom事件级别"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/&title=dom事件级别"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/&is_video=false&description=dom事件级别"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=dom事件级别&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/&title=dom事件级别"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/&title=dom事件级别"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/&title=dom事件级别"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/&title=dom事件级别"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/&name=dom事件级别&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/&t=dom事件级别"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB"><span class="toc-number">1.</span> <span class="toc-text">DOM事件级别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dom0%E7%BA%A7%E4%BA%8B%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">dom0级事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dom2%E7%BA%A7%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">dom2级事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dom3%E7%BA%A7%E4%BA%8B%E4%BB%B6%EF%BC%9A%E5%9C%A8dom2%E7%BA%A7%E4%BA%8B%E4%BB%B6%E5%9F%BA%E7%A1%80%E4%B8%8A%E6%B7%BB%E5%8A%A0%E4%BA%86%E6%9B%B4%E5%A4%9A%E7%9A%84%E4%BA%8B%E4%BB%B6%E7%B1%BB%E5%9E%8B%E3%80%82"><span class="toc-number">4.</span> <span class="toc-text">dom3级事件：在dom2级事件基础上添加了更多的事件类型。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM%E4%BA%8B%E4%BB%B6%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E4%BB%B6%E6%B5%81"><span class="toc-number">5.</span> <span class="toc-text">DOM事件模型和事件流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E4%BB%A3%E7%90%86%EF%BC%88%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">事件代理（事件委托）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Event%E5%AF%B9%E8%B1%A1%E5%B8%B8%E8%A7%81%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">7.</span> <span class="toc-text">Event对象常见的应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#event-amp-currentTarget"><span class="toc-number">8.</span> <span class="toc-text">event &amp; currentTarget</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        dom事件级别
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-03-01T13:40:34.000Z" itemprop="datePublished">2021-03-01</time>
+        
+        (Updated: <time datetime="2021-03-02T08:43:41.232Z" itemprop="dateModified">2021-03-02</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/Javascript/">Javascript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="DOM事件级别"><a href="#DOM事件级别" class="headerlink" title="DOM事件级别"></a>DOM事件级别</h2><p>DOM级别一共可以分为四个级别：DOM0级、DOM1级、DOM2级和DOM3级。而DOM事件分为3个级别：DOM 0级事件处理，DOM 2级事件处理和DOM 3级事件处理。由于DOM 1级中没有事件的相关内容，所以没有DOM 1级事件</p>
+<h2 id="dom0级事件"><a href="#dom0级事件" class="headerlink" title="dom0级事件"></a>dom0级事件</h2><p>不允许为同个元素绑定多个同类dom0级事件，给元素的事件行为绑定方法，这些方法都是在当前元素事件的冒泡或者目标阶段执行的</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">name</span>=<span class="string">&quot;&quot;</span> <span class="attr">id</span>=<span class="string">&quot;btn1&quot;</span> <span class="attr">value</span>=<span class="string">&quot;btn1&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;console.log(&#x27;click me:dom0&#x27;)&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&#x27;btn1&#x27;</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;click me: dom1&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>点击btn1时，输出’click me: dom1’，不允许为同个元素绑定多个同类dom0级事件</p>
+<h2 id="dom2级事件"><a href="#dom2级事件" class="headerlink" title="dom2级事件"></a>dom2级事件</h2><p>el.addEventListener(event-name, callback, useCapture)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&#x27;btn1&#x27;</span>).addEventListener(<span class="string">&#x27;click&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;click me: addEventListener111&#x27;</span>)</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&#x27;btn1&#x27;</span>).addEventListener(<span class="string">&#x27;click&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;click me: addEventListener222&#x27;</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>点击btn1，依次输出：<br>click me: addEventListener111<br>click me: addEventListener222</p>
+<h2 id="dom3级事件：在dom2级事件基础上添加了更多的事件类型。"><a href="#dom3级事件：在dom2级事件基础上添加了更多的事件类型。" class="headerlink" title="dom3级事件：在dom2级事件基础上添加了更多的事件类型。"></a>dom3级事件：在dom2级事件基础上添加了更多的事件类型。</h2><p>UI事件:当用户与页面上元素交互时触发,比如:load,scroll,<br>焦点事件:当元素获得或失去焦点时触发,比如:blur,focus,<br>鼠标事件:当用户通过鼠标在页面执行操作时触发如：dblclick、mouseup,<br>滚轮事件，当使用鼠标滚轮或类似设备时触发，如：mousewheel<br>文本事件，当在文档中输入文本时触发，如：textInput<br>键盘事件，当用户通过键盘在页面上执行操作时触发，如：keydown、keypress<br>合成事件，当为IME（输入法编辑器）输入字符时触发，如：compositionstart<br>变动事件，当底层DOM结构发生变化时触发，如：DOMsubtreeModified<br>同时DOM3级事件也允许使用者自定义一些事件</p>
+<h2 id="DOM事件模型和事件流"><a href="#DOM事件模型和事件流" class="headerlink" title="DOM事件模型和事件流"></a>DOM事件模型和事件流</h2><p>DOM事件模型分为捕获和冒泡。一个事件发生后，会在子元素和父元素之间传播（propagation）。这种传播分成三个阶段</p>
+<p>1.捕获阶段：事件从window对象自上而下向目标节点传播的阶段<br>2.目标阶段：真正的目标阶段正在处理事件的阶段<br>3.冒泡阶段：事件从目标节点自下而上向window对象传播的阶段</p>
+<h2 id="事件代理（事件委托）"><a href="#事件代理（事件委托）" class="headerlink" title="事件代理（事件委托）"></a>事件代理（事件委托）</h2><p>由于事件会在冒泡阶段传播到父元素上，由父元素监听函数同时处理多个子节点的事件，称为事件代理。<br>优点：减少内存的消耗提高性能</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">&quot;list&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>item1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>item2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>item3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&#x27;list&#x27;</span>).addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 兼容性处理</span></span><br><span class="line">  <span class="keyword">var</span> event = e || <span class="built_in">window</span>.event;</span><br><span class="line">  <span class="keyword">var</span> target = event.target || event.srcElement;</span><br><span class="line">  <span class="comment">// 判断是否匹配目标元素</span></span><br><span class="line">  <span class="keyword">if</span> (target.nodeName.toLocaleLowerCase() === <span class="string">&#x27;li&#x27;</span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;the content is: &#x27;</span>, target.innerHTML);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="Event对象常见的应用"><a href="#Event对象常见的应用" class="headerlink" title="Event对象常见的应用"></a>Event对象常见的应用</h2><p>event.preventDefault();阻止默认事件的发生，比如链接跳转，表达提交<br>event.stopPropagation();阻止事件冒泡到父元素,阻止任何父元素事件处理程序被执行<br>event.stopImmediatePropagation();既能阻止事件向父元素冒泡,也能阻止元素同事件类型的其他监听器被触发</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> btn = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#btn1&#x27;</span>);</span><br><span class="line">btn.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;btn click 1&#x27;</span>);</span><br><span class="line">  event.stopImmediatePropagation();</span><br><span class="line">&#125;);</span><br><span class="line">btn.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;btn click 2&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">document</span>.body.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;body click&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>点击btn，输出’btn click 1’</p>
+<h2 id="event-amp-currentTarget"><a href="#event-amp-currentTarget" class="headerlink" title="event &amp; currentTarget"></a>event &amp; currentTarget</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;a&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;b&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;c&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;d&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&#x27;a&#x27;</span>).addEventListener(<span class="string">&#x27;click&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;target: &#x27;</span>+ e.target.id+<span class="string">&#x27; &amp;curretTarget: &#x27;</span>+e.currentTarget.id)</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&#x27;b&#x27;</span>).addEventListener(<span class="string">&#x27;click&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;target: &#x27;</span>+ e.target.id+<span class="string">&#x27; &amp;curretTarget: &#x27;</span>+e.currentTarget.id)</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&#x27;c&#x27;</span>).addEventListener(<span class="string">&#x27;click&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;target: &#x27;</span>+ e.target.id+<span class="string">&#x27; &amp;curretTarget: &#x27;</span>+e.currentTarget.id)</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&#x27;d&#x27;</span>).addEventListener(<span class="string">&#x27;click&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;target: &#x27;</span>+ e.target.id+<span class="string">&#x27; &amp;curretTarget: &#x27;</span>+e.currentTarget.id)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>点击d元素，依次输出：<br>target: d &amp;curretTarget: d<br>target: d &amp;curretTarget: c<br>target: d &amp;curretTarget: b<br>target: d &amp;curretTarget: a</p>
+
+  </div>
+  <div>
+      <!-- <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/dom事件级别.md" target="_blank">编辑</a> -->
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB"><span class="toc-number">1.</span> <span class="toc-text">DOM事件级别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dom0%E7%BA%A7%E4%BA%8B%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">dom0级事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dom2%E7%BA%A7%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">dom2级事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dom3%E7%BA%A7%E4%BA%8B%E4%BB%B6%EF%BC%9A%E5%9C%A8dom2%E7%BA%A7%E4%BA%8B%E4%BB%B6%E5%9F%BA%E7%A1%80%E4%B8%8A%E6%B7%BB%E5%8A%A0%E4%BA%86%E6%9B%B4%E5%A4%9A%E7%9A%84%E4%BA%8B%E4%BB%B6%E7%B1%BB%E5%9E%8B%E3%80%82"><span class="toc-number">4.</span> <span class="toc-text">dom3级事件：在dom2级事件基础上添加了更多的事件类型。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM%E4%BA%8B%E4%BB%B6%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BA%8B%E4%BB%B6%E6%B5%81"><span class="toc-number">5.</span> <span class="toc-text">DOM事件模型和事件流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E4%BB%A3%E7%90%86%EF%BC%88%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">事件代理（事件委托）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Event%E5%AF%B9%E8%B1%A1%E5%B8%B8%E8%A7%81%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">7.</span> <span class="toc-text">Event对象常见的应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#event-amp-currentTarget"><span class="toc-number">8.</span> <span class="toc-text">event &amp; currentTarget</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/&text=dom事件级别"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/&title=dom事件级别"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/&is_video=false&description=dom事件级别"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=dom事件级别&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/&title=dom事件级别"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/&title=dom事件级别"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/&title=dom事件级别"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/&title=dom事件级别"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/&name=dom事件级别&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/dom%E4%BA%8B%E4%BB%B6%E7%BA%A7%E5%88%AB/&t=dom事件级别"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

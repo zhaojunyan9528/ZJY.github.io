@@ -39,8 +39,8 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12890819-6b84636562994190.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12890819-1fe94787d58e751d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12890819-8156dafea5e01e46.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="article:published_time" content="2021-01-22T09:24:12.000Z">
-<meta property="article:modified_time" content="2021-01-22T09:27:17.737Z">
+<meta property="article:published_time" content="2021-01-22T17:24:12.000Z">
+<meta property="article:modified_time" content="2021-03-02T08:43:41.236Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -106,6 +106,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" href="/ZJY.github.io/2021/01/26/%E4%BA%92%E8%81%94%E7%BD%91%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C%E7%9A%84/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" href="/ZJY.github.io/2021/01/20/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E5%9F%BA%E7%A1%80/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
@@ -143,7 +145,8 @@
     
     <div class="content index py4">
         
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
@@ -159,9 +162,9 @@
       
     <div class="postdate">
       
-        <time datetime="2021-01-22T09:24:12.000Z" itemprop="datePublished">2021-01-22</time>
+        <time datetime="2021-01-22T17:24:12.000Z" itemprop="datePublished">2021-01-22</time>
         
-        (Updated: <time datetime="2021-01-22T09:27:17.737Z" itemprop="dateModified">2021-01-22</time>)
+        (Updated: <time datetime="2021-03-02T08:43:41.236Z" itemprop="dateModified">2021-03-02</time>)
         
       
     </div>
@@ -223,7 +226,7 @@
 <p><strong>document 常用属性与方法有哪些 ？</strong></p>
 <p>document 常见的属性</p>
 <ul>
-<li>body 提供对 <body> 元素的直接访问。对于定义了框架集的文档，该属性引用最外层的 <frameset>。</li>
+<li>body 提供对 <code>&lt;body&gt;</code> 元素的直接访问。对于定义了框架集的文档，该属性引用最外层的 <code>&lt;frameset&gt;</code>。</li>
 <li>cookie 设置或返回与当前文档有关的所有 cookie。</li>
 <li>domain 返回当前文档的域名。</li>
 <li>lastModified 返回文档被最后修改的日期和时间。</li>
@@ -308,7 +311,7 @@
 <hr>
 <p><strong>Doctype 作用 ？标准模式与兼容模式各有什么区别 ?</strong></p>
 <ul>
-<li><!DOCTYPE> 声明位于位于 HTML 文档中的第一行，处于 <html> 标签之前。告知浏览器的解析器用什么文档标准解析这个文档。DOCTYPE 不存在或格式不正确会导致文档以兼容模式呈现。</li>
+<li><!DOCTYPE> 声明位于位于 HTML 文档中的第一行，处于 <code>&lt;html&gt; </code>标签之前。告知浏览器的解析器用什么文档标准解析这个文档。DOCTYPE 不存在或格式不正确会导致文档以兼容模式呈现。</li>
 <li>标准模式的排版和 JS 运作模式都是以该浏览器支持的最高标准运行。在兼容模式中，页面以宽松的向后兼容的方式显示，模拟老式浏览器的行为以防止站点无法工作。</li>
 </ul>
 <hr>
@@ -343,7 +346,8 @@
 <p>支持 HTML5 新标签</p>
 <ul>
 <li>IE8/IE7/IE6 支持通过 document.createElement 方法产生的标签，可以利用这一特性让这些浏览器支持 HTML5 新标签，浏览器支持新标签后，还需要添加标签默认的样式。</li>
-<li>当然也可以直接使用成熟的框架、比如 html5shim;<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--[if lt IE 9]&gt;</span></span><br><span class="line"><span class="comment">&lt;script&gt; src=&quot;http://html5shim.googlecode.com/svn/trunk/html5.js&quot;&lt;/script&gt;</span></span><br><span class="line"><span class="comment">&lt;![endif]--&gt;</span></span><br></pre></td></tr></table></figure>
+<li>当然也可以直接使用成熟的框架、比如 html5shim;</li>
+<li><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--[if lt IE 9]&gt;</span></span><br><span class="line"><span class="comment">&lt;script&gt; src=&quot;http://html5shim.googlecode.com/svn/trunk/html5.js&quot;&lt;/script&gt;</span></span><br><span class="line"><span class="comment">&lt;![endif]--&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <hr>
@@ -364,7 +368,8 @@
 <p>如何使用</p>
 <ul>
 <li>1、页面头部像下面一样加入一个 manifest 的属性；</li>
-<li>2、在 cache.manifest 文件的编写离线存储的资源；<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CACHE MANIFEST</span><br><span class="line">#v0.11</span><br><span class="line">CACHE:</span><br><span class="line">js/app.js</span><br><span class="line">css/style.css</span><br><span class="line">NETWORK:</span><br><span class="line">resourse/logo.png</span><br><span class="line">FALLBACK:</span><br><span class="line"><span class="comment">//offline.html</span></span><br></pre></td></tr></table></figure></li>
+<li>2、在 cache.manifest 文件的编写离线存储的资源；</li>
+<li><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CACHE MANIFEST</span><br><span class="line">#v0.11</span><br><span class="line">CACHE:</span><br><span class="line">js/app.js</span><br><span class="line">css/style.css</span><br><span class="line">NETWORK:</span><br><span class="line">resourse/logo.png</span><br><span class="line">FALLBACK:</span><br><span class="line"><span class="comment">//offline.html</span></span><br></pre></td></tr></table></figure></li>
 <li>3、在离线状态时，操作 window.applicationCache 进行需求实现。</li>
 </ul>
 <hr>
@@ -384,7 +389,7 @@
 <li>cookie 数据大小不能超过 4k。</li>
 <li>sessionStorage 和 localStorage 虽然也有存储大小的限制，但比 cookie 大得多，可以达到 5M 或更大。</li>
 </ul>
-<p>有期时间</p>
+<p>有效期时间</p>
 <ul>
 <li>localStorage 存储持久数据，浏览器关闭后数据不丢失除非主动删除数据；</li>
 <li>sessionStorage 数据在当前浏览器窗口关闭后自动删除。</li>
@@ -473,8 +478,7 @@
 </ul>
 <hr>
 <p><strong>有这么一段 HTML，请挑毛病</strong></p>
-<P> 哥写的不是HTML，是寂寞。< br>< br> 我说：< br>不要迷恋哥，哥只是一个传说
-
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">P</span>&gt;</span> 哥写的不是HTML，是寂寞。&lt; br&gt;&lt; br&gt; 我说：&lt; br&gt;不要迷恋哥，哥只是一个传说</span><br></pre></td></tr></table></figure>
 <p>答案：缺少 p 标记的结束标记。</p>
 <hr>
 <h2 id="3-CSS"><a href="#3-CSS" class="headerlink" title="3. CSS"></a>3. CSS</h2><p><strong>盒子模型的理解 ?</strong></p>
@@ -488,8 +492,8 @@
 <p>我们所说的 width，height 指的是内容 (content) 的宽高。</p>
 <p>一个盒子模型的中：</p>
 <ul>
-<li>宽度 = width+ pdding(宽) + border(宽)。</li>
-<li>高度 = height + padding(高) + border(高)。</li>
+<li>宽度 = contentWidth+ pdding(宽) + border(宽)。</li>
+<li>高度 = contentHeight + padding(高) + border(高)。</li>
 </ul>
 <hr>
 <p><strong>如何在页面上实现一个圆形的可点击区域 ？</strong></p>
@@ -2264,7 +2268,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">findMaxDuplicateChar</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(str.length == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> charObj = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; str.length; i++) &#123;</span><br><span class="line">        <span class="comment">// 利用String的charAt()方法获取各个字符; charAt() 方法可返回指定位置的字符</span></span><br><span class="line">        <span class="keyword">if</span>(!charObj[str.charAt(i)]) &#123;</span><br><span class="line">            charObj[str.charAt(i)] = <span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            charObj[str.charAt(i)] += <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> maxChar = <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">            maxValue = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">in</span> charObj) &#123;</span><br><span class="line">        <span class="comment">// 在obj对象中寻找值最大的那个属性</span></span><br><span class="line">        <span class="keyword">if</span>(charObj[k] &gt;= maxValue) &#123;</span><br><span class="line">            maxChar = k;</span><br><span class="line">            maxValue = charObj[k];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxChar;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
   </div>
   <div>
-      <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/前端面试基础2.md" target="_blank">编辑</a>
+      <!-- <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/前端面试基础2.md" target="_blank">编辑</a> -->
   </div>
 </article>
 

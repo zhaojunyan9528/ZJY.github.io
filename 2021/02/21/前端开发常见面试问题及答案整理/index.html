@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="前端开发常见面试问题及答案整理闭包的理解闭包是为了设计私有方法和变量。优点：避免全局变量的污染缺点：闭包常驻内存，加大内存使用，使用不当容易造成内存泄漏 闭包的三大特性：  函数嵌套函数 函数内部可以引用外部的参数和变量 参数和变量不会被垃圾回收机制回收  cookie的弊端1.每个特定的域名下最多生成20个cookie，每个cookie长度不能超过4KB，否则会被截掉。2.安全性问题。如果coo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端开发常见面试问题及答案整理">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="前端开发常见面试问题及答案整理闭包的理解闭包是为了设计私有方法和变量。优点：避免全局变量的污染缺点：闭包常驻内存，加大内存使用，使用不当容易造成内存泄漏 闭包的三大特性：  函数嵌套函数 函数内部可以引用外部的参数和变量 参数和变量不会被垃圾回收机制回收  cookie的弊端1.每个特定的域名下最多生成20个cookie，每个cookie长度不能超过4KB，否则会被截掉。2.安全性问题。如果coo">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-21T22:06:22.000Z">
+<meta property="article:modified_time" content="2021-03-02T08:43:41.236Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>前端开发常见面试问题及答案整理</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/02/21/typescript/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/&text=前端开发常见面试问题及答案整理"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/&title=前端开发常见面试问题及答案整理"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/&is_video=false&description=前端开发常见面试问题及答案整理"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=前端开发常见面试问题及答案整理&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/&title=前端开发常见面试问题及答案整理"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/&title=前端开发常见面试问题及答案整理"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/&title=前端开发常见面试问题及答案整理"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/&title=前端开发常见面试问题及答案整理"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/&name=前端开发常见面试问题及答案整理&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/&t=前端开发常见面试问题及答案整理"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">前端开发常见面试问题及答案整理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AD%E5%8C%85%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">闭包的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie%E7%9A%84%E5%BC%8A%E7%AB%AF"><span class="toc-number">3.</span> <span class="toc-text">cookie的弊端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8"><span class="toc-number">4.</span> <span class="toc-text">浏览器本地存储</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#web-storage%E5%92%8Ccookie%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">4.1.</span> <span class="toc-text">web storage和cookie的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cookie%E5%92%8Csession%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">4.2.</span> <span class="toc-text">cookie和session的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#css%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98"><span class="toc-number">5.</span> <span class="toc-text">css相关问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#display-none-%E5%92%8C-visibility-hidden"><span class="toc-number">5.1.</span> <span class="toc-text">display:none 和 visibility:hidden</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E4%B8%ADlink%E5%92%8C-import%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">5.2.</span> <span class="toc-text">css中link和@import的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#position-absolute%E5%92%8Cfloat%E7%9A%84%E5%BC%82%E5%90%8C"><span class="toc-number">5.3.</span> <span class="toc-text">position:absolute和float的异同</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#box-sizing%E5%B1%9E%E6%80%A7"><span class="toc-number">5.4.</span> <span class="toc-text">box-sizing属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-%E9%80%89%E6%8B%A9%E7%AC%A6%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">5.5.</span> <span class="toc-text">CSS 选择符有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E5%93%AA%E4%BA%9B%E5%B1%9E%E6%80%A7%E5%8F%AF%E4%BB%A5%E7%BB%A7%E6%89%BF%EF%BC%9F"><span class="toc-number">5.6.</span> <span class="toc-text">css哪些属性可以继承？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E4%BC%98%E5%85%88%E7%BA%A7%E7%AE%97%E6%B3%95%EF%BC%9F"><span class="toc-number">5.7.</span> <span class="toc-text">css优先级算法？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css3%E6%96%B0%E5%A2%9E%E4%BC%AA%E7%B1%BB%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">5.8.</span> <span class="toc-text">css3新增伪类有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#position%E7%9A%84%E5%80%BC%EF%BC%8C%E5%88%86%E5%88%AB%E7%9B%B8%E5%AF%B9%E4%BA%8E%E8%B0%81%E5%AE%9A%E4%BD%8D%EF%BC%9F"><span class="toc-number">5.9.</span> <span class="toc-text">position的值，分别相对于谁定位？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css3%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9F"><span class="toc-number">5.10.</span> <span class="toc-text">css3有哪些新特性？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XML%E5%92%8CJSON%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">5.11.</span> <span class="toc-text">XML和JSON的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9BFC%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F"><span class="toc-number">5.12.</span> <span class="toc-text">对BFC的理解？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css-sprites-%E5%A6%82%E4%BD%95%E5%9C%A8%E7%BD%91%E7%AB%99%E4%BD%BF%E7%94%A8%EF%BC%9F"><span class="toc-number">5.13.</span> <span class="toc-text">css sprites,如何在网站使用？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html%E9%83%A8%E5%88%86"><span class="toc-number">6.</span> <span class="toc-text">html部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%AF%AD%E4%B9%89%E5%8C%96%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F"><span class="toc-number">6.1.</span> <span class="toc-text">对语义化的理解？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Doctype%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9F%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F%E5%92%8C%E6%B7%B7%E6%9D%82%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB%EF%BC%9F%E6%9C%89%E4%BD%95%E6%84%8F%E4%B9%89%EF%BC%9F"><span class="toc-number">6.2.</span> <span class="toc-text">Doctype的作用？严格模式和混杂模式区别？有何意义？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E5%8A%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%9F%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8%E7%9A%84%E6%8A%80%E5%B7%A7%EF%BC%9F"><span class="toc-number">6.3.</span> <span class="toc-text">浮动工作原理？清除浮动的技巧？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E5%8A%A8%E5%85%83%E7%B4%A0%E5%BC%95%E8%B5%B7%E7%9A%84%E9%97%AE%E9%A2%98%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9F"><span class="toc-number">6.4.</span> <span class="toc-text">浮动元素引起的问题和解决方案？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM%E6%93%8D%E4%BD%9C%E2%80%94%E2%80%94%E6%80%8E%E6%A0%B7%E6%B7%BB%E5%8A%A0%E3%80%81%E7%A7%BB%E9%99%A4%E3%80%81%E7%A7%BB%E5%8A%A8%E3%80%81%E5%A4%8D%E5%88%B6%E3%80%81%E5%88%9B%E5%BB%BA%E5%92%8C%E6%9F%A5%E6%89%BE%E8%8A%82%E7%82%B9"><span class="toc-number">6.5.</span> <span class="toc-text">DOM操作——怎样添加、移除、移动、复制、创建和查找节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#html5%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9F"><span class="toc-number">6.6.</span> <span class="toc-text">html5有哪些新特性？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98"><span class="toc-number">6.7.</span> <span class="toc-text">常见浏览器兼容问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A4%9A%E4%B8%AA%E6%A0%87%E7%AD%BE%E9%A1%B5%E4%B9%8B%E9%97%B4%E9%80%9A%E4%BF%A1%EF%BC%9F"><span class="toc-number">6.8.</span> <span class="toc-text">如何实现浏览器多个标签页之间通信？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E4%B9%8B%E9%97%B4%E5%85%B3%E7%B3%BB%E5%92%8C%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">6.9.</span> <span class="toc-text">进程和线程之间关系和区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFFOUC%EF%BC%9F%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%EF%BC%9F"><span class="toc-number">6.10.</span> <span class="toc-text">什么是FOUC？怎么解决？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null%E5%92%8Cundefined%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">6.11.</span> <span class="toc-text">null和undefined的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new-%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%85%B7%E4%BD%93%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">6.12.</span> <span class="toc-text">new 操作符具体做了什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="toc-number">6.13.</span> <span class="toc-text">js延迟加载的几种方式？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#document-write%E5%92%8CinnerHTML%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">6.14.</span> <span class="toc-text">document.write和innerHTML的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%AA%E4%BA%9B%E6%93%8D%E4%BD%9C%E4%BC%9A%E9%80%A0%E6%88%90%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%EF%BC%9F"><span class="toc-number">6.15.</span> <span class="toc-text">哪些操作会造成内存泄漏？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E8%84%9A%E6%9C%AC%E8%BF%90%E8%A1%8C%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%98%E6%98%AFnode%E7%8E%AF%E5%A2%83%E4%B8%AD%EF%BC%9F"><span class="toc-number">6.16.</span> <span class="toc-text">如何判断当前脚本运行在浏览器还是node环境中？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ajax%E8%BF%87%E7%A8%8B"><span class="toc-number">6.17.</span> <span class="toc-text">ajax过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ie%E5%90%84%E7%89%88%E6%9C%AC%E5%92%8Cchrome%E5%8F%AF%E4%BB%A5%E5%B9%B6%E8%A1%8C%E4%B8%8B%E8%BD%BD%E5%A4%9A%E5%B0%91%E4%B8%AA%E8%B5%84%E6%BA%90"><span class="toc-number">6.18.</span> <span class="toc-text">ie各版本和chrome可以并行下载多少个资源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript%E7%9A%84%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5"><span class="toc-number">6.19.</span> <span class="toc-text">javascript的同源策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%AA%E4%BA%9B%E5%9C%B0%E6%96%B9%E4%BC%9A%E5%87%BA%E7%8E%B0css%E9%98%BB%E5%A1%9E%EF%BC%8C%E5%93%AA%E4%BA%9B%E5%9C%B0%E6%96%B9%E4%BC%9A%E5%87%BA%E7%8E%B0js%E9%98%BB%E5%A1%9E%EF%BC%9F"><span class="toc-number">6.20.</span> <span class="toc-text">哪些地方会出现css阻塞，哪些地方会出现js阻塞？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js%E6%97%A0%E9%98%BB%E5%A1%9E%E5%8A%A0%E8%BD%BD%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="toc-number">6.21.</span> <span class="toc-text">js无阻塞加载方式？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#eval%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F"><span class="toc-number">6.22.</span> <span class="toc-text">eval是做什么的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E5%92%8C%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7%EF%BC%9F"><span class="toc-number">6.23.</span> <span class="toc-text">事件冒泡和事件捕获？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96UA"><span class="toc-number">6.24.</span> <span class="toc-text">如何获取UA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js%E6%93%8D%E4%BD%9C%E5%92%8C%E8%AE%BE%E7%BD%AEcookie"><span class="toc-number">6.25.</span> <span class="toc-text">js操作和设置cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tcp%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">6.26.</span> <span class="toc-text">tcp三次握手</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9promise%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">6.27.</span> <span class="toc-text">对promise的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%88%E8%B0%88%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98"><span class="toc-number">6.28.</span> <span class="toc-text">谈谈性能优化问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFEtag%EF%BC%9F"><span class="toc-number">6.29.</span> <span class="toc-text">什么是Etag？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">6.30.</span> <span class="toc-text">栈和队列的区别?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%E5%92%8C%E5%A0%86%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">6.31.</span> <span class="toc-text">栈和堆的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8EHttp-2-0-%E4%BD%A0%E7%9F%A5%E9%81%93%E5%A4%9A%E5%B0%91%EF%BC%9F"><span class="toc-number">6.32.</span> <span class="toc-text">关于Http 2.0 你知道多少？</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        前端开发常见面试问题及答案整理
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-02-21T22:06:22.000Z" itemprop="datePublished">2021-02-21</time>
+        
+        (Updated: <time datetime="2021-03-02T08:43:41.236Z" itemprop="dateModified">2021-03-02</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E9%9D%A2%E8%AF%95/">面试</a> › <a class="category-link" href="/ZJY.github.io/categories/%E9%9D%A2%E8%AF%95/Javascript/">Javascript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="前端开发常见面试问题及答案整理"><a href="#前端开发常见面试问题及答案整理" class="headerlink" title="前端开发常见面试问题及答案整理"></a>前端开发常见面试问题及答案整理</h2><h2 id="闭包的理解"><a href="#闭包的理解" class="headerlink" title="闭包的理解"></a>闭包的理解</h2><p>闭包是为了设计私有方法和变量。<br>优点：避免全局变量的污染<br>缺点：闭包常驻内存，加大内存使用，使用不当容易造成内存泄漏</p>
+<p>闭包的三大特性：</p>
+<ul>
+<li>函数嵌套函数</li>
+<li>函数内部可以引用外部的参数和变量</li>
+<li>参数和变量不会被垃圾回收机制回收</li>
+</ul>
+<h2 id="cookie的弊端"><a href="#cookie的弊端" class="headerlink" title="cookie的弊端"></a>cookie的弊端</h2><p>1.每个特定的域名下最多生成20个cookie，每个cookie长度不能超过4KB，否则会被截掉。<br>2.安全性问题。如果cookie被拦截，那就可以取到所有session信息，即使加密也于事无补，，因为拦截者并不需要知道cookie的意义，他只要原样转发cookie就可以达到目的了。</p>
+<h2 id="浏览器本地存储"><a href="#浏览器本地存储" class="headerlink" title="浏览器本地存储"></a>浏览器本地存储</h2><p>html5中web storage包括了2种存储方式：sessionStorage和localStorage</p>
+<ul>
+<li>sessionStorage:用于存储本地的一个会话的数据，这些数据只能在同一个会话中的页面才能访问并且当会话结束后会随之销毁。所以sessionStorage不是一个持久化的的本地存储，仅仅是会话级别的存储。</li>
+<li>localStorage：是持久化的本地存储，除非主动删除数据，否则永远不用过期。</li>
+</ul>
+<h3 id="web-storage和cookie的区别"><a href="#web-storage和cookie的区别" class="headerlink" title="web storage和cookie的区别"></a>web storage和cookie的区别</h3><p>web storage和cookie类似，区别是web storage是为了更大容量设计的。<br>cookie大小受限制；且每次打开新的页面，cookie都会被发送过去，无形中浪费带宽；且cookie不能跨域</p>
+<p>web storage拥有setItem,getItem,removeItem,clear等方法，而cookie需要自己封装setCookie,getCookie</p>
+<p>但cookie是不可或缺的：cookie的作用是与服务器进行交互，作为http的规范而存在，web storage仅仅是为了本地存储</p>
+<p>localStorage和sessionStorage都具有相同的操作方法，例如setItem、getItem和removeItem</p>
+<h3 id="cookie和session的区别"><a href="#cookie和session的区别" class="headerlink" title="cookie和session的区别"></a>cookie和session的区别</h3><ul>
+<li>cookie存放在客户端浏览器，session存放在服务器</li>
+<li>cookie最大4kb，且每个站点最多20个cookie</li>
+<li>cookie不是很安全，别人可以获取cookie进行cookie欺骗</li>
+<li>session会在一定时间内存储在服务器，当访问量增大时，占用服务器的性能</li>
+</ul>
+<h2 id="css相关问题"><a href="#css相关问题" class="headerlink" title="css相关问题"></a>css相关问题</h2><h3 id="display-none-和-visibility-hidden"><a href="#display-none-和-visibility-hidden" class="headerlink" title="display:none 和 visibility:hidden"></a>display:none 和 visibility:hidden</h3><ul>
+<li>display:none隐藏对应的元素,文档布局中不再分配空间，周边元素会当他不存在</li>
+<li>visibility:hidden 隐藏元素，保留布局，占用空间。</li>
+</ul>
+<h3 id="css中link和-import的区别"><a href="#css中link和-import的区别" class="headerlink" title="css中link和@import的区别"></a>css中link和@import的区别</h3><ul>
+<li>link是html标签，@import是css提供的</li>
+<li>link是html标签无兼容问题，@import需ie5以上才兼容</li>
+<li>页面加载时，link会被一起加载，而@import需要页面加载完后再加载</li>
+<li>link引入样式权重高于@import权重</li>
+</ul>
+<h3 id="position-absolute和float的异同"><a href="#position-absolute和float的异同" class="headerlink" title="position:absolute和float的异同"></a>position:absolute和float的异同</h3><ul>
+<li>相同点：对内联元素设置position:absolute和float都会使其脱离文档流，并可设置宽和高</li>
+<li>不同点：设置position:absolute的元素会覆盖文档流中的其他元素，而float仍然占据位置。</li>
+</ul>
+<h3 id="box-sizing属性"><a href="#box-sizing属性" class="headerlink" title="box-sizing属性"></a>box-sizing属性</h3><p>box-sizing属性用来控制元素的盒模型解析模式，默认是content-box</p>
+<ul>
+<li>content-box: w3c标准盒模型，元素的宽高由padding+border+content决定，设置元素的width/height属性是指content的宽/高</li>
+<li>border-box: IE怪异盒模型，设置元素的width/height属性是指content+padding+border</li>
+</ul>
+<p>CSS盒模型本质上是一个盒子，封装周围的HTML元素，它包括：边距，边框，填充，和实际内容。</p>
+<h3 id="CSS-选择符有哪些？"><a href="#CSS-选择符有哪些？" class="headerlink" title="CSS 选择符有哪些？"></a>CSS 选择符有哪些？</h3><ul>
+<li>id选择器(#con)</li>
+<li>class选择器(.con)</li>
+<li>标签选择器(div/p)</li>
+<li>相邻选择器(div + p)</li>
+<li>子选择器(div &gt; p)</li>
+<li>后代选择器(div p)</li>
+<li>通配符选择器(*)</li>
+<li>属性选择器（a[rel = “external”]）</li>
+<li>伪类选择器(a:hover)</li>
+</ul>
+<h3 id="css哪些属性可以继承？"><a href="#css哪些属性可以继承？" class="headerlink" title="css哪些属性可以继承？"></a>css哪些属性可以继承？</h3><ul>
+<li>可以继承属性：font-size, font-family,color,text-index</li>
+<li>不可以继承属性：width,height,border,padding,margin</li>
+</ul>
+<h3 id="css优先级算法？"><a href="#css优先级算法？" class="headerlink" title="css优先级算法？"></a>css优先级算法？</h3><ul>
+<li>优先级就近原则，同权重情况下样式定义最近者为准</li>
+<li>载入样式以最后载入为准</li>
+<li>!important &gt;  id &gt; class &gt; tag，important 比 内联优先级高,但内联比 id 要高</li>
+</ul>
+<h3 id="css3新增伪类有哪些？"><a href="#css3新增伪类有哪些？" class="headerlink" title="css3新增伪类有哪些？"></a>css3新增伪类有哪些？</h3><ul>
+<li>p:first-of-type 选择属于其父元素的首个 <code>&lt;p&gt; </code>元素的每个<code> &lt;p&gt;</code> 元素。</li>
+<li>p:last-of-type 选择属于其父元素的最后 <code>&lt;p&gt;</code> 元素的每个 <code>&lt;p&gt;</code> 元素。</li>
+<li>p:only-of-type 选择属于其父元素唯一的 <code>&lt;p&gt;</code> 元素的每个 <code>&lt;p&gt;</code> 元素。</li>
+<li>p:nth-child(2) 选择属于其父元素的第二个子元素的每个 <code>&lt;p&gt;</code> 元素。</li>
+<li>p:only-child 选择属于其父元素的唯一子元素的每个 <code>&lt;p&gt;</code> 元素。</li>
+<li>:enabled :disabled 控制表单控件的禁用状态。</li>
+<li>:checked 单选框或复选框被选中。</li>
+</ul>
+<h3 id="position的值，分别相对于谁定位？"><a href="#position的值，分别相对于谁定位？" class="headerlink" title="position的值，分别相对于谁定位？"></a>position的值，分别相对于谁定位？</h3><ul>
+<li>static： 默认值，没有定位，元素出现在正常文档流中。</li>
+<li>relative：相对定位，相对于其在正常文档流中位置定位。</li>
+<li>absolute： 绝对定位，相对于最近一级的定位不是staic的元素定位。</li>
+<li>fixed： 绝对定位，相对于浏览器视窗定位。</li>
+</ul>
+<h3 id="css3有哪些新特性？"><a href="#css3有哪些新特性？" class="headerlink" title="css3有哪些新特性？"></a>css3有哪些新特性？</h3><ul>
+<li>border-radius:圆角</li>
+<li>border-image: 边框图片</li>
+<li>box-shadow: 边框阴影</li>
+<li>background-image: 多背景</li>
+<li>background-clip: 背景图片绘制区域</li>
+<li>background-origin: 背景图片的定位区域</li>
+<li>text-shadow: 文本阴影</li>
+<li>word-wrap:允许长单词或url换行到下一行</li>
+<li>word-break: 设置自动换行的处理方法</li>
+<li>transform: 旋转、缩放、移动、倾斜，2D或3D转换</li>
+<li>animation: 使用@keyframes创建动画</li>
+<li>transition: 设置元素过渡效果</li>
+<li>column-count/gap/rule: 多列设置</li>
+<li>::selection: 新增伪元素，设置选中高亮</li>
+</ul>
+<h3 id="XML和JSON的区别？"><a href="#XML和JSON的区别？" class="headerlink" title="XML和JSON的区别？"></a>XML和JSON的区别？</h3><ul>
+<li>数据体积方面：JSON相对XML来说，数据体积小，传输速度更快</li>
+<li>数据交互方面：JSON于js的交互更方便，更容易解析处理</li>
+<li>数据描述方面：XML对数据的描述比JSON好</li>
+<li>传输速度方面：JSON的传输速度要快于XML</li>
+</ul>
+<h3 id="对BFC的理解？"><a href="#对BFC的理解？" class="headerlink" title="对BFC的理解？"></a>对BFC的理解？</h3><p>BFC块级格式化上下文，是一个独立的渲染区域，内部元素不会影响外部元素定位，使内外元素相隔离</p>
+<p>BFC布局规则：</p>
+<ul>
+<li>BFC是一个独立的区域，内外元素不互相影响</li>
+<li>内部的box会在垂直方向，一个一个排列</li>
+<li>box垂直方向的距离由margin决定，相邻的2个box间的margin会发生重叠</li>
+<li>每个元素的margin box的左边与border box的左边相接触，即使浮动也如此</li>
+<li>BFC区域不和浮动盒子相重叠</li>
+<li>计算BFC高度时，float box也参与计算</li>
+</ul>
+<p>什么情况会形成BFC？</p>
+<ul>
+<li>根元素</li>
+<li>position为absolute或fixed</li>
+<li>浮动元素</li>
+<li>display值为flex、inline-flex、inline-block、table-cell</li>
+<li>overflow不为visibility的元素</li>
+</ul>
+<h3 id="css-sprites-如何在网站使用？"><a href="#css-sprites-如何在网站使用？" class="headerlink" title="css sprites,如何在网站使用？"></a>css sprites,如何在网站使用？</h3><p>css sprites就是把网页中一些背景图片整合到一张图片中，利用”background-image”,”background-repeat”,”background-position”属性组合进行背景定位。”background-position”可以精准定位背景图片的位置。有效减少图片请求开销。</p>
+<h2 id="html部分"><a href="#html部分" class="headerlink" title="html部分"></a>html部分</h2><h3 id="对语义化的理解？"><a href="#对语义化的理解？" class="headerlink" title="对语义化的理解？"></a>对语义化的理解？</h3><ul>
+<li>样式丢失也能呈现出清晰的结构</li>
+<li>有利于SEO：和搜索引擎建立良好沟通，有助于爬虫抓去更多信息</li>
+<li>方便其他设备解析（屏幕阅读器、盲人阅读器）</li>
+<li>便于团队开发和维护，语义化更具有可读性</li>
+</ul>
+<h3 id="Doctype的作用？严格模式和混杂模式区别？有何意义？"><a href="#Doctype的作用？严格模式和混杂模式区别？有何意义？" class="headerlink" title="Doctype的作用？严格模式和混杂模式区别？有何意义？"></a>Doctype的作用？严格模式和混杂模式区别？有何意义？</h3><ul>
+<li><!DOCTYPE>声明位于文档最前面，告知浏览器以何种模式渲染文档</li>
+<li>严格模式的排版和js运作模式是以浏览器支持的最高标准运行。</li>
+<li>在混杂模式中以宽松的向后兼容的方式显示，模拟老式浏览器的行为以防止站点无法工作。</li>
+<li>DOCTYPE不存在或不正确会使浏览器以混杂模式呈现。</li>
+</ul>
+<h3 id="浮动工作原理？清除浮动的技巧？"><a href="#浮动工作原理？清除浮动的技巧？" class="headerlink" title="浮动工作原理？清除浮动的技巧？"></a>浮动工作原理？清除浮动的技巧？</h3><p>浮动元素脱离文档流，不占据空间。浮动元素碰到包含它的边框或浮动元素的边框停留。</p>
+<p>清除浮动方式：</p>
+<ul>
+<li>使用空标签清除浮动：浮动标签后面添加一个空标签，定义css clear:both.弊端就是增加了无意义的标签</li>
+<li>使用overflow：给包含浮动元素的父元素添加overflow:auto;zoom:1;zoom:1;兼容ie6</li>
+<li>使用after伪对象清除浮动：只适用于非IE浏览器，该方法中必须为需要清除浮动元素的伪对象中设置 height:0，否则该元素会比实际高出若干像素</li>
+</ul>
+<h3 id="浮动元素引起的问题和解决方案？"><a href="#浮动元素引起的问题和解决方案？" class="headerlink" title="浮动元素引起的问题和解决方案？"></a>浮动元素引起的问题和解决方案？</h3><ul>
+<li>1.父元素的高度无法被撑开，影响与父元素同级的元素</li>
+<li>2.与浮动元素同级的非浮动元素（内联元素）会跟随其后</li>
+<li>3.若非第一个元素浮动，则该元素之前的元素也需要浮动，否则会影响页面结构</li>
+</ul>
+<p>解决方法：<br>对于第二个第三个问题可用clear:both清除元素的浮动，对于第一个问题，给父元素添加clearfix样式：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">::after</span>&#123;</span><br><span class="line">  <span class="attribute">content</span>:<span class="string">&#x27;.&#x27;</span>;</span><br><span class="line">  <span class="attribute">height</span>:<span class="number">0</span>;</span><br><span class="line">  <span class="attribute">clear</span>:both;</span><br><span class="line">  <span class="attribute">visibility</span>:hidden;</span><br><span class="line">  <span class="attribute">display</span>:block;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.clearfix</span>&#123;</span><br><span class="line">  <span class="attribute">display</span>:inline-block; <span class="comment">/* for IE/Mac */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>清除浮动的几种方式：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1，额外标签法，&lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;（缺点：不过这个办法会增加额外的标签使HTML结构看起来不够简洁。）</span><br><span class="line">2，使用<span class="selector-tag">after</span>伪类</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#parent</span><span class="selector-pseudo">:after</span>&#123;</span><br><span class="line">    <span class="attribute">content</span>:<span class="string">&quot;.&quot;</span>;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">visibility</span>:hidden;</span><br><span class="line">    <span class="attribute">display</span>:block;</span><br><span class="line">    <span class="attribute">clear</span>:both;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">3,浮动外部元素</span><br><span class="line">4,设置`<span class="selector-tag">overflow</span>`为`<span class="selector-tag">hidden</span>`或者<span class="selector-tag">auto</span></span><br></pre></td></tr></table></figure>
+<h3 id="DOM操作——怎样添加、移除、移动、复制、创建和查找节点"><a href="#DOM操作——怎样添加、移除、移动、复制、创建和查找节点" class="headerlink" title="DOM操作——怎样添加、移除、移动、复制、创建和查找节点"></a>DOM操作——怎样添加、移除、移动、复制、创建和查找节点</h3><ul>
+<li><p>创建</p>
+<ul>
+<li>createDocumentFragment() 创建一个Dom片段</li>
+<li>createElement() 创建一个元素</li>
+<li>createTextNode() 创建文本节点</li>
+</ul>
+</li>
+<li><p>添加、移除、移动、复制</p>
+<ul>
+<li>appendChild() </li>
+<li>removeChild()</li>
+<li>replaceChild()</li>
+<li>insertBefore()</li>
+</ul>
+</li>
+<li><p>查找</p>
+<ul>
+<li>getElementsByTagName()</li>
+<li>getElementById()</li>
+<li>getElementsByClassName()</li>
+</ul>
+</li>
+</ul>
+<h3 id="html5有哪些新特性？"><a href="#html5有哪些新特性？" class="headerlink" title="html5有哪些新特性？"></a>html5有哪些新特性？</h3><ul>
+<li>拖拽API</li>
+<li>语义化更好的标签（header,section,article,footer,nav,aside）</li>
+<li>音视频（audio/video）</li>
+<li>canvas画布/svg</li>
+<li>地理位置Geolocation</li>
+<li>本地缓存：localStorage持久化缓存，sessionStorage会话级缓存</li>
+<li>新的表单控件：calendar,date,time,url,search,email</li>
+</ul>
+<h3 id="常见浏览器兼容问题"><a href="#常见浏览器兼容问题" class="headerlink" title="常见浏览器兼容问题"></a>常见浏览器兼容问题</h3><ul>
+<li>浏览器默认margin,padding值不同，需要添加全局*{margin:0;padding:0}</li>
+<li>chrome浏览器设置字体小于12px，会默认为12px，解决方法：-webkit-text-size-adjust:none;</li>
+<li>a标签超链接访问过后hover样式就不出现了，被访问过的链接不再具有hover和active，解决方法改变css属性的顺序：<br>L-V-H-A: a:link{} a:visited: a:hover a:active</li>
+<li>怪异模式问题：漏写DTD声明时，火狐仍然按照标准模式来解析网页，但在IE中会触发怪异模式。</li>
+</ul>
+<h3 id="如何实现浏览器多个标签页之间通信？"><a href="#如何实现浏览器多个标签页之间通信？" class="headerlink" title="如何实现浏览器多个标签页之间通信？"></a>如何实现浏览器多个标签页之间通信？</h3><p>使用localStorage,cookies等本地存储方式</p>
+<h3 id="进程和线程之间关系和区别？"><a href="#进程和线程之间关系和区别？" class="headerlink" title="进程和线程之间关系和区别？"></a>进程和线程之间关系和区别？</h3><ul>
+<li><p>1.定义</p>
+<ul>
+<li>进程：是系统进行资源分配和调度的独立单位。</li>
+<li>线程：线程是进程的一个实体，是cpu调度和分派的基本单位，是比进程更小的能独立运行的基本单位。线程自己基本上不拥有系统资源，但是和进程内的其他线程共享进程拥有的全部资源。</li>
+</ul>
+</li>
+<li><p>2.关系</p>
+<ul>
+<li>一个线程可以创建和撤销另一个线程，同一个进程中的多个线程之间可以并发执行。</li>
+<li>相对进程而言，线程更接近于执行体的概念，它可以与进程内的其他线程共享资源，但拥有自己的栈空间，拥有独立的执行序列</li>
+</ul>
+</li>
+<li><p>3.区别<br>进程和线程的主要差别是他们是不同的操作系统资源的管理方式。进程拥有独立的地址空间，一个进程崩溃后，基于系统的保护程序，并不会影响其他进程，而线程只是进程中的不同执行路径。<br>线程拥有自己的堆栈和局部变量，但线程间没有单独的地址空间，一个线程死掉就相当于整个进程死掉，所以多进程的程序比多线程的程序更健壮，但在进程切换时，耗费资源较大，效率低一些。</p>
+<ul>
+<li>一个程序至少有一个进程，一个进程中至少有一个线程</li>
+<li>线程的划分尺度低于进程，使得多线程的程序并发性高</li>
+<li>进程在执行过程拥有独立的内存单元，而多个线程共享内存，从而极大的提高程序的运行效率</li>
+<li>线程在执行过程中和进程还是有区别的。每个线程都有程序运行入口，顺序执行序列和程序的出口，但线程不能独立执行，必须依存于应用程序，由应用程序提供多个线程执行控制</li>
+<li>从逻辑角度来看，多线程的意义在于应用程序中，有多个执行部分可以同时执行，但是操作系统并没有将多个线程看出多个独立的应用，来实现线程的调度和管理以及资源分配。这就是进程和线程的重要区别</li>
+</ul>
+</li>
+<li><p>4.优缺点</p>
+<ul>
+<li>线程执行开销小，但不利于资源的管理和保护；而进程相反</li>
+<li>线程适合于在SMP机器上运行，而进程则可以跨机器迁移。</li>
+</ul>
+</li>
+</ul>
+<h3 id="什么是FOUC？怎么解决？"><a href="#什么是FOUC？怎么解决？" class="headerlink" title="什么是FOUC？怎么解决？"></a>什么是FOUC？怎么解决？</h3><p>Flash Of Unstyled Content 文档式闪烁</p>
+<ul>
+<li>什么是FOUC(文档样式短暂失效)?<ul>
+<li>如果使用import方法对CSS进行导入,会导致某些页面在Windows 下的Internet Explorer出现一些奇怪的现象:以无样式显示页面内容的瞬间闪烁,这种现象称之为文档样式短暂失效(Flash of Unstyled Content),简称为FOUC。</li>
+</ul>
+</li>
+<li>造成原因：<ul>
+<li>使用import引入css</li>
+<li>将样式表放在页面底部</li>
+<li>多个样式表放在html结构的不同位置<br>当样式表晚于页面html加载，当加载到此样式表时，页面将停止之前的渲染，等待文件的下载解析后将重新渲染页面，也就出现短暂页面闪烁</li>
+</ul>
+</li>
+<li>解决方法：<ul>
+<li>使用link标签将样式表放置与head中</li>
+</ul>
+</li>
+</ul>
+<h3 id="null和undefined的区别？"><a href="#null和undefined的区别？" class="headerlink" title="null和undefined的区别？"></a>null和undefined的区别？</h3><p>null是表示“无”的对象，转为数值为0，undefined是表示“无”的原始值，转为数值为NaN。</p>
+<p>当声明的变量未初始化时，值为undefined。<br>null用来表示尚未存在的对象，常用来表示函数企图返回不存在的对象。</p>
+<p>undefined:<br>1.变量被声明了，但没有赋值，该变量值为undefined<br>2.调用函数时，应该提供的参数没有提供，该参数值为undefined<br>3.未给对象的属性赋值时，该属性的值为undefined<br>4.函数没有返回值时，默认返回undefined</p>
+<p>null：<br>1.作为函数的参数，表明该函数的参数不是对象<br>2.作为对象原型链的终点</p>
+<h3 id="new-操作符具体做了什么？"><a href="#new-操作符具体做了什么？" class="headerlink" title="new 操作符具体做了什么？"></a>new 操作符具体做了什么？</h3><ul>
+<li>1.创建新的空对象，并且this变量引用该对象，同时还继承了该函数的原型</li>
+<li>2.属性和方法被加入到this引用的对象上</li>
+<li>3.新创建的对象由this所引用，并隐式返回this</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">obj.__proto__ = Base.prototype;</span><br><span class="line">Base.call(obj);</span><br></pre></td></tr></table></figure>
+<h3 id="js延迟加载的几种方式？"><a href="#js延迟加载的几种方式？" class="headerlink" title="js延迟加载的几种方式？"></a>js延迟加载的几种方式？</h3><p>js延迟加载就是等页面加载完成后再加载js文件<br>js延迟加载有助于提高页面加载速度。<br>一般有以下几种方式：</p>
+<ul>
+<li><p>1.defer属性<br>html4为script标签添加了defer属性，表明脚本在执行时不会影响页面构造，也就是说脚本会延迟到整个页面都加载解析完毕再执行</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;script src=<span class="string">&quot;test.js&quot;</span> defer=<span class="string">&quot;defer&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br></pre></td></tr></table></figure>
+<p>defer属性告诉浏览器立即下载，但延迟执行。虽然<code>&lt;script&gt;</code> 元素放在了<code>&lt;head&gt;</code>元素中，但包含的脚本会延迟到浏览器遇到<code>&lt;/html&gt;</code>标签后再执行。</p>
+</li>
+</ul>
+<p>HTML5规范要求脚本按照它们出现的先后顺序执行</p>
+<p>defer属性只适用于外部脚本文件</p>
+<ul>
+<li><p>2.async属性<br>html5为script标签定义了async属性，与defer属性类似。只适用于外部脚本。<br>目的：不让页面等待脚本下载和执行，从而异步加载页面其他内容<br>异步脚本一定会在onload事件前执行<br>不能保证脚本按照顺序执行</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;test1.js&quot;</span> <span class="attr">async</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>async和defer一样，不会阻塞其他资源下载，不会影响页面加载<br>缺点：不能控制脚本加载顺序</p>
+</li>
+<li><p>3.动态创建DOM方式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这些代码应被放置在&lt;/body&gt;标签前(接近HTML文件底部)</span></span><br><span class="line">&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;  </span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">downloadJSAtOnload</span>(<span class="params"></span>) </span>&#123;  </span><br><span class="line">      varelement = <span class="built_in">document</span>.createElement(<span class="string">&quot;script&quot;</span>);  </span><br><span class="line">      element.src = <span class="string">&quot;defer.js&quot;</span>;  </span><br><span class="line">      <span class="built_in">document</span>.body.appendChild(element);  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">window</span>.addEventListener)  </span><br><span class="line">      <span class="built_in">window</span>.addEventListener(<span class="string">&quot;load&quot;</span>,downloadJSAtOnload, <span class="literal">false</span>);  </span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">window</span>.attachEvent)  </span><br><span class="line">      <span class="built_in">window</span>.attachEvent(<span class="string">&quot;onload&quot;</span>,downloadJSAtOnload);  </span><br><span class="line">  <span class="keyword">else</span> </span><br><span class="line">      <span class="built_in">window</span>.onload =downloadJSAtOnload;  </span><br><span class="line">&lt;/script&gt;  </span><br></pre></td></tr></table></figure>
+<p>创建script，插入到DOM中，加载完毕后callBack</p>
+</li>
+<li><p>4.使用setTimeout延迟</p>
+</li>
+<li><p>5.按需异步加载</p>
+</li>
+</ul>
+<h3 id="document-write和innerHTML的区别"><a href="#document-write和innerHTML的区别" class="headerlink" title="document.write和innerHTML的区别"></a>document.write和innerHTML的区别</h3><p>document.write重绘整个页面<br>innerHTML重绘页面一部分</p>
+<h3 id="哪些操作会造成内存泄漏？"><a href="#哪些操作会造成内存泄漏？" class="headerlink" title="哪些操作会造成内存泄漏？"></a>哪些操作会造成内存泄漏？</h3><p>内存泄漏是指任何对象在您不再拥有或需要时仍然存在<br>垃圾回收器会定时扫描对象，并计算应用了每个对象的其他对象的数量，当引用该对象数量为0，或对该对象的惟一引用是循环的，那么该对象的内存就会被回收。</p>
+<p>setTimeout函数的第一个参数如果是字符串，闭包、控制台日志，循环（两个对象彼此存在且彼此引用时，会行程一个循环）会引发内存泄漏。</p>
+<h3 id="如何判断当前脚本运行在浏览器还是node环境中？"><a href="#如何判断当前脚本运行在浏览器还是node环境中？" class="headerlink" title="如何判断当前脚本运行在浏览器还是node环境中？"></a>如何判断当前脚本运行在浏览器还是node环境中？</h3><p>通过判断Global对象是否等于window，如果不是则在node中</p>
+<p>this == window</p>
+<h3 id="ajax过程"><a href="#ajax过程" class="headerlink" title="ajax过程"></a>ajax过程</h3><ul>
+<li>1.创建一个XMLHttpRequest对象，也就是异步调用对象</li>
+<li>2.创建一个新的http请求，设置请求的方式、URL以及验证信息</li>
+<li>3.设置响应http请求状态变化的函数</li>
+<li>4.发送http请求</li>
+<li>5.获取异步调用返回的结果</li>
+<li>6.使用js和dom实现局部刷新</li>
+</ul>
+<h3 id="ie各版本和chrome可以并行下载多少个资源"><a href="#ie各版本和chrome可以并行下载多少个资源" class="headerlink" title="ie各版本和chrome可以并行下载多少个资源"></a>ie各版本和chrome可以并行下载多少个资源</h3><p>IE6 两个并发，iE7升级之后的6个并发，之后版本也是6个</p>
+<p>Firefox，chrome也是6个</p>
+<h3 id="javascript的同源策略"><a href="#javascript的同源策略" class="headerlink" title="javascript的同源策略"></a>javascript的同源策略</h3><p>同源：协议、域名、端口相同，同源策略是一种协议，指脚本只能读取来自同一源的窗口和文档属性。</p>
+<h3 id="哪些地方会出现css阻塞，哪些地方会出现js阻塞？"><a href="#哪些地方会出现css阻塞，哪些地方会出现js阻塞？" class="headerlink" title="哪些地方会出现css阻塞，哪些地方会出现js阻塞？"></a>哪些地方会出现css阻塞，哪些地方会出现js阻塞？</h3><p>所以浏览器在下载js的时候，都会阻塞其他资源的下载，页面的呈现等。知道js下载、解析、执行完毕后才能继续并行下载其他资源并呈现内容。新一代浏览器都支持并行下载js，但仍然会阻塞其他资源（css，图片）的下载。<br>由于浏览器为了防止出现js修改dom树，造成重新构造dom树的情况，需要阻塞其他资源的下载和呈现<br>嵌入js会阻塞所有内容的呈现，外部js只会阻塞其后内容的显示，2种方式都会阻塞资源的下载。</p>
+<p>css本来是可以并行下载的，在什么情况下会阻塞加载？<br>css后面跟着嵌入js的时候，会阻塞后面资源的下载，而把嵌入js放置在css前面就不会阻塞资源加载了。</p>
+<p>原因：<br>因为浏览器会维持html中css和js的顺序，样式表必须在嵌入js前先加载、解析完。而嵌入js又会阻塞后面的资源加载，所以就会出现css阻塞下载的情况</p>
+<p>嵌入js应该放在什么位置？<br>1.放置在底部，虽然放在底部会阻塞所有呈现，但不会阻塞资源下载<br>2.放在head，放在css前面<br>3.使用defer<br>4.嵌入js中不要调用运行时间较长的函数，如果要调用，可以使用setTimeout来调用</p>
+<h3 id="js无阻塞加载方式？"><a href="#js无阻塞加载方式？" class="headerlink" title="js无阻塞加载方式？"></a>js无阻塞加载方式？</h3><ul>
+<li>将脚本放在底部：script标签放在’</body>‘前</li>
+<li>非阻塞脚本：等页面加载完后，再加载js。也就是在onload事件下载js<ul>
+<li>1.defer属性/async属性</li>
+<li>2.动态创建dom方式（创建script，插入文档，onload事件回调触发）</li>
+</ul>
+</li>
+</ul>
+<h3 id="eval是做什么的？"><a href="#eval是做什么的？" class="headerlink" title="eval是做什么的？"></a>eval是做什么的？</h3><p>功能是将对应的字符串解析成js代码并执行。</p>
+<p>应该避免使用eval，不安全，耗性能（2次，一次解析成js代码，一次执行）</p>
+<h3 id="事件冒泡和事件捕获？"><a href="#事件冒泡和事件捕获？" class="headerlink" title="事件冒泡和事件捕获？"></a>事件冒泡和事件捕获？</h3><p>事件流描述的是从页面接收事件的顺序。<br>IE是冒泡事件流<br>Firefox是捕获事件流</p>
+<ul>
+<li>事件冒泡：即事件从具体的元素到不具体的元素，从内向外传递事件</li>
+<li>事件捕获：即事件从不具体的元素到具体的元素</li>
+</ul>
+<p>事件冒泡和事件捕获是两个相反的过程</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>event<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;obj1&quot;</span>&gt;</span></span><br><span class="line">        welcome</span><br><span class="line">        <span class="tag">&lt;<span class="name">h5</span> <span class="attr">id</span>=<span class="string">&quot;obj2&quot;</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h5</span> <span class="attr">id</span>=<span class="string">&quot;obj3&quot;</span>&gt;</span>world<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> obj1=<span class="built_in">document</span>.getElementById(<span class="string">&#x27;obj1&#x27;</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> obj2=<span class="built_in">document</span>.getElementById(<span class="string">&#x27;obj2&#x27;</span>);</span></span><br><span class="line"><span class="javascript">        obj1.addEventListener(<span class="string">&#x27;click&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            alert(<span class="string">&#x27;hello&#x27;</span>);</span></span><br><span class="line"><span class="javascript">        &#125;,<span class="literal">false</span>);</span></span><br><span class="line"><span class="javascript">        obj2.addEventListener(<span class="string">&#x27;click&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            alert(<span class="string">&#x27;world&#x27;</span>);</span></span><br><span class="line">        &#125;)</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>文档结构：document &gt; html &gt; body &gt; div &gt; h5<br>addEventListener的第三个参数为false,所以页面是在冒泡阶段处理绑定事件</p>
+<p>1.点击文字welcome，触发obj1的点击事件，弹出hello<br>2.点击文字hello，触发obj2的点击事件，弹出world &gt; hello<br>3.点击world时，触发obj1的点击事件，弹出hello</p>
+<ul>
+<li>事件代理机制：</li>
+</ul>
+<p>我们想要在点击每个h5标签时，弹出对应的innerHTML 。常规做法是遍历每个h5,然后在每个h5上绑定一个点击事件，这种做法在h5较少的时候可以使用，但如果有一万个h5，那就会导致性能降低。这时就需要事件代理出场了。 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">obj1.addEventListener(&#x27;click&#x27;,function(e)&#123;</span><br><span class="line">    var e=e||window.event;</span><br><span class="line">    if(e.target.nodeName.toLowerCase()==&#x27;h5&#x27;)&#123;</span><br><span class="line">        alert(e.target.innerHTML);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;,false);</span><br></pre></td></tr></table></figure>
+<p>由于事件冒泡机制，点击了h5后会冒泡到div,此时就会触发绑定在div上的点击事件，再利用target找到事件实际发生的元素，就可以达到预期的效果</p>
+<p>采用事件代理，为页面所有a标签绑定click事件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEvenetListenser(<span class="string">&#x27;click&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(e.target.nodeName == <span class="string">&#x27;A&#x27;</span>)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,<span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
+<p>问题：若a标签里面仍有span、img等其他元素，上述代码中，单击span、img等其他元素不能触发click事件。</p>
+<p>原因：单击span、img等其他元素时，e.target指向的是触发click事件的元素（span、img等其他元素），而不是a标签</p>
+<p>解决方法：从触发click事件的元素开始，逐级向上查找，直到找到a标签为止。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">&#x27;click&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> node = e.target;</span><br><span class="line">  <span class="keyword">while</span>(node.parentNode.nodeName != <span class="string">&#x27;BODY&#x27;</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(node.nodeName == <span class="string">&#x27;A&#x27;</span>)&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    node = node.parentNode</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,<span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+<p>阻止事件冒泡：e.stopPropagation(),ie旧方法e.cancelBubble = true</p>
+<h3 id="如何获取UA"><a href="#如何获取UA" class="headerlink" title="如何获取UA"></a>如何获取UA</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt; </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">whatBrowser</span>(<span class="params"></span>) </span>&#123;  </span><br><span class="line">        <span class="built_in">document</span>.Browser.Name.value=navigator.appName;  </span><br><span class="line">        <span class="built_in">document</span>.Browser.Version.value=navigator.appVersion;  </span><br><span class="line">        <span class="built_in">document</span>.Browser.Code.value=navigator.appCodeName;  </span><br><span class="line">        <span class="built_in">document</span>.Browser.Agent.value=navigator.userAgent;  </span><br><span class="line">    &#125;  </span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="js操作和设置cookie"><a href="#js操作和设置cookie" class="headerlink" title="js操作和设置cookie"></a>js操作和设置cookie</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建cookie</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setCookie</span>(<span class="params">name, value, expires, path, domain, secure</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> cookieText = <span class="built_in">encodeURIComponent</span>(name) + <span class="string">&#x27;=&#x27;</span> + <span class="built_in">encodeURIComponent</span>(value);</span><br><span class="line">    <span class="keyword">if</span> (expires <span class="keyword">instanceof</span> <span class="built_in">Date</span>) &#123;</span><br><span class="line">        cookieText += <span class="string">&#x27;; expires=&#x27;</span> + expires;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (path) &#123;</span><br><span class="line">        cookieText += <span class="string">&#x27;; expires=&#x27;</span> + expires;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (domain) &#123;</span><br><span class="line">        cookieText += <span class="string">&#x27;; domain=&#x27;</span> + domain;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (secure) &#123;</span><br><span class="line">        cookieText += <span class="string">&#x27;; secure&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">document</span>.cookie = cookieText;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//获取cookie</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCookie</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> cookieName = <span class="built_in">encodeURIComponent</span>(name) + <span class="string">&#x27;=&#x27;</span>;</span><br><span class="line">    <span class="keyword">var</span> cookieStart = <span class="built_in">document</span>.cookie.indexOf(cookieName);</span><br><span class="line">    <span class="keyword">var</span> cookieValue = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (cookieStart &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> cookieEnd = <span class="built_in">document</span>.cookie.indexOf(<span class="string">&#x27;;&#x27;</span>, cookieStart);</span><br><span class="line">        <span class="keyword">if</span> (cookieEnd == -<span class="number">1</span>) &#123;</span><br><span class="line">            cookieEnd = <span class="built_in">document</span>.cookie.length;</span><br><span class="line">        &#125;</span><br><span class="line">        cookieValue = <span class="built_in">decodeURIComponent</span>(<span class="built_in">document</span>.cookie.substring(cookieStart + cookieName.length, cookieEnd));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cookieValue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除cookie</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unsetCookie</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">document</span>.cookie = name + <span class="string">&quot;= ; expires=&quot;</span> + <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="tcp三次握手"><a href="#tcp三次握手" class="headerlink" title="tcp三次握手"></a>tcp三次握手</h3><p>为了准确无误将数据送达目标处，TCP协议采取了三次握手协议。<br>用tcp协议将数据包送出去后，tcp不会对发送后的情况置之不理，它一定向对方确认是否收到。</p>
+<ul>
+<li>1.发送端首先发送带SYN标志的数据给对方。</li>
+<li>2.接收方收到后回传一个SYN/ACK标志的数据包以示传达确认信息。</li>
+<li>3.最后，发送端再回传一个带ACK标志的字段，代表握手结束</li>
+</ul>
+<p>若在握手过程中某个阶段被打断，TCP会再次以相同的顺序发送数据包。</p>
+<h3 id="对promise的理解"><a href="#对promise的理解" class="headerlink" title="对promise的理解"></a>对promise的理解</h3><p>promise有四种状态：</p>
+<ul>
+<li>1.pending:初始状态，非fullfilled或rejected</li>
+<li>2.fullfilled: 成功的操作</li>
+<li>3.rejected: 失败的操作</li>
+<li>4:settled：promise已被fullfilled或rejected，且不是pending</li>
+</ul>
+<p>另外，fullfilled和rejected合称settled</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (...) &#123;  <span class="comment">// succeed</span></span><br><span class="line">        resolve(result);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;   <span class="comment">// fails</span></span><br><span class="line">        reject(<span class="built_in">Error</span>(errMessage));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>Promise 实例拥有 then 方法（具有 then 方法的对象，通常被称为 thenable）。它的使用方法如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">promise.then(onFulfilled, onRejected)</span><br></pre></td></tr></table></figure>
+<p>接收两个函数作为参数，一个在 fulfilled 的时候被调用，一个在 rejected 的时候被调用，接收参数就是 future，onFulfilled 对应 resolve, onRejected 对应 reject</p>
+<h3 id="谈谈性能优化问题"><a href="#谈谈性能优化问题" class="headerlink" title="谈谈性能优化问题"></a>谈谈性能优化问题</h3><p>代码层面：避免使用css表达式，避免使用高级选择器，通配选择器。<br>缓存利用：缓存Ajax，使用CDN，使用外部js和css文件以便缓存，添加Expires头，服务端配置Etag，减少DNS查找等<br>请求数量：合并样式和脚本，使用css图片精灵，初始首屏之外的图片资源按需加载，静态资源延迟加载。<br>请求带宽：压缩文件，开启GZIP</p>
+<h3 id="什么是Etag？"><a href="#什么是Etag？" class="headerlink" title="什么是Etag？"></a>什么是Etag？</h3><p>浏览器下载组件的时候，会将它们存储到浏览器缓存中。如果需要再次获取相同的组件，浏览器将检查组件的缓存时间，假如已经过期，那么浏览器将发送一个条件GET请求到服务器，服务器判断缓存还有效，则发送一个304响应<br>告诉浏览器可以重用缓存组件</p>
+<p>那么服务器是根据什么判断缓存是否还有效呢?答案有两种方式，一种是前面提到的ETag，另一种是根据Last-Modified</p>
+<h3 id="栈和队列的区别"><a href="#栈和队列的区别" class="headerlink" title="栈和队列的区别?"></a>栈和队列的区别?</h3><p>栈的插入和删除操作都是在一端进行的，而队列的操作却是在两端进行的。<br>队列先进先出，栈先进后出。</p>
+<p>栈只允许在表尾一端进行插入和删除，而队列只允许在表尾一端进行插入，在表头一端进行删除 </p>
+<h3 id="栈和堆的区别？"><a href="#栈和堆的区别？" class="headerlink" title="栈和堆的区别？"></a>栈和堆的区别？</h3><p>栈区（stack）—   由编译器自动分配释放   ，存放函数的参数值，局部变量的值等。<br>堆区（heap）   —   一般由程序员分配释放，   若程序员不释放，程序结束时可能由OS回收。<br>堆（数据结构）：堆可以被看成是一棵树，如：堆排序；<br>栈（数据结构）：一种先进后出的数据结构。 </p>
+<h3 id="关于Http-2-0-你知道多少？"><a href="#关于Http-2-0-你知道多少？" class="headerlink" title="关于Http 2.0 你知道多少？"></a>关于Http 2.0 你知道多少？</h3><p>HTTP/2引入了“服务端推（serverpush）”的概念，它允许服务端在客户端需要数据之前就主动地将数据发送到客户端缓存中，从而提高性能。<br>HTTP/2提供更多的加密支持<br>HTTP/2使用多路技术，允许多个消息在一个连接上同时交差。<br>它增加了头压缩（header compression），因此即使非常小的请求，其请求和响应的header都只会占用很小比例的带宽。</p>
+
+  </div>
+  <div>
+      <!-- <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/前端开发常见面试问题及答案整理.md" target="_blank">编辑</a> -->
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">前端开发常见面试问题及答案整理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AD%E5%8C%85%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">闭包的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie%E7%9A%84%E5%BC%8A%E7%AB%AF"><span class="toc-number">3.</span> <span class="toc-text">cookie的弊端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8"><span class="toc-number">4.</span> <span class="toc-text">浏览器本地存储</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#web-storage%E5%92%8Ccookie%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">4.1.</span> <span class="toc-text">web storage和cookie的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cookie%E5%92%8Csession%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">4.2.</span> <span class="toc-text">cookie和session的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#css%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98"><span class="toc-number">5.</span> <span class="toc-text">css相关问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#display-none-%E5%92%8C-visibility-hidden"><span class="toc-number">5.1.</span> <span class="toc-text">display:none 和 visibility:hidden</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E4%B8%ADlink%E5%92%8C-import%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">5.2.</span> <span class="toc-text">css中link和@import的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#position-absolute%E5%92%8Cfloat%E7%9A%84%E5%BC%82%E5%90%8C"><span class="toc-number">5.3.</span> <span class="toc-text">position:absolute和float的异同</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#box-sizing%E5%B1%9E%E6%80%A7"><span class="toc-number">5.4.</span> <span class="toc-text">box-sizing属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-%E9%80%89%E6%8B%A9%E7%AC%A6%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">5.5.</span> <span class="toc-text">CSS 选择符有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E5%93%AA%E4%BA%9B%E5%B1%9E%E6%80%A7%E5%8F%AF%E4%BB%A5%E7%BB%A7%E6%89%BF%EF%BC%9F"><span class="toc-number">5.6.</span> <span class="toc-text">css哪些属性可以继承？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css%E4%BC%98%E5%85%88%E7%BA%A7%E7%AE%97%E6%B3%95%EF%BC%9F"><span class="toc-number">5.7.</span> <span class="toc-text">css优先级算法？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css3%E6%96%B0%E5%A2%9E%E4%BC%AA%E7%B1%BB%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">5.8.</span> <span class="toc-text">css3新增伪类有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#position%E7%9A%84%E5%80%BC%EF%BC%8C%E5%88%86%E5%88%AB%E7%9B%B8%E5%AF%B9%E4%BA%8E%E8%B0%81%E5%AE%9A%E4%BD%8D%EF%BC%9F"><span class="toc-number">5.9.</span> <span class="toc-text">position的值，分别相对于谁定位？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css3%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9F"><span class="toc-number">5.10.</span> <span class="toc-text">css3有哪些新特性？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XML%E5%92%8CJSON%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">5.11.</span> <span class="toc-text">XML和JSON的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9BFC%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F"><span class="toc-number">5.12.</span> <span class="toc-text">对BFC的理解？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css-sprites-%E5%A6%82%E4%BD%95%E5%9C%A8%E7%BD%91%E7%AB%99%E4%BD%BF%E7%94%A8%EF%BC%9F"><span class="toc-number">5.13.</span> <span class="toc-text">css sprites,如何在网站使用？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html%E9%83%A8%E5%88%86"><span class="toc-number">6.</span> <span class="toc-text">html部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%AF%AD%E4%B9%89%E5%8C%96%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F"><span class="toc-number">6.1.</span> <span class="toc-text">对语义化的理解？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Doctype%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9F%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F%E5%92%8C%E6%B7%B7%E6%9D%82%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB%EF%BC%9F%E6%9C%89%E4%BD%95%E6%84%8F%E4%B9%89%EF%BC%9F"><span class="toc-number">6.2.</span> <span class="toc-text">Doctype的作用？严格模式和混杂模式区别？有何意义？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E5%8A%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%9F%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8%E7%9A%84%E6%8A%80%E5%B7%A7%EF%BC%9F"><span class="toc-number">6.3.</span> <span class="toc-text">浮动工作原理？清除浮动的技巧？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E5%8A%A8%E5%85%83%E7%B4%A0%E5%BC%95%E8%B5%B7%E7%9A%84%E9%97%AE%E9%A2%98%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9F"><span class="toc-number">6.4.</span> <span class="toc-text">浮动元素引起的问题和解决方案？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM%E6%93%8D%E4%BD%9C%E2%80%94%E2%80%94%E6%80%8E%E6%A0%B7%E6%B7%BB%E5%8A%A0%E3%80%81%E7%A7%BB%E9%99%A4%E3%80%81%E7%A7%BB%E5%8A%A8%E3%80%81%E5%A4%8D%E5%88%B6%E3%80%81%E5%88%9B%E5%BB%BA%E5%92%8C%E6%9F%A5%E6%89%BE%E8%8A%82%E7%82%B9"><span class="toc-number">6.5.</span> <span class="toc-text">DOM操作——怎样添加、移除、移动、复制、创建和查找节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#html5%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9F"><span class="toc-number">6.6.</span> <span class="toc-text">html5有哪些新特性？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98"><span class="toc-number">6.7.</span> <span class="toc-text">常见浏览器兼容问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A4%9A%E4%B8%AA%E6%A0%87%E7%AD%BE%E9%A1%B5%E4%B9%8B%E9%97%B4%E9%80%9A%E4%BF%A1%EF%BC%9F"><span class="toc-number">6.8.</span> <span class="toc-text">如何实现浏览器多个标签页之间通信？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E4%B9%8B%E9%97%B4%E5%85%B3%E7%B3%BB%E5%92%8C%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">6.9.</span> <span class="toc-text">进程和线程之间关系和区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFFOUC%EF%BC%9F%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%EF%BC%9F"><span class="toc-number">6.10.</span> <span class="toc-text">什么是FOUC？怎么解决？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null%E5%92%8Cundefined%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">6.11.</span> <span class="toc-text">null和undefined的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new-%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%85%B7%E4%BD%93%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">6.12.</span> <span class="toc-text">new 操作符具体做了什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="toc-number">6.13.</span> <span class="toc-text">js延迟加载的几种方式？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#document-write%E5%92%8CinnerHTML%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">6.14.</span> <span class="toc-text">document.write和innerHTML的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%AA%E4%BA%9B%E6%93%8D%E4%BD%9C%E4%BC%9A%E9%80%A0%E6%88%90%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%EF%BC%9F"><span class="toc-number">6.15.</span> <span class="toc-text">哪些操作会造成内存泄漏？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E8%84%9A%E6%9C%AC%E8%BF%90%E8%A1%8C%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%98%E6%98%AFnode%E7%8E%AF%E5%A2%83%E4%B8%AD%EF%BC%9F"><span class="toc-number">6.16.</span> <span class="toc-text">如何判断当前脚本运行在浏览器还是node环境中？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ajax%E8%BF%87%E7%A8%8B"><span class="toc-number">6.17.</span> <span class="toc-text">ajax过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ie%E5%90%84%E7%89%88%E6%9C%AC%E5%92%8Cchrome%E5%8F%AF%E4%BB%A5%E5%B9%B6%E8%A1%8C%E4%B8%8B%E8%BD%BD%E5%A4%9A%E5%B0%91%E4%B8%AA%E8%B5%84%E6%BA%90"><span class="toc-number">6.18.</span> <span class="toc-text">ie各版本和chrome可以并行下载多少个资源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javascript%E7%9A%84%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5"><span class="toc-number">6.19.</span> <span class="toc-text">javascript的同源策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%AA%E4%BA%9B%E5%9C%B0%E6%96%B9%E4%BC%9A%E5%87%BA%E7%8E%B0css%E9%98%BB%E5%A1%9E%EF%BC%8C%E5%93%AA%E4%BA%9B%E5%9C%B0%E6%96%B9%E4%BC%9A%E5%87%BA%E7%8E%B0js%E9%98%BB%E5%A1%9E%EF%BC%9F"><span class="toc-number">6.20.</span> <span class="toc-text">哪些地方会出现css阻塞，哪些地方会出现js阻塞？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js%E6%97%A0%E9%98%BB%E5%A1%9E%E5%8A%A0%E8%BD%BD%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="toc-number">6.21.</span> <span class="toc-text">js无阻塞加载方式？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#eval%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F"><span class="toc-number">6.22.</span> <span class="toc-text">eval是做什么的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E5%92%8C%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7%EF%BC%9F"><span class="toc-number">6.23.</span> <span class="toc-text">事件冒泡和事件捕获？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96UA"><span class="toc-number">6.24.</span> <span class="toc-text">如何获取UA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js%E6%93%8D%E4%BD%9C%E5%92%8C%E8%AE%BE%E7%BD%AEcookie"><span class="toc-number">6.25.</span> <span class="toc-text">js操作和设置cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tcp%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">6.26.</span> <span class="toc-text">tcp三次握手</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9promise%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">6.27.</span> <span class="toc-text">对promise的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%88%E8%B0%88%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98"><span class="toc-number">6.28.</span> <span class="toc-text">谈谈性能优化问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFEtag%EF%BC%9F"><span class="toc-number">6.29.</span> <span class="toc-text">什么是Etag？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">6.30.</span> <span class="toc-text">栈和队列的区别?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%E5%92%8C%E5%A0%86%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">6.31.</span> <span class="toc-text">栈和堆的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8EHttp-2-0-%E4%BD%A0%E7%9F%A5%E9%81%93%E5%A4%9A%E5%B0%91%EF%BC%9F"><span class="toc-number">6.32.</span> <span class="toc-text">关于Http 2.0 你知道多少？</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/&text=前端开发常见面试问题及答案整理"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/&title=前端开发常见面试问题及答案整理"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/&is_video=false&description=前端开发常见面试问题及答案整理"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=前端开发常见面试问题及答案整理&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/&title=前端开发常见面试问题及答案整理"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/&title=前端开发常见面试问题及答案整理"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/&title=前端开发常见面试问题及答案整理"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/&title=前端开发常见面试问题及答案整理"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/&name=前端开发常见面试问题及答案整理&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/&t=前端开发常见面试问题及答案整理"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

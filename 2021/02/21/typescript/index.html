@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="TS（typescript）是什么？TS是以JavaScript为基础构建的语言，是JavaScript的一个超集TS扩展了JavaScript，并添加了类型。可以在任何支持JavaScript的平台执行。TS不能被js解释器直接执行，需要将ts编译成js TS增加了什么？类型支持ES的新特性添加ES不具有的新特性丰富的配置选项（编译为ES3，ES6等）强大的开发工具 TS安装1.安装node2.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="typescript">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="TS（typescript）是什么？TS是以JavaScript为基础构建的语言，是JavaScript的一个超集TS扩展了JavaScript，并添加了类型。可以在任何支持JavaScript的平台执行。TS不能被js解释器直接执行，需要将ts编译成js TS增加了什么？类型支持ES的新特性添加ES不具有的新特性丰富的配置选项（编译为ES3，ES6等）强大的开发工具 TS安装1.安装node2.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-21T14:54:14.000Z">
+<meta property="article:modified_time" content="2021-03-02T08:43:41.232Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>typescript</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/02/20/vue%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/&text=typescript"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/&title=typescript"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/&is_video=false&description=typescript"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=typescript&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/&title=typescript"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/&title=typescript"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/&title=typescript"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/&title=typescript"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/&name=typescript&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/&t=typescript"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TS%EF%BC%88typescript%EF%BC%89%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">TS（typescript）是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TS%E5%A2%9E%E5%8A%A0%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">TS增加了什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TS%E5%AE%89%E8%A3%85"><span class="toc-number">3.</span> <span class="toc-text">TS安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TS%E7%BC%96%E8%AF%91"><span class="toc-number">4.</span> <span class="toc-text">TS编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E5%A3%B0%E6%98%8E%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">类型声明：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="toc-number">6.</span> <span class="toc-text">联合类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B"><span class="toc-number">7.</span> <span class="toc-text">TypeScript基础类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#any"><span class="toc-number">8.</span> <span class="toc-text">any</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80-Type-Assertion"><span class="toc-number">9.</span> <span class="toc-text">类型断言(Type Assertion)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#never-%E4%B8%8D%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0%E7%9A%84%E5%80%BC"><span class="toc-number">10.</span> <span class="toc-text">never 不可能出现的值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1"><span class="toc-number">11.</span> <span class="toc-text">对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#amp-%E8%A1%A8%E7%A4%BA%E5%90%8C%E6%97%B6%E6%BB%A1%E8%B6%B32%E4%B8%AA%E6%9D%A1%E4%BB%B6"><span class="toc-number">12.</span> <span class="toc-text">&amp;:表示同时满足2个条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%88%AB%E5%90%8D"><span class="toc-number">13.</span> <span class="toc-text">类型的别名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E7%BC%96%E8%AF%91%E9%80%89%E9%A1%B9%EF%BC%9Atsc-xxx-ts-w"><span class="toc-number">14.</span> <span class="toc-text">自动编译选项：tsc xxx.ts -w</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0tsconfig-json%E6%96%87%E4%BB%B6%E5%8F%AF%E7%BC%96%E8%AF%91%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6"><span class="toc-number">15.</span> <span class="toc-text">添加tsconfig.json文件可编译目录下所有文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tsconfig-json%E7%BC%96%E8%AF%91%E9%80%89%E9%A1%B9"><span class="toc-number">16.</span> <span class="toc-text">tsconfig.json编译选项</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        typescript
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-02-21T14:54:14.000Z" itemprop="datePublished">2021-02-21</time>
+        
+        (Updated: <time datetime="2021-03-02T08:43:41.232Z" itemprop="dateModified">2021-03-02</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/TypeScript/">TypeScript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="TS（typescript）是什么？"><a href="#TS（typescript）是什么？" class="headerlink" title="TS（typescript）是什么？"></a>TS（typescript）是什么？</h2><p>TS是以JavaScript为基础构建的语言，是JavaScript的一个超集<br>TS扩展了JavaScript，并添加了类型。可以在任何支持JavaScript的平台执行。<br>TS不能被js解释器直接执行，需要将ts编译成js</p>
+<h2 id="TS增加了什么？"><a href="#TS增加了什么？" class="headerlink" title="TS增加了什么？"></a>TS增加了什么？</h2><p>类型<br>支持ES的新特性<br>添加ES不具有的新特性<br>丰富的配置选项（编译为ES3，ES6等）<br>强大的开发工具</p>
+<h2 id="TS安装"><a href="#TS安装" class="headerlink" title="TS安装"></a>TS安装</h2><p>1.安装node<br>2.安装npm<br>3.npm install -g typescript<br>4.tsc -v  查看tsc安装版本</p>
+<h2 id="TS编译"><a href="#TS编译" class="headerlink" title="TS编译"></a>TS编译</h2><p>tsc ts.ts<br>编译成功生成同名js文件</p>
+<h2 id="类型声明："><a href="#类型声明：" class="headerlink" title="类型声明："></a>类型声明：</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a:number = <span class="number">10</span>;或者<span class="keyword">let</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a:number, b:number</span>):<span class="title">number</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="联合类型"><a href="#联合类型" class="headerlink" title="联合类型"></a>联合类型</h2><p>联合类型（Union Types）可以通过管道(|)将变量设置多种类型，赋值时可以根据设置的类型来赋值。</p>
+<p>注意：只能赋值指定的类型，如果赋值其它类型就会报错</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> d: <span class="string">&#x27;male&#x27;</span> | <span class="string">&#x27;female&#x27;</span>;</span><br><span class="line">d = <span class="string">&#x27;male&#x27;</span>;</span><br><span class="line">d = <span class="string">&#x27;female&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> e: boolean | string;</span><br><span class="line">e = <span class="literal">false</span>;</span><br><span class="line">e = <span class="string">&#x27;123&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="TypeScript基础类型"><a href="#TypeScript基础类型" class="headerlink" title="TypeScript基础类型"></a>TypeScript基础类型</h2><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>关键字</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>任意类型</td>
+<td>any</td>
+<td>声明为 any 的变量可以赋予任意类型的值</td>
+</tr>
+<tr>
+<td>数字类型</td>
+<td>number</td>
+<td>双精度 64 位浮点值。它可以用来表示整数和分数。<br>let binaryLiteral: number = 0b1010; // 二进制 <br>let octalLiteral: number = 0o744;    // 八进制 <br>let decLiteral: number = 6;    // 十进制 <br>let hexLiteral: number = 0xf00d;    // 十六进制</td>
+</tr>
+<tr>
+<td>字符串类型</td>
+<td>string</td>
+<td>一个字符系列，使用单引号（’）或双引号（”）来表示字符串类型。反引号（``）来定义多行文本和内嵌表达式。<br>let name: string = “Runoob”;<br>let years: number = 5;<br>let words: string = <code>您好，今年是 $&#123; name &#125; 发布 $&#123; years + 1&#125; 周年</code>;</td>
+</tr>
+<tr>
+<td>布尔类型</td>
+<td>boolean</td>
+<td>表示逻辑值：true 和 false。<br>let flag: boolean = true;</td>
+</tr>
+<tr>
+<td>数组类型</td>
+<td>无</td>
+<td>声明变量为数组。<br>// 在元素类型后面加上[]<br>let arr: number[] = [1, 2];<br>// 或者使用数组泛型<br>let arr: Array<number> = [1, 2];</td>
+</tr>
+<tr>
+<td>元组</td>
+<td>无</td>
+<td>元组类型用来表示已知元素数量和类型的数组，各元素的类型不必相同，对应位置的类型需要相同。<br>let x: [string, number];<br>x = [‘Runoob’, 1];    // 运行正常<br>x = [1, ‘Runoob’];    // 报错<br>console.log(x[0]);    // 输出 Runoob</td>
+</tr>
+<tr>
+<td>枚举</td>
+<td>enum</td>
+<td>用于定义数值集合 <br>enum Color {Red, Green, Blue};<br>let c: Color = Color.Blue;<br>console.log(c);    // 输出 2</td>
+</tr>
+<tr>
+<td>void</td>
+<td>void</td>
+<td>用于标识方法返回值的类型，表示该方法没有返回值<br>function hello(): void {<br>alert(“Hello Runoob”);<br>或者return; /return null; /return undefined}</td>
+</tr>
+<tr>
+<td>null</td>
+<td>null</td>
+<td>表示对象值缺失</td>
+</tr>
+<tr>
+<td>undefined</td>
+<td>undefined</td>
+<td>用于初始化变量为一个未定义的值</td>
+</tr>
+<tr>
+<td>never</td>
+<td>never</td>
+<td>never 是其它类型（包括 null 和 undefined）的子类型，代表从不会出现的值</td>
+</tr>
+</tbody></table>
+<h2 id="any"><a href="#any" class="headerlink" title="any"></a>any</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a;</span><br><span class="line">a = <span class="number">123</span>;</span><br><span class="line">a = <span class="string">&#x27;fs&#x27;</span>;</span><br><span class="line">a = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> s:string;</span><br><span class="line">s = a; <span class="comment">//正常</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c: unknown; <span class="comment">//未知类型的值</span></span><br><span class="line">c = <span class="number">123</span>;</span><br><span class="line">c = <span class="string">&#x27;fs&#x27;</span>;</span><br><span class="line">c = <span class="literal">true</span>;</span><br><span class="line">c = <span class="string">&#x27;str&#x27;</span>;</span><br><span class="line"></span><br><span class="line">s = c; <span class="comment">//错误：Type &#x27;unknown&#x27; is not assignable to type &#x27;string&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// unknown实际上是一个类型安全的any</span></span><br><span class="line"><span class="comment">// unknown类型的变量不可以直接赋值给其他变量，需要类型检测，any类型的可以直接赋值。</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span> c === <span class="string">&#x27;string&#x27;</span>)&#123;</span><br><span class="line">    s = c; <span class="comment">//正常</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 或者：</span></span><br><span class="line">s = h <span class="keyword">as</span> string; <span class="comment">//类型断言</span></span><br><span class="line">s = &lt;string&gt;e; <span class="comment">//类型断言</span></span><br></pre></td></tr></table></figure>
+<h2 id="类型断言-Type-Assertion"><a href="#类型断言-Type-Assertion" class="headerlink" title="类型断言(Type Assertion)"></a>类型断言(Type Assertion)</h2><p>类型断言可以用来手动指定一个值的类型，即允许变量从一种值的类型转换为另一种类型。<br>语法：</p>
+<ul>
+<li>&lt;类型&gt;值</li>
+<li>值 as 类型</li>
+</ul>
+<h2 id="never-不可能出现的值"><a href="#never-不可能出现的值" class="headerlink" title="never 不可能出现的值"></a>never 不可能出现的值</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//表示不会有返回值的</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test1</span>(<span class="params"></span>): <span class="title">never</span></span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;error&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回值为 never 的函数可以是无法被执行到的终止点的情况</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loop</span>(<span class="params"></span>): <span class="title">never</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> n:never;</span><br><span class="line"><span class="keyword">let</span> m: string;</span><br><span class="line"><span class="comment">// n = 1; // 运行错误，数字类型不能转为 never 类型</span></span><br><span class="line"><span class="comment">// &lt;!-- 运行正确，never 类型可以赋值给 never类型 --&gt;</span></span><br><span class="line">n = (<span class="function">()=&gt;</span>&#123; <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;error&#x27;</span>)&#125;)();</span><br><span class="line"></span><br><span class="line">m = <span class="string">&#x27;1&#x27;</span>;</span><br><span class="line"><span class="comment">// &lt;!-- 运行正确，never 类型可以赋值给 字符串类型 --&gt;</span></span><br><span class="line">m = (<span class="function">()=&gt;</span>&#123; <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;error&#x27;</span>)&#125;)();</span><br></pre></td></tr></table></figure>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p>{}可以指定对象中有哪些属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj: &#123;<span class="attr">name</span>: string,age?:number&#125;;</span><br><span class="line">obj = &#123;<span class="attr">name</span>: <span class="string">&#x27;zjy&#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
+<p>age?:number,?表示可选</p>
+<p>多个属性可选：[propName: string]:any</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj: &#123;<span class="attr">name</span>: string,[propName:string]:any&#125;;</span><br><span class="line">obj = &#123;<span class="attr">name</span>:<span class="string">&#x27;zjy&#x27;</span>,<span class="attr">age</span>:<span class="number">13</span>,<span class="attr">sex</span>:<span class="number">1</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>函数结构的类型声明：<br>语法：(属性：类型,…)=&gt;返回值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fun :<span class="function">(<span class="params">a:number,b:number</span>)=&gt;</span>number;</span><br><span class="line">fun = <span class="function"><span class="keyword">function</span>(<span class="params">n1:number,n2:number</span>):<span class="title">number</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> n1 + n2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="amp-表示同时满足2个条件"><a href="#amp-表示同时满足2个条件" class="headerlink" title="&amp;:表示同时满足2个条件"></a>&amp;:表示同时满足2个条件</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj2: &#123;<span class="attr">name</span>:string&#125; &amp; &#123;<span class="attr">age</span>:number&#125;;</span><br><span class="line">    obj2 = &#123; <span class="attr">name</span>: <span class="string">&#x27;zjy&#x27;</span>, <span class="attr">age</span>:<span class="number">18</span>&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="类型的别名"><a href="#类型的别名" class="headerlink" title="类型的别名"></a>类型的别名</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 类型的别名</span></span><br><span class="line">type typename = <span class="number">1</span> | <span class="number">2</span> | <span class="number">3</span>;</span><br><span class="line"><span class="keyword">let</span> k: typename;</span><br><span class="line">k = <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<h2 id="自动编译选项：tsc-xxx-ts-w"><a href="#自动编译选项：tsc-xxx-ts-w" class="headerlink" title="自动编译选项：tsc xxx.ts -w"></a>自动编译选项：tsc xxx.ts -w</h2><h2 id="添加tsconfig-json文件可编译目录下所有文件"><a href="#添加tsconfig-json文件可编译目录下所有文件" class="headerlink" title="添加tsconfig.json文件可编译目录下所有文件"></a>添加tsconfig.json文件可编译目录下所有文件</h2><p>tsc -init 生成tsconfig.json文件</p>
+<h2 id="tsconfig-json编译选项"><a href="#tsconfig-json编译选项" class="headerlink" title="tsconfig.json编译选项"></a>tsconfig.json编译选项</h2><ul>
+<li><p>include: [] 用于指定哪些文件需要被编译</p>
+<ul>
+<li>**: 任意目录</li>
+<li>*: 任意文件</li>
+</ul>
+</li>
+<li><p>exclude :[] 不需要被编译文件的目录</p>
+<ul>
+<li>“exclude”默认情况下会排除node_modules，bower_components，jspm_packages和<code>&lt;outDir&gt;</code>目录</li>
+</ul>
+</li>
+<li><p>extends： 可以利用extends属性从另一个配置文件里继承配置</p>
+</li>
+<li><p>files: [] 指定一个包含相对或绝对文件路径的列表</p>
+<ul>
+<li>使用”include”引入的文件可以使用”exclude”属性过滤。 然而，通过 “files”属性明确指定的文件却总是会被包含在内，不管”exclude”如何设置</li>
+</ul>
+</li>
+<li><p>compilerOptions:编译器选项配置</p>
+<ul>
+<li>target：指定ECMAScript目标版本，默认ES3，”ES5”， “ES6”/ “ES2015”， “ES2016”， “ES2017”或 “ESNext”。</li>
+<li>module: 指定生成哪个模块系统代码： “None”， “CommonJS”， “AMD”， “System”， “UMD”， “ES6”或 “ES2015”。</li>
+<li>lib:[]  编译过程中需要引入的库文件的列表,例如ES5，ES6 ，DOM等</li>
+<li>outDir: 用来指定编译后文件所在目录</li>
+<li>outFile: 将输出文件合并为一个文件,只有 “AMD”和 “System”能和 –outFile一起使用。</li>
+<li>allowJs: 默认是false，允许编译javascript文件。</li>
+<li>checkJs: 默认是false，是否检测js语法，与allowJs配合使用</li>
+<li>removeComments: 默认是false，删除所有注释，除了以 /!*开头的版权信息。</li>
+<li>noEmit: 默认是false,不输出编译文件</li>
+<li>noEmitOnError: 默认是false 报错时不生成输出文件</li>
+<li>alwaysStrict: 默认是false 以严格模式解析并为每个源文件生成 “use strict”语句,当文件使用模块化时自动采用严格模式，不会生成文件头部’use strict’</li>
+<li>noImplicitAny: 默认是false 在表达式和声明上有隐含的 any类型时报错。<ul>
+<li>例如：function add(a,b){<br>return a + b;<br>}</li>
+</ul>
+</li>
+<li>noImplicitThis: 默认是false 当 this表达式的值为 any类型的时候，生成一个错误</li>
+<li>strictNullChecks: 默认是false 严格检查空值</li>
+<li>strict: 默认是false 启用所有严格类型检查选项。启用 –strict相当于启用 –noImplicitAny, –noImplicitThis, –alwaysStrict， –strictNullChecks和 –strictFunctionTypes和–strictPropertyInitialization</li>
+</ul>
+</li>
+</ul>
+<p>tsconfig.json文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">    <span class="comment">/* Visit https://aka.ms/tsconfig.json to read more about this file */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Basic Options */</span></span><br><span class="line">    <span class="comment">// &quot;incremental&quot;: true,                   /* Enable incremental compilation */</span></span><br><span class="line">    <span class="string">&quot;target&quot;</span>: <span class="string">&quot;es6&quot;</span>,                          <span class="comment">/* Specify ECMAScript target version: &#x27;ES3&#x27; (default), &#x27;ES5&#x27;, &#x27;ES2015&#x27;, &#x27;ES2016&#x27;, &#x27;ES2017&#x27;, &#x27;ES2018&#x27;, &#x27;ES2019&#x27;, &#x27;ES2020&#x27;, or &#x27;ESNEXT&#x27;. */</span></span><br><span class="line">    <span class="string">&quot;module&quot;</span>: <span class="string">&quot;es6&quot;</span>,                     <span class="comment">/* Specify module code generation: &#x27;none&#x27;, &#x27;commonjs&#x27;, &#x27;amd&#x27;, &#x27;system&#x27;, &#x27;umd&#x27;, &#x27;es2015&#x27;, &#x27;es2020&#x27;, or &#x27;ESNext&#x27;. */</span></span><br><span class="line">    <span class="comment">// &quot;lib&quot;: [],                             /* Specify library files to be included in the compilation. */</span></span><br><span class="line">    <span class="string">&quot;allowJs&quot;</span>: <span class="literal">true</span>,                       <span class="comment">/* Allow javascript files to be compiled. */</span></span><br><span class="line">    <span class="string">&quot;checkJs&quot;</span>: <span class="literal">true</span>,                       <span class="comment">/* Report errors in .js files. */</span></span><br><span class="line">    <span class="comment">// &quot;jsx&quot;: &quot;preserve&quot;,                     /* Specify JSX code generation: &#x27;preserve&#x27;, &#x27;react-native&#x27;, or &#x27;react&#x27;. */</span></span><br><span class="line">    <span class="comment">// &quot;declaration&quot;: true,                   /* Generates corresponding &#x27;.d.ts&#x27; file. */</span></span><br><span class="line">    <span class="comment">// &quot;declarationMap&quot;: true,                /* Generates a sourcemap for each corresponding &#x27;.d.ts&#x27; file. */</span></span><br><span class="line">    <span class="comment">// &quot;sourceMap&quot;: true,                     /* Generates corresponding &#x27;.map&#x27; file. */</span></span><br><span class="line">    <span class="comment">// &quot;outFile&quot;: &quot;dist/app.js&quot;,                       /* Concatenate and emit output to single file. */</span></span><br><span class="line">    <span class="string">&quot;outDir&quot;</span>: <span class="string">&quot;dist/&quot;</span>,                        <span class="comment">/* Redirect output structure to the directory. */</span></span><br><span class="line">    <span class="comment">// &quot;rootDir&quot;: &quot;./&quot;,                       /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */</span></span><br><span class="line">    <span class="comment">// &quot;composite&quot;: true,                     /* Enable project compilation */</span></span><br><span class="line">    <span class="comment">// &quot;tsBuildInfoFile&quot;: &quot;./&quot;,               /* Specify file to store incremental compilation information */</span></span><br><span class="line">    <span class="string">&quot;removeComments&quot;</span>: <span class="literal">true</span>,                <span class="comment">/* Do not emit comments to output. */</span></span><br><span class="line">    <span class="string">&quot;noEmit&quot;</span>: <span class="literal">false</span>,                        <span class="comment">/* Do not emit outputs. */</span></span><br><span class="line">    <span class="string">&quot;noEmitOnError&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="comment">// &quot;importHelpers&quot;: true,                 /* Import emit helpers from &#x27;tslib&#x27;. */</span></span><br><span class="line">    <span class="comment">// &quot;downlevelIteration&quot;: true,            /* Provide full support for iterables in &#x27;for-of&#x27;, spread, and destructuring when targeting &#x27;ES5&#x27; or &#x27;ES3&#x27;. */</span></span><br><span class="line">    <span class="comment">// &quot;isolatedModules&quot;: true,               /* Transpile each file as a separate module (similar to &#x27;ts.transpileModule&#x27;). */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Strict Type-Checking Options */</span></span><br><span class="line">    <span class="string">&quot;strict&quot;</span>: <span class="literal">true</span>,                           <span class="comment">/* Enable all strict type-checking options. */</span></span><br><span class="line">    <span class="string">&quot;noImplicitAny&quot;</span>: <span class="literal">true</span>,                 <span class="comment">/* Raise error on expressions and declarations with an implied &#x27;any&#x27; type. */</span></span><br><span class="line">    <span class="comment">// &quot;strictNullChecks&quot;: true,              /* Enable strict null checks. */</span></span><br><span class="line">    <span class="comment">// &quot;strictFunctionTypes&quot;: true,           /* Enable strict checking of function types. */</span></span><br><span class="line">    <span class="comment">// &quot;strictBindCallApply&quot;: true,           /* Enable strict &#x27;bind&#x27;, &#x27;call&#x27;, and &#x27;apply&#x27; methods on functions. */</span></span><br><span class="line">    <span class="comment">// &quot;strictPropertyInitialization&quot;: true,  /* Enable strict checking of property initialization in classes. */</span></span><br><span class="line">    <span class="comment">// &quot;noImplicitThis&quot;: true,                /* Raise error on &#x27;this&#x27; expressions with an implied &#x27;any&#x27; type. */</span></span><br><span class="line">    <span class="comment">// &quot;alwaysStrict&quot;: true,                  /* Parse in strict mode and emit &quot;use strict&quot; for each source file. */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Additional Checks */</span></span><br><span class="line">    <span class="comment">// &quot;noUnusedLocals&quot;: true,                /* Report errors on unused locals. */</span></span><br><span class="line">    <span class="comment">// &quot;noUnusedParameters&quot;: true,            /* Report errors on unused parameters. */</span></span><br><span class="line">    <span class="comment">// &quot;noImplicitReturns&quot;: true,             /* Report error when not all code paths in function return a value. */</span></span><br><span class="line">    <span class="comment">// &quot;noFallthroughCasesInSwitch&quot;: true,    /* Report errors for fallthrough cases in switch statement. */</span></span><br><span class="line">    <span class="comment">// &quot;noUncheckedIndexedAccess&quot;: true,      /* Include &#x27;undefined&#x27; in index signature results */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Module Resolution Options */</span></span><br><span class="line">    <span class="comment">// &quot;moduleResolution&quot;: &quot;node&quot;,            /* Specify module resolution strategy: &#x27;node&#x27; (Node.js) or &#x27;classic&#x27; (TypeScript pre-1.6). */</span></span><br><span class="line">    <span class="comment">// &quot;baseUrl&quot;: &quot;./&quot;,                       /* Base directory to resolve non-absolute module names. */</span></span><br><span class="line">    <span class="comment">// &quot;paths&quot;: &#123;&#125;,                           /* A series of entries which re-map imports to lookup locations relative to the &#x27;baseUrl&#x27;. */</span></span><br><span class="line">    <span class="comment">// &quot;rootDirs&quot;: [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */</span></span><br><span class="line">    <span class="comment">// &quot;typeRoots&quot;: [],                       /* List of folders to include type definitions from. */</span></span><br><span class="line">    <span class="comment">// &quot;types&quot;: [],                           /* Type declaration files to be included in compilation. */</span></span><br><span class="line">    <span class="comment">// &quot;allowSyntheticDefaultImports&quot;: true,  /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */</span></span><br><span class="line">    <span class="string">&quot;esModuleInterop&quot;</span>: <span class="literal">true</span>,                  <span class="comment">/* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies &#x27;allowSyntheticDefaultImports&#x27;. */</span></span><br><span class="line">    <span class="comment">// &quot;preserveSymlinks&quot;: true,              /* Do not resolve the real path of symlinks. */</span></span><br><span class="line">    <span class="comment">// &quot;allowUmdGlobalAccess&quot;: true,          /* Allow accessing UMD globals from modules. */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Source Map Options */</span></span><br><span class="line">    <span class="comment">// &quot;sourceRoot&quot;: &quot;&quot;,                      /* Specify the location where debugger should locate TypeScript files instead of source locations. */</span></span><br><span class="line">    <span class="comment">// &quot;mapRoot&quot;: &quot;&quot;,                         /* Specify the location where debugger should locate map files instead of generated locations. */</span></span><br><span class="line">    <span class="comment">// &quot;inlineSourceMap&quot;: true,               /* Emit a single file with source maps instead of having a separate file. */</span></span><br><span class="line">    <span class="comment">// &quot;inlineSources&quot;: true,                 /* Emit the source alongside the sourcemaps within a single file; requires &#x27;--inlineSourceMap&#x27; or &#x27;--sourceMap&#x27; to be set. */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Experimental Options */</span></span><br><span class="line">    <span class="comment">// &quot;experimentalDecorators&quot;: true,        /* Enables experimental support for ES7 decorators. */</span></span><br><span class="line">    <span class="comment">// &quot;emitDecoratorMetadata&quot;: true,         /* Enables experimental support for emitting type metadata for decorators. */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Advanced Options */</span></span><br><span class="line">    <span class="string">&quot;skipLibCheck&quot;</span>: <span class="literal">true</span>,                     <span class="comment">/* Skip type checking of declaration files. */</span></span><br><span class="line">    <span class="string">&quot;forceConsistentCasingInFileNames&quot;</span>: <span class="literal">true</span>  <span class="comment">/* Disallow inconsistently-cased references to the same file. */</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;include&quot;</span>: [</span><br><span class="line">      <span class="string">&quot;src/**/*&quot;</span></span><br><span class="line">  ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  </div>
+  <div>
+      <!-- <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/typescript.md" target="_blank">编辑</a> -->
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TS%EF%BC%88typescript%EF%BC%89%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">TS（typescript）是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TS%E5%A2%9E%E5%8A%A0%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">TS增加了什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TS%E5%AE%89%E8%A3%85"><span class="toc-number">3.</span> <span class="toc-text">TS安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TS%E7%BC%96%E8%AF%91"><span class="toc-number">4.</span> <span class="toc-text">TS编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E5%A3%B0%E6%98%8E%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">类型声明：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="toc-number">6.</span> <span class="toc-text">联合类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TypeScript%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B"><span class="toc-number">7.</span> <span class="toc-text">TypeScript基础类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#any"><span class="toc-number">8.</span> <span class="toc-text">any</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80-Type-Assertion"><span class="toc-number">9.</span> <span class="toc-text">类型断言(Type Assertion)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#never-%E4%B8%8D%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0%E7%9A%84%E5%80%BC"><span class="toc-number">10.</span> <span class="toc-text">never 不可能出现的值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1"><span class="toc-number">11.</span> <span class="toc-text">对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#amp-%E8%A1%A8%E7%A4%BA%E5%90%8C%E6%97%B6%E6%BB%A1%E8%B6%B32%E4%B8%AA%E6%9D%A1%E4%BB%B6"><span class="toc-number">12.</span> <span class="toc-text">&amp;:表示同时满足2个条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%88%AB%E5%90%8D"><span class="toc-number">13.</span> <span class="toc-text">类型的别名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E7%BC%96%E8%AF%91%E9%80%89%E9%A1%B9%EF%BC%9Atsc-xxx-ts-w"><span class="toc-number">14.</span> <span class="toc-text">自动编译选项：tsc xxx.ts -w</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0tsconfig-json%E6%96%87%E4%BB%B6%E5%8F%AF%E7%BC%96%E8%AF%91%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6"><span class="toc-number">15.</span> <span class="toc-text">添加tsconfig.json文件可编译目录下所有文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tsconfig-json%E7%BC%96%E8%AF%91%E9%80%89%E9%A1%B9"><span class="toc-number">16.</span> <span class="toc-text">tsconfig.json编译选项</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/&text=typescript"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/&title=typescript"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/&is_video=false&description=typescript"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=typescript&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/&title=typescript"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/&title=typescript"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/&title=typescript"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/&title=typescript"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/&name=typescript&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/21/typescript/&t=typescript"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

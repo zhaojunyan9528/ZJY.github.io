@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="边框属性border-image边框图片属性border-image:none 100% 1 0 stretch; 默认值border-image是一个简写，用于设置以下属性：  border-image-source: 边框图片路径 border-image-slice: 图片边框向内偏移 border-image-width: 图片边框的宽度 border-image-outset: 边框图像">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS3新特性">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="边框属性border-image边框图片属性border-image:none 100% 1 0 stretch; 默认值border-image是一个简写，用于设置以下属性：  border-image-source: 边框图片路径 border-image-slice: 图片边框向内偏移 border-image-width: 图片边框的宽度 border-image-outset: 边框图像">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-22T17:13:22.000Z">
+<meta property="article:modified_time" content="2021-03-02T08:43:41.232Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>CSS3新特性</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/02/28/javascript%E7%9A%84%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/02/21/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%E6%95%B4%E7%90%86/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/&text=CSS3新特性"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/&title=CSS3新特性"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/&is_video=false&description=CSS3新特性"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CSS3新特性&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/&title=CSS3新特性"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/&title=CSS3新特性"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/&title=CSS3新特性"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/&title=CSS3新特性"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/&name=CSS3新特性&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/&t=CSS3新特性"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%B9%E6%A1%86%E5%B1%9E%E6%80%A7"><span class="toc-number">1.</span> <span class="toc-text">边框属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#border-image%E8%BE%B9%E6%A1%86%E5%9B%BE%E7%89%87%E5%B1%9E%E6%80%A7"><span class="toc-number">2.</span> <span class="toc-text">border-image边框图片属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#border-radius%E8%BE%B9%E6%A1%86%E5%9C%86%E8%A7%92%E5%B1%9E%E6%80%A7"><span class="toc-number">3.</span> <span class="toc-text">border-radius边框圆角属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#box-shadow%E8%BE%B9%E6%A1%86%E9%98%B4%E5%BD%B1%E5%B1%9E%E6%80%A7"><span class="toc-number">4.</span> <span class="toc-text">box-shadow边框阴影属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%E5%B1%9E%E6%80%A7"><span class="toc-number">5.</span> <span class="toc-text">背景属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-image%E5%A4%9A%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87%E5%B1%9E%E6%80%A7"><span class="toc-number">6.</span> <span class="toc-text">background-image多背景图片属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-clip%E8%83%8C%E6%99%AF%E7%9A%84%E7%BB%98%E5%88%B6%E5%8C%BA%E5%9F%9F"><span class="toc-number">7.</span> <span class="toc-text">background-clip背景的绘制区域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-origin%E8%A7%84%E5%AE%9A%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87%E7%9A%84%E5%AE%9A%E4%BD%8D%E5%8C%BA%E5%9F%9F"><span class="toc-number">8.</span> <span class="toc-text">background-origin规定背景图片的定位区域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-size%E8%A7%84%E5%AE%9A%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87%E7%9A%84%E5%B0%BA%E5%AF%B8"><span class="toc-number">9.</span> <span class="toc-text">background-size规定背景图片的尺寸</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E6%95%88%E6%9E%9C"><span class="toc-number">10.</span> <span class="toc-text">文本效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#text-shadow%E6%96%87%E6%9C%AC%E9%98%B4%E5%BD%B1"><span class="toc-number">11.</span> <span class="toc-text">text-shadow文本阴影</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#word-wrap%E5%B1%9E%E6%80%A7"><span class="toc-number">12.</span> <span class="toc-text">word-wrap属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#word-break%E5%B1%9E%E6%80%A7%E8%A7%84%E5%AE%9A%E8%87%AA%E5%8A%A8%E6%8D%A2%E8%A1%8C%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95"><span class="toc-number">13.</span> <span class="toc-text">word-break属性规定自动换行的处理方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#transform%E5%B1%9E%E6%80%A7"><span class="toc-number">14.</span> <span class="toc-text">transform属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#transition%E8%BF%87%E6%B8%A1%E5%B1%9E%E6%80%A7"><span class="toc-number">15.</span> <span class="toc-text">transition过渡属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#animation%E5%8A%A8%E7%94%BB"><span class="toc-number">16.</span> <span class="toc-text">animation动画</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        CSS3新特性
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-02-22T17:13:22.000Z" itemprop="datePublished">2021-02-22</time>
+        
+        (Updated: <time datetime="2021-03-02T08:43:41.232Z" itemprop="dateModified">2021-03-02</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/css/">css</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="边框属性"><a href="#边框属性" class="headerlink" title="边框属性"></a>边框属性</h2><h2 id="border-image边框图片属性"><a href="#border-image边框图片属性" class="headerlink" title="border-image边框图片属性"></a>border-image边框图片属性</h2><p>border-image:none 100% 1 0 stretch; 默认值<br>border-image是一个简写，用于设置以下属性：</p>
+<ul>
+<li>border-image-source: 边框图片路径</li>
+<li>border-image-slice: 图片边框向内偏移</li>
+<li>border-image-width: 图片边框的宽度</li>
+<li>border-image-outset: 边框图像区域超出边框的量</li>
+<li>border-image-repeat: 图片边框是否平铺（repeated）,铺满（rounded）或拉伸（stretched）</li>
+</ul>
+<h2 id="border-radius边框圆角属性"><a href="#border-radius边框圆角属性" class="headerlink" title="border-radius边框圆角属性"></a>border-radius边框圆角属性</h2><p>border-radius: 0; 默认值<br>border-radius是一个简写，用于设置以下属性：</p>
+<ul>
+<li>border-top-left-radius: 左上角圆角属性</li>
+<li>border-top-right-radius: 右上角圆角属性，若省略则取top-left的值</li>
+<li>border-bottom-left-radius: 左下角圆角属性，若省略则取top-right的值</li>
+<li>border-bottom-right-radius: 右下角圆角属性，若省略则取top-left的值</li>
+</ul>
+<p>以上属性值可取2种值：</p>
+<ul>
+<li>length: 具体的值,比如2px,2em等</li>
+<li>%: 百分比</li>
+</ul>
+<h2 id="box-shadow边框阴影属性"><a href="#box-shadow边框阴影属性" class="headerlink" title="box-shadow边框阴影属性"></a>box-shadow边框阴影属性</h2><p>box-shadow属性向边框添加一个或多个阴影，是由逗号分隔的阴影列表，每个阴影由2-4个长度值、可选的颜色以及可选的inset关键词来规定。省略长度的值是0.</p>
+<p>box-shadow属性值：</p>
+<ul>
+<li>h-shadow: 必需，水平阴影的位置，允许负值</li>
+<li>v-shadow：必需，垂直阴影的位置，允许负值</li>
+<li>blur： 可选，模糊距离</li>
+<li>spread：可选，阴影的尺寸</li>
+<li>color：可选，阴影的颜色</li>
+<li>inset：可选，将外部阴影设置为内部阴影</li>
+</ul>
+<h2 id="背景属性"><a href="#背景属性" class="headerlink" title="背景属性"></a>背景属性</h2><h2 id="background-image多背景图片属性"><a href="#background-image多背景图片属性" class="headerlink" title="background-image多背景图片属性"></a>background-image多背景图片属性</h2><p>background-image:url(bg_flower.gif),url(bg_flower_2.gif);</p>
+<h2 id="background-clip背景的绘制区域"><a href="#background-clip背景的绘制区域" class="headerlink" title="background-clip背景的绘制区域"></a>background-clip背景的绘制区域</h2><p>background-clip 属性规定背景的绘制区域</p>
+<p>background-clip属性可选值：</p>
+<ul>
+<li>border-box：默认值，图片被剪裁到边框盒</li>
+<li>padding-box: 图片被剪裁到内边距框</li>
+<li>content-box: 图片被剪裁到内容框</li>
+</ul>
+<h2 id="background-origin规定背景图片的定位区域"><a href="#background-origin规定背景图片的定位区域" class="headerlink" title="background-origin规定背景图片的定位区域"></a>background-origin规定背景图片的定位区域</h2><p>background-origin属性规定background-position属性相对于什么位置来定位。<br>如果background-attachment属性设置为“fixed”，该属性无效。</p>
+<p>background-origin属性值：</p>
+<ul>
+<li>padding-box: 默认值，背景图片相对于内边距框来定位</li>
+<li>border-box: 背景图片相对于边框盒来定位</li>
+<li>content-box: 背景图片相对于内容框来定位</li>
+</ul>
+<h2 id="background-size规定背景图片的尺寸"><a href="#background-size规定背景图片的尺寸" class="headerlink" title="background-size规定背景图片的尺寸"></a>background-size规定背景图片的尺寸</h2><p>background-size 属性规定背景图像的尺寸</p>
+<p>background-size: auto;默认值</p>
+<p>background-size取值四种方式：</p>
+<ul>
+<li>length：设置宽度和高度，第一个设置宽度，第二个值设置高度，如果只设置一个值，第二个值会被设置为”auto”.</li>
+<li>%:百分比设置宽度和高度，相对于父元素的宽高设置，第一个设置宽度，第二个值设置高度，如果只设置一个值，第二个值会被设置为”auto”.</li>
+<li>cover：把背景图片扩展至足够大，以使背景图像完全覆盖背景区域</li>
+<li>contain：把背景图片扩展至最大尺寸，以使其宽高完全适应内容区域</li>
+</ul>
+<h2 id="文本效果"><a href="#文本效果" class="headerlink" title="文本效果"></a>文本效果</h2><h2 id="text-shadow文本阴影"><a href="#text-shadow文本阴影" class="headerlink" title="text-shadow文本阴影"></a>text-shadow文本阴影</h2><p>text-shadow 属性向文本设置阴影。<br>text-shadow: none;默认值</p>
+<p>text-shadow属性包含下列值：</p>
+<ul>
+<li>h-shadow: 必需，水平阴影的位置，允许负值</li>
+<li>v-shadow: 必需，垂直阴影的位置，允许负值</li>
+<li>blur: 可选，模糊的距离</li>
+<li>color: 可选，阴影的颜色</li>
+</ul>
+<h2 id="word-wrap属性"><a href="#word-wrap属性" class="headerlink" title="word-wrap属性"></a>word-wrap属性</h2><p>word-wrap属性允许长单词或 URL 地址换行到下一行。</p>
+<p>word-wrap:normal;默认值</p>
+<ul>
+<li>break-word：允许长单词或url地址换到下一行</li>
+<li>normal: 只在允许的断字点换行（浏览器保持默认处理）</li>
+</ul>
+<h2 id="word-break属性规定自动换行的处理方法"><a href="#word-break属性规定自动换行的处理方法" class="headerlink" title="word-break属性规定自动换行的处理方法"></a>word-break属性规定自动换行的处理方法</h2><p>word-break: noraml默认值</p>
+<ul>
+<li>noraml:浏览器默认换行规则</li>
+<li>break-all: 允许在单词内换行</li>
+<li>keep-all： 只允许在半角空格或连字符处换行</li>
+</ul>
+<h2 id="transform属性"><a href="#transform属性" class="headerlink" title="transform属性"></a>transform属性</h2><p>transform属性向元素应用2D或3D属性。该属性允许元素进行旋转、缩放、倾斜、移动</p>
+<p>transform:none/transform-function,none为默认值</p>
+<p>transform值可以是以下方法：</p>
+<ul>
+<li>none：不进行任何转换</li>
+<li>matrix(n,n,n,n,n,n):定义2D转换，使用六个值的矩阵</li>
+<li>matrix3d(n,…n):定义3D转换，使用16个值的矩阵</li>
+<li>translate(x,y):定义2D转换</li>
+<li>translate3d(x,y,z): 定义3D转换</li>
+<li>translateX(x): 定义转换，只是用 X 轴的值。</li>
+<li>translateY(y): 定义转换，只是用 Y 轴的值。</li>
+<li>translateZ(z): 定义转换，只是用 Z 轴的值。</li>
+<li>scale(x,y): 定义2D缩放转换</li>
+<li>scale3d(x,y,z): 定义3D缩放转换</li>
+<li>scaleX(x): 通过设置 X 轴的值来定义缩放转换。</li>
+<li>scaleY(y): 通过设置 Y 轴的值来定义缩放转换。</li>
+<li>scaleZ(z): 通过设置 Z 轴的值来定义缩放转换。</li>
+<li>rotate(angle): 定义 2D 旋转，在参数中规定角度</li>
+<li>rotate(x,y,angle): 定义3D旋转</li>
+<li>rotateX(angle): 定义沿着 X 轴的 3D 旋转</li>
+<li>rotatezY(angle): 定义沿着 Y 轴的 3D 旋转</li>
+<li>rotateZ(angle): 定义沿着 Z 轴的 3D 旋转</li>
+<li>skew(x-angle,y-angle): 定义沿着x轴和y轴倾斜转换</li>
+<li>skewX(angle): 定义沿着X轴的2D倾斜转换</li>
+<li>skewY(angle):定义沿着y轴的2D倾斜转换</li>
+</ul>
+<h2 id="transition过渡属性"><a href="#transition过渡属性" class="headerlink" title="transition过渡属性"></a>transition过渡属性</h2><p>transition过渡是元素从一种样式逐渐改变为另一种效果，需要规定2项内容：</p>
+<ul>
+<li>规定希望效果作用到元素哪个属性上</li>
+<li>规定效果的时长</li>
+</ul>
+<p>transition是简写属性，包含以下转换属性：</p>
+<ul>
+<li>transition-property:规定应用过渡的css属性名称，取值：none/property/all</li>
+<li>transition-duration:规定应用过渡时长，默认值0，以秒或毫秒计</li>
+<li>transition-timing-function: 规定过渡效果的曲线，默认值是ease</li>
+<li>transition-delay: 规定效果从何时开始，默认值是0</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attribute">transition</span>: width <span class="number">2s</span>;</span><br><span class="line">  <span class="attribute">-moz-transition</span>: width <span class="number">2s</span>;	<span class="comment">/* Firefox 4 */</span></span><br><span class="line">  <span class="attribute">-webkit-transition</span>: width <span class="number">2s</span>;	<span class="comment">/* Safari 和 Chrome */</span></span><br><span class="line">  <span class="attribute">-o-transition</span>: width <span class="number">2s</span>;	<span class="comment">/* Opera */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="animation动画"><a href="#animation动画" class="headerlink" title="animation动画"></a>animation动画</h2><p>@keyframes规则用于创建动画</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> myFirst&#123;</span><br><span class="line">  <span class="selector-tag">from</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: red;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">to</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: yellow;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在@keyframes创建动画后，需要将它绑定到某个选择器，需要以下2项css3动画属性，即可将动画绑定到选择器：</p>
+<ul>
+<li>规定动画的名称</li>
+<li>规定动画的时长</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span>&#123;</span><br><span class="line">  <span class="attribute">animation</span>: myFirst <span class="number">5s</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可用0%和100%代替from和to。</p>
+<ul>
+<li>@keyframes：创建动画</li>
+<li>animation：动画属性简写</li>
+<li>animation-name: 规定@keyframes动画的名称</li>
+<li>animation-duration: 规定动画的一个周期所需时长，默认是0</li>
+<li>animation-timing-function: 规定动画的曲线，默认是ease</li>
+<li>animation-delay: 规定动画何时开始，默认是0</li>
+<li>animation-iteration-count: 规定动画播放次数，默认是1，值可取n/infinate(无限播放)</li>
+<li>animation-direction: 规定动画是否在下一周期逆向播放，默认是normal,取值normal/alternate</li>
+<li>animation-play-state: 规定动画是正在运行还是暂停，默认值是running，取值running/paused</li>
+<li>animation-fill-mode: 定对象动画时间之外的状态</li>
+</ul>
+
+  </div>
+  <div>
+      <!-- <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/CSS3新特性.md" target="_blank">编辑</a> -->
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%B9%E6%A1%86%E5%B1%9E%E6%80%A7"><span class="toc-number">1.</span> <span class="toc-text">边框属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#border-image%E8%BE%B9%E6%A1%86%E5%9B%BE%E7%89%87%E5%B1%9E%E6%80%A7"><span class="toc-number">2.</span> <span class="toc-text">border-image边框图片属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#border-radius%E8%BE%B9%E6%A1%86%E5%9C%86%E8%A7%92%E5%B1%9E%E6%80%A7"><span class="toc-number">3.</span> <span class="toc-text">border-radius边框圆角属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#box-shadow%E8%BE%B9%E6%A1%86%E9%98%B4%E5%BD%B1%E5%B1%9E%E6%80%A7"><span class="toc-number">4.</span> <span class="toc-text">box-shadow边框阴影属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%E5%B1%9E%E6%80%A7"><span class="toc-number">5.</span> <span class="toc-text">背景属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-image%E5%A4%9A%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87%E5%B1%9E%E6%80%A7"><span class="toc-number">6.</span> <span class="toc-text">background-image多背景图片属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-clip%E8%83%8C%E6%99%AF%E7%9A%84%E7%BB%98%E5%88%B6%E5%8C%BA%E5%9F%9F"><span class="toc-number">7.</span> <span class="toc-text">background-clip背景的绘制区域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-origin%E8%A7%84%E5%AE%9A%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87%E7%9A%84%E5%AE%9A%E4%BD%8D%E5%8C%BA%E5%9F%9F"><span class="toc-number">8.</span> <span class="toc-text">background-origin规定背景图片的定位区域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#background-size%E8%A7%84%E5%AE%9A%E8%83%8C%E6%99%AF%E5%9B%BE%E7%89%87%E7%9A%84%E5%B0%BA%E5%AF%B8"><span class="toc-number">9.</span> <span class="toc-text">background-size规定背景图片的尺寸</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E6%95%88%E6%9E%9C"><span class="toc-number">10.</span> <span class="toc-text">文本效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#text-shadow%E6%96%87%E6%9C%AC%E9%98%B4%E5%BD%B1"><span class="toc-number">11.</span> <span class="toc-text">text-shadow文本阴影</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#word-wrap%E5%B1%9E%E6%80%A7"><span class="toc-number">12.</span> <span class="toc-text">word-wrap属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#word-break%E5%B1%9E%E6%80%A7%E8%A7%84%E5%AE%9A%E8%87%AA%E5%8A%A8%E6%8D%A2%E8%A1%8C%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95"><span class="toc-number">13.</span> <span class="toc-text">word-break属性规定自动换行的处理方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#transform%E5%B1%9E%E6%80%A7"><span class="toc-number">14.</span> <span class="toc-text">transform属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#transition%E8%BF%87%E6%B8%A1%E5%B1%9E%E6%80%A7"><span class="toc-number">15.</span> <span class="toc-text">transition过渡属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#animation%E5%8A%A8%E7%94%BB"><span class="toc-number">16.</span> <span class="toc-text">animation动画</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/&text=CSS3新特性"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/&title=CSS3新特性"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/&is_video=false&description=CSS3新特性"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CSS3新特性&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/&title=CSS3新特性"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/&title=CSS3新特性"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/&title=CSS3新特性"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/&title=CSS3新特性"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/&name=CSS3新特性&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/22/CSS3%E6%96%B0%E7%89%B9%E6%80%A7/&t=CSS3新特性"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

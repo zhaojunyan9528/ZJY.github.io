@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="pxpx就是pixel像素的缩写，相对长度单位，网页设计常用的基本单位。像素px是相对于显示器屏幕分辨率而言的 emem是相对长度单位。相对于当前对象内文本的字体尺寸（参考物是父元素的font-size） 如当前父元素的字体尺寸未设置，则相对于浏览器的默认字体尺寸 remrem是CSS3新增的一个相对单位，rem是相对于HTML根元素的字体大小（font-size）来计算的长度单位 如果你没有设置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Css单位px,rem,em,vw,vh的区别">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="pxpx就是pixel像素的缩写，相对长度单位，网页设计常用的基本单位。像素px是相对于显示器屏幕分辨率而言的 emem是相对长度单位。相对于当前对象内文本的字体尺寸（参考物是父元素的font-size） 如当前父元素的字体尺寸未设置，则相对于浏览器的默认字体尺寸 remrem是CSS3新增的一个相对单位，rem是相对于HTML根元素的字体大小（font-size）来计算的长度单位 如果你没有设置">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-19T17:37:56.000Z">
+<meta property="article:modified_time" content="2021-03-02T08:43:41.232Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Css单位px,rem,em,vw,vh的区别</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/02/20/vue%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/02/19/HTML5/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/&text=Css单位px,rem,em,vw,vh的区别"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/&title=Css单位px,rem,em,vw,vh的区别"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/&is_video=false&description=Css单位px,rem,em,vw,vh的区别"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Css单位px,rem,em,vw,vh的区别&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/&title=Css单位px,rem,em,vw,vh的区别"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/&title=Css单位px,rem,em,vw,vh的区别"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/&title=Css单位px,rem,em,vw,vh的区别"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/&title=Css单位px,rem,em,vw,vh的区别"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/&name=Css单位px,rem,em,vw,vh的区别&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/&t=Css单位px,rem,em,vw,vh的区别"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#px"><span class="toc-number">1.</span> <span class="toc-text">px</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#em"><span class="toc-number">2.</span> <span class="toc-text">em</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rem"><span class="toc-number">3.</span> <span class="toc-text">rem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vw%E3%80%81vh"><span class="toc-number">4.</span> <span class="toc-text">vw、vh</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%88%E7%99%BE%E5%88%86%E6%AF%94%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">%（百分比）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vm"><span class="toc-number">6.</span> <span class="toc-text">vm</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Css单位px,rem,em,vw,vh的区别
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-02-19T17:37:56.000Z" itemprop="datePublished">2021-02-19</time>
+        
+        (Updated: <time datetime="2021-03-02T08:43:41.232Z" itemprop="dateModified">2021-03-02</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/css/">css</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="px"><a href="#px" class="headerlink" title="px"></a>px</h2><p>px就是pixel像素的缩写，相对长度单位，网页设计常用的基本单位。像素px是相对于显示器屏幕分辨率而言的</p>
+<h2 id="em"><a href="#em" class="headerlink" title="em"></a>em</h2><p>em是相对长度单位。相对于当前对象内文本的字体尺寸（参考物是父元素的font-size）</p>
+<p>如当前父元素的字体尺寸未设置，则相对于浏览器的默认字体尺寸</p>
+<h2 id="rem"><a href="#rem" class="headerlink" title="rem"></a>rem</h2><p>rem是CSS3新增的一个相对单位，rem是相对于HTML根元素的字体大小（font-size）来计算的长度单位</p>
+<p>如果你没有设置html的字体大小，就会以浏览器默认字体大小，一般是16px<br>html{font-size: 62.5%}  /* 10 ÷ 16 × 100% = 62.5% */</p>
+<p>em与rem的区别：</p>
+<p>　　rem是相对于根元素（html）的字体大小，而em是相对于其父元素的字体大小</p>
+<p>两者使用规则：</p>
+<p>  如果这个属性根据它的font-size进行测量，则使用em<br>  其他的一切事物属性均使用rem</p>
+<h2 id="vw、vh"><a href="#vw、vh" class="headerlink" title="vw、vh"></a>vw、vh</h2><p>vw、vh、vmax、vmin这四个单位都是基于视口<br>vw是相对视口（viewport）的宽度而定的，长度等于视口宽度的1/100</p>
+<p>假如浏览器的宽度为200px，那么1vw就等于2px（200px/100）</p>
+<p>vh是相对视口（viewport）的高度而定的，长度等于视口高度的1/100</p>
+<p>假如浏览器的高度为500px，那么1vh就等于5px（500px/100）</p>
+<p>vmin和vmax是相对于视口的高度和宽度两者之间的最小值或最大值</p>
+<p>如果浏览器的高为300px、宽为500px，那么1vmin就是3px，1vmax就是5px；如果浏览器的高为800px，宽为1080px，那么1vmin也是8px，1vmax也是10.8px</p>
+<h2 id="（百分比）"><a href="#（百分比）" class="headerlink" title="%（百分比）"></a>%（百分比）</h2><p>一般来说就是相对于父元素</p>
+<p>1、对于普通定位元素就是我们理解的父元素</p>
+<p>2、对于position: absolute;的元素是相对于已定位的父元素</p>
+<p>3、对于position: fixed;的元素是相对于ViewPort（可视窗口）</p>
+<h2 id="vm"><a href="#vm" class="headerlink" title="vm"></a>vm</h2><p>css3新单位，相对于视口的宽度或高度中较小的那个</p>
+<p>其中最小的那个被均分为100单位的vm</p>
+<p>比如：浏览器高度900px，宽度1200px，取最小的浏览器高度，1 vm = 900px/100 = 9 px</p>
+<p>缺点：兼容性差</p>
+
+  </div>
+  <div>
+      <!-- <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/Css单位px-rem-em-vw-vh的区别.md" target="_blank">编辑</a> -->
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#px"><span class="toc-number">1.</span> <span class="toc-text">px</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#em"><span class="toc-number">2.</span> <span class="toc-text">em</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rem"><span class="toc-number">3.</span> <span class="toc-text">rem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vw%E3%80%81vh"><span class="toc-number">4.</span> <span class="toc-text">vw、vh</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%88%E7%99%BE%E5%88%86%E6%AF%94%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">%（百分比）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vm"><span class="toc-number">6.</span> <span class="toc-text">vm</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/&text=Css单位px,rem,em,vw,vh的区别"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/&title=Css单位px,rem,em,vw,vh的区别"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/&is_video=false&description=Css单位px,rem,em,vw,vh的区别"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Css单位px,rem,em,vw,vh的区别&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/&title=Css单位px,rem,em,vw,vh的区别"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/&title=Css单位px,rem,em,vw,vh的区别"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/&title=Css单位px,rem,em,vw,vh的区别"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/&title=Css单位px,rem,em,vw,vh的区别"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/&name=Css单位px,rem,em,vw,vh的区别&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/19/Css%E5%8D%95%E4%BD%8Dpx-rem-em-vw-vh%E7%9A%84%E5%8C%BA%E5%88%AB/&t=Css单位px,rem,em,vw,vh的区别"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="1.HTTP基本概念1.1 http是什么？http是超文本传输协议，也就是HyperText Transfer Protocaol。  协议 http是一个用在计算机世界里的协议。它使用计算机能够理解的语言确立了一种计算机之间交流通信的规范，以及相关的各种控制和错误处理方式   传输 http协议是一个双向协议 http是一个在计算机世界里专门用来在两点之间传输数据的约定和规范  我们在上网冲浪">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http常见面试题">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="1.HTTP基本概念1.1 http是什么？http是超文本传输协议，也就是HyperText Transfer Protocaol。  协议 http是一个用在计算机世界里的协议。它使用计算机能够理解的语言确立了一种计算机之间交流通信的规范，以及相关的各种控制和错误处理方式   传输 http协议是一个双向协议 http是一个在计算机世界里专门用来在两点之间传输数据的约定和规范  我们在上网冲浪">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/images/http.jpg">
+<meta property="article:published_time" content="2021-02-05T14:33:46.000Z">
+<meta property="article:modified_time" content="2021-03-02T08:43:41.232Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/images/http.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>http常见面试题</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/02/19/HTML5/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/02/04/Cookie%E3%80%81Session%E3%80%81Token%E3%80%81JWT%E7%9A%84%E5%8C%BA%E5%88%AB/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/&text=http常见面试题"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/&title=http常见面试题"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/&is_video=false&description=http常见面试题"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=http常见面试题&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/&title=http常见面试题"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/&title=http常见面试题"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/&title=http常见面试题"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/&title=http常见面试题"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/&name=http常见面试题&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/&t=http常见面试题"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-HTTP%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">1.HTTP基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-http%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 http是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E3%80%8CHTTP-%E6%98%AF%E7%94%A8%E4%BA%8E%E4%BB%8E%E4%BA%92%E8%81%94%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%A0%E8%BE%93%E8%B6%85%E6%96%87%E6%9C%AC%E5%88%B0%E6%9C%AC%E5%9C%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%8D%8F%E8%AE%AEHTTP%E3%80%8D-%E8%BF%99%E7%A7%8D%E8%AF%B4%E6%B3%95%E6%AD%A3%E7%A1%AE%E5%90%97%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 「HTTP 是用于从互联网服务器传输超文本到本地浏览器的协议HTTP」,这种说法正确吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-http%E5%B8%B8%E8%A7%81%E7%9A%84%E7%8A%B6%E6%80%81%E5%90%97%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 http常见的状态吗有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-http%E5%B8%B8%E8%A7%81%E5%AD%97%E6%AE%B5%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 http常见字段有哪些？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-GET%E5%92%8CPOST"><span class="toc-number">2.</span> <span class="toc-text">2.GET和POST</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1get%E5%92%8Cpost%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">2.1.</span> <span class="toc-text">2.1get和post的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-get%E5%92%8Cpost-%E6%96%B9%E6%B3%95%E9%83%BD%E6%98%AF%E5%AE%89%E5%85%A8%E5%92%8C%E5%B9%82%E7%AD%89%E7%9A%84%E5%90%97%EF%BC%9F"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 get和post 方法都是安全和幂等的吗？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-http%E7%9A%84%E7%89%B9%E6%80%A7"><span class="toc-number">3.</span> <span class="toc-text">3.http的特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E4%BD%A0%E7%9F%A5%E9%81%93%E7%9A%84-HTTP%EF%BC%881-1%EF%BC%89-%E7%9A%84%E4%BC%98%E7%82%B9%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%8C%E6%80%8E%E4%B9%88%E4%BD%93%E7%8E%B0%E7%9A%84%EF%BC%9F"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 你知道的 HTTP（1.1） 的优点有哪些，怎么体现的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-http%E7%9A%84%E7%BC%BA%E7%82%B9%EF%BC%9F"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 http的缺点？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-http1-1%E7%9A%84%E6%80%A7%E8%83%BD%EF%BC%9F"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 http1.1的性能？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-http%E5%92%8Chttps"><span class="toc-number">4.</span> <span class="toc-text">4.http和https</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-HTTP-%E4%B8%8E-HTTPS-%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 HTTP 与 HTTPS 有哪些区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-HTTPS%E8%A7%A3%E5%86%B3%E4%BA%86http%E7%9A%84%E5%93%AA%E4%BA%9B%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 HTTPS解决了http的哪些问题？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-HTTP-1-1%E3%80%81HTTP-2%E3%80%81HTTP-3-%E6%BC%94%E5%8F%98"><span class="toc-number">5.</span> <span class="toc-text">5.HTTP&#x2F;1.1、HTTP&#x2F;2、HTTP&#x2F;3 演变</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-HTTP-1-1-%E7%9B%B8%E6%AF%94-HTTP-1-0-%E6%8F%90%E9%AB%98%E4%BA%86%E4%BB%80%E4%B9%88%E6%80%A7%E8%83%BD%EF%BC%9F"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 HTTP&#x2F;1.1 相比 HTTP&#x2F;1.0 提高了什么性能？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E5%9F%BA%E4%BA%8E%E4%B8%8A%E9%9D%A2%E7%9A%84-HTTP-1-1-%E7%9A%84%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88%EF%BC%8CHTTP-2-%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%E4%BC%98%E5%8C%96%EF%BC%9F"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 基于上面的 HTTP&#x2F;1.1 的性能瓶颈，HTTP&#x2F;2 做了什么优化？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-HTTP-2-%E6%9C%89%E5%93%AA%E4%BA%9B%E7%BC%BA%E9%99%B7%EF%BC%9FHTTP-3-%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BC%98%E5%8C%96%EF%BC%9F"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 HTTP&#x2F;2 有哪些缺陷？HTTP&#x2F;3 做了哪些优化？</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        http常见面试题
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-02-05T14:33:46.000Z" itemprop="datePublished">2021-02-05</time>
+        
+        (Updated: <time datetime="2021-03-02T08:43:41.232Z" itemprop="dateModified">2021-03-02</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E9%9D%A2%E8%AF%95/">面试</a> › <a class="category-link" href="/ZJY.github.io/categories/%E9%9D%A2%E8%AF%95/Javascript/">Javascript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="1-HTTP基本概念"><a href="#1-HTTP基本概念" class="headerlink" title="1.HTTP基本概念"></a>1.HTTP基本概念</h2><h3 id="1-1-http是什么？"><a href="#1-1-http是什么？" class="headerlink" title="1.1 http是什么？"></a>1.1 http是什么？</h3><p>http是超文本传输协议，也就是HyperText Transfer Protocaol。</p>
+<ul>
+<li>协议<ul>
+<li>http是一个用在计算机世界里的协议。它使用计算机能够理解的语言确立了一种计算机之间交流通信的规范，以及相关的各种控制和错误处理方式</li>
+</ul>
+</li>
+<li>传输<ul>
+<li>http协议是一个双向协议</li>
+<li>http是一个在计算机世界里专门用来在两点之间传输数据的约定和规范<br>  我们在上网冲浪时，浏览器是请求方 A ，百度网站就是应答方 B。双方约定用 HTTP 协议来通信，于是浏览器把请求数据发送给网站，网站再把一些数据返回给浏览器，最后由浏览器渲染在屏幕，就可以看到图片、视频了。<br>  数据虽然是在 A 和 B 之间传输，但允许中间有中转或接力。<br>  就好像第一排的同学想穿递纸条给最后一排的同学，那么传递的过程中就需要经过好多个同学（中间人），这样的传输方式就从「A &lt; — &gt; B」，变成了「A &lt;-&gt; N &lt;-&gt; M &lt;-&gt; B」。<br>  而在 HTTP 里，需要中间人遵从 HTTP 协议，只要不打扰基本的数据传输，就可以添加任意额外的东西。</li>
+</ul>
+</li>
+<li>超文本<ul>
+<li>http传输的内容是超文本</li>
+<li>我们先来理解「文本」，在互联网早期的时候只是简单的字符文字，但现在「文本」的涵义已经可以扩展为图片、视频、压缩包等，在 HTTP 眼里这些都算做「文本」</li>
+<li>再来理解「超文本」，它就是超越了普通文本的文本，它是文字、图片、视频等的混合体最关键有超链接，能从一个超文本跳转到另外一个超文本</li>
+<li>HTML 就是最常见的超文本了，它本身只是纯文字文件，但内部用很多标签定义了图片、视频等的链接，在经过浏览器的解释，呈现给我们的就是一个文字、有画面的网页了</li>
+</ul>
+</li>
+</ul>
+<p><b>HTTP 是一个在计算机世界里专门在「两点」之间「传输」文字、图片、音频、视频等「超文本」数据的「约定和规范」。</b></p>
+<h3 id="1-2-「HTTP-是用于从互联网服务器传输超文本到本地浏览器的协议HTTP」-这种说法正确吗？"><a href="#1-2-「HTTP-是用于从互联网服务器传输超文本到本地浏览器的协议HTTP」-这种说法正确吗？" class="headerlink" title="1.2 「HTTP 是用于从互联网服务器传输超文本到本地浏览器的协议HTTP」,这种说法正确吗？"></a>1.2 「HTTP 是用于从互联网服务器传输超文本到本地浏览器的协议HTTP」,这种说法正确吗？</h3><p>这种说法是不正确的。因为也可以是「服务器&lt; – &gt;服务器」，所以采用两点之间的描述会更准确</p>
+<h3 id="1-3-http常见的状态吗有哪些？"><a href="#1-3-http常见的状态吗有哪些？" class="headerlink" title="1.3 http常见的状态吗有哪些？"></a>1.3 http常见的状态吗有哪些？</h3><ul>
+<li>1xx<ul>
+<li>1xx类状态码属于提示信息，是协议处理中的一种中间状态，实际用到的比较少</li>
+</ul>
+</li>
+<li>2xx<ul>
+<li>2xx类状态码表示服务器成功处理了客户端的请求。</li>
+<li>200 ok是最常见的成功状态码，表示一切正常。如果是非HEAD请求，服务器返回的相应头都会有body数据。</li>
+<li>204 no content也是常见的成功状态码，与200基本相同，但响应头没有body数据。</li>
+<li>206 partial content是应用于http分块下载或断电续传。表示响应返回的body数据并不是资源的全部，而是其中的一部分，也是服务器处理成功的状态。</li>
+</ul>
+</li>
+<li>3xx<ul>
+<li>3xx类状态码表示客户端请求的资源发生了变动，需要客户端用新的URL重新发送请求获取资源，也就是重定向。</li>
+<li>301 Moved Permanently 表示永久重定向，说明请求的资源已经不在了，需要用另一个url再次访问</li>
+<li>302 临时重定向，说明请求的资源还在，但暂时需要用另一个url来访问</li>
+<li>301和302都会在响应头里使用字段location，指明后续要跳转的url，浏览器会自动重定向新的url。</li>
+<li>304 not modified不具有跳转的含义，表示资源未被修改，重定向已存在的缓冲文件，也称为缓存重定向，用于缓存控制。</li>
+</ul>
+</li>
+<li>4xx<ul>
+<li>4xx类状态码表示客户端发送的报文有误，服务器无法处理，也就是错误码的含义。</li>
+<li>400 bad request表示客户端请求的报文有误，但只是个笼统的错误</li>
+<li>403 forbidden表示服务器禁止访问资源，并不是客户端的请求出错</li>
+<li>404 not found表示请求的资源在服务器上不存在或未找到，所以无法提供给客户端。</li>
+</ul>
+</li>
+<li>5xx<ul>
+<li>5xx类状态码表示客户端请求报文正确，但服务器处理时内部发生了错误，属于服务端的错误码。</li>
+<li>500 internal server error，与 400 类型，是个笼统通用的错误码，服务器发生了什么错误，我们并不知道。</li>
+<li>501 not implemented 表示客户端请求的功能还不支持，类似“即将开业，敬请期待”的意思。</li>
+<li>502 bad gateway，通常是服务器作为网关或代理时返回的错误码，表示服务器自身工作正常，访问后端服务器发生了错误</li>
+<li>503 service unavailable表示服务器当前很忙，暂时无法响应服务器。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-4-http常见字段有哪些？"><a href="#1-4-http常见字段有哪些？" class="headerlink" title="1.4 http常见字段有哪些？"></a>1.4 http常见字段有哪些？</h3><ul>
+<li>Host<ul>
+<li>客户端发送请求时，用来指定服务器的域名</li>
+<li>host:http:<a target="_blank" rel="noopener" href="http://www.a.com/">www.a.com</a></li>
+<li>有了host字段，就可以将请求发往同一台服务器的不同网站</li>
+</ul>
+</li>
+<li>Content-Length<ul>
+<li>服务器在返回数据时，会有content-length字段，表明本次回应的数据长度</li>
+</ul>
+</li>
+<li>Connection字段<ul>
+<li>Connection字段最常用于客户端要求服务器使用TCP持久连接，以便其他请求复用。Connection: keep-alive</li>
+</ul>
+</li>
+<li>Content-Type字段<ul>
+<li>Content-Type字段用于服务器返回时，告诉客户端本次数据返回什么格式。</li>
+<li>Content-Type: text/html; charset=utf-8</li>
+<li>上面的类型表明，发送的是网页，而且编码是UTF-8</li>
+<li>客户端请求的时候，可以使用 Accept 字段声明自己可以接受哪些数据格式</li>
+<li>Accept: <em>/</em></li>
+<li>上面代码中，客户端声明自己可以接受任何格式的数据。</li>
+</ul>
+</li>
+<li>Content-Encoding字段<ul>
+<li>Content-Encoding 字段说明数据的压缩方法。表示服务器返回的数据使用了什么压缩格式</li>
+<li>Content-Encoding: gzip</li>
+<li>上面表示服务器返回的数据采用了 gzip 方式压缩，告知客户端需要用此方式解压。</li>
+<li>客户端在请求时，用 Accept-Encoding 字段说明自己可以接受哪些压缩方法</li>
+<li>Accept-Encoding: gzip, deflate</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-GET和POST"><a href="#2-GET和POST" class="headerlink" title="2.GET和POST"></a>2.GET和POST</h2><h3 id="2-1get和post的区别？"><a href="#2-1get和post的区别？" class="headerlink" title="2.1get和post的区别？"></a>2.1get和post的区别？</h3><ul>
+<li>get方法含义是请求从服务器获取资源，这个资源可以是静态的文本、页面、图片视频等。比如打开一篇文章，浏览器会发送get请求给服务器，服务器就会返回文章所有资源。</li>
+<li>post方法向url指定的资源提交数据，数据就放在报文的body里。比如在一篇文章底部，提交留言板，浏览器就会执行一次post请求，把你的留言文字放进报文body里然后拼接好post请求，通过tcp协议发送给服务器。</li>
+</ul>
+<h3 id="2-2-get和post-方法都是安全和幂等的吗？"><a href="#2-2-get和post-方法都是安全和幂等的吗？" class="headerlink" title="2.2 get和post 方法都是安全和幂等的吗？"></a>2.2 get和post 方法都是安全和幂等的吗？</h3><ul>
+<li>安全：在http协议里，所谓的安全是指请求方法不会破坏服务器上的资源。</li>
+<li>幂等：多次执行相同的操作，结果都是相同的。</li>
+<li>get方法就是安全且幂等的，因为它是只读操作，无论操作多少次，服务器上的数据是安全的，且每次的结果都是相同的。</li>
+<li>post是新增或提交数据的操作，会修改服务器上的资源，所以是不安全的，且多次提交数据就会创建多个资源，所以不是幂等的。</li>
+</ul>
+<h2 id="3-http的特性"><a href="#3-http的特性" class="headerlink" title="3.http的特性"></a>3.http的特性</h2><h3 id="3-1-你知道的-HTTP（1-1）-的优点有哪些，怎么体现的？"><a href="#3-1-你知道的-HTTP（1-1）-的优点有哪些，怎么体现的？" class="headerlink" title="3.1 你知道的 HTTP（1.1） 的优点有哪些，怎么体现的？"></a>3.1 你知道的 HTTP（1.1） 的优点有哪些，怎么体现的？</h3><p>http最凸出的优点是简单、灵活和易于扩展、应用广泛和跨平台。</p>
+<ul>
+<li>简单：http最基本的报文格式是header+body，头部信息也是key-value简单文本的形式。易于理解降低学习和使用门槛。</li>
+<li>灵活和易于扩展：<ul>
+<li>http协议里的各类请求方法、URL/URI、状态码、头字段等每个组成要求都没被固定死，都允许开发人员自定义和扩展。</li>
+<li>http工作在应用层，则它下层可以随意变化</li>
+<li>HTTPS 也就是在 HTTP 与 TCP 层之间增加了 SSL/TLS 安全传输层，HTTP3 甚至把 TCPP 层换成了基于 UDP 的 QUIC。</li>
+</ul>
+</li>
+<li>应用广泛和跨平台</li>
+</ul>
+<h3 id="3-2-http的缺点？"><a href="#3-2-http的缺点？" class="headerlink" title="3.2 http的缺点？"></a>3.2 http的缺点？</h3><p>http协议里有优缺点一体的双刃剑，分别是无状态、明文传输，同时还有一大缺点不安全。</p>
+<ul>
+<li>无状态双刃剑<ul>
+<li>无状态的好处，因为服务器不会去记忆http的状态，所以不需要额外的资源来记录状态信息，这可以减轻服务器的压力，能够把更多的cpu和内存用于对外提供服务</li>
+<li>无状态的坏处，既然服务器没有记忆能力，在完成关联性的操作时会非常麻烦。例如登录-&gt;添加购物车-&gt;下单-&gt;结算-&gt;支付，这系列操作都要知道用户的身份才行。但服务器不知道这些请求是有关联的，每次都要问一遍身份信息</li>
+</ul>
+</li>
+<li>明文传输双刃剑<ul>
+<li>明文传输是在传输信息过程中，是可方便阅读的，在浏览器控制台和抓包可以直接肉眼查看，为开发者调试工作带来了便利。</li>
+<li>但是就是因为这样，信息都暴露出来，容易泄漏，很容易被窃取。</li>
+</ul>
+</li>
+<li>不安全<ul>
+<li>通信使用明文，不加密，信息很容易被窃取。</li>
+<li>不验证通信方的身份，很可能遭遇伪装，比如访问假的淘宝，京东</li>
+<li>无法证明报文的完整性，所以有可能已遭篡改，比如网页植入广告</li>
+<li>HTTP 的安全问题，可以用 HTTPS 的方式解决，也就是通过引入 SSL/TLS 层，使得在安全上达到了极致。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-3-http1-1的性能？"><a href="#3-3-http1-1的性能？" class="headerlink" title="3.3 http1.1的性能？"></a>3.3 http1.1的性能？</h3><p>http协议是基于TCP/IPP，并且使用了请求-应答的通信模式，所以性能的关键就在这2点里。</p>
+<ul>
+<li>长连接<ul>
+<li>早期http1.0性能上很大一个问题就是每发起一个请求，都要重新建立一次TCP连接（三次握手），而且是串行请求，做了无谓的TCP连接建立和断开，增加了通信的开销</li>
+<li>为了解决上述的TCP连接问题，http1.1提出了长连接的通信方式，也叫持久连接。这种方式的好处在于减少了TCP连接的重复建立和断开所造成的额外开销，减轻了服务器的负载。</li>
+<li>持久连接的特点是，只要任意一端没有明确说明断开连接则保持TCP连接状态。</li>
+</ul>
+</li>
+<li>管道网络传输<ul>
+<li>HTTP/1.1 采用了长连接的方式，这使得管道（pipeline）网络传输成为了可能。</li>
+<li>即在同一个TCP连接里，可发起多个请求，只要第一个请求发出去了，不必等其回来，就可发第二个请求出去，可以减少整体的响应时间。</li>
+<li>举例来说，客户端需要请求两个资源。以前的做法是，在同一个TCP连接里面，先发送 A 请求，然后等待服务器做出回应，收到后再发出 B 请求。管道机制则是允许浏览器同时发出 A 请求和 B 请求</li>
+<li>但是服务器还是按照顺序，先回应 A 请求，完成后再回应 B 请求。要是 前面的回应特别慢，后面就会有许多请求排队等着。这称为「队头堵塞」。</li>
+</ul>
+</li>
+<li>队头堵塞<ul>
+<li>请求 - 应答的模式，加剧了http的性能问题。</li>
+<li>因为当顺序发送的请求序列中的一个请求因为某种原因被阻塞时，会导致后面的请求也被阻塞，客户端一直请求不到数据，这也就是对头阻塞。</li>
+<li>总之 HTTP/1.1 的性能一般般，后续的 HTTP/2 和 HTTP/3 就是在优化 HTTP 的性能</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-http和https"><a href="#4-http和https" class="headerlink" title="4.http和https"></a>4.http和https</h2><h3 id="4-1-HTTP-与-HTTPS-有哪些区别？"><a href="#4-1-HTTP-与-HTTPS-有哪些区别？" class="headerlink" title="4.1 HTTP 与 HTTPS 有哪些区别？"></a>4.1 HTTP 与 HTTPS 有哪些区别？</h3><ul>
+<li>http是超文本传输协议，信息是明文传输，存在安全隐患。https则解决了http不安全的问题，在TCP和HTTP网络层之间加入了SSL/TLS安全协议，使得报文能够加密传输。</li>
+<li>http连接建立相对简单，TCP三次握手后就可进行http报文传输。而https在TCP三次握手之后，还需要进行SSL/TLS的握手过程，才可进入报文加密传输。</li>
+<li>http的端口是80，https的端口是443</li>
+<li>https需要向CA（证书权威机构）申请数字证书，来保证服务器的身份是可信的。</li>
+</ul>
+<h3 id="4-2-HTTPS解决了http的哪些问题？"><a href="#4-2-HTTPS解决了http的哪些问题？" class="headerlink" title="4.2 HTTPS解决了http的哪些问题？"></a>4.2 HTTPS解决了http的哪些问题？</h3><ul>
+<li>HTTP 由于是明文传输，所以安全上存在以下三个风险：<ul>
+<li>窃听风险，比如通信链路上可以获取通信内容，用户号容易没。</li>
+<li>篡改风险，比如强制入垃圾广告，视觉污染，用户眼容易瞎。</li>
+<li>冒充风险，比如冒充淘宝网站，用户钱容易没。</li>
+</ul>
+</li>
+<li>HTTPS 在 HTTP 与 TCP 层之间加入了 SSL/TLS 协议。<ul>
+<li>HTTP TCP IP MAC</li>
+<li>HTTP SSL/TLS TCP IP MAC</li>
+</ul>
+</li>
+<li>HTTP 与 HTTPS可以很好的解决了上述的风险：<ul>
+<li>信息加密：交互信息无法被窃取</li>
+<li>校验机制：无法篡改通信内容，篡改了就不能正常显示</li>
+<li>身份证书：证明淘宝是真的淘宝网</li>
+</ul>
+</li>
+<li>HTTPS 是如何解决上面的三个风险的？<ul>
+<li>混合加密的方式实现信息的机密性，解决了窃听的风险</li>
+<li>摘要算法的方式来实现完整性，它能够为数据生成独一无二的指纹，用于校验数据的完整性，解决来篡改的风险</li>
+<li>将服务器公钥放进数字证书里，解决里冒充的风险。</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-HTTP-1-1、HTTP-2、HTTP-3-演变"><a href="#5-HTTP-1-1、HTTP-2、HTTP-3-演变" class="headerlink" title="5.HTTP/1.1、HTTP/2、HTTP/3 演变"></a>5.HTTP/1.1、HTTP/2、HTTP/3 演变</h2><h3 id="5-1-HTTP-1-1-相比-HTTP-1-0-提高了什么性能？"><a href="#5-1-HTTP-1-1-相比-HTTP-1-0-提高了什么性能？" class="headerlink" title="5.1 HTTP/1.1 相比 HTTP/1.0 提高了什么性能？"></a>5.1 HTTP/1.1 相比 HTTP/1.0 提高了什么性能？</h3><ul>
+<li>HTTP/1.1 相比 HTTP/1.0 性能上的改进：<ul>
+<li>使用 TCP 长连接的方式改善了 HTTP/1.0 短连接造成的性能开销。</li>
+<li>支持 管道（pipeline）网络传输，只要第一个请求发出去了，不必等其回来，就可以发第二个请求出去，可以减少整体的响应时间</li>
+</ul>
+</li>
+<li>但 HTTP/1.1 还是有性能瓶颈：<ul>
+<li>请求 / 响应头部（Header）未经压缩就发送，首部信息越多延迟越大。只能压缩 Body 的部分</li>
+<li>发送冗长的首部。每次互相发送相同的首部造成的浪费较多</li>
+<li>服务器是按请求的顺序响应的，如果服务器响应慢，会招致客户端一直请求不到数据，也就是队头阻塞；</li>
+<li>没有请求优先级控制；</li>
+<li>请求只能从客户端开始，服务器只能被动响应</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-2-基于上面的-HTTP-1-1-的性能瓶颈，HTTP-2-做了什么优化？"><a href="#5-2-基于上面的-HTTP-1-1-的性能瓶颈，HTTP-2-做了什么优化？" class="headerlink" title="5.2 基于上面的 HTTP/1.1 的性能瓶颈，HTTP/2 做了什么优化？"></a>5.2 基于上面的 HTTP/1.1 的性能瓶颈，HTTP/2 做了什么优化？</h3><ul>
+<li>HTTP/2 协议是基于 HTTPS 的，所以 HTTP/2 的安全性也是有保障的。</li>
+<li>那 HTTP/2 相比 HTTP/1.1 性能上的改进：<ul>
+<li>头部压缩<ul>
+<li>HTTP/2 会压缩头（Header）如果你同时发出多个请求，他们的头是一样的或是相似的，那么，协议会帮你消除重复的分。</li>
+<li>这就是所谓的 HPACK 算法：在客户端和服务器同时维护一张头信息表，所有字段都会存入这个表，生成一个索引号，以后就不发送同样字段了，只发送索引号，这样就提高速度了。</li>
+</ul>
+</li>
+<li>二进制格式<ul>
+<li>HTTP/2 不再像 HTTP/1.1 里的纯文本形式的报文，而是全面采用了二进制格式。</li>
+<li>头信息和数据体都是二进制，并且统称为帧（frame）：头信息帧和数据帧</li>
+<li>这样虽然对人不友好，但是对计算机非常友好，因为计算机只懂二进制，那么收到报文后，无需再将明文的报文转成二进制，而是直接解析二进制报文，这增加了数据传输的效率。</li>
+</ul>
+</li>
+<li>数据流<ul>
+<li>HTTP/2 的数据包不是按顺序发送的，同一个连接里面连续的数据包，可能属于不同的回应。因此，必须要对数据包做标记，指出它属于哪个回应。</li>
+<li>每个请求或回应的所有数据包，称为一个数据流（Stream）。</li>
+<li>每个数据流都标记着一个独一无二的编号，其中规定客户端发出的数据流编号为奇数， 服务器发出的数据流编号为偶数</li>
+<li>客户端还可以指定数据流的优先级。优先级高的请求，服务器就先响应该请求</li>
+</ul>
+</li>
+<li>多路复用<ul>
+<li>HTTP/2 是可以在一个连接中并发多个请求或回应，而不用按照顺序一一对应。</li>
+<li>移除了 HTTP/1.1 中的串行请求，不需要排队等待，也就不会再出现「队头阻塞」问题，降低了延迟，大幅度提高了连接的利用率。</li>
+<li>举例来说，在一个 TCP 连接里，服务器收到了客户端 A 和 B 的两个请求，如果发现 A 处理过程非常耗时，于是就回应 A 请求已经处理好的部分，接着回应 B 请求，完成后，再回应 A 请求剩下的部分。</li>
+</ul>
+</li>
+<li>服务器推送<ul>
+<li>HTTP/2 还在一定程度上改善了传统的「请求 - 应答」工作模式，服务不再是被动地响应，也可以主动向客户端发送消息。</li>
+<li>举例来说，在浏览器刚请求 HTML 的时候，就提前把可能会用到的 JS、CSS 文件等静态资源主动发给客户端，减少延时的等待，也就是服务器推送（Server Push，也叫 Cache Push）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-3-HTTP-2-有哪些缺陷？HTTP-3-做了哪些优化？"><a href="#5-3-HTTP-2-有哪些缺陷？HTTP-3-做了哪些优化？" class="headerlink" title="5.3 HTTP/2 有哪些缺陷？HTTP/3 做了哪些优化？"></a>5.3 HTTP/2 有哪些缺陷？HTTP/3 做了哪些优化？</h3><ul>
+<li>HTTP/2 主要的问题在于：多个 HTTP 请求在复用一个 TCP 连接，下层的 TCP 协议是不知道有多少个 HTTP 请求的。</li>
+<li>所以一旦发生了丢包现象，就会触发 TCP 的重传机制，这样在一个 TCP 连接中的所有的 HTTP 请求都必须等待这个丢了的包被重传回来。<ul>
+<li>HTTP/1.1 中的管道（ pipeline）传输中如果有一个请求阻塞了，那么队列后请求也统统被阻塞住了</li>
+<li>HTTP/2 多请求复用一个TCP连接，一旦发生丢包，就会阻塞住所有的 HTTP 请求。</li>
+</ul>
+</li>
+<li>这都是基于 TCP 传输层的问题，所以 HTTP/3 把 HTTP 下层的 TCP 协议改成了 UDP！<br><img src="/ZJY.github.io/images/http.jpg" alt="image"></li>
+</ul>
+
+  </div>
+  <div>
+      <!-- <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/http常见面试题.md" target="_blank">编辑</a> -->
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-HTTP%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">1.HTTP基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-http%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 http是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E3%80%8CHTTP-%E6%98%AF%E7%94%A8%E4%BA%8E%E4%BB%8E%E4%BA%92%E8%81%94%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%A0%E8%BE%93%E8%B6%85%E6%96%87%E6%9C%AC%E5%88%B0%E6%9C%AC%E5%9C%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%8D%8F%E8%AE%AEHTTP%E3%80%8D-%E8%BF%99%E7%A7%8D%E8%AF%B4%E6%B3%95%E6%AD%A3%E7%A1%AE%E5%90%97%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 「HTTP 是用于从互联网服务器传输超文本到本地浏览器的协议HTTP」,这种说法正确吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-http%E5%B8%B8%E8%A7%81%E7%9A%84%E7%8A%B6%E6%80%81%E5%90%97%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 http常见的状态吗有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-http%E5%B8%B8%E8%A7%81%E5%AD%97%E6%AE%B5%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 http常见字段有哪些？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-GET%E5%92%8CPOST"><span class="toc-number">2.</span> <span class="toc-text">2.GET和POST</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1get%E5%92%8Cpost%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">2.1.</span> <span class="toc-text">2.1get和post的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-get%E5%92%8Cpost-%E6%96%B9%E6%B3%95%E9%83%BD%E6%98%AF%E5%AE%89%E5%85%A8%E5%92%8C%E5%B9%82%E7%AD%89%E7%9A%84%E5%90%97%EF%BC%9F"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 get和post 方法都是安全和幂等的吗？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-http%E7%9A%84%E7%89%B9%E6%80%A7"><span class="toc-number">3.</span> <span class="toc-text">3.http的特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E4%BD%A0%E7%9F%A5%E9%81%93%E7%9A%84-HTTP%EF%BC%881-1%EF%BC%89-%E7%9A%84%E4%BC%98%E7%82%B9%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%8C%E6%80%8E%E4%B9%88%E4%BD%93%E7%8E%B0%E7%9A%84%EF%BC%9F"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 你知道的 HTTP（1.1） 的优点有哪些，怎么体现的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-http%E7%9A%84%E7%BC%BA%E7%82%B9%EF%BC%9F"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 http的缺点？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-http1-1%E7%9A%84%E6%80%A7%E8%83%BD%EF%BC%9F"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 http1.1的性能？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-http%E5%92%8Chttps"><span class="toc-number">4.</span> <span class="toc-text">4.http和https</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-HTTP-%E4%B8%8E-HTTPS-%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 HTTP 与 HTTPS 有哪些区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-HTTPS%E8%A7%A3%E5%86%B3%E4%BA%86http%E7%9A%84%E5%93%AA%E4%BA%9B%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 HTTPS解决了http的哪些问题？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-HTTP-1-1%E3%80%81HTTP-2%E3%80%81HTTP-3-%E6%BC%94%E5%8F%98"><span class="toc-number">5.</span> <span class="toc-text">5.HTTP&#x2F;1.1、HTTP&#x2F;2、HTTP&#x2F;3 演变</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-HTTP-1-1-%E7%9B%B8%E6%AF%94-HTTP-1-0-%E6%8F%90%E9%AB%98%E4%BA%86%E4%BB%80%E4%B9%88%E6%80%A7%E8%83%BD%EF%BC%9F"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 HTTP&#x2F;1.1 相比 HTTP&#x2F;1.0 提高了什么性能？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E5%9F%BA%E4%BA%8E%E4%B8%8A%E9%9D%A2%E7%9A%84-HTTP-1-1-%E7%9A%84%E6%80%A7%E8%83%BD%E7%93%B6%E9%A2%88%EF%BC%8CHTTP-2-%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%E4%BC%98%E5%8C%96%EF%BC%9F"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 基于上面的 HTTP&#x2F;1.1 的性能瓶颈，HTTP&#x2F;2 做了什么优化？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-HTTP-2-%E6%9C%89%E5%93%AA%E4%BA%9B%E7%BC%BA%E9%99%B7%EF%BC%9FHTTP-3-%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BC%98%E5%8C%96%EF%BC%9F"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 HTTP&#x2F;2 有哪些缺陷？HTTP&#x2F;3 做了哪些优化？</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/&text=http常见面试题"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/&title=http常见面试题"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/&is_video=false&description=http常见面试题"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=http常见面试题&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/&title=http常见面试题"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/&title=http常见面试题"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/&title=http常见面试题"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/&title=http常见面试题"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/&name=http常见面试题&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/02/05/http%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/&t=http常见面试题"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

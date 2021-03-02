@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="浏览器是如何运作的1.浏览器发展史： 1991年Berners Lee建立了第一代网络浏览器WorldWideWeb,只支持显示文本图片  1993年Mosaic问世，同时支持显示文本和图像 1994年网景浏览器发布 ，只能显示简单的静态html，没有js，css。同年出现Opera。 1995年微软发布IE1.0，IE2.0，自此第一次浏览器大战正式打响 1996年微软发布的IE3.0和wind">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器是如何运作的">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="浏览器是如何运作的1.浏览器发展史： 1991年Berners Lee建立了第一代网络浏览器WorldWideWeb,只支持显示文本图片  1993年Mosaic问世，同时支持显示文本和图像 1994年网景浏览器发布 ，只能显示简单的静态html，没有js，css。同年出现Opera。 1995年微软发布IE1.0，IE2.0，自此第一次浏览器大战正式打响 1996年微软发布的IE3.0和wind">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-27T21:27:28.000Z">
+<meta property="article:modified_time" content="2021-03-02T08:43:41.236Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>浏览器是如何运作的</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/02/04/Cookie%E3%80%81Session%E3%80%81Token%E3%80%81JWT%E7%9A%84%E5%8C%BA%E5%88%AB/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/01/26/%E4%BA%92%E8%81%94%E7%BD%91%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C%E7%9A%84/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/&text=浏览器是如何运作的"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/&title=浏览器是如何运作的"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/&is_video=false&description=浏览器是如何运作的"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=浏览器是如何运作的&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/&title=浏览器是如何运作的"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/&title=浏览器是如何运作的"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/&title=浏览器是如何运作的"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/&title=浏览器是如何运作的"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/&name=浏览器是如何运作的&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/&t=浏览器是如何运作的"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84"><span class="toc-number">1.</span> <span class="toc-text">浏览器是如何运作的</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%91%E5%B1%95%E5%8F%B2%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">1.浏览器发展史：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BB%93%E6%9E%84%E5%9B%BE%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">2.浏览器结构图：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E4%B8%80%E4%B8%AA%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%BB%93%E6%9E%84%EF%BC%9A"><span class="toc-number">1.3.</span> <span class="toc-text">3.浏览器是一个多进程的结构：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%BD%93%E4%BD%A0%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5%E5%9C%B0%E5%9D%80%E6%97%B6%EF%BC%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E9%83%A8%E4%BC%9A%E5%8F%91%E7%94%9F%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.4.</span> <span class="toc-text">4.当你在浏览器输入地址时，浏览器内部会发生什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">1.5.</span> <span class="toc-text">5.总结：</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        浏览器是如何运作的
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-01-27T21:27:28.000Z" itemprop="datePublished">2021-01-27</time>
+        
+        (Updated: <time datetime="2021-03-02T08:43:41.236Z" itemprop="dateModified">2021-03-02</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/Javascript/">Javascript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="浏览器是如何运作的"><a href="#浏览器是如何运作的" class="headerlink" title="浏览器是如何运作的"></a>浏览器是如何运作的</h2><h3 id="1-浏览器发展史："><a href="#1-浏览器发展史：" class="headerlink" title="1.浏览器发展史："></a>1.浏览器发展史：</h3><ul>
+<li>1991年Berners Lee建立了第一代网络浏览器WorldWideWeb,只支持显示文本图片 </li>
+<li>1993年Mosaic问世，同时支持显示文本和图像</li>
+<li>1994年网景浏览器发布 ，只能显示简单的静态html，没有js，css。同年出现Opera。</li>
+<li>1995年微软发布IE1.0，IE2.0，自此第一次浏览器大战正式打响</li>
+<li>1996年微软发布的IE3.0和window系统集成一起，网景份额此时占86%</li>
+<li>1998年网景开源了firefox火狐来迎击IE</li>
+<li>1999年IE市场份额占据99%</li>
+<li>2003年苹果发布safari浏览器，被包含在所有苹果操作系统中 </li>
+<li>2004年网景发布来firefox1.0版本，拉开第二次浏览器大战</li>
+<li>2005年苹果开源了safari浏览器内核webkit </li>
+<li>2008年谷歌以苹果开源项目webkit 创建了新的项目chromium， 在该项目的基础上谷歌发布了自己的浏览器产品Chrome，</li>
+<li>2015年微软放弃了IE，推出了以webkit内核的Edge浏览器</li>
+<li>2020年chrome已占据60%多的市场份额</li>
+</ul>
+<h3 id="2-浏览器结构图："><a href="#2-浏览器结构图：" class="headerlink" title="2.浏览器结构图："></a>2.浏览器结构图：</h3><ul>
+<li>用户界面-用户界面用来展示除标签页窗口以外的其他用户界面内容</li>
+<li>浏览器引擎- </li>
+<li>渲染引擎-渲染引擎负责渲染用户请求的页面内容</li>
+</ul>
+<p>浏览器是运行在操作系统上的一个应用程序 ，每个应用程序必须至少启动一个进程来执行其功能，每个程序往往需要运行很多任务，进程就会创建很多线程去帮助它执行一些小的任务。</p>
+<p>当我们启动一个应用程序时，就会创建一个进程来执行任务代码，同时为该进程分配内存空间。该应用程序的状态都保存在内存空间里，当应用关闭时，该内存就会被回收。<br>进程可以启动更多的进程来执行任务，由于每个进程分配的内存空间是独立的，如果两个进程间需要传递数据，则需要通过进程间通信管道IPC来传递。很多引用程序都是多进程的结构，避免某一个进程卡死，由于进程间相互独立，这样不会影响整个应用程序。<br>进程可以将任务分为更多个细小的任务，然后通过创建多个线程并行执行不同的任务，同一进程下的线程之间是可以通信共享数据的。</p>
+<h3 id="3-浏览器是一个多进程的结构："><a href="#3-浏览器是一个多进程的结构：" class="headerlink" title="3.浏览器是一个多进程的结构："></a>3.浏览器是一个多进程的结构：</h3><ul>
+<li>浏览器进程<br>  浏览器进程负责控制除标签页外的用户界面，包括地址栏，书签，前进，后退按钮以及负责与浏览器其他进程协调工作</li>
+<li>缓存进程</li>
+<li>网络进程<br>  负责发起接受网络请求</li>
+<li>GPU进程<br>  负责整个浏览器界面的渲染</li>
+<li>插件进程<br>  负责网站使用的所有插件，例如flash,插件并不是指插件安装的扩展</li>
+<li>渲染器进程<br>  用来控制显示tab标签内的所有内容<br>  浏览器默认情况下会为每个标签页都创建一个进程（和启动浏览器选择的进程模型有关）</li>
+</ul>
+<h3 id="4-当你在浏览器输入地址时，浏览器内部会发生什么？"><a href="#4-当你在浏览器输入地址时，浏览器内部会发生什么？" class="headerlink" title="4.当你在浏览器输入地址时，浏览器内部会发生什么？"></a>4.当你在浏览器输入地址时，浏览器内部会发生什么？</h3><p>当你在浏览器输入内容时，浏览器进程的UI进程会捕捉你的输入内容，如果访问的是网址，则UI进程会启动一个网络线程来请求DNS进行域名解析，接着开始连接服务器来获取数据。如果输入的不是网址，而是关键词，浏览器就会使用默认配置的搜索引擎来查询。</p>
+<p>当网络线程获取到数据后会通过SafeBrowsing来检查站点是否是恶意站点，如果是，会提示个警告页面阻止你继续访问，也可以强行继续访问。SafeBrowsing是谷歌内部的一套站点安全系统，通过检测该站点的数据判断是否安全。</p>
+<p>当返回数据并安全校验通过时，网络线程就会通知UI线程（浏览器进程）准备好了，然后UI线程就会创建一个渲染器进程来渲染页面，浏览器进程就会通过进程通信管道IPC来把数据传递给渲染器进程，正式进入渲染流程。渲染器接受到的数据也就是html，渲染器的核心任务就是把html,js,css,image等资源渲染成用户可以交互的web页面。</p>
+<p>渲染器进程的主线程将html进行解析，构造DOM数据结构。<br>html首先经过tokeniser标记化，通过词法分析将输入的html内容解析成多个标记，根据识别后的标记进行DOM树构造,在DOM树构造偶成中会创建document对象，然后以document为根节点的DOM树不断进行修改向其中添加各种元素。</p>
+<pre><code>html-&gt;tokeniser-&gt;tree construction-&gt;DOM
+document-&gt;body-&gt;p-&gt;text</code></pre>
+<p>html的代码中往往会引入一些额外的资源，比如图片、css、js脚本等，图片和css资源需要经过网络下载或者从缓存中加载，这些资源不回阻塞html的解析，因为它们不会影响dom的生成。但是html解析遇到script标签，就会停止html的解析流程，转而去加载解析并且执行js，可以使用async或defer来异步加载执行js。在html解析完成后会获得一个DOM 树，但是还不知道dom树上每个节点长什么样子。 </p>
+<p>主线程需要解析css来确定每个dom节点的计算样式。</p>
+<p>在知道DOM节点和每个节点的样式后，接下来需要直到每个节点放置的位置，也就是节点的坐标以及该节点需要占据的区域，这个阶段称为layout布局。</p>
+<p>主线程通过遍历dom和计算好的样式来生成layout tree，layout tree上的每个节点都记录来x,y坐标以及边框尺寸。layout tree是和最后显示的节点一一对应的。</p>
+<p>现在知道节点的形状大小，还需要知道以什么样的顺序来绘制，z-index属性会影响节点绘制的层级关系。按照dom层级顺序绘制节点是不对的，为了在屏幕上展示正确的层级，主线程遍历Layout tree 创建了一个绘制记录表（paint record）,该表记录了绘制的顺序，这个阶段被称为绘制（paint）。</p>
+<p>现在知道了节点绘制的顺序，到了把这些信息转化称像素点显示在屏幕上的时候了。这种行为被称为栅格化。<br>chrome早期栅格化只栅格用户可视区域界面，随着滚动再继续栅格，会带来延迟。现在使用另一种更复杂的栅格化，叫做合成（Composting）,合成是一种将页面的各个部分分为多个图层，分别对其栅格化，并在合成器线程中单独进行合成页面的技术。<br>简单来说就是页面所有元素按照某种规则进行分图层，然后把图层都栅格化好了，然后只需把可视区域的内容组合成一帧展示给用户即可。</p>
+<p>主线程遍历layout tree生成layer tree(图层),当layer tree生成完毕和绘制顺序确定后，主线程将这些信息传递给合成器线程，<br>合成器线程将每个图层栅格化，由于一层可能像页面的整个长度一样大，因此合成器线程将他们切分为许多图块，然后将每个图块发送给栅格化线程（Raster thread）。</p>
+<p>栅格化线程栅格每个图块，并将它们存储在GPU内存中，当栅格化完成后，合成器线程将收集称为“draw quads”的图块信息，这些信息记录了图块在内存中的位置和在页面的哪个位置绘制图块的信息。根据这些信息合成器线程合成生成了一个合成器帧（Compositor Frame）,然后这个合成器帧通过进程间通信管道IPC传递给浏览器进程，接着浏览器进程将合成器帧传送到GPU，然后GPU渲染展示到屏幕上。</p>
+<p>页面上终于可以看到内容，当页面发生变化，比如滚动页面，则会生成一个新的合成器帧，新的帧再传送到GPU，再渲染到屏幕上。</p>
+<h3 id="5-总结："><a href="#5-总结：" class="headerlink" title="5.总结："></a>5.总结：</h3><ul>
+<li>浏览器进程中的网络线程请求获取到html数据后，通过IPC将数据传给渲染器进程的主线程</li>
+<li>主线程将html解析构造DOM树</li>
+<li>然后进行样式计算</li>
+<li>根据DOM树和生成好的样式成功layout tree</li>
+<li>通过遍历layout tree生成绘制顺序表paint</li>
+<li>接着遍历layout tree生成layer tree(图层)</li>
+<li>然后主线程将layer tree和绘制顺序信息一起传递给合成器线程</li>
+<li>合成器线程按照规则进行分图层，并把更小的tiles（图块）传递给栅格化线程进程栅格化</li>
+<li>栅格化完成后，合成器线程将收到栅格化线程传递过来的“draw quads”的图块信息</li>
+<li>根据这些信息合成器线程合成生成了一个合成器帧（Compositor Frame）</li>
+<li>然后这个合成器帧通过进程间通信管道IPC传递给浏览器进程</li>
+<li>浏览器进程再传送到GPU渲染，然后就展示到屏幕上了。</li>
+</ul>
+<p>主线程-&gt;DOM-&gt;style-&gt;layout tree-&gt;paint-&gt;layer（这些在主线程执行）<br>-&gt;合成器线程-&gt;tiles（图块）<br>-&gt;栅格化线程-&gt;“draw quads”的图块信息-&gt;传递给合成器线程-&gt;合成器帧-&gt;浏览器进程-&gt;GPU-&gt;渲染屏幕</p>
+<p>当我们改变元素的尺寸位置时，会重新计算样式,layout,paint以及后面所有流程，这种行为称为重排reflow</p>
+<p>当我们改变元素颜色属性时，不会出发layout layer 布局，但会触发样式计算，这种行为称为重绘repaint</p>
+<p>重排和重绘都会占用主线程，js也在主线程运行，如果他们都在主线程运行，就会出现抢占执行时间的问题，如果写了一个不断导致重排重绘的动画，浏览器则需要在每一帧都运行样式计算布局和绘制的操作，页面以每秒60帧频率刷新时才不会让用户感觉到页面卡顿，绘制动画时，如果js运行时间过长，没有及时归还主线程，就会导致页面绘制卡顿。</p>
+<p>可以通过requestAnimationFrame()和transform解决这个问题。<br>合成器线程和栅格化线程不运行在主线程，不会受到主线程中js执行的影响，css中transform动画不需要样式计算布局绘制，不运行在主线程。</p>
+
+  </div>
+  <div>
+      <!-- <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/浏览器是如何运作的.md" target="_blank">编辑</a> -->
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84"><span class="toc-number">1.</span> <span class="toc-text">浏览器是如何运作的</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%91%E5%B1%95%E5%8F%B2%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">1.浏览器发展史：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BB%93%E6%9E%84%E5%9B%BE%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">2.浏览器结构图：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E4%B8%80%E4%B8%AA%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%BB%93%E6%9E%84%EF%BC%9A"><span class="toc-number">1.3.</span> <span class="toc-text">3.浏览器是一个多进程的结构：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%BD%93%E4%BD%A0%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BE%93%E5%85%A5%E5%9C%B0%E5%9D%80%E6%97%B6%EF%BC%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E9%83%A8%E4%BC%9A%E5%8F%91%E7%94%9F%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.4.</span> <span class="toc-text">4.当你在浏览器输入地址时，浏览器内部会发生什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">1.5.</span> <span class="toc-text">5.总结：</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/&text=浏览器是如何运作的"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/&title=浏览器是如何运作的"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/&is_video=false&description=浏览器是如何运作的"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=浏览器是如何运作的&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/&title=浏览器是如何运作的"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/&title=浏览器是如何运作的"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/&title=浏览器是如何运作的"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/&title=浏览器是如何运作的"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/&name=浏览器是如何运作的&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/27/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E4%BD%9C%E7%9A%84/&t=浏览器是如何运作的"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

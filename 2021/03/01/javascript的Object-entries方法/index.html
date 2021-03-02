@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Object.entries方法Object.entries()方法会返回指定对象自身可枚举属性，并返回其健值对数组，其排列与使用与for…in遍历该对象时返回一致，只不过for…in还会枚举其原型链中属性。 1234567891011const object1 &#x3D; &amp;#123;    a: &amp;#x27;somestring&amp;#x27;,    b: 42&amp;#125;;console.log(Ob">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript的Object.entries方法">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="Object.entries方法Object.entries()方法会返回指定对象自身可枚举属性，并返回其健值对数组，其排列与使用与for…in遍历该对象时返回一致，只不过for…in还会枚举其原型链中属性。 1234567891011const object1 &#x3D; &amp;#123;    a: &amp;#x27;somestring&amp;#x27;,    b: 42&amp;#125;;console.log(Ob">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-01T17:02:51.000Z">
+<meta property="article:modified_time" content="2021-03-02T08:43:41.232Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>javascript的Object.entries方法</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-create%E6%96%B9%E6%B3%95/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-assign%E6%96%B9%E6%B3%95/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/&text=javascript的Object.entries方法"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/&title=javascript的Object.entries方法"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/&is_video=false&description=javascript的Object.entries方法"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=javascript的Object.entries方法&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/&title=javascript的Object.entries方法"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/&title=javascript的Object.entries方法"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/&title=javascript的Object.entries方法"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/&title=javascript的Object.entries方法"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/&name=javascript的Object.entries方法&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/&t=javascript的Object.entries方法"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-entries%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">Object.entries方法</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        javascript的Object.entries方法
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-03-01T17:02:51.000Z" itemprop="datePublished">2021-03-01</time>
+        
+        (Updated: <time datetime="2021-03-02T08:43:41.232Z" itemprop="dateModified">2021-03-02</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/Javascript/">Javascript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="Object-entries方法"><a href="#Object-entries方法" class="headerlink" title="Object.entries方法"></a>Object.entries方法</h2><p>Object.entries()方法会返回指定对象自身可枚举属性，并返回其健值对数组，其排列与使用与for…in遍历该对象时返回一致，只不过for…in还会枚举其原型链中属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> object1 = &#123;</span><br><span class="line">    a: <span class="string">&#x27;somestring&#x27;</span>,</span><br><span class="line">    b: <span class="number">42</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.entries(object1));</span><br><span class="line"><span class="comment">// Array：[[&#x27;a&#x27;,&#x27;somestring&#x27;],[&quot;b&quot;,42]]</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> [key, value] <span class="keyword">of</span> <span class="built_in">Object</span>.entries(object1)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;key&#125;</span>: <span class="subst">$&#123;value&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//a: somestring</span></span><br><span class="line"><span class="comment">// b: 42</span></span><br></pre></td></tr></table></figure>
+<p>语法：Object.entries(obj)<br>参数：<br>obj: 可以返回枚举健值对的对象<br>返回值：返回指定对象可枚举属性的健值对数组</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  foo: <span class="string">&#x27;bar&#x27;</span>,</span><br><span class="line">  baz: <span class="number">42</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.entries(obj)); <span class="comment">// [ [&#x27;foo&#x27;, &#x27;bar&#x27;], [&#x27;baz&#x27;, 42] ]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// array like object</span></span><br><span class="line"><span class="keyword">const</span> obj1 = &#123;</span><br><span class="line">    <span class="number">0</span>: <span class="string">&#x27;a&#x27;</span>,</span><br><span class="line">    <span class="number">1</span>: <span class="string">&#x27;b&#x27;</span>,</span><br><span class="line">    <span class="number">2</span>: <span class="string">&#x27;c&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.entries(obj1)); <span class="comment">// [ [&#x27;0&#x27;, &#x27;a&#x27;], [&#x27;1&#x27;, &#x27;b&#x27;], [&#x27;2&#x27;, &#x27;c&#x27;] ]</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// array like object with random key ordering</span></span><br><span class="line"><span class="keyword">const</span> anObj = &#123;</span><br><span class="line">    <span class="number">100</span>: <span class="string">&#x27;a&#x27;</span>,</span><br><span class="line">    <span class="number">2</span>: <span class="string">&#x27;b&#x27;</span>,</span><br><span class="line">    <span class="number">7</span>: <span class="string">&#x27;c&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.entries(anObj)); <span class="comment">// [ [&#x27;2&#x27;, &#x27;b&#x27;], [&#x27;7&#x27;, &#x27;c&#x27;], [&#x27;100&#x27;, &#x27;a&#x27;] ]</span></span><br><span class="line"><span class="keyword">for</span> (k <span class="keyword">in</span> anObj) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(k); <span class="comment">//2   7   10</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// getFoo is property which isn&#x27;t enumerable</span></span><br><span class="line"><span class="comment">// create和defineProperty方法创建对象属性,enumerable默认值为false</span></span><br><span class="line"><span class="keyword">const</span> myObj = <span class="built_in">Object</span>.create(&#123;&#125;, &#123;</span><br><span class="line">  getFoo: &#123;</span><br><span class="line">      <span class="function"><span class="title">value</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="built_in">this</span>.foo;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(myObj); <span class="comment">//&#123; getFoo:()&#125;</span></span><br><span class="line">myObj.foo = <span class="string">&#x27;bar&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(myObj); <span class="comment">//&#123;foo:&quot;bar&quot;,getFoo:()&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.entries(myObj)); <span class="comment">// [ [&#x27;foo&#x27;, &#x27;bar&#x27;] ]</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// non-object argument will be coerced to an object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.entries(<span class="string">&#x27;foo&#x27;</span>)); <span class="comment">// [ [&#x27;0&#x27;, &#x27;f&#x27;], [&#x27;1&#x27;, &#x27;o&#x27;], [&#x27;2&#x27;, &#x27;o&#x27;] ]</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// iterate through key-value gracefully</span></span><br><span class="line"><span class="keyword">const</span> objs = &#123;</span><br><span class="line">    a: <span class="number">5</span>,</span><br><span class="line">    b: <span class="number">7</span>,</span><br><span class="line">    c: <span class="number">9</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> [key, value] <span class="keyword">of</span> <span class="built_in">Object</span>.entries(objs)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;key&#125;</span> <span class="subst">$&#123;value&#125;</span>`</span>); <span class="comment">// &quot;a 5&quot;, &quot;b 7&quot;, &quot;c 9&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Or, using array extras</span></span><br><span class="line"><span class="built_in">Object</span>.entries(objs).forEach(<span class="function">(<span class="params">[key, value]</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;key&#125;</span> <span class="subst">$&#123;value&#125;</span>`</span>); <span class="comment">// &quot;a 5&quot;, &quot;b 7&quot;, &quot;c 9&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 将Object转换为Map:</span></span><br><span class="line"><span class="comment">// new Map() 构造函数接受一个可迭代的entries。借助Object.entries方法你可以</span></span><br><span class="line"><span class="comment">// 很容易的将Object转换为Map:</span></span><br><span class="line"><span class="keyword">var</span> obj3 = &#123; <span class="attr">foo</span>: <span class="string">&quot;bar&quot;</span>, <span class="attr">baz</span>: <span class="number">42</span> &#125;; </span><br><span class="line"><span class="keyword">var</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>(<span class="built_in">Object</span>.entries(obj3));</span><br><span class="line"><span class="built_in">console</span>.log(map); <span class="comment">// Map &#123; foo: &quot;bar&quot;, baz: 42 &#125;</span></span><br></pre></td></tr></table></figure>
+  </div>
+  <div>
+      <!-- <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/javascript的Object-entries方法.md" target="_blank">编辑</a> -->
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-entries%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">Object.entries方法</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/&text=javascript的Object.entries方法"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/&title=javascript的Object.entries方法"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/&is_video=false&description=javascript的Object.entries方法"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=javascript的Object.entries方法&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/&title=javascript的Object.entries方法"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/&title=javascript的Object.entries方法"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/&title=javascript的Object.entries方法"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/&title=javascript的Object.entries方法"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/&name=javascript的Object.entries方法&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/03/01/javascript%E7%9A%84Object-entries%E6%96%B9%E6%B3%95/&t=javascript的Object.entries方法"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
