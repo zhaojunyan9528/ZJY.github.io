@@ -36,7 +36,7 @@ const promise = new Promise(function(resolve,reject){
 })
 ```
 
-promise构造函数接收一个函数作为参数，该函数等两个参数为resovle和reject，由js引擎提供，不用自己部署
+promise构造函数接收一个函数作为参数，该函数的两个参数为resovle和reject，由js引擎提供，不用自己部署
 
 resovle函数的作用是，将promise对象的状态从“未完成”变为“成功”（pending变为resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去。
 
@@ -47,3 +47,104 @@ promise生成以后，可用then方法分别指定为resolve和reject状态的�
 promise.then(function(value){},function(error){})
 
 then方法可以接受两个回调函数作为参数。第一个回调函数是Promise对象的状态变为resolved时调用，第二个回调函数是Promise对象的状态变为rejected时调用。其中，第二个函数是可选的，不一定要提供。这两个函数都接受Promise对象传出的值作为参数。
+
+promise.then(onFulfilled, onRejected)
+
+promise简化了对error的处理，上面的代码我们也可以这样写：
+
+promise.then(onFulfilled).catch(onRejected)
+
+Promise.all方法
+
+Promise.all 方法用于将多个 Promise 实例，包装成一个新的 Promise 实例。
+var p = Promise.all([p1,p2,p3]);
+
+上面代码中，Promise.all 方法接受一个数组作为参数，p1、p2、p3 都是 Promise 对象的实例。（Promise.all 方法的参数不一定是数组，但是必须具有 iterator 接口，且返回的每个成员都是 Promise 实例。）
+
+p 的状态由 p1、p2、p3 决定，分成两种情况。
+
+（1）只有p1、p2、p3的状态都变成fulfilled，p的状态才会变成fulfilled，此时p1、p2、p3的返回值组成一个数组，传递给p的回调函数。
+（2）只要p1、p2、p3之中有一个被rejected，p的状态就变成rejected，此时第一个被reject的实例的返回值，会传递给p的回调函数。
+
+例子：
+
+```js
+// 生成一个Promise对象的数组
+var promises = [2, 3, 5, 7, 11, 13].map(function(id){
+  return getJSON("/post/" + id + ".json");
+});
+ 
+Promise.all(promises).then(function(posts) {
+  // ...  
+}).catch(function(reason){
+  // ...
+});
+```
+
+Promise.race 方法同样是将多个 Promise 实例，包装成一个新的 Promise 实例
+
+var p = Promise.race([p1,p2,p3]);
+
+上面代码中，只要p1、p2、p3之中有一个实例率先改变状态，p的状态就跟着改变。那个率先改变的Promise实例的返回值，就传递给p的返回值。
+
+如果Promise.all方法和Promise.race方法的参数，不是Promise实例，就会先调用下面讲到的Promise.resolve方法，将参数转为Promise实例，再进一步处理。
+
+
+Promise.resolve 方法
+有时需要将现有对象转为Promise对象，Promise.resolve方法就起到这个作用。
+
+```js
+var p = Promise.resolve('Hello');
+ 
+p.then(function (s){
+  console.log(s)
+});
+```
+
+如果 Promise.resolve 方法的参数，不是具有 then 方法的对象（又称 thenable 对象），则返回一个新的 Promise 对象，且它的状态为fulfilled。
+
+上面代码生成一个新的Promise对象的实例p，它的状态为fulfilled，所以回调函数会立即执行，Promise.resolve方法的参数就是回调函数的参数。
+
+如果Promise.resolve方法的参数是一个Promise对象的实例，则会被原封不动地返回。
+
+
+Promise.reject(reason)方法也会返回一个新的Promise实例，该实例的状态为rejected。Promise.reject方法的参数reason，会被传递给实例的回调函数。
+
+```js
+var p = Promise.reject('出错了');
+ 
+p.then(null, function (s){
+  console.log(s)
+});
+// 出错了
+```
+
+上面代码生成一个Promise对象的实例，状态为rejected，回调函数会立即执行。
+
+promise实现ajax：
+
+```js
+function ajax(URL) {
+    return new Promise(function (resolve, reject) {
+        var req = new XMLHttpRequest(); 
+        req.open('GET', URL, true);
+        req.onload = function () {
+        if (req.status === 200) { 
+                resolve(req.responseText);
+            } else {
+                reject(new Error(req.statusText));
+            } 
+        };
+        req.onerror = function () {
+            reject(new Error(req.statusText));
+        };
+        req.send(); 
+    });
+}
+var URL = "/try/ajax/testpromise.php"; 
+ajax(URL).then(function onFulfilled(value){
+    document.write('内容是：' + value); 
+}).catch(function onRejected(error){
+    document.write('错误：' + error); 
+});
+```
