@@ -18,7 +18,7 @@ date: 2021-01-20 11:56:25
     + undefined
     + symbol  
 
-基本类型都比较就是值的比较，访问的是值的本身，没有属性和方法，保存在栈内存中
+基本类型的比较就是值的比较，访问的是值的本身，没有属性和方法，保存在栈内存中
         
 + 引用类型
     + Array
@@ -71,7 +71,7 @@ console.log(str1.split('').reverse().join(''))
     let obj = {}
     let num2 = str2.length
     for (let i = 0; i < num2; i++) {
-      if (obj[str2.charAtt(i)]) {
+      if (obj[str2.charAt(i)]) {
         obj[str2.charAt(i)] = parseInt(obj[str2.charAt(i)]) + 1
       } else {
         obj[str2.charAt(i)] = 1
@@ -106,7 +106,7 @@ console.log(str1.split('').reverse().join(''))
 ```javascript
     let str = 'hello china';
     let str2 = str.replace('hello', 'hi');
-    console.log(str2,str)；//hi china,hello china
+    console.log(str2,str);//hi china,hello china
 ```
 
 ### 5.toUpperCase()大写/toLocaleUpperCase
@@ -134,7 +134,7 @@ console.log(str1.split('').reverse().join(''))
 ```
 
 []是创建了一个新数组，重新分配了内存空间，任何其他引
-用不受影响，但仍指向其原始数据
+用不受影响，仍指向其原始数据
 length=0 修改数组本身。如果通过不同的变量访问它，那
 么仍然可以获得修改后的数组
 
@@ -806,7 +806,7 @@ undefined、symbol 和函数这三种情况，会直接忽略
     }
 ```
 
-该方法不禁可以过滤掉重复的NaN,还是可以过滤掉Object。
+该方法不仅可以过滤掉重复的NaN,还是可以过滤掉Object。
 
 优点：该方法可以顾虑到重复的 String、Boolean、 Number、undefined、null、NaN、Object，返回的是去重后的新数组。
 缺点：针对 NaN和'NaN', 对象的key会视为一个key，区分不了NaN和'NaN'
