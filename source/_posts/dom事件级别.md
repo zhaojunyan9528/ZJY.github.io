@@ -61,7 +61,7 @@ UI事件:当用户与页面上元素交互时触发,比如:load,scroll,
 DOM事件模型分为捕获和冒泡。一个事件发生后，会在子元素和父元素之间传播（propagation）。这种传播分成三个阶段
 
 1.捕获阶段：事件从window对象自上而下向目标节点传播的阶段
-2.目标阶段：真正的目标阶段正在处理事件的阶段
+2.目标阶段：真正的目标节点正在处理事件的阶段
 3.冒泡阶段：事件从目标节点自下而上向window对象传播的阶段
 
 ## 事件代理（事件委托）
@@ -91,7 +91,7 @@ document.getElementById('list').addEventListener('click', function(e){
 
 ## Event对象常见的应用
 
-event.preventDefault();阻止默认事件的发生，比如链接跳转，表达提交
+event.preventDefault();阻止默认事件的发生，比如链接跳转，表单提交
 event.stopPropagation();阻止事件冒泡到父元素,阻止任何父元素事件处理程序被执行
 event.stopImmediatePropagation();既能阻止事件向父元素冒泡,也能阻止元素同事件类型的其他监听器被触发
 
