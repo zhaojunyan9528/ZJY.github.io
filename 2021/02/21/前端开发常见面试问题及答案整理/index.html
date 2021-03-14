@@ -14,7 +14,7 @@
 <meta property="og:description" content="前端开发常见面试问题及答案整理闭包的理解闭包是为了设计私有方法和变量。优点：避免全局变量的污染缺点：闭包常驻内存，加大内存使用，使用不当容易造成内存泄漏 闭包的三大特性：  函数嵌套函数 函数内部可以引用外部的参数和变量 参数和变量不会被垃圾回收机制回收  cookie的弊端1.每个特定的域名下最多生成20个cookie，每个cookie长度不能超过4KB，否则会被截掉。2.安全性问题。如果coo">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-21T22:06:22.000Z">
-<meta property="article:modified_time" content="2021-03-09T05:32:24.467Z">
+<meta property="article:modified_time" content="2021-03-14T05:50:35.763Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -137,7 +137,7 @@
       
         <time datetime="2021-02-21T22:06:22.000Z" itemprop="datePublished">2021-02-21</time>
         
-        (Updated: <time datetime="2021-03-09T05:32:24.467Z" itemprop="dateModified">2021-03-09</time>)
+        (Updated: <time datetime="2021-03-14T05:50:35.763Z" itemprop="dateModified">2021-03-14</time>)
         
       
     </div>
@@ -444,12 +444,12 @@
 <h3 id="ie各版本和chrome可以并行下载多少个资源"><a href="#ie各版本和chrome可以并行下载多少个资源" class="headerlink" title="ie各版本和chrome可以并行下载多少个资源"></a>ie各版本和chrome可以并行下载多少个资源</h3><p>IE6 两个并发，iE7升级之后的6个并发，之后版本也是6个</p>
 <p>Firefox，chrome也是6个</p>
 <h3 id="javascript的同源策略"><a href="#javascript的同源策略" class="headerlink" title="javascript的同源策略"></a>javascript的同源策略</h3><p>同源：协议、域名、端口相同，同源策略是一种协议，指脚本只能读取来自同一源的窗口和文档属性。</p>
-<h3 id="哪些地方会出现css阻塞，哪些地方会出现js阻塞？"><a href="#哪些地方会出现css阻塞，哪些地方会出现js阻塞？" class="headerlink" title="哪些地方会出现css阻塞，哪些地方会出现js阻塞？"></a>哪些地方会出现css阻塞，哪些地方会出现js阻塞？</h3><p>所以浏览器在下载js的时候，都会阻塞其他资源的下载，页面的呈现等。知道js下载、解析、执行完毕后才能继续并行下载其他资源并呈现内容。新一代浏览器都支持并行下载js，但仍然会阻塞其他资源（css，图片）的下载。<br>由于浏览器为了防止出现js修改dom树，造成重新构造dom树的情况，需要阻塞其他资源的下载和呈现<br>嵌入js会阻塞所有内容的呈现，外部js只会阻塞其后内容的显示，2种方式都会阻塞资源的下载。</p>
+<h3 id="哪些地方会出现css阻塞，哪些地方会出现js阻塞？"><a href="#哪些地方会出现css阻塞，哪些地方会出现js阻塞？" class="headerlink" title="哪些地方会出现css阻塞，哪些地方会出现js阻塞？"></a>哪些地方会出现css阻塞，哪些地方会出现js阻塞？</h3><p>所有浏览器在下载js的时候，都会阻塞其他资源的下载，页面的呈现等。直到js下载、解析、执行完毕后才能继续并行下载其他资源并呈现内容。新一代浏览器都支持并行下载js，但仍然会阻塞其他资源（css，图片）的下载。<br>由于浏览器为了防止出现js修改dom树，造成重新构造dom树的情况，需要阻塞其他资源的下载和呈现<br>嵌入js会阻塞所有内容的呈现，外部js只会阻塞其后内容的显示，2种方式都会阻塞资源的下载。</p>
 <p>css本来是可以并行下载的，在什么情况下会阻塞加载？<br>css后面跟着嵌入js的时候，会阻塞后面资源的下载，而把嵌入js放置在css前面就不会阻塞资源加载了。</p>
 <p>原因：<br>因为浏览器会维持html中css和js的顺序，样式表必须在嵌入js前先加载、解析完。而嵌入js又会阻塞后面的资源加载，所以就会出现css阻塞下载的情况</p>
 <p>嵌入js应该放在什么位置？<br>1.放置在底部，虽然放在底部会阻塞所有呈现，但不会阻塞资源下载<br>2.放在head，放在css前面<br>3.使用defer<br>4.嵌入js中不要调用运行时间较长的函数，如果要调用，可以使用setTimeout来调用</p>
 <h3 id="js无阻塞加载方式？"><a href="#js无阻塞加载方式？" class="headerlink" title="js无阻塞加载方式？"></a>js无阻塞加载方式？</h3><ul>
-<li>将脚本放在底部：script标签放在’</body>‘前</li>
+<li>将脚本放在底部：script标签放在<code>&lt;/body&gt;</code>前</li>
 <li>非阻塞脚本：等页面加载完后，再加载js。也就是在onload事件下载js<ul>
 <li>1.defer属性/async属性</li>
 <li>2.动态创建dom方式（创建script，插入文档，onload事件回调触发）</li>
@@ -492,8 +492,8 @@
 <h3 id="对promise的理解"><a href="#对promise的理解" class="headerlink" title="对promise的理解"></a>对promise的理解</h3><p>promise有四种状态：</p>
 <ul>
 <li>1.pending:初始状态，非fullfilled或rejected</li>
-<li>2.fullfilled: 成功的操作</li>
-<li>3.rejected: 失败的操作</li>
+<li>2.fullfilled: 成功的状态</li>
+<li>3.rejected: 失败的状态</li>
 <li>4:settled：promise已被fullfilled或rejected，且不是pending</li>
 </ul>
 <p>另外，fullfilled和rejected合称settled</p>

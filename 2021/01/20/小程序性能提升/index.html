@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/images/webapp.png">
 <meta property="article:published_time" content="2021-01-20T16:58:55.000Z">
-<meta property="article:modified_time" content="2021-03-09T05:32:24.471Z">
+<meta property="article:modified_time" content="2021-03-14T05:50:35.763Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -139,7 +139,7 @@
       
         <time datetime="2021-01-20T16:58:55.000Z" itemprop="datePublished">2021-01-20</time>
         
-        (Updated: <time datetime="2021-03-09T05:32:24.471Z" itemprop="dateModified">2021-03-09</time>)
+        (Updated: <time datetime="2021-03-14T05:50:35.763Z" itemprop="dateModified">2021-03-14</time>)
         
       
     </div>
@@ -194,7 +194,7 @@
 <p>渲染层收到通讯后，还需要重新渲染出来，所以，一次setData带来两次开销：通信的开销 + webview更新的开销。</p>
 <ul>
 <li>1.减少setData的数据量<ul>
-<li>如果一个数据不能会影响渲染层，则不用放在setData里面</li>
+<li>如果一个数据不会影响渲染层，则不用放在setData里面</li>
 </ul>
 </li>
 <li>2.合并setData的请求，减少通讯的次数</li>
