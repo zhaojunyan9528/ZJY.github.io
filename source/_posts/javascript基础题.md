@@ -157,6 +157,7 @@ length=0 修改数组本身。如果通过不同的变量访问它，那
     typeof v //"undefined"
 ```
 
+typeof可以判断基本数据类型：String，Boolean,Number,但不能判断Array,Object,Null类型
 
 ### 13.变量提升
 
@@ -241,7 +242,7 @@ slice(start,end)向数组中选出指定数组，返回被截选的子数组
 
 ### 16.js判断数据类型
 
-typeof:
+1.typeof:
 
 ```javascript
         typeof 'ls' // string
@@ -255,10 +256,15 @@ typeof:
         typeof Symbol(1) // symbol
 ```
 
-instanceof
+typeof可以判断基本数据类型：String，Boolean,Number,但不能判断Array,Object,Null类型
+
+
+2.instanceof
+
+判断构造函数的prototype属性是否存在某实例对象的原型链上。
 
 ```javascript
-        instanceof 运算符用来测试一个对象在其原型链中是否存在一个构造函数的 prototype 属性。其意思就是判断对象是否是某一数据类型（如Array）的实例
+        // instanceof 运算符用来测试一个对象在其原型链中是否存在一个构造函数的 prototype 属性。其意思就是判断对象是否是某一数据类型（如Array）的实例
         function A(){}
         let a = new A();
         console.log(a instanceof A);//true,因为 Object.getPrototypeOf(a) === A.prototype;
@@ -280,10 +286,14 @@ instanceof
         
         console.log(new null instanceof Null) // null is not a constructor
         console.log(new undefined instanceof Undefined) //undefined is not a constructor
-        浏览器认为null，undefined不是构造器
+        // 浏览器认为null，undefined不是构造器
 ``` 
 
-constructor
+能判断Array,Object,Null类型，但不能区分基本数据类型
+
+3.constructor
+
+constructor属性返回创建该对象时构造函数的引用
 
 ```javascript
         console.log((2).constructor === Number); //true
@@ -303,30 +313,25 @@ constructor
         console.log(f.constructor=== Array);//true
 ``` 
 
-Object.prototype.toString.call
+4.Object.prototype.toString.call
+
+toString方法返回调用它的对象的类型或值。
+返回值默认是[object class],class是对象的内部类型，通常对应对象的构造函数名。
 
 ```javascript  
         // 常用于判断浏览器内置对象,对于所有基本的数据类型都能进行判断，即使是 null 和 undefined
         var  test = Object.prototype.toString;
-        console.log(test.call(1));
-        console.log(test.call(true));
-        console.log(test.call('123'));
-        console.log(test.call([]));
-        console.log(test.call({}));
-        console.log(test.call(function(){}));
-        console.log(test.call(null));
-        console.log(test.call(undefined));
-        [object Number]
-        [object Boolean]
-        [object String]
-        [object Array]
-        [object Object]
-        [object Function]
-        [object Null]
-        [object Undefined]
+        console.log(test.call(1)); //[object Number]
+        console.log(test.call(true)); //[object Boolean]
+        console.log(test.call('123')); //[object String]
+        console.log(test.call([])); //[object Array]
+        console.log(test.call({})); //[object Object]
+        console.log(test.call(function(){})); //[object Function]
+        console.log(test.call(null)); //[object Null]
+        console.log(test.call(undefined)); //[object Undefined]       
 ```
 
-Array.isArray
+5.Array.isArray
 
 ```javascript   
    console.log(Array.isArray([]))// true
