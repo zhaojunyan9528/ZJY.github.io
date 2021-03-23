@@ -33,7 +33,7 @@ module:{
         rules:[
             {
                 test:/\.css$/,
-                user:[
+                use:[
                     'style-loader',
                     'css-loader'
                 ]
