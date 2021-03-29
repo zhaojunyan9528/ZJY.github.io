@@ -1,0 +1,75 @@
+<!--
+ * @Description: 
+ * @version:: 
+ * @Author: zhao
+ * @Date: 2021-03-26 10:11:34
+ * @LastEditors: zhao
+ * @LastEditTime: 2021-03-28 16:53:54
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            height: 100px;
+            width: 100px;
+            background-color: lightpink;
+            
+        }
+
+        .box:hover {
+            width: 200px;
+            transition: width 1s 0.5s ease-in-out;
+        }
+        .line{
+            height:0.5px;
+            background-color:#000;
+            transform: scaleY(0.5)
+        }
+        .line1{
+            height: 1px;
+            background-color:#000;
+        }
+        /* p:first-child{
+            background-color:red;
+        } */
+        p:first-of-type{
+            background-color:red;
+
+        }
+        .overflow{
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div id="overflow">hahhahahhahahhahahhahahhahahhahahhahahhahahhahahhahahhahahhahahhahahha</div>
+        <p>1</p>
+        <p>2</p>
+        <p>3</p>
+        <p>4</p>
+        <p>5</p>
+    </div>
+    <div>
+        <p>6</p>
+        <p>7</p>
+        <p>8</p>
+        <p>9</p>
+    </div>
+
+
+</body>
+
+</html>
