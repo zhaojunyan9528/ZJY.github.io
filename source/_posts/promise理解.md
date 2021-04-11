@@ -75,17 +75,27 @@ p 的状态由 p1、p2、p3 决定，分成两种情况。
 例子：
 
 ```js
-// 生成一个Promise对象的数组
-var promises = [2, 3, 5, 7, 11, 13].map(function(id){
-  return getJSON("/post/" + id + ".json");
-});
- 
-Promise.all(promises).then(function(posts) {
-  // ...  
-}).catch(function(reason){
-  // ...
-});
+let wake = (time) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log(`${time / 1000}秒后醒来`)
+      resolve(`${time / 1000}秒后醒来`)
+    }, time)
+  })
+}
+
+let p1 = wake(3000)
+let p2 = wake(2000)
+
+Promise.all([p1, p2]).then((result) => {
+  console.log(result)       //'2秒后醒来','3秒后醒来'  [ '3秒后醒来', '2秒后醒来' ]
+}).catch((error) => {
+  console.log(error)
+})
 ```
+
+需要特别注意的是，Promise.all获得的成功结果的数组里面的数据顺序和Promise.all接收到的数组顺序是一致的，即p1的结果在前，即便p1的结果获取的比p2要晚。这带来了一个绝大的好处：在前端开发请求数据的过程中，偶尔会遇到发送多个请求并根据请求顺序获取和使用数据的场景，使用Promise.all毫无疑问可以解决这个问题。
+
 
 ### Promise.race方法
 
@@ -94,6 +104,26 @@ Promise.race 方法同样是将多个 Promise 实例，包装成一个新的 Pro
 var p = Promise.race([p1,p2,p3]);
 
 上面代码中，只要p1、p2、p3之中有一个实例率先改变状态，p的状态就跟着改变。那个率先改变的Promise实例的返回值，就传递给p的返回值。
+
+```js
+let p1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('success')
+  },1000)
+})
+
+let p2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    reject('failed')
+  }, 500)
+})
+
+Promise.race([p1, p2]).then((result) => {
+  console.log(result)
+}).catch((error) => {
+  console.log(error)  // 打开的是 'failed'
+})
+```
 
 如果Promise.all方法和Promise.race方法的参数，不是Promise实例，就会先调用下面讲到的Promise.resolve方法，将参数转为Promise实例，再进一步处理。
 
