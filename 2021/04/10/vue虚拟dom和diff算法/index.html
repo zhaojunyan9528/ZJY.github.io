@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="1.虚拟dom用js对象描述dom的层级结构。虚拟dom属性和真实dom的属性一一对应。vue虚拟dom参考snabbdom库实现的 diff是发生在虚拟dom上的新的虚拟dom和旧的虚拟dom进行diff，算出如何最小量更新，最后反映在真正的dom上。 数据更新-&gt;虚拟dom计算变更-&gt;操作真实的dom-&gt;视图更新 一个虚拟节点有哪些属性？ {  tag:’div’,  pro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue虚拟dom和diff算法">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="1.虚拟dom用js对象描述dom的层级结构。虚拟dom属性和真实dom的属性一一对应。vue虚拟dom参考snabbdom库实现的 diff是发生在虚拟dom上的新的虚拟dom和旧的虚拟dom进行diff，算出如何最小量更新，最后反映在真正的dom上。 数据更新-&gt;虚拟dom计算变更-&gt;操作真实的dom-&gt;视图更新 一个虚拟节点有哪些属性？ {  tag:’div’,  pro">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/images/domdiff.jpeg">
+<meta property="article:published_time" content="2021-04-10T09:56:01.000Z">
+<meta property="article:modified_time" content="2021-04-11T14:15:26.251Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/images/domdiff.jpeg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>vue虚拟dom和diff算法</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/04/10/window-sessionStorage%E7%9A%84%E7%90%86%E8%A7%A3/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/04/09/querySelector%E5%92%8CgetElement%E7%9A%84%E5%8C%BA%E5%88%AB/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/&text=vue虚拟dom和diff算法"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/&title=vue虚拟dom和diff算法"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/&is_video=false&description=vue虚拟dom和diff算法"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=vue虚拟dom和diff算法&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/&title=vue虚拟dom和diff算法"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/&title=vue虚拟dom和diff算法"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/&title=vue虚拟dom和diff算法"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/&title=vue虚拟dom和diff算法"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/&name=vue虚拟dom和diff算法&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/&t=vue虚拟dom和diff算法"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        vue虚拟dom和diff算法
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-04-10T09:56:01.000Z" itemprop="datePublished">2021-04-10</time>
+        
+        (Updated: <time datetime="2021-04-11T14:15:26.251Z" itemprop="dateModified">2021-04-11</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/vue/">vue</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>1.虚拟dom<br>用js对象描述dom的层级结构。虚拟dom属性和真实dom的属性一一对应。<br>vue虚拟dom参考snabbdom库实现的</p>
+<p>diff是发生在虚拟dom上的<br>新的虚拟dom和旧的虚拟dom进行diff，算出如何最小量更新，最后反映在真正的dom上。</p>
+<p>数据更新-&gt;虚拟dom计算变更-&gt;操作真实的dom-&gt;视图更新</p>
+<p>一个虚拟节点有哪些属性？</p>
+<p>{<br>  tag:’div’,<br>  props:{<br>    id:’app’,<br>    className:’’<br>  },<br>  children:[]<br>}</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  children: <span class="literal">undefined</span> , <span class="comment">//子元素</span></span><br><span class="line">  data: &#123;&#125;, <span class="comment">//属性，样式等</span></span><br><span class="line">  elm: <span class="literal">undefined</span>, <span class="comment">//真实的dom节点</span></span><br><span class="line">  key: <span class="literal">undefined</span>, <span class="comment">//唯一标识</span></span><br><span class="line">  sel: <span class="string">&quot;div&quot;</span>, <span class="comment">//选择器</span></span><br><span class="line">  text: <span class="string">&#x27;文本&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">    init,</span><br><span class="line">    classModule,</span><br><span class="line">    propsModule,</span><br><span class="line">    styleModule,</span><br><span class="line">    eventListenersModule,</span><br><span class="line">    h,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&quot;snabbdom&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建出patch函数</span></span><br><span class="line"><span class="keyword">const</span> patch = init([</span><br><span class="line">    <span class="comment">// Init patch function with chosen modules</span></span><br><span class="line">    classModule, <span class="comment">// makes it easy to toggle classes</span></span><br><span class="line">    propsModule, <span class="comment">// for setting properties on DOM elements</span></span><br><span class="line">    styleModule, <span class="comment">// handles styling on elements with support for animations</span></span><br><span class="line">    eventListenersModule, <span class="comment">// attaches event listeners</span></span><br><span class="line">]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> container = <span class="built_in">document</span>.getElementById(<span class="string">&quot;container&quot;</span>);</span><br><span class="line"><span class="comment">// 创建虚拟节点 h函数</span></span><br><span class="line"><span class="keyword">const</span> vnode = h(<span class="string">&quot;div#container.two.classes&quot;</span>, &#123; <span class="attr">on</span>: &#123; <span class="attr">click</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125; &#125; &#125;, [</span><br><span class="line">    h(<span class="string">&quot;span&quot;</span>, &#123; <span class="attr">style</span>: &#123; <span class="attr">fontWeight</span>: <span class="string">&quot;bold&quot;</span> &#125; &#125;, <span class="string">&quot;This is bold&quot;</span>),</span><br><span class="line">    <span class="string">&quot; and this is just normal text&quot;</span>,</span><br><span class="line">    h(<span class="string">&quot;a&quot;</span>, &#123; <span class="attr">props</span>: &#123; <span class="attr">href</span>: <span class="string">&quot;/foo&quot;</span> &#125; &#125;, <span class="string">&quot;I&#x27;ll take you places!&quot;</span>),</span><br><span class="line">]);</span><br><span class="line"><span class="comment">// console.log(vnode)</span></span><br><span class="line"><span class="comment">// Patch into empty DOM element – this modifies the DOM as a side effect</span></span><br><span class="line"><span class="comment">// 让虚拟节点上树</span></span><br><span class="line">patch(container, vnode);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> newVnode = h(</span><br><span class="line">    <span class="string">&quot;div#container.two.classes&quot;</span>,</span><br><span class="line">    &#123; <span class="attr">on</span>: &#123; <span class="attr">click</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125; &#125; &#125;,</span><br><span class="line">    [</span><br><span class="line">        h(</span><br><span class="line">            <span class="string">&quot;span&quot;</span>,</span><br><span class="line">            &#123; <span class="attr">style</span>: &#123; <span class="attr">fontWeight</span>: <span class="string">&quot;normal&quot;</span>, <span class="attr">fontStyle</span>: <span class="string">&quot;italic&quot;</span> &#125; &#125;,</span><br><span class="line">            <span class="string">&quot;This is now italic type&quot;</span></span><br><span class="line">        ),</span><br><span class="line">        <span class="string">&quot; and this is still just normal text&quot;</span>,</span><br><span class="line">        h(<span class="string">&quot;a&quot;</span>, &#123; <span class="attr">props</span>: &#123; <span class="attr">href</span>: <span class="string">&quot;/bar&quot;</span> &#125; &#125;, <span class="string">&quot;I&#x27;ll take you places!&quot;</span>),</span><br><span class="line">    ]</span><br><span class="line">);</span><br><span class="line"><span class="comment">// Second `patch` invocation</span></span><br><span class="line">patch(vnode, newVnode); <span class="comment">// Snabbdom efficiently updates the old view to the new state</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> vnode3 = h(</span><br><span class="line">    <span class="string">&#x27;ul&#x27;</span>,[</span><br><span class="line">        h(<span class="string">&#x27;li&#x27;</span>,<span class="string">&#x27;one&#x27;</span>),</span><br><span class="line">        h(<span class="string">&#x27;li&#x27;</span>,<span class="string">&quot;two&quot;</span>)</span><br><span class="line">    ]</span><br><span class="line">)</span><br><span class="line"><span class="built_in">console</span>.log(vnode3);</span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//   children:[</span></span><br><span class="line"><span class="comment">//     &#123;</span></span><br><span class="line"><span class="comment">//       sel:&#x27;li&#x27;,</span></span><br><span class="line"><span class="comment">//       data:&#123;&#125;,</span></span><br><span class="line"><span class="comment">//       text: &#x27;one&#x27;,</span></span><br><span class="line"><span class="comment">//       elm: li,</span></span><br><span class="line"><span class="comment">//       key: undefined,</span></span><br><span class="line"><span class="comment">//       children: undefined</span></span><br><span class="line"><span class="comment">//     &#125;,</span></span><br><span class="line"><span class="comment">//     &#123;</span></span><br><span class="line"><span class="comment">//       sel:&#x27;li&#x27;,</span></span><br><span class="line"><span class="comment">//       data:&#123;&#125;,</span></span><br><span class="line"><span class="comment">//       text: &#x27;two&#x27;,</span></span><br><span class="line"><span class="comment">//       elm: li,</span></span><br><span class="line"><span class="comment">//       key: undefined,</span></span><br><span class="line"><span class="comment">//       children: undefined</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">//   ],</span></span><br><span class="line"><span class="comment">//   sel:&#x27;ul&#x27;,</span></span><br><span class="line"><span class="comment">//   elm: ul,</span></span><br><span class="line"><span class="comment">//   data:&#123;&#125;,</span></span><br><span class="line"><span class="comment">//   key: undefined,</span></span><br><span class="line"><span class="comment">//   text: undefined</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">patch(vnode,vnode3)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>key是节点的唯一标识，告诉diff算法，在更改前后他们是同一个dom节点</li>
+<li>只比较同一层级，不跨级作比较</li>
+<li>只有是同一个虚拟节点才进行精细比较，否则就是暴力删除旧的，插入新的。</li>
+</ul>
+<p>diff算法：</p>
+<ul>
+<li>patch函数，首先判断oldvnode是不是虚拟节点，如果不是，转换为虚拟节点</li>
+<li>接着判断是不是同一个虚拟节点（选择器相同且key相同），如果不是，则创建新的节点并插入删除旧的节点</li>
+<li>如果是同一个虚拟节点则进行精细比较，调用patchVnode函数，首先判断新虚拟节点vnode和旧虚拟节点oldVnode是否指向同一个对象，如果是直接返回</li>
+<li>如果他们都有文本节点并且不相等，那么将vnode的文本节点设置为真实dom的文本节点</li>
+<li>如果oldVnode有子节点而vnode没有子节点，则删除对应真实dom的子节点</li>
+<li>如果oldVnode没有子节点而vnode有子节点，将vnode的子节点真实化后添加到真实dom</li>
+<li>如果oldVnode和vnode都有子节点则执行updateChildren函数比较子节点</li>
+</ul>
+<p>diff算法对比同级节点：<br>为了保证dom顺序和新节点保持一致使用while循环和首尾节点进行对比，对新旧虚拟节点数组的开始和结束节点设置索引，遍历的过程向中间移动索引，这样既能实现排序也减小了时间复杂度。两节点比较，有四种比对方式：</p>
+<ul>
+<li>旧开始节点  和  新结束节点  比较</li>
+<li>旧结束节点  和  新开始节点  比较</li>
+<li>旧开始节点  和  新开始节点  比较</li>
+<li>旧结束节点  和  新结束节点  比较</li>
+</ul>
+<p>旧节点：oldStartIndex—-&gt;oldEndIndex<br>新节点：newStartIndex—-&gt;newEndIndex</p>
+<p>比如：如果oldStartIndex和newEndIndex匹配上了，那么真实dom的第一个节点会移动到最右；如果newStartIndex和oldEndIndex匹配上了，那么真实dom的最后一个元素会移动到最左，匹配上的两个指针向中间移动，直到while循环结束</p>
+<p>如果四种匹配都没有成功：</p>
+<ul>
+<li>那么遍历新节点，用新节点的key去老节点数组中查找相同节点</li>
+<li>如果没有找到，说明当前节点是新节点，创建对应dom元素并插入到真实dom</li>
+<li>如果找到了，比对新旧节点的sel是否相同<ul>
+<li>如果相同，说明是同一个节点，移动到dom元素的最左边</li>
+<li>如果不相同，说明修改了节点，创建对应的dom元素并插入到真实dom树中</li>
+</ul>
+</li>
+</ul>
+<p>循环结束：</p>
+<ul>
+<li>如果老节点的子节点先遍历完，那么说明新节点有新增节点，将新增节点批量加入</li>
+<li>如果新节点的子节点先遍历完，那么说明老节点有剩余，将剩余节点批量删除</li>
+</ul>
+<p>例子：</p>
+<p><img src="/ZJY.github.io/images/domdiff.jpeg" alt="image"></p>
+<ul>
+<li>先对首尾进行4种比较:b和a,b和e,a和e,e和e. 得出e节点匹配在真实DOM最右侧中得出第1步. 索引向中间移动,剩下old: b a d f 剩下new: a b</li>
+<li>对剩余的同样进行收尾比较,匹配出b匹配在真实DOM的最左侧.剩下old: a d f 剩下new: a</li>
+<li>同上,匹配出a匹配在真实DOM的最左侧.剩下old:d f 剩下new: 空</li>
+<li>最后old长度大于new的长度,把真实dom中对应的删除</li>
+</ul>
+
+  </div>
+  <div>
+      <!-- <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/vue虚拟dom和diff算法.md" target="_blank">编辑</a> -->
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/&text=vue虚拟dom和diff算法"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/&title=vue虚拟dom和diff算法"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/&is_video=false&description=vue虚拟dom和diff算法"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=vue虚拟dom和diff算法&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/&title=vue虚拟dom和diff算法"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/&title=vue虚拟dom和diff算法"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/&title=vue虚拟dom和diff算法"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/&title=vue虚拟dom和diff算法"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/&name=vue虚拟dom和diff算法&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/10/vue%E8%99%9A%E6%8B%9Fdom%E5%92%8Cdiff%E7%AE%97%E6%B3%95/&t=vue虚拟dom和diff算法"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
