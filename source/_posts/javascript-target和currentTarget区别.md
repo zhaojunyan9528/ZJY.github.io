@@ -10,6 +10,9 @@ date: 2021-01-19 22:03:31
 
 ## target和currentTarget区别
 
+target:触发事件的元素
+currentTarget:事件绑定的元素
+
 ```html
 <ul id="ulT">
     <li class="item1">1</li>
