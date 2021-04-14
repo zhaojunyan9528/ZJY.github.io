@@ -106,3 +106,34 @@ div {
 
 定位元素可以创建新的层叠上下文，在这个上下文中的所有层叠等级，都会高于或者低于另一个层叠上下文的所有层叠等级
 
+### 4.补充
+
+fixed 属性会创建新的层叠上下文。当元素祖先的 transform, perspective 或 filter 属性非 none 时，容器由视口改为该祖先，相对于该祖先进行定位。
+
+### 5.堆叠上下文
+
+以下情况可形成堆叠上下文：
+
++ 文档的根元素(hmtl)
++ position为absolute/relative且z-index不为auto的元素
++ position为fixed或sticky的元素
++ flex容器的子元素且z-index不为auto
++ grid容器的子元素且z-index不为auto
++ opacity值
++ mix-blend-mode 属性值不为 normal 的元素；
++ 以下任意属性值不为 none 的元素：
+  + transform
+  + filter
+  + perspective
+  + clip-path
+  + mask / mask-image / mask-border
++ isolation 属性值为 isolate 的元素；
++ -webkit-overflow-scrolling 属性值为 touch 的元素；
++ will-change 值设定了任一属性而该属性在 non-initial 值时会创建层叠上下文的元素（参考这篇文章）；
++ contain 属性值为 layout、paint 或包含它们其中之一的合成值（比如 contain: strict、contain: content）的元素。
+
+总结:
+
+层叠上下文可以包含在其他层叠上下文中，并且一起创建一个层叠上下文的层级。
+每个层叠上下文都完全独立于它的兄弟元素：当处理层叠时只考虑子元素。
+每个层叠上下文都是自包含的：当一个元素的内容发生层叠后，该元素将被作为整体在父级层叠上下文中按顺序进行层叠。
