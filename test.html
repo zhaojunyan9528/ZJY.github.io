@@ -4,7 +4,7 @@
  * @Author: zhao
  * @Date: 2021-03-26 10:11:34
  * @LastEditors: zhao
- * @LastEditTime: 2021-04-14 22:23:51
+ * @LastEditTime: 2021-04-15 18:27:25
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -68,10 +68,27 @@
 
 <body>
     <div class="main relative">
-        <div class="section">hahah</div>
+        <div class="section" onclick="showMessage()">hahah</div>
+        
     </div>
+    <input type="button" id="button" value="click me"></input>
 
-
+    <script>
+        function showMessage(){
+            console.log(event.type)
+            console.log(this.class)
+        }
+        window.onload = function() {
+            let button = document.getElementById('button');
+            button.onclick = function() {
+                console.log(this.id)
+            }
+            button.onclick = function() {
+                console.log(this.id+'111')
+            }
+        }
+        
+    </script>
 </body>
 
 </html>
