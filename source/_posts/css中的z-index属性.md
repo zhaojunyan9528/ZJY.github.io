@@ -119,7 +119,7 @@ fixed 属性会创建新的层叠上下文。当元素祖先的 transform, persp
 + position为fixed或sticky的元素
 + flex容器的子元素且z-index不为auto
 + grid容器的子元素且z-index不为auto
-+ opacity值
++ opacity属性值小于 1 的元素
 + mix-blend-mode 属性值不为 normal 的元素；
 + 以下任意属性值不为 none 的元素：
   + transform
