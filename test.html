@@ -4,7 +4,7 @@
  * @Author: zhao
  * @Date: 2021-03-26 10:11:34
  * @LastEditors: zhao
- * @LastEditTime: 2021-04-15 18:27:25
+ * @LastEditTime: 2021-04-20 22:21:27
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -14,81 +14,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        .box {
-            height: 100px;
-            width: 100px;
-            background-color: lightpink;
-            
-        }
-
-        .box:hover {
-            width: 200px;
-            transition: width 1s 0.5s ease-in-out;
-        }
-        .line{
-            height:0.5px;
-            background-color:#000;
-            transform: scaleY(0.5)
-        }
-        .line1{
-            height: 1px;
-            background-color:#000;
-        }
-        /* p:first-child{
-            background-color:red;
-        } */
-        p:first-of-type{
-            background-color:red;
-
-        }
-        .overflow{
-            
-        }
-        .relative{
-            position:relative;
-            background:brown;
-            width: 500px;
-            height:300px;
-        }
-        .section{
-            /* position:absolute; */
-            background:cadetblue;
-            width: 20%;
-            height:0;
-            padding-bottom:20%;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="main relative">
-        <div class="section" onclick="showMessage()">hahah</div>
-        
-    </div>
-    <input type="button" id="button" value="click me"></input>
-
     <script>
-        function showMessage(){
-            console.log(event.type)
-            console.log(this.class)
-        }
-        window.onload = function() {
-            let button = document.getElementById('button');
-            button.onclick = function() {
-                console.log(this.id)
-            }
-            button.onclick = function() {
-                console.log(this.id+'111')
-            }
-        }
         
     </script>
+
 </body>
 
 </html>
