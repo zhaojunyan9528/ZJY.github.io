@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="1.HTTPS简介超文本传输安全协议是一种网络安全传输协议。http协议传输的数据都是未加密的，明文传输。http使用80端口通讯，https占用443端口通讯。https经由http进行通信，用ssl&#x2F;tls加密数据包。https主要用于提供网络服务器的身份认证，保护数据的隐私和完整性。 2.https工作原理工作流程：1、TCP 三次同步握手2、客户端验证服务器数字证书3、DH 算法协商对称加">
+<meta property="og:type" content="article">
+<meta property="og:title" content="https和ssl证书概要">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="1.HTTPS简介超文本传输安全协议是一种网络安全传输协议。http协议传输的数据都是未加密的，明文传输。http使用80端口通讯，https占用443端口通讯。https经由http进行通信，用ssl&#x2F;tls加密数据包。https主要用于提供网络服务器的身份认证，保护数据的隐私和完整性。 2.https工作原理工作流程：1、TCP 三次同步握手2、客户端验证服务器数字证书3、DH 算法协商对称加">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-30T10:56:01.000Z">
+<meta property="article:modified_time" content="2021-04-30T07:30:02.699Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>https和ssl证书概要</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/04/29/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/&text=https和ssl证书概要"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/&title=https和ssl证书概要"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/&is_video=false&description=https和ssl证书概要"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=https和ssl证书概要&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/&title=https和ssl证书概要"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/&title=https和ssl证书概要"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/&title=https和ssl证书概要"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/&title=https和ssl证书概要"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/&name=https和ssl证书概要&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/&t=https和ssl证书概要"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-HTTPS%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">1.HTTPS简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-https%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">2.https工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-HTTP-%E4%B8%8E-HTTPS-%E5%8C%BA%E5%88%AB"><span class="toc-number">3.</span> <span class="toc-text">3.HTTP 与 HTTPS 区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">4.</span> <span class="toc-text">4.TCP三次握手</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        https和ssl证书概要
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-04-30T10:56:01.000Z" itemprop="datePublished">2021-04-30</time>
+        
+        (Updated: <time datetime="2021-04-30T07:30:02.699Z" itemprop="dateModified">2021-04-30</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/Javascript/">Javascript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="1-HTTPS简介"><a href="#1-HTTPS简介" class="headerlink" title="1.HTTPS简介"></a>1.HTTPS简介</h3><p>超文本传输安全协议是一种网络安全传输协议。<br>http协议传输的数据都是未加密的，明文传输。<br>http使用80端口通讯，https占用443端口通讯。<br>https经由http进行通信，用ssl/tls加密数据包。<br>https主要用于提供网络服务器的身份认证，保护数据的隐私和完整性。</p>
+<h3 id="2-https工作原理"><a href="#2-https工作原理" class="headerlink" title="2.https工作原理"></a>2.https工作原理</h3><p>工作流程：<br>1、TCP 三次同步握手<br>2、客户端验证服务器数字证书<br>3、DH 算法协商对称加密算法的密钥、hash 算法的密钥<br>4、SSL 安全加密隧道协商完成<br>5、网页以加密的方式传输，用协商的对称加密算法和密钥加密，保证数据机密性；用协商的hash算法进行数据完整性保护，保证数据不被篡改。</p>
+<p>1、客户端发起 HTTPS 请求</p>
+<p>这个没什么好说的，就是用户在浏览器里输入一个 https 网址，然后连接到 server 的 443 端口。</p>
+<p>2、服务端的配置</p>
+<p>采用 HTTPS 协议的服务器必须要有一套数字证书，可以自己制作，也可以向组织申请，区别就是自己颁发的证书需要客户端验证通过，才可以继续访问，而使用受信任的公司申请的证书则不会弹出提示页面(startssl 就是个不错的选择，有 1 年的免费服务)。</p>
+<p>这套证书其实就是一对公钥和私钥，如果对公钥和私钥不太理解，可以想象成一把钥匙和一个锁头，只是全世界只有你一个人有这把钥匙，你可以把锁头给别人，别人可以用这个锁把重要的东西锁起来，然后发给你，因为只有你一个人有这把钥匙，所以只有你才能看到被这把锁锁起来的东西。</p>
+<p>3、传送证书</p>
+<p>这个证书其实就是公钥，只是包含了很多信息，如证书的颁发机构，过期时间，网站地址，加密公钥等等。</p>
+<p>4、客户端解析证书</p>
+<p>这部分工作是有客户端的TLS来完成的，首先会验证公钥是否有效，比如颁发机构，过期时间等等，如果发现异常，则会弹出一个警告框，提示证书存在问题。</p>
+<p>如果证书没有问题，那么就生成一个随机值，然后用证书对该随机值进行加密，就好像上面说的，把随机值用锁头锁起来，这样除非有钥匙，不然看不到被锁住的内容。</p>
+<p>5、传送加密信息</p>
+<p>这部分传送的是用证书加密后的随机值，目的就是让服务端得到这个随机值，以后客户端和服务端的通信就可以通过这个随机值来进行加密解密了。</p>
+<p>6、服务端解密信息</p>
+<p>服务端用私钥解密后，得到了客户端传过来的随机值(私钥)，然后把内容通过该值进行对称加密，所谓对称加密就是，将信息和私钥通过某种算法混合在一起，这样除非知道私钥，不然无法获取内容，而正好客户端和服务端都知道这个私钥，所以只要加密算法够彪悍，私钥够复杂，数据就够安全。</p>
+<p>7、传输加密后的信息</p>
+<p>这部分信息是服务段用私钥加密后的信息，可以在客户端被还原。</p>
+<p>8、客户端解密信息</p>
+<p>客户端用之前生成的私钥解密服务段传过来的信息，于是获取了解密后的内容，整个过程第三方即使监听到了数据，也束手无策。</p>
+<h3 id="3-HTTP-与-HTTPS-区别"><a href="#3-HTTP-与-HTTPS-区别" class="headerlink" title="3.HTTP 与 HTTPS 区别"></a>3.HTTP 与 HTTPS 区别</h3><p>HTTP 明文传输，数据都是未加密的，安全性较差，HTTPS（SSL+HTTP） 数据传输过程是加密的，安全性较好。<br>使用 HTTPS 协议需要到 CA（Certificate Authority，数字证书认证机构） 申请证书，一般免费证书较少，因而需要一定费用。证书颁发机构如：Symantec、Comodo、GoDaddy 和 GlobalSign 等。<br>HTTP 页面响应速度比 HTTPS 快，主要是因为 HTTP 使用 TCP 三次握手建立连接，客户端和服务器需要交换 3 个包，而 HTTPS除了 TCP 的三个包，还要加上 ssl 握手需要的 9 个包，所以一共是 12 个包。<br>http 和 https 使用的是完全不同的连接方式，用的端口也不一样，前者是 80，后者是 443。<br>HTTPS 其实就是建构在 SSL/TLS 之上的 HTTP 协议，所以，要比较 HTTPS 比 HTTP 要更耗费服务器资源</p>
+<h3 id="4-TCP三次握手"><a href="#4-TCP三次握手" class="headerlink" title="4.TCP三次握手"></a>4.TCP三次握手</h3><p>第一次握手：客户端尝试连接服务器，向服务器发送 syn 包（同步序列编号Synchronize Sequence Numbers），syn=j，客户端进入 SYN_SEND 状态等待服务器确认<br>第二次握手：服务器接收客户端syn包并确认（ack=j+1），同时向客户端发送一个 SYN包（syn=k），即 SYN+ACK 包，此时服务器进入 SYN_RECV 状态<br>第三次握手：第三次握手：客户端收到服务器的SYN+ACK包，向服务器发送确认包ACK(ack=k+1），此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手</p>
+
+  </div>
+  <div>
+      <!-- <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/https和ssl证书概要.md" target="_blank">编辑</a> -->
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-HTTPS%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">1.HTTPS简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-https%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">2.https工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-HTTP-%E4%B8%8E-HTTPS-%E5%8C%BA%E5%88%AB"><span class="toc-number">3.</span> <span class="toc-text">3.HTTP 与 HTTPS 区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">4.</span> <span class="toc-text">4.TCP三次握手</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/&text=https和ssl证书概要"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/&title=https和ssl证书概要"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/&is_video=false&description=https和ssl证书概要"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=https和ssl证书概要&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/&title=https和ssl证书概要"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/&title=https和ssl证书概要"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/&title=https和ssl证书概要"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/&title=https和ssl证书概要"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/&name=https和ssl证书概要&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/04/30/https%E5%92%8Cssl%E8%AF%81%E4%B9%A6%E6%A6%82%E8%A6%81/&t=https和ssl证书概要"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
