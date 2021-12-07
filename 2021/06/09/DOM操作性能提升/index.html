@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="在浏览器中DOM和Javascript通常是独立实现的，因此通过Javascript操作DOM会产生很大的性能消耗，因此需要尽可能地减少DOM操作 主要有以下几种方式： 1.使用innerHTML代替DOM方法将多次DOM操作转换为字符串拼接，并一次性插入页面 2.节点克隆对于一些相同的节点，使用节点克隆(element.cloneNode)而不是节点创建(element.createElemen">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DOM操作性能提升">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="在浏览器中DOM和Javascript通常是独立实现的，因此通过Javascript操作DOM会产生很大的性能消耗，因此需要尽可能地减少DOM操作 主要有以下几种方式： 1.使用innerHTML代替DOM方法将多次DOM操作转换为字符串拼接，并一次性插入页面 2.节点克隆对于一些相同的节点，使用节点克隆(element.cloneNode)而不是节点创建(element.createElemen">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-09T17:08:14.000Z">
+<meta property="article:modified_time" content="2021-12-07T08:48:38.016Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>DOM操作性能提升</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/11/09/Nodejs-%E5%9F%BA%E7%A1%80/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/06/09/%E7%9B%91%E5%90%AC%E9%A1%B5%E9%9D%A2%E5%85%B3%E9%97%AD/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/&text=DOM操作性能提升"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/&title=DOM操作性能提升"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/&is_video=false&description=DOM操作性能提升"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=DOM操作性能提升&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/&title=DOM操作性能提升"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/&title=DOM操作性能提升"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/&title=DOM操作性能提升"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/&title=DOM操作性能提升"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/&name=DOM操作性能提升&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/&t=DOM操作性能提升"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BD%BF%E7%94%A8innerHTML%E4%BB%A3%E6%9B%BFDOM%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">1.使用innerHTML代替DOM方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%8A%82%E7%82%B9%E5%85%8B%E9%9A%86"><span class="toc-number">2.</span> <span class="toc-text">2.节点克隆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%B0%BD%E5%8F%AF%E8%83%BD%E5%B0%91%E5%9C%B0%E4%BD%BF%E7%94%A8HTML%E9%9B%86%E5%90%88"><span class="toc-number">3.</span> <span class="toc-text">3.尽可能少地使用HTML集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%87%8F%E5%B0%91%E6%B8%B2%E6%9F%93%E6%A0%91%E7%9A%84%E6%8E%92%E9%98%9F%E5%92%8C%E5%88%B7%E6%96%B0"><span class="toc-number">4.</span> <span class="toc-text">4.减少渲染树的排队和刷新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9dom"><span class="toc-number">5.</span> <span class="toc-text">5.批量修改dom</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-number">6.</span> <span class="toc-text">6.事件委托</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        DOM操作性能提升
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-06-09T17:08:14.000Z" itemprop="datePublished">2021-06-09</time>
+        
+        (Updated: <time datetime="2021-12-07T08:48:38.016Z" itemprop="dateModified">2021-12-07</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E9%97%AE%E9%A2%98-%E6%80%BB%E7%BB%93/">问题&总结</a> › <a class="category-link" href="/ZJY.github.io/categories/%E9%97%AE%E9%A2%98-%E6%80%BB%E7%BB%93/HTML/">HTML</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>在浏览器中DOM和Javascript通常是独立实现的，因此通过Javascript操作DOM会产生很大的性能消耗，因此需要尽可能地减少DOM操作</p>
+<p>主要有以下几种方式：</p>
+<h3 id="1-使用innerHTML代替DOM方法"><a href="#1-使用innerHTML代替DOM方法" class="headerlink" title="1.使用innerHTML代替DOM方法"></a>1.使用innerHTML代替DOM方法</h3><p>将多次DOM操作转换为字符串拼接，并一次性插入页面</p>
+<h3 id="2-节点克隆"><a href="#2-节点克隆" class="headerlink" title="2.节点克隆"></a>2.节点克隆</h3><p>对于一些相同的节点，使用节点克隆(element.cloneNode)而不是节点创建(element.createElement)来创建</p>
+<h3 id="3-尽可能少地使用HTML集合"><a href="#3-尽可能少地使用HTML集合" class="headerlink" title="3.尽可能少地使用HTML集合"></a>3.尽可能少地使用HTML集合</h3><p>以下方法返回的就是一个集合：</p>
+<ul>
+<li>document.getElementsByName()</li>
+<li>document.getElementsByClassName()</li>
+<li>document.getElementsByTagName()</li>
+<li>document.images</li>
+<li>document.links</li>
+<li>document.forms</li>
+<li>document.forms[0].elements</li>
+</ul>
+<p>HTML集以一种”假定实时态”实时存在，当底层文档对象更新时，它也会自动更新</p>
+<p>一种可行的方法是将集的属性存入缓存变量中，或者将HTML集拷贝到普通数组</p>
+<h3 id="4-减少渲染树的排队和刷新"><a href="#4-减少渲染树的排队和刷新" class="headerlink" title="4.减少渲染树的排队和刷新"></a>4.减少渲染树的排队和刷新</h3><p>获取页面布局信息的操作会导致队列刷新，如以下方法：</p>
+<ul>
+<li>offsetTop，offsetLeft，offsetWidth，offsetHeight</li>
+<li>scrollTop，scrollLeft，scrollWith，scrollHeight</li>
+<li>clientTop，clientLeft，clientWidth，clientHeight</li>
+<li>getComputedStyle()</li>
+</ul>
+<p>尽量避免使用以上的方法</p>
+<p>即使需要获取布局信息，也要将它保存在局部变量中，如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 低效的</span></span><br><span class="line">element.style.left = <span class="number">1</span> + element.offsetLeft + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">element.style.top = <span class="number">1</span> + element.offsetTop + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span> (element.offsetLeft &gt;= <span class="number">500</span>) &#123;</span><br><span class="line">  <span class="comment">// dosomething();</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 高效的</span></span><br><span class="line"><span class="keyword">let</span> currentLeft = element.offsetLeft,</span><br><span class="line">    currentTop = element.offsetTop;</span><br><span class="line">currentLeft ++;</span><br><span class="line">currentTop ++;</span><br><span class="line">element.style.left = current + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">element.style.top = current + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span> (currentLeft &gt;= <span class="number">500</span>) &#123;</span><br><span class="line">  <span class="comment">// dosomething();</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-批量修改dom"><a href="#5-批量修改dom" class="headerlink" title="5.批量修改dom"></a>5.批量修改dom</h3><p>提升方式：</p>
+<ul>
+<li>使元素脱离文档流</li>
+<li>对其应用多重改变</li>
+<li>把元素带回文档中</li>
+</ul>
+<p>使DOM脱离文档的方式：</p>
+<ul>
+<li>隐藏元素，应用修改，重新显示</li>
+<li>使用文档片段(document fragment)在当前DOM之外构建一个子树，再把它拷贝回文档</li>
+<li>将原始元素拷贝到一个脱离文档的节点中，修改副本，完成后再替换元素元素</li>
+</ul>
+<p>推荐尽可能地使用第二种方式，因为所产生的DOM遍历和重排次数最少</p>
+<h3 id="6-事件委托"><a href="#6-事件委托" class="headerlink" title="6.事件委托"></a>6.事件委托</h3><p>当页面中有大量元素需要绑定事件处理器，尽可能使用事件委托。它基于这样一个事实：事件逐层冒泡并能被父级元素捕获。使用事件代理，只需给外层元素绑定一个处理器，就可以处理在其子元素上触发的所有事件。</p>
+<p>每个事件经历的阶段：</p>
+<ul>
+<li>捕获阶段</li>
+<li>目标阶段</li>
+<li>冒泡阶段</li>
+</ul>
+
+  </div>
+  <div>
+      <!-- <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/DOM操作性能提升.md" target="_blank">编辑</a> -->
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BD%BF%E7%94%A8innerHTML%E4%BB%A3%E6%9B%BFDOM%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">1.使用innerHTML代替DOM方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%8A%82%E7%82%B9%E5%85%8B%E9%9A%86"><span class="toc-number">2.</span> <span class="toc-text">2.节点克隆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%B0%BD%E5%8F%AF%E8%83%BD%E5%B0%91%E5%9C%B0%E4%BD%BF%E7%94%A8HTML%E9%9B%86%E5%90%88"><span class="toc-number">3.</span> <span class="toc-text">3.尽可能少地使用HTML集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%87%8F%E5%B0%91%E6%B8%B2%E6%9F%93%E6%A0%91%E7%9A%84%E6%8E%92%E9%98%9F%E5%92%8C%E5%88%B7%E6%96%B0"><span class="toc-number">4.</span> <span class="toc-text">4.减少渲染树的排队和刷新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9dom"><span class="toc-number">5.</span> <span class="toc-text">5.批量修改dom</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-number">6.</span> <span class="toc-text">6.事件委托</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/&text=DOM操作性能提升"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/&title=DOM操作性能提升"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/&is_video=false&description=DOM操作性能提升"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=DOM操作性能提升&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/&title=DOM操作性能提升"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/&title=DOM操作性能提升"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/&title=DOM操作性能提升"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/&title=DOM操作性能提升"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/&name=DOM操作性能提升&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/06/09/DOM%E6%93%8D%E4%BD%9C%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/&t=DOM操作性能提升"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
