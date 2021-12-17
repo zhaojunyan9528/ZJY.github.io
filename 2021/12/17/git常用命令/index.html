@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="1.克隆项目  1git clone url 2.创建分支 创建dev分支对应远程dev分支,并切换到dev分支 1git checkout -b dev origin&#x2F;dev 创建本地分支并切换 1git checkout -b dev 提交本地分支到远程仓库,创建远程分支dev 1git push origin dev 3.切换分支 1git checkout dev 4.提交代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git常用命令">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="1.克隆项目  1git clone url 2.创建分支 创建dev分支对应远程dev分支,并切换到dev分支 1git checkout -b dev origin&#x2F;dev 创建本地分支并切换 1git checkout -b dev 提交本地分支到远程仓库,创建远程分支dev 1git push origin dev 3.切换分支 1git checkout dev 4.提交代码">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-17T14:57:40.000Z">
+<meta property="article:modified_time" content="2021-12-17T09:36:12.220Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>git常用命令</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2021/12/17/%E8%AE%B0git-have-diverged/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&text=git常用命令"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&title=git常用命令"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&is_video=false&description=git常用命令"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=git常用命令&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&title=git常用命令"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&title=git常用命令"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&title=git常用命令"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&title=git常用命令"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&name=git常用命令&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&t=git常用命令"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        git常用命令
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-12-17T14:57:40.000Z" itemprop="datePublished">2021-12-17</time>
+        
+        (Updated: <time datetime="2021-12-17T09:36:12.220Z" itemprop="dateModified">2021-12-17</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/git/">git</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>1.克隆项目 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone url</span><br></pre></td></tr></table></figure>
+<p>2.创建分支</p>
+<p>创建dev分支对应远程dev分支,并切换到dev分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b dev origin&#x2F;dev</span><br></pre></td></tr></table></figure>
+<p>创建本地分支并切换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b dev</span><br></pre></td></tr></table></figure>
+<p>提交本地分支到远程仓库,创建远程分支dev</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin dev</span><br></pre></td></tr></table></figure>
+<p>3.切换分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout dev</span><br></pre></td></tr></table></figure>
+<p>4.提交代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;暂存代码</span><br><span class="line">git add .</span><br><span class="line">&#x2F;&#x2F;提交暂存代码到本地仓库</span><br><span class="line">git commit -m &quot;commit info&quot;</span><br><span class="line">&#x2F;&#x2F;将本地仓库代码推送到远程仓库</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+<p>5.删除分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 首先要切换到别的分支</span><br><span class="line">git branch -d dev</span><br><span class="line">git branch -D dev &#x2F;&#x2F; 强制删除</span><br><span class="line">git push origin --delete dev &#x2F;&#x2F; 删除远程分支</span><br></pre></td></tr></table></figure>
+<p>6.打标签</p>
+<p>列出标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure>
+<p>创建轻量标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag v1.0</span><br></pre></td></tr></table></figure>
+<p>后期打标签,可以对过去的提交打标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 先查看提交历史</span><br><span class="line">git log --pretty&#x3D;online</span><br><span class="line"></span><br><span class="line">7d58683af833a44637800f89f2ee5fbacec436d8 (HEAD -&gt; develop, origin&#x2F;develop) 🐞 fix(input): 修复input-confirm-type:search时出现搜索图标</span><br><span class="line">aa3b910be51a9e682e5646f108f340d1248d6233 (tag: v1.0.0, origin&#x2F;build, build) 🐞 fix(招标公告详情): 公告进度样式处理16f0d68366724fcbc7b9121522d71724bdc70251 ✨ feat(注册): 1.新增注册功能 2.我的名称兼容</span><br><span class="line">648e1ef9701ec3bd8f48ec9f9dd9c97468dba3cc ✨ feat(app): 1.去掉耳机页面下拉刷新 2.去掉调试工具</span><br><span class="line">c2a3a051ef35e3babe39ef5127db78d337cc4f4e ✨ feat(设置): 去掉手机号</span><br><span class="line">7acae11b4aab2276efcec9ca54a4e7b100e8cd37 🐞 fix(tabbar页面): 1.修复tabbar页面接口执行2次</span><br><span class="line">b9975fca9ee199dd59b48457d37fd782e9be7721 🐞 fix(工作台): 招标列表详情取招标名称</span><br><span class="line">e3686c0c9892d205a44e1e9379ea546d50f38cb6 🐞 fix(时间格式化): 修复时间戳转换</span><br><span class="line">da2e37df1aabf25af302160db7596b55370bc58f 🐞 fix(资质认证): 认证状态处理</span><br><span class="line">281b56bc78d79782fcd1eb42ae98721cea2ac49c ✨ feat(tabar页面): 添加下拉刷新功能</span><br></pre></td></tr></table></figure>
+<p>给最新一次提交打上v1.2标签,也就是7d58683af833a44637800f89f2ee5fbacec436d8,需要再命令的末尾指定提交的校验和(或部分校验和):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -a v1.2 7d58683af833</span><br></pre></td></tr></table></figure>
+<p>可以看到打上标签了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br><span class="line">v1.1</span><br><span class="line">v1.2</span><br></pre></td></tr></table></figure>
+<p>默认情况下,git push不会传送标签到远程仓库,创建完标签后必须显示推送到服务器上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin v1.2</span><br></pre></td></tr></table></figure>
+<p>如果想要一次性推送很多标签，也可以使用带有 –tags 选项的 git push 命令。 这将会把所有不在远程仓库服务器上的标签全部传送到那里。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --tags</span><br></pre></td></tr></table></figure>
+<p>7.删除标签</p>
+<p>删除本地仓库的标签,用git tag -d <tagname></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -d v1.2</span><br></pre></td></tr></table></figure>
+<p>上述命令不会从远程仓库删除这个标签,需用git push <remote> :refs/tags/<tagname>来更新远程仓库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin :refs&#x2F;tags&#x2F;v1.2</span><br></pre></td></tr></table></figure>
+<p>或者用以下命令删除远程标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete &lt;tagname&gt;</span><br></pre></td></tr></table></figure>
+
+<p>8.回退已经提交(git push)到远程仓库的代码</p>
+<p>git log找到commit id</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br><span class="line">commit 7d58683af833a44637800f89f2ee5fbacec436d8 (HEAD -&gt; develop, origin&#x2F;develop)</span><br><span class="line">Author: zhaojunyan &lt;zhao.junyan@hxss.com.cn&gt;</span><br><span class="line">Date:   Fri Dec 3 09:40:22 2021 +0800</span><br><span class="line">...</span><br><span class="line">commit aa3b910be51a9e682e5646f108f340d1248d6233 (tag: v1.0.0, origin&#x2F;build, build)</span><br><span class="line">Author: zhaojunyan &lt;zhao.junyan@hxss.com.cn&gt;</span><br><span class="line">Date:   Wed Dec 1 15:35:20 2021 +0800</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>将代码回退到aa3b910be51a9e682e5646f108f340d1248d6233</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard aa3b910be51a9e682e5646f108f340d1248d6233 &#x2F;&#x2F; 回退本地提交</span><br><span class="line">git push --force &#x2F;&#x2F; 本地修改强制推送到远程仓库</span><br></pre></td></tr></table></figure>
+<p>9.撤销git commit</p>
+<p>1.git reset –soft 版本号<commit></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft HEAD^  &#x2F;&#x2F;回到上一个版本</span><br></pre></td></tr></table></figure>
+<p>不删除工作区改动的代码，撤销commit，不撤销git add .</p>
+<p>2.git reset –mixed 版本号 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --mixed HEAD^  &#x2F;&#x2F;回到上一个版本</span><br></pre></td></tr></table></figure>
+<p>不删除工作区改动的代码，撤销commit，撤销git add .</p>
+<p>3.git reset –hard 版本号 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^  &#x2F;&#x2F;回到上一个版本</span><br></pre></td></tr></table></figure>
+<p>删除工作区的代码，撤销commit，撤销git add . 回到上一次commit的状态</p>
+
+  </div>
+  <div>
+      <!-- <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/git常用命令.md" target="_blank">编辑</a> -->
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&text=git常用命令"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&title=git常用命令"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&is_video=false&description=git常用命令"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=git常用命令&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&title=git常用命令"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&title=git常用命令"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&title=git常用命令"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&title=git常用命令"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&name=git常用命令&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2021/12/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/&t=git常用命令"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2021
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
