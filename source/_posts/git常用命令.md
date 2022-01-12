@@ -78,7 +78,7 @@ git tag v1.0
 
 ```
 // 先查看提交历史
-git log --pretty=online
+git log --pretty
 
 7d58683af833a44637800f89f2ee5fbacec436d8 (HEAD -> develop, origin/develop) 🐞 fix(input): 修复input-confirm-type:search时出现搜索图标
 aa3b910be51a9e682e5646f108f340d1248d6233 (tag: v1.0.0, origin/build, build) 🐞 fix(招标公告详情): 公告进度样式处理16f0d68366724fcbc7b9121522d71724bdc70251 ✨ feat(注册): 1.新增注册功能 2.我的名称兼容
