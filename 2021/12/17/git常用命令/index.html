@@ -14,7 +14,7 @@
 <meta property="og:description" content="1.克隆项目  1git clone url 2.创建分支 创建dev分支对应远程dev分支,并切换到dev分支 1git checkout -b dev origin&#x2F;dev 创建本地分支并切换 1git checkout -b dev 提交本地分支到远程仓库,创建远程分支dev 1git push origin dev 3.切换分支 1git checkout dev 4.提交代码">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-17T14:57:40.000Z">
-<meta property="article:modified_time" content="2021-12-31T06:22:45.111Z">
+<meta property="article:modified_time" content="2022-03-28T01:36:28.780Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -137,7 +137,7 @@
       
         <time datetime="2021-12-17T14:57:40.000Z" itemprop="datePublished">2021-12-17</time>
         
-        (Updated: <time datetime="2021-12-31T06:22:45.111Z" itemprop="dateModified">2021-12-31</time>)
+        (Updated: <time datetime="2022-03-28T01:36:28.780Z" itemprop="dateModified">2022-03-28</time>)
         
       
     </div>
@@ -183,7 +183,7 @@
 <p>创建轻量标签</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag v1.0</span><br></pre></td></tr></table></figure>
 <p>后期打标签,可以对过去的提交打标签</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 先查看提交历史</span><br><span class="line">git log --pretty&#x3D;online</span><br><span class="line"></span><br><span class="line">7d58683af833a44637800f89f2ee5fbacec436d8 (HEAD -&gt; develop, origin&#x2F;develop) 🐞 fix(input): 修复input-confirm-type:search时出现搜索图标</span><br><span class="line">aa3b910be51a9e682e5646f108f340d1248d6233 (tag: v1.0.0, origin&#x2F;build, build) 🐞 fix(招标公告详情): 公告进度样式处理16f0d68366724fcbc7b9121522d71724bdc70251 ✨ feat(注册): 1.新增注册功能 2.我的名称兼容</span><br><span class="line">648e1ef9701ec3bd8f48ec9f9dd9c97468dba3cc ✨ feat(app): 1.去掉耳机页面下拉刷新 2.去掉调试工具</span><br><span class="line">c2a3a051ef35e3babe39ef5127db78d337cc4f4e ✨ feat(设置): 去掉手机号</span><br><span class="line">7acae11b4aab2276efcec9ca54a4e7b100e8cd37 🐞 fix(tabbar页面): 1.修复tabbar页面接口执行2次</span><br><span class="line">b9975fca9ee199dd59b48457d37fd782e9be7721 🐞 fix(工作台): 招标列表详情取招标名称</span><br><span class="line">e3686c0c9892d205a44e1e9379ea546d50f38cb6 🐞 fix(时间格式化): 修复时间戳转换</span><br><span class="line">da2e37df1aabf25af302160db7596b55370bc58f 🐞 fix(资质认证): 认证状态处理</span><br><span class="line">281b56bc78d79782fcd1eb42ae98721cea2ac49c ✨ feat(tabar页面): 添加下拉刷新功能</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 先查看提交历史</span><br><span class="line">git log --pretty</span><br><span class="line"></span><br><span class="line">7d58683af833a44637800f89f2ee5fbacec436d8 (HEAD -&gt; develop, origin&#x2F;develop) 🐞 fix(input): 修复input-confirm-type:search时出现搜索图标</span><br><span class="line">aa3b910be51a9e682e5646f108f340d1248d6233 (tag: v1.0.0, origin&#x2F;build, build) 🐞 fix(招标公告详情): 公告进度样式处理16f0d68366724fcbc7b9121522d71724bdc70251 ✨ feat(注册): 1.新增注册功能 2.我的名称兼容</span><br><span class="line">648e1ef9701ec3bd8f48ec9f9dd9c97468dba3cc ✨ feat(app): 1.去掉耳机页面下拉刷新 2.去掉调试工具</span><br><span class="line">c2a3a051ef35e3babe39ef5127db78d337cc4f4e ✨ feat(设置): 去掉手机号</span><br><span class="line">7acae11b4aab2276efcec9ca54a4e7b100e8cd37 🐞 fix(tabbar页面): 1.修复tabbar页面接口执行2次</span><br><span class="line">b9975fca9ee199dd59b48457d37fd782e9be7721 🐞 fix(工作台): 招标列表详情取招标名称</span><br><span class="line">e3686c0c9892d205a44e1e9379ea546d50f38cb6 🐞 fix(时间格式化): 修复时间戳转换</span><br><span class="line">da2e37df1aabf25af302160db7596b55370bc58f 🐞 fix(资质认证): 认证状态处理</span><br><span class="line">281b56bc78d79782fcd1eb42ae98721cea2ac49c ✨ feat(tabar页面): 添加下拉刷新功能</span><br></pre></td></tr></table></figure>
 <p>给最新一次提交打上v1.2标签,也就是7d58683af833a44637800f89f2ee5fbacec436d8,需要再命令的末尾指定提交的校验和(或部分校验和):</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -a v1.2 7d58683af833</span><br></pre></td></tr></table></figure>
 <p>可以看到打上标签了</p>
@@ -281,7 +281,7 @@
     Copyright &copy;
     
     
-    2020-2021
+    2020-2022
     ZJY
   </div>
   <div class="footer-right">
