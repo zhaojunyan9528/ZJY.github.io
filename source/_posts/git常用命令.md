@@ -187,5 +187,31 @@ git reset --hard HEAD^  //回到上一个版本
 
 删除工作区的代码，撤销commit，撤销git add . 回到上一次commit的状态
 
+10.仓库b 分支a同步 仓库a 分支a 的代码
 
+1.仓库b添加仓库a连接
+
+```
+git remote add 仓库a的项目名 仓库a的git地址
+```
+
+2.仓库b 拉取仓库a分支a 的最新代码
+
+```
+git pull 仓库a的项目名 branch-a
+```
+
+3.仓库b根据仓库a的分支a创建分支a
+
+```
+git checkout -b branch-a 仓库a的项目名/branch-a
+```
+
+例子：
+
+```
+git remote add storeA storeA.git
+git pull storeA branch-a
+git checkout -b branch-a storeA/branch-a
+```
 
