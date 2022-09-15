@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="第一章 层叠、优先级和继承css里的c代表cascade,层叠，层叠决定了如何解决冲突，是css语言的基础。层叠会依据三种条件解决冲突。 (1) 样式表的来源：样式是从哪里来的，包括你的样式和浏览器默认样式等。 (2) 选择器优先级：哪些选择器比另一些选择器更重要。 (3) 源码顺序：样式在样式表里的声明顺序。 声明：color: black;包含在大括号内的一组声明被称作一个声明块。声明块前面有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css-笔记">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="第一章 层叠、优先级和继承css里的c代表cascade,层叠，层叠决定了如何解决冲突，是css语言的基础。层叠会依据三种条件解决冲突。 (1) 样式表的来源：样式是从哪里来的，包括你的样式和浏览器默认样式等。 (2) 选择器优先级：哪些选择器比另一些选择器更重要。 (3) 源码顺序：样式在样式表里的声明顺序。 声明：color: black;包含在大括号内的一组声明被称作一个声明块。声明块前面有">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-14T15:40:37.000Z">
+<meta property="article:modified_time" content="2022-09-15T06:42:26.893Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>css-笔记</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2022/03/28/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&text=css-笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=css-笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&is_video=false&description=css-笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=css-笔记&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=css-笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=css-笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=css-笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=css-笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&name=css-笔记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&t=css-笔记"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%B1%82%E5%8F%A0%E3%80%81%E4%BC%98%E5%85%88%E7%BA%A7%E5%92%8C%E7%BB%A7%E6%89%BF"><span class="toc-number">1.</span> <span class="toc-text">第一章 层叠、优先级和继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E7%9B%B8%E5%AF%B9%E5%8D%95%E4%BD%8D"><span class="toc-number">2.</span> <span class="toc-text">第二章 相对单位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC3%E7%AB%A0-%E7%9B%92%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">第3章 盒模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC7%E7%AB%A0-%E5%AE%9A%E4%BD%8D%E5%92%8C%E5%B1%82%E5%8F%A0%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number"></span> <span class="toc-text">第7章 定位和层叠上下文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC8%E7%AB%A0-%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1"><span class="toc-number"></span> <span class="toc-text">第8章 响应式设计</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number"></span> <span class="toc-text">选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">1.基础选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%BB%84%E5%90%88%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">2.组合器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BC%AA%E7%B1%BB%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">3.</span> <span class="toc-text">3.伪类选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BC%AA%E5%85%83%E7%B4%A0%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">4.</span> <span class="toc-text">4.伪元素选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%B1%9E%E6%80%A7%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">5.</span> <span class="toc-text">5.属性选择器</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        css-笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-07-14T15:40:37.000Z" itemprop="datePublished">2022-07-14</time>
+        
+        (Updated: <time datetime="2022-09-15T06:42:26.893Z" itemprop="dateModified">2022-09-15</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/CSS/">CSS</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="第一章-层叠、优先级和继承"><a href="#第一章-层叠、优先级和继承" class="headerlink" title="第一章 层叠、优先级和继承"></a>第一章 层叠、优先级和继承</h3><p>css里的c代表cascade,层叠，层叠决定了如何解决冲突，是css语言的基础。层叠会依据三种条件解决冲突。</p>
+<p>(1) 样式表的来源：样式是从哪里来的，包括你的样式和浏览器默认样式等。</p>
+<p>(2) 选择器优先级：哪些选择器比另一些选择器更重要。</p>
+<p>(3) 源码顺序：样式在样式表里的声明顺序。</p>
+<p>声明：color: black;<br>包含在大括号内的一组声明被称作一个声明块。<br>声明块前面有一个选择器.<br>选择器和声明块一起组成了规则集（ruleset）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: black;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>样式表的来源</p>
+<p>你添加到网页里的样式表并不是浏览器唯一使用的样式表，还有其他类型或来源的样式表。你的样式表属于作者样式表，除此之外还有用户代理样式表，即浏览器默认样式。用户代理样式表优先级低，你的样式会覆盖它们.</p>
+<p>! important声明会被当作更高优先级的来源，因此总体的优先级按照由高到低排列如下所示：<br>(1) 作者的！important<br>(2) 作者的样式表<br>(3) 用户代理样式表</p>
+<p>层叠规则顺序：不同来源的声明-内联声明-选择器优先级声明-源码顺序声明</p>
+</li>
+<li><p>理解优先级</p>
+<p>浏览器将优先级分为两部分：HTML的行内样式和选择器的样式。</p>
+</li>
+<li><p>行内样式<br>如果用HTML的style属性写样式，这个声明只会作用于当前元素。实际上行内元素属于“带作用域的”声明，它会覆盖任何来自样式表或者<code>&lt;style&gt;</code>标签的样式。行内样式没有选择器，因为它们直接作用于所在的元素</p>
+</li>
+<li><p>选择器优先级<br>伪类选择器（:hover）和属性选择器（[type=”input”]）与一个类选择器的优先级相同。<br>通用选择器（*）和组合选择器（&gt;,+,~）对优先级无影响。</p>
+</li>
+<li><p>源码顺序<br>层叠的第三步，也是最后一步，是源码顺序。如果两个声明的来源和优先级相同，其中一个声明在样式表中出现较晚，或者位于页面较晚引入的样式表中，则该声明胜出。</p>
+</li>
+<li><p>层叠值<br>浏览器遵循三个步骤，即来源，优先级，源码顺序来解析网页上每个元素的每个属性。<br>处理层叠的两条通用法则：<br>1.在选择器中不要使用ID<br>2.不要使用!important</p>
+</li>
+<li><p>继承</p>
+<p>如果一个元素的某个属性没有层叠值，则可能继承祖先元素的值。比如给<code>&lt;body&gt;</code>元素加上font-family,<br>就不必给每个元素明确指定字体。但不是所有属性都能被继承。只有特定属性能被继承，主要和文本相关的<br>属性：<br> color、font、font-family、font-size、font-weight、font-variant、font-style、<br> line-height、letter-spacing、text-align、text-indent、text-transform、white-space<br> word-spacing</p>
+<p>还有一些其他属性能被继承，比如列表属性：<br> list-style、list-style-type、list-style-position、list-style-image</p>
+<p>表格的边框属性: border-collapse、border-spacing 也能被继承</p>
+</li>
+<li><p>特殊值</p>
+<p>有两个特殊值可以赋给任意属性，用于控制层叠：inherit和initial</p>
+</li>
+<li><p>inherit关键字<br>可以用继承代替一个层叠值，比如覆盖另一个值，这样该元素就会继承其父元素的值。</p>
+</li>
+<li><p>initial关键字<br>每个css属性都有初始默认值，给属性设置initial会有效将其重置为默认值，比如给<code>&lt;body&gt;</code>设置color: #111; 那么默认的其子元素文本颜色都继承这个属性值，给其设置color: initial，会使其文本颜色变为<br>color: black; 因为黑色是color属性的初始值。</p>
+<p>注：声明display: initial等价于display: inline。不管应用于哪种类型的元素，他都不会等于display:block。因为initial重置的是属性的初始值，而不是元素的初始值。inline才是display属性<br>的初始值。</p>
+</li>
+<li><p>简写属性</p>
+<p>简写属性是用于同时给多个属性赋值的属性。比如font是一个简写属性，还有：background,border,border-width</p>
+</li>
+<li><p>简写属性会默默覆盖其他样式<br>大多数简写可以省略一些值，只指定我们关注的值，但这样仍然会设置省略的值，即它们会被隐式的设置为初始值initial.这样会覆盖其他定义的样式</p>
+</li>
+<li><p>理解简写值的顺序<br>可以设置border: 1px solid black或者border: black 1pxsolid，两者都会生效。这是因为浏览器知道宽度、颜色、边框样式分别对应什么类型的值。但是有很多属性的值很模糊。在这种情况下，值的顺序很关键</p>
+<p>（1）上、右、下、左<br>margin、padding、边框属性<br>（2）水平、垂直<br>上右下左只适合给盒子设置四个方向的值的属性。还有一些属性只支持最多指定两个值，这些属性包括background-position、box-shadow、text-shadow，比如box-shadow: 10px 2px #000;<br>指定水平方向偏移量10px，垂直方向偏移量2px，先水平再垂直</p>
+</li>
+</ol>
+<h3 id="第二章-相对单位"><a href="#第二章-相对单位" class="headerlink" title="第二章 相对单位"></a>第二章 相对单位</h3><p>1.em<br>em的复杂之处在于同时用它指定一个元素的字号和其他属性。这时，浏览器必须先计算字号，然后使用这个计算值去算出其余的属性值。这两类属性可以拥有一样的声明值，但是计算值不一样。<br>例如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.title</span> &#123;</span><br><span class="line">  font-size: 1.2em; // 计算值为16*1.2=19.2px</span><br><span class="line">  padding: 1.2em; // 计算值为19.2*1.2=23.04px</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>字体缩小的问题</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">ul</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">0.8em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span> <span class="comment">&lt;!-- font-size: 16px * 0.8 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>top level<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span><span class="comment">&lt;!-- font-size: 16px * 0.8 * 0.8 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>second level<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span><span class="comment">&lt;!-- font-size: 16px * 0.8 * 0.8 * 0.8--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>third level<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>2.rem<br>在文档中，根节点是所有其他元素的祖先节点。根节点有一个伪类选择器（:root），可以用来选中它自己。这等价于类型选择器html，但是html的优先级相当于一个类名，而不是一个标签.<br>rem是root em的缩写。rem不是相对于当前元素，而是相对于根元素的单位.不管在文档的什么位置使用rem,1.2rem都会有相同的计算值：1.2乘以根元素的字号.</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;  <span class="comment">/*  :root伪类相当于类型选择器html */</span></span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">1em</span>; <span class="comment">/* 根元素上的em是相对于浏览器默认值的，16px  */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">ul</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">0.8rem</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>拿不准的时候，用rem设置字号，用px设置边框，用em设置其他大部分属性.</p>
+<p>em和rem都是相对于font-size定义的。</p>
+<p>3.视口的相对单位<br>视口——浏览器窗口里网页可见部分的边框区域。它不包括浏览器的地址栏、工具栏、状态栏。</p>
+<p>vh：视口高度的1/100。<br>vw：视口宽度的1/100。<br>vmin：视口高度的1/100。1. vw：视口宽度的1/100。<br>vmax：视口宽、高中较大的一方的1/100。</p>
+<p>当一个元素的宽和高为90vmin时，不管视口的大小或者方向是什么，总会显示成一个稍小于视口的正方形</p>
+<p>vw可以结合calc()设置字号，对于iphone6 375到1200px，字号从11.75到20px</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="built_in">calc</span>(<span class="number">0.5em</span> + <span class="number">1vw</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4.自定义属性即css变量</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">  <span class="attribute">--main-foot</span>: Arial, sans-serif;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="built_in">var</span>(--main-foot);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>var()函数接受第二个参数，它指定了备用值。如果第一个参数指定的变量未定义，那么就会使用第二个值</p>
+<p>如果var()函数算出来的是一个非法值，对应的属性就会设置为其初始值。比如，如果在padding: var(–brand-color)中的变量算出来是一个颜色，它就是一个非法的内边距值。这种情况下，内边距会设置为0.</p>
+<p>自定义属性就像作用域变量一样,自定义属性就像作用域变量一样</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">  <span class="attribute">--main-color</span>: black;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.panel</span> &#123;</span><br><span class="line">  <span class="attribute">--main-color</span>: white</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">var</span>(--main-color);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>黑色<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;panel&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>白色<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>使用js改变属性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rootElement = <span class="built_in">document</span>.documentElement;</span><br><span class="line">rootElement.style.setProperty(<span class="string">&#x27;--main-color&#x27;</span>, <span class="string">&#x27;#ccc&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="第3章-盒模型"><a href="#第3章-盒模型" class="headerlink" title="第3章 盒模型"></a>第3章 盒模型</h3><p>1.盒模型<br>box-sizing: content-box; 设置元素宽高只设置内容盒子大小<br>box-sizing: border-box; width和height属性会设置内容、内边距及边框的大小总和。</p>
+<figure class="highlight plain"><figcaption><span>&#123;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  box-sizing: border-box;</span><br><span class="line">&#125;</span><br><span class="line">*,</span><br><span class="line">::before,</span><br><span class="line">::after &#123;</span><br><span class="line">  box-sizing: .inherit;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>盒模型通常不会被继承，但是使用inherit关键字可以强制继承.这样可以不覆盖第三方组件的盒模型.</p>
+<p>2.垂直居中<br>如果给块级元素设置vertical-align:middle;块级元素的内容不会垂直居中，vertical-align声明只会影响行内元素或者table-cell元素。对于行内元素，它控制着该元素跟同一行内其他元素之间的对齐关系。比如一行内图片和文字对齐方式。</p>
+<p>3.负外边距<br>负外边距的具体行为取决于设置在元素的哪边。如果设置左边或顶部的负外边距，元素就会相应地向左或向上移动，导致元素与它前面的元素重叠，如果设置右边或者底部的负外边距，并不会移动元素，而是将它后面的元素拉过来。给元素底部加上负外边距并不等同于给它下面的元素顶部加上负外边距</p>
+<p>4.外边距折叠<br>所有相邻的顶部和底部外边距会折叠到一起，即使两个元素不是相邻的兄弟节点也会产生外边距折叠。只有上下外边距会产生折叠，左右外边距不会折叠。<br>折叠外边距的大小等于相邻外边距中的最大值</p>
+<h1 id="第7章-定位和层叠上下文"><a href="#第7章-定位和层叠上下文" class="headerlink" title="第7章 定位和层叠上下文"></a>第7章 定位和层叠上下文</h1><p>1.固定和绝对定位可以设置top,right,bottom,left改变定位元素的大小，相对定位不可以<br>2.固定定位相对于视口定位，绝对定位相对于最近定位父元素定位，如果没有定位父元素，则相对于初始包含块定位<br>3.初始包含块是视口和html根元素之间的内容<br>4.相对定位，left和right， top和bottom不能同时使用，left和right一起使用时，right会被忽略，top和bottom一起使用时right会被忽略<br>5.通常情况下（使用定位之前），元素在HTML里出现的顺序决定了绘制的顺序。<br>6.浏览器会先绘制所有非定位的元素，然后绘制定位元素。默认情况下，所有的定位元素会出现在非定位元素前面。<br>7.相对定位依赖于文档流，绝对定位元素依赖于它的定位祖先节点。这时候需要用z-index属性来控制它们的层叠行为。<br>8.z-index属性的值可以是任意整数（正负都行）。z表示的是笛卡儿x-y-z坐标系里的深度方向。拥有较高z-index的元素出现在拥有较低z-index的元素前面。拥有负数z-index的元素出现在静态元素后面<br>9.z-index只在定位元素上生效，不能控制静态元素；给一个定位元素添加z-index属性可以创建层叠上下文。<br>10.一个层叠上下文包含一个元素或由浏览器一起绘制的一组元素。其中一个元素作为层叠上下文的根，比如给一个定位元素设置z-index属性，该元素就是新的层叠上下问的根。<br>11.层叠上下文负责决定哪些元素出现在另一些元素前面，而BFC负责处理文档流，以及元素是否会重叠<br>12.创建层叠上下文方式：给定位元素添加z-index属性，opacity属性小于1，transform、，filter属性，跟节点html<br>13.所有层叠上下文内的元素会按照以下顺序，从后到前叠放：</p>
+<p>  1.层叠上下文的根<br>  2.z-index为负的定位元素（及其子元素）<br>  3.非定位元素<br>  4.z-index为auto的定位元素（及其子元素）<br>  5.z-index为正的定位元素（及其子元素）</p>
+<h1 id="第8章-响应式设计"><a href="#第8章-响应式设计" class="headerlink" title="第8章 响应式设计"></a>第8章 响应式设计</h1><p>1.响应式设计的三大原则如下</p>
+<p>  (1) 移动优先。这意味着在实现桌面布局之前先构建移动版的布局。不要忘记给视口添加meta标签。<br>  (2) @media规则。使用这个样式规则，可以为不同大小的视口定制样式。用这一语法，通常叫作媒体查询（media queries），写的样式只在特定条件下才会生效。使用媒体查询，按照视口从小到大的顺序渐进增强网页。<br>  (3) 流式布局（fluid layout）。这种方式允许容器根据视口宽度缩放尺寸。</p>
+<h1 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h1><h3 id="1-基础选择器"><a href="#1-基础选择器" class="headerlink" title="1.基础选择器"></a>1.基础选择器</h3><ol>
+<li>tagname——类型选择器或者标签选择器。该选择器匹配目标元素的标签名。它的优先级是0,0,1。例如：p、h1、strong。</li>
+<li>class——类选择器。该选择器匹配class属性中有指定类名的元素。它的优先级是0,1,0。例如：.media、.nav-menu。</li>
+<li>#id——ID选择器。该选择器匹配拥有指定ID属性的元素。它的优先级是1,0,0。例如：#sidebar。</li>
+<li>＊——通用选择器。该选择器匹配所有元素。它的优先级是0,0,0。</li>
+</ol>
+<h3 id="2-组合器"><a href="#2-组合器" class="headerlink" title="2.组合器"></a>2.组合器</h3><ol>
+<li>子组合器（&gt;）——匹配的目标元素是其他元素的直接后代。例如：.parent &gt; .child。</li>
+<li>相邻兄弟组合器（+）——匹配的目标元素紧跟在其他元素后面。例如：p + h2。</li>
+<li>通用兄弟组合器（~）——匹配所有跟随在指定元素之后的兄弟元素。注意，它不会选中目标元素之前的兄弟元素。例如：li.active ~ li。</li>
+</ol>
+<h3 id="3-伪类选择器"><a href="#3-伪类选择器" class="headerlink" title="3.伪类选择器"></a>3.伪类选择器</h3><p>伪类选择器用于选中处于某个特定状态的元素。伪类选择器始终以一个冒号（:）开始。优先级等于一个类选择器（0,1,0）</p>
+<ol>
+<li>:first-child——匹配的元素是其父元素的第一个子元素。</li>
+<li>:last-child——匹配的元素是其父元素的最后一个子元素。</li>
+<li>:only-child——匹配的元素是其父元素的唯一一个子元素（没有兄弟元素）。</li>
+<li>:nth-child(an+b)——匹配的元素在兄弟元素中间有特定的位置。</li>
+<li>:nth-last-child(an+b)——类似于：nth-child()，但不是从第一个元素往后数，而是从最后一个元素往前数。</li>
+<li>:first-of-type——类似于：first-child，但不是根据在全部子元素中的位置查找元素，而是根据拥有相同标签名的子元素中的数字顺序查找第一个元素。</li>
+<li>:last-of-type——匹配每种类型的最后一个子元素。</li>
+<li>:only-of-type——该选择器匹配的元素是满足该类型的唯一一个子元素。</li>
+<li>:nth-of-type(an+b)——根据目标元素在特定类型下的数字顺序以及特定公式选择元素，类似于：nth-child。</li>
+<li>nth-last-of-type(an+b)——根据元素类型以及特定公式选择元素，从其中最后一个元素往前算，类似于：nth-last-child。</li>
+<li>:not(<code>&lt;selector&gt;</code>)——匹配的元素不匹配括号内的选择器。括号内的选择器必须是基础选择器，它只能指定元素本身，无法用于排除祖先元素，同时不允许包含另一个排除选择器。</li>
+<li>:empty——匹配的元素必须没有子元素。注意，如果元素包含空格就无法由该选择器匹配，因为空格在DOM中属于文本节点。</li>
+<li>:focus——匹配通过鼠标点击、触摸屏幕或者按Tab键导航而获得焦点的元素。</li>
+<li>:hover——匹配鼠标指针正悬停在其上方的元素。</li>
+<li>:root——匹配文档根元素.</li>
+<li>:disabled——匹配已禁用的元素，包括input、select以及button元素。</li>
+<li>:enabled——匹配已启用的元素，即那些能够被激活或者接受焦点的元素。</li>
+<li>:checked——匹配已经针对选定的复选框、单选按钮或选择框选项。</li>
+<li>:invalid——根据输入类型中的定义，匹配有非法输入值的元素。例如，当<input type="email">的值不是一个合法的邮箱地址时，该元素会被匹配（Level4）。</li>
+<li>:valid——匹配有合法值的元素（Level4）。</li>
+<li>:required——匹配设置了required属性的元素（Level4）。</li>
+<li>:optional——匹配没有设置required属性的元素</li>
+</ol>
+<h3 id="4-伪元素选择器"><a href="#4-伪元素选择器" class="headerlink" title="4.伪元素选择器"></a>4.伪元素选择器</h3><p>伪元素类似于伪类，但是它不匹配特定状态的元素，而是匹配在文档中没有直接对应HTML元素的特定部分.<br>以双冒号（::）开头，尽管大多数浏览器也支持单冒号的语法以便向后兼容。伪元素选择器的优先级与类型选择器（0,0,1）相等</p>
+<ol>
+<li>::before——创建一个伪元素，使其成为匹配元素的第一个子元素。该元素默认是行内元素，可用于插入文字、图片或其他形状。必须指定content属性才能让元素出现，例如：.menu::before。</li>
+<li>::after——创建一个伪元素，使其成为匹配元素的最后一个子元素。该元素默认是行内元素，可用于插入文字、图片或其他形状。必须指定content属性才能让元素出现，例如：.menu::after。1.</li>
+<li>::first-letter——用于指定匹配元素的第一个文本字符的样式，例如：h2::first-letter。</li>
+<li>::first-line——用于指定匹配元素的第一行文本的样式。</li>
+<li>::selection——用于指定用户使用鼠标高亮选择的任意文本的样式。通常用于改变选中文本的background-color。只有少数属性可以使用，包括color、background-color、cursor、text-decoration。</li>
+</ol>
+<h3 id="5-属性选择器"><a href="#5-属性选择器" class="headerlink" title="5.属性选择器"></a>5.属性选择器</h3><p>属性选择器用于根据HTML属性匹配元素。其优先级与一个类选择器（0,1,0）相等</p>
+<p>以下选择器区分大小写：</p>
+<ol>
+<li>[attr]——匹配的元素拥有指定属性attr，无论属性值是什么，例如：input[disabled]。</li>
+<li>[attr=”value”]——匹配的元素拥有指定属性attr，且属性值等于指定的字符串值，例如：input[type=”radio”]。</li>
+<li>[attr^=”value”]——“开头”属性选择器。该选择器匹配的元素拥有指定属性attr，且属性值的开头是指定的字符串值，例如：a[href^=”https”]。</li>
+<li>[attr$=”value”]——“结尾”属性选择器。该选择器匹配的元素拥有指定属性attr，且属性值的结尾是指定的字符串值，例如：a[href$= “.pdf”]。</li>
+<li>[attr＊=”value”]——“包含”属性选择器。该选择器匹配的元素拥有指定属性attr，且属性值包含指定的字符串值，例如：[class＊=”sprite-“]。</li>
+<li>[attr~=”value”]——“空格分隔的列表”属性选择器。该选择器匹配的元素拥有指定属性attr，且属性值是一个空格分隔的值列表，列表中的某个值等于指定的字符串值，例如：a[rel=”author”]。</li>
+<li>[attr|=”value”]——匹配的元素拥有指定属性attr，且属性值要么等于指定的字符串值，要么以该字符串开头且紧跟着一个连字符（-）。适用于语言属性，因为该属性有时候会指定一种语言的子集（比如墨西哥西班牙语，es-MX，或者普通的西班牙语，es），例如：[lang|=”es”]。</li>
+</ol>
+<p>不区分大小写的属性选择器：将i添加到结束方括号前面，input[value=”search”i]</p>
+
+  </div>
+  <div>
+      <!-- <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/css-笔记.md" target="_blank">编辑</a> -->
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%B1%82%E5%8F%A0%E3%80%81%E4%BC%98%E5%85%88%E7%BA%A7%E5%92%8C%E7%BB%A7%E6%89%BF"><span class="toc-number">1.</span> <span class="toc-text">第一章 层叠、优先级和继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E7%9B%B8%E5%AF%B9%E5%8D%95%E4%BD%8D"><span class="toc-number">2.</span> <span class="toc-text">第二章 相对单位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC3%E7%AB%A0-%E7%9B%92%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">第3章 盒模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC7%E7%AB%A0-%E5%AE%9A%E4%BD%8D%E5%92%8C%E5%B1%82%E5%8F%A0%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number"></span> <span class="toc-text">第7章 定位和层叠上下文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC8%E7%AB%A0-%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1"><span class="toc-number"></span> <span class="toc-text">第8章 响应式设计</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number"></span> <span class="toc-text">选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">1.基础选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%BB%84%E5%90%88%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">2.组合器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BC%AA%E7%B1%BB%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">3.</span> <span class="toc-text">3.伪类选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BC%AA%E5%85%83%E7%B4%A0%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">4.</span> <span class="toc-text">4.伪元素选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%B1%9E%E6%80%A7%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">5.</span> <span class="toc-text">5.属性选择器</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&text=css-笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=css-笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&is_video=false&description=css-笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=css-笔记&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=css-笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=css-笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=css-笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=css-笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&name=css-笔记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&t=css-笔记"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2022
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
