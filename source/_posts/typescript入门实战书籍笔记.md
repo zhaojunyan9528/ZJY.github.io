@@ -1836,3 +1836,61 @@ function add(x: number | any[], y: number | any[]): any {
 
 this是js中关键字，表示调用函数的对象或实例对象。
 默认情况，编译器会将函数中的this值设为any类型，允许程序在this上执行任意的操作。
+
+```ts
+function f() {
+  // 以下语句均没有错误
+  this.a = true;
+  this.b++;
+  this.c = () => {};
+}
+```
+
+当启用了--noImplicitThis编译选项时，如果this值默认获得了any类型，那么将产生编译错误；如果函数体中没有引用this值，则没有任何影响.
+
+```ts
+function f() {
+  // 以下语句均没有错误
+  this.a = true; // 'this' implicitly has type 'any' because it does not have a type annotation.
+  this.b++; // wrong  this隐式地any类型，因为没有给this添加类型注解
+  this.c = () => {}; // wrong
+}
+
+function bar() {
+  const a = 1
+}
+```
+
+ts支持在函数形式参数列表中定义this参数来描述this值的类型
+
+```ts
+function foo(this: {name: string}): void {
+    this.name = 'str'
+    this.name = 0 // wrong: Type 'number' is not assignable to type 'string'.
+}
+```
+
+this参数固定使用this作为参数名，是可选参数，若存在必须在形式参数列表的第一位。this参数的类型即为函数体中this值的类型。
+this参数不同于常规的函数形式参数，它只存在于编译阶段，在编译生成的JavaScript代码中会被完全删除，在运行时的代码中不存在这个this参数。
+
+如果我们想要定义一个纯函数或者是不想让函数代码依赖于this的值，那么在这种情况下可以明确地将this参数定义为void类型。这样做之后，在函数体中就不允许读写this的属性和方法
+
+```ts
+function foo(this: void): void {
+    this.name = 'str' // wrong: Property 'name' does not exist on type 'void'.
+}
+
+// 当调用定义了this参数的函数时，若this值的实际类型与函数定义中的期望类型不匹配，则会产生编译错误
+function foo(this: { baz: string}, bar: string) {
+    //
+}
+
+foo(0) // wrong: The 'this' context of type 'void' is not assignable to method's 'this' of type '{ baz: string; }'.
+foo({baz: 'str'}, 'str')
+```
+
+### 3.13 接口
+
+接口也能表示对象类型，只在编译阶段存在，无法表示原始类型
+
+#### 3.13.1 接口声明
