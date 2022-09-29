@@ -1894,3 +1894,62 @@ foo({baz: 'str'}, 'str')
 接口也能表示对象类型，只在编译阶段存在，无法表示原始类型
 
 #### 3.13.1 接口声明
+
+```ts
+interface InterfaceName {
+  TypeMember,
+  TypeMember,
+  ...
+}
+```
+
+interface关键字，InterfaceName接口名，它必须是合法的标识符通常首字母大写；TypeMember表示接口的类型成员。
+接口类型的类型成员分为：
+
+1. 属性签名
+2. 调用签名
+3. 构造签名
+4. 方法签名
+5. 索引签名
+
+#### 3.13.2 属性签名
+
+PropertyName: Type; PropertyName表示对象名称，可以为标识符、字符串、数字和可计算属性名；Type表示属性类型。
+
+```ts
+interface Point {
+  x: number,
+  y: number
+}
+```
+
+#### 3.13.3 调用签名
+
+调用签名定义了该对象类型表示的函数在调用时的类型参数、参数列表和返回值类型。
+(parameterList): Type
+ParameterList表示函数形式参数列表类型；Type表示函数返回值类型，两者都是可选的
+
+```ts
+interface ErrorConsturctior {
+  (message?: string): Error
+}
+```
+
+#### 3.13.4 构造签名
+
+构造签名定义了该对象类型表示的构造函数在使用new运算符调用时的参数列表和返回类型。
+
+new (parameterList): Type
+
+new是运算符关键字；ParameterList表示构造函数形式参数列表类型；Type表示构造函数返回值类型，两者都是可选的.
+
+```ts
+interface ErrorConsturctior {
+  new (message?: string): Error
+}
+```
+
+#### 3.13.5 方法签名
+
+方法签名是声明函数类型的属性成员的简写。
+PropertyName(parameterList): Type
