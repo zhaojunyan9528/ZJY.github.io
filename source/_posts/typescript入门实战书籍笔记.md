@@ -1953,3 +1953,217 @@ interface ErrorConsturctior {
 
 方法签名是声明函数类型的属性成员的简写。
 PropertyName(parameterList): Type
+
+PropertyName表示对象属性名，可以是标识符，数字，字符串，可计算的属性名；
+parameterList为可选的方法形式参数列表类型；
+Type为可选的方法返回值类型。
+方法签名是在调用签名之前加属性名作为方法名。
+
+```ts
+interface Document {
+  getElementById(elementId: string): HTMLElement | null
+}
+```
+
+#### 3.13.6 索引签名
+
+js支持使用索引去访问对象的属性，即通过方括号"[]"语法去访问对象属性。
+索引签名有2种：
+
+1. 字符串索引签名
+2. 数值索引签名
+
+字符串索引签名：
+
+```ts
+[indexName: string]: Type
+```
+
+indexName表示索引名，任意合法的标识符必须为string类型.索引名只起占位作用，不代表真实的对象属性名；
+Type表示索引值的类型，可以为任意类型。
+
+```ts
+interface A {
+  [prop: number]: string
+}
+const obj: A = ['a', 'b']
+obj[0] // string
+```
+
+若接口中同时存在字符串索引和数字索引，那么数值索引的类型必须能够赋值给字符串索引的签名的类型，因为在js中属性名只能为字符串或Symbol。js也允许使用数字等其他值作为索引，但最终会被转换为字符串类型。
+
+```ts
+interface A {
+  [prop: string]: number,
+  [prop: number]: 0 | 1
+}
+interface A {
+  [prop: string]: 0 | 1,
+  [prop: number]: number // 编译错误
+}
+```
+
+#### 3.13.7 可选属性和方法
+
+默认情况下，接口中属性签名和方法签名定义的对象属性都是必选的。
+
+```ts
+interface Foo {
+    x: string,
+    y(): number
+}
+
+const a: Foo = { x: 'hi'} // wrong 缺少属性y
+const b: Foo = { y() { return 0 }} // wrong 缺少属性x
+const c: Foo = { // right
+    x: 'hi',
+    y() {
+        return 1
+    }
+}
+```
+
+可以在属性名或者方法名后面添加?表示可选
+
+propertyName?: Type
+propertyName?(parameterList): Type
+
+```ts
+interface Foo {
+    x?: string,
+    y?(): number
+}
+
+const a: Foo = { x: 'hi'}
+const b: Foo = { y() { return 0 }}
+const c: Foo = {
+    x: 'hi',
+    y() {
+        return 1
+    }
+}
+const d: Foo = {}
+```
+
+如果接口中定义了重载方法，那么所有重载方法签名必须同时为必须或可选的。
+
+```ts
+interface Foo {
+    a(): void,
+    a(x: string): void,
+
+    b?(): void,
+    b?(x: string): void
+
+    c(): void,
+    c?(x: string): void // wrong 重载方法签名必须同时为可选的或必选的
+}
+```
+
+#### 3.13.8 只读属性和方法
+
+在接口声明中，readonly修复符能够定义只读属性，readonly修饰符只允许在属性签名和索引签名中使用。
+
+```ts
+interface A {
+    readonly a: string,
+    readonly [prop: string]: string
+}
+```
+
+若接口中只定义了只读的索引签名，那么接口中所有属性都是只读的
+
+```ts
+interface A {
+    readonly [prop: string]: string
+}
+const obj: A = { x: 'a' }
+obj[x] = 'b' // wrong 只读
+```
+
+如果接口中既定义了只读索引签名，又定义了非只读的属性签名，那么非只读的属性签名定义的属性依旧是非只读的，除此之外的所有属性都是只读的
+
+```ts
+interface A {
+    readonly [prop: string]: number,
+    x: number
+}
+const obj: A = { x: 1, y: 1}
+obj['x'] = 2
+obj['y'] = 2 // wrong 只读
+```
+
+#### 3.13.9 接口的继承
+
+接口可以继承其他的对象类型，这相当于将对象类型中成员复制到当前接口中，可以继承的对象类型如下：
+
+1. 接口
+2. 对象类型的类型别名
+3. 类
+4. 对象类型的交叉类型
+
+接口继承需要使用extends关键字。
+
+```ts
+interface Shape {
+    name: string
+}
+interface Style {
+    color: string
+}
+interface Cricle extends Shape, Style {
+    radius: number
+}
+
+const c: Cricle = {
+    name: 'circle',
+    color: 'red',
+    radius: 4
+}
+```
+
+如果子接口与父接口之间存在同名的类型成员，那么子接口中的类型成员具有更高的优先级。同时，子接口与父接口中的同名类型成员必须是类型兼容的。也就是说，子接口中同名类型成员的类型需要能够赋值给父接口中同名类型成员的类型，否则将产生编译错误
+
+如果仅是多个父接口之间存在同名的类型成员，而子接口本身没有该同名类型成员，那么父接口中同名类型成员的类型必须是完全相同的，否则将产生编译错误。解决方法是子接口中定义一个同名的类型成员，拥有更高的优先级，同时应兼容父接口的同名类型成员。
+
+### 3.14 类型别名
+
+#### 3.14.1 类型别名声明
+
+type AliasName = Type
+在该语法中，type是声明类型别名的关键字；AliasName表示类型别名的名称；Type表示类型别名关联的具体类型
+
+```ts
+type Point = { x: number, y: number }
+```
+
+类型别名引用的类型可以为任意类型，例如原始类型、对象类型、联合类型和交叉类型等
+
+```ts
+type StringType = string;
+
+type BooleanType = true | false;
+
+type Point = { x: number; y: number; z?: number };
+```
+
+在类型别名中，也可以引用其他类型别名
+
+```ts
+type Numeric = number | bigint;
+
+// string | number | bigint
+type StringOrNumber = string | Numeric;
+
+type DecimalDigit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+
+const digit: DecimalDigit = 6; 
+```
+
+#### 3.14.2 递归的类型别名
+
+一般情况下，在类型别名声明中赋值运算符的右侧不允许引用当前定义的类型别名。
+
+```ts
+type T = T // wrong
+```

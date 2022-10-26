@@ -9,7 +9,7 @@ date: 2021-02-22 17:13:22
 ---
 ## 边框属性
 
-## border-image边框图片属性
+### 1.border-image边框图片属性
 
 border-image:none 100% 1 0 stretch; 默认值
 border-image是一个简写，用于设置以下属性：
@@ -20,7 +20,7 @@ border-image是一个简写，用于设置以下属性：
 + border-image-outset: 边框图像区域超出边框的量
 + border-image-repeat: 图片边框是否平铺（repeated）,铺满（rounded）或拉伸（stretched）
 
-## border-radius边框圆角属性
+### 2.border-radius边框圆角属性
 
 border-radius: 0; 默认值
 border-radius是一个简写，用于设置以下属性：
@@ -35,7 +35,7 @@ border-radius是一个简写，用于设置以下属性：
 + length: 具体的值,比如2px,2em等
 + %: 百分比
 
-## box-shadow边框阴影属性
+### 3.box-shadow边框阴影属性
 
 box-shadow属性向边框添加一个或多个阴影，是由逗号分隔的阴影列表，每个阴影由2-4个长度值、可选的颜色以及可选的inset关键词来规定。省略长度的值是0.
 
@@ -50,11 +50,11 @@ box-shadow属性值：
 
 ## 背景属性
 
-## background-image多背景图片属性
+### 1.background-image多背景图片属性
 
 background-image:url(bg_flower.gif),url(bg_flower_2.gif);
 
-## background-clip背景的绘制区域
+### 2.background-clip背景的绘制区域
 
 background-clip 属性规定背景的绘制区域
 
@@ -64,7 +64,7 @@ background-clip属性可选值：
 + padding-box: 图片被剪裁到内边距框
 + content-box: 图片被剪裁到内容框
 
-## background-origin规定背景图片的定位区域
+### 3.background-origin规定背景图片的定位区域
 
 background-origin属性规定background-position属性相对于什么位置来定位。
 如果background-attachment属性设置为“fixed”，该属性无效。
@@ -75,7 +75,7 @@ background-origin属性值：
 + border-box: 背景图片相对于边框盒来定位
 + content-box: 背景图片相对于内容框来定位
 
-## background-size规定背景图片的尺寸
+### background-size规定背景图片的尺寸
 
 background-size 属性规定背景图像的尺寸
 
@@ -90,7 +90,7 @@ background-size取值四种方式：
 
 ## 文本效果
 
-## text-shadow文本阴影
+### 1.text-shadow文本阴影
 
 text-shadow 属性向文本设置阴影。
 text-shadow: none;默认值
@@ -102,7 +102,7 @@ text-shadow属性包含下列值：
 + blur: 可选，模糊的距离
 + color: 可选，阴影的颜色
   
-## word-wrap属性
+### 2.word-wrap属性
 
 word-wrap属性允许长单词或 URL 地址换行到下一行。
 
@@ -111,7 +111,7 @@ word-wrap:normal;默认值
 + break-word：允许长单词或url地址换到下一行
 + normal: 只在允许的断字点换行（浏览器保持默认处理）
 
-## word-break属性规定自动换行的处理方法
+### 3.word-break属性规定自动换行的处理方法
 
 word-break: noraml默认值
 
@@ -214,3 +214,7 @@ div{
 + animation-direction: 规定动画是否在下一周期逆向播放，默认是normal,取值normal/alternate
 + animation-play-state: 规定动画是正在运行还是暂停，默认值是running，取值running/paused
 + animation-fill-mode: 定对象动画时间之外的状态
+
+## 弹性盒子flexbox
+
+## 多媒体查询@media
