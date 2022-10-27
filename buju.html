@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 圣杯布局，两边固宽，用父容器padding空出空间
+    float加负margin */
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    .container {
+      padding: 0 60px 0 30px;
+      height: 150px;
+
+    }
+    .main {
+      float: left;
+      width: 100%;
+      height: 150px;
+      background-color: aquamarine;
+    }
+    .left {
+      float: left;
+      width: 30px;
+      height: 100px;
+      background-color: darkkhaki;
+      margin-left: calc(-100% - 30px);
+    }
+    .right {
+      float: left;
+      width: 60px;
+      height: 100px;
+      background-color: firebrick;
+      /* margin-left: -60px;
+      position: relative;
+      left: 60px; */
+      margin-right: -60px;
+    }
+
+    /* 双飞翼布局 */
+
+    .container1 {
+      width: 100%;
+      height: 150px;
+      border-top: 1px solid;
+    }
+    .container1 .main1 {
+      float: left;
+      width: 100%;
+    }
+    .content {
+      height: 150px;
+      background-color: aquamarine;
+      margin: 0 60px 0 30px;
+    }
+    .left1 {
+      float: left;
+      width: 30px;
+      height: 100px;
+      margin-left: -100%;
+      background-color: darkkhaki;
+    }
+    .right1 {
+      float: left;
+      width: 60px;
+      height: 100px;
+      margin-left: -60px;
+      background-color: firebrick;
+    }
+
+    /* flex */
+    .container2 {
+      width: 100%;
+      height: 150px;
+      border-top: 1px solid;
+      display: flex;
+      flex: 1 1 auto;
+    }
+    .main2 {
+      height: 150px;
+      background-color: aquamarine;
+      width: 100%;
+    }
+    .left2 {
+      width: 30px;
+      height: 100px;
+      background-color: darkkhaki;
+    }
+    .right2 {
+      width: 60px;
+      height: 100px;
+      background-color: firebrick;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" accesskey="n" dir="rtl" draggable="true" 
+    tabindex="1" title="input" data-id="test">
+  <button>hahhah</button>
+  <textarea name="" id="textarea" cols="30" rows="10" style="position: absolute;z-index: -99;"></textarea>
+  <input type="text">
+  <img src="https://img1.baidu.com/it/u=3155988012,1977937542&fm=253&app=138&size=w931&n=0&f=JPG&fmt=auto?sec=1666890000&t=99430b88a8153ac95a1bd7fcfc8ff518" alt="" style="width: 20px;">
+  <i>hahah</i>
+  <em>em</em>
+  <strong>strong</strong>
+  <br />
+  <label for="">label</label>
+  <span>span</span>
+  <canvas style="border: 1px solid;"></canvas>
+  <audio src="https://img1.baidu.com/it/u=3155988012,1977937542&fm=253&app=138&size=w931&n=0&f=JPG&fmt=auto?sec=1666890000&t=99430b88a8153ac95a1bd7fcfc8ff518" controls>11</audio>
+  <video src="https://img1.baidu.com/it/u=3155988012,1977937542&fm=253&app=138&size=w931&n=0&f=JPG&fmt=auto?sec=1666890000&t=99430b88a8153ac95a1bd7fcfc8ff518"></video>
+  <table>
+    <thead>
+      <th>th1</th>
+      <th>th2</th>
+      <th>th3</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>td1</td>
+        <td>td2</td>
+        <td>td3</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="container">
+    <div class="main">
+      <p>圣杯布局</p>
+      <p>hahahhaha</p>
+    </div>
+    <div class="left">left</div>
+    <div class="right">right</div>
+  </div>
+  <div class="container1">
+    <div class="main1">
+      <div class="content">
+        <p>双飞翼布局</p>
+        <p>hahahhaha</p>
+      </div>
+    </div>
+    <div class="left1">left1</div>
+    <div class="right1">right1</div>
+  </div>
+
+  <div class="container2">
+    <div class="left2">left2</div>
+    <div class="main2">
+      flex
+    </div>
+    <div class="right2">right2</div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    window.onload = function() {
+      // console.log(CryptoJS.enc.Base64.stringify)
+      // let target = 'abc'
+      // let secrect =  CryptoJS.enc.Base64.parse(target);
+      // let sec = CryptoJS.enc.Base64.stringify(secrect)
+      // console.log(secrect,sec)
+
+      let str = CryptoJS.enc.Utf8.parse("Hello World!")
+      var base64 = CryptoJS.enc.Base64.stringify(str)
+      console.log('CryptoJS-base64---加密:',base64)
+
+      var words = CryptoJS.enc.Base64.parse(base64);
+      var parseStr = words.toString(CryptoJS.enc.Utf8)
+      console.log('CryptoJS-base64---解密:', parseStr)
+    }
+    
+  </script>
+  <script>
+    // 创建Base64对象
+    var Base64 = {
+     _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+     encode: function(e) {
+      var t = "";
+      var n, r, i, s, o, u, a;
+      var f = 0;
+      e = Base64._utf8_encode(e);
+      while (f < e.length) {
+       n = e.charCodeAt(f++);
+       r = e.charCodeAt(f++);
+       i = e.charCodeAt(f++);
+       s = n >> 2;
+       o = (n & 3) << 4 | r >> 4;
+       u = (r & 15) << 2 | i >> 6;
+       a = i & 63;
+       if (isNaN(r)) {
+        u = a = 64
+       } else if (isNaN(i)) {
+        a = 64
+       }
+       t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a)
+      }
+      return t
+     },
+     decode: function(e) {
+      var t = "";
+      var n, r, i;
+      var s, o, u, a;
+      var f = 0;
+      e=e.replace(/[^A-Za-z0-9+/=]/g,"");
+      while (f < e.length) {
+       s = this._keyStr.indexOf(e.charAt(f++));
+       o = this._keyStr.indexOf(e.charAt(f++));
+       u = this._keyStr.indexOf(e.charAt(f++));
+       a = this._keyStr.indexOf(e.charAt(f++));
+       n = s << 2 | o >> 4;
+       r = (o & 15) << 4 | u >> 2;
+       i = (u & 3) << 6 | a;
+       t = t + String.fromCharCode(n);
+       if (u != 64) {
+        t = t + String.fromCharCode(r)
+       }
+       if (a != 64) {
+        t = t + String.fromCharCode(i)
+       }
+      }
+      t = Base64._utf8_decode(t);
+      return t
+     },
+     _utf8_encode: function(e) {
+      e = e.replace(/rn/g, "n");
+      var t = "";
+      for (var n = 0; n < e.length; n++) {
+       var r = e.charCodeAt(n);
+       if (r < 128) {
+        t += String.fromCharCode(r)
+       } else if (r > 127 && r < 2048) {
+        t += String.fromCharCode(r >> 6 | 192);
+        t += String.fromCharCode(r & 63 | 128)
+       } else {
+        t += String.fromCharCode(r >> 12 | 224);
+        t += String.fromCharCode(r >> 6 & 63 | 128);
+        t += String.fromCharCode(r & 63 | 128)
+       }
+      }
+      return t
+     },
+     _utf8_decode: function(e) {
+      var t = "";
+      var n = 0;
+      var r = c1 = c2 = 0;
+      while (n < e.length) {
+       r = e.charCodeAt(n);
+       if (r < 128) {
+        t += String.fromCharCode(r);
+        n++
+       } else if (r > 191 && r < 224) {
+        c2 = e.charCodeAt(n + 1);
+        t += String.fromCharCode((r & 31) << 6 | c2 & 63);
+        n += 2
+       } else {
+        c2 = e.charCodeAt(n + 1);
+        c3 = e.charCodeAt(n + 2);
+        t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63);
+        n += 3
+       }
+      }
+      return t
+     }
+    }
+    // 定义字符串
+    var string = 'Hello World!';
+    // 加密
+    var encodedString = Base64.encode(string);
+    console.log('base64加密', encodedString); // 输出: "SGVsbG8gV29ybGQh"
+    // 解密
+    var decodedString = Base64.decode(encodedString);
+    console.log('base64解密', decodedString); // 输出: "Hello World!"
+  </script>
+</body>
+</html>
