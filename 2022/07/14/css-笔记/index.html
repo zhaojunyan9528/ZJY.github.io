@@ -8,13 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="第一章 层叠、优先级和继承css里的c代表cascade,层叠，层叠决定了如何解决冲突，是css语言的基础。层叠会依据三种条件解决冲突。 (1) 样式表的来源：样式是从哪里来的，包括你的样式和浏览器默认样式等。 (2) 选择器优先级：哪些选择器比另一些选择器更重要。 (3) 源码顺序：样式在样式表里的声明顺序。 声明：color: black;包含在大括号内的一组声明被称作一个声明块。声明块前面有">
 <meta property="og:type" content="article">
-<meta property="og:title" content="css-笔记">
+<meta property="og:title" content="深入解析css">
 <meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="ZJY">
 <meta property="og:description" content="第一章 层叠、优先级和继承css里的c代表cascade,层叠，层叠决定了如何解决冲突，是css语言的基础。层叠会依据三种条件解决冲突。 (1) 样式表的来源：样式是从哪里来的，包括你的样式和浏览器默认样式等。 (2) 选择器优先级：哪些选择器比另一些选择器更重要。 (3) 源码顺序：样式在样式表里的声明顺序。 声明：color: black;包含在大括号内的一组声明被称作一个声明块。声明块前面有">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-07-14T15:40:37.000Z">
-<meta property="article:modified_time" content="2022-09-29T08:22:18.067Z">
+<meta property="article:modified_time" content="2022-10-27T01:08:08.472Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -37,7 +37,7 @@
       
     
     <!-- title -->
-    <title>css-笔记</title>
+    <title>深入解析css</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/ZJY.github.io/css/style.css">
@@ -96,21 +96,21 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&text=css-笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=css-笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&is_video=false&description=css-笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=css-笔记&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=css-笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=css-笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=css-笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=css-笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&name=css-笔记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&t=css-笔记"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&text=深入解析css"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=深入解析css"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&is_video=false&description=深入解析css"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=深入解析css&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=深入解析css"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=深入解析css"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=深入解析css"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=深入解析css"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&name=深入解析css&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&t=深入解析css"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%B1%82%E5%8F%A0%E3%80%81%E4%BC%98%E5%85%88%E7%BA%A7%E5%92%8C%E7%BB%A7%E6%89%BF"><span class="toc-number">1.</span> <span class="toc-text">第一章 层叠、优先级和继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E7%9B%B8%E5%AF%B9%E5%8D%95%E4%BD%8D"><span class="toc-number">2.</span> <span class="toc-text">第二章 相对单位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC3%E7%AB%A0-%E7%9B%92%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">第3章 盒模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC7%E7%AB%A0-%E5%AE%9A%E4%BD%8D%E5%92%8C%E5%B1%82%E5%8F%A0%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number"></span> <span class="toc-text">第7章 定位和层叠上下文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC8%E7%AB%A0-%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1"><span class="toc-number"></span> <span class="toc-text">第8章 响应式设计</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number"></span> <span class="toc-text">选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">1.基础选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%BB%84%E5%90%88%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">2.组合器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BC%AA%E7%B1%BB%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">3.</span> <span class="toc-text">3.伪类选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BC%AA%E5%85%83%E7%B4%A0%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">4.</span> <span class="toc-text">4.伪元素选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%B1%9E%E6%80%A7%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">5.</span> <span class="toc-text">5.属性选择器</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%B1%82%E5%8F%A0%E3%80%81%E4%BC%98%E5%85%88%E7%BA%A7%E5%92%8C%E7%BB%A7%E6%89%BF"><span class="toc-number">1.</span> <span class="toc-text">第一章 层叠、优先级和继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E7%9B%B8%E5%AF%B9%E5%8D%95%E4%BD%8D"><span class="toc-number">2.</span> <span class="toc-text">第二章 相对单位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%9B%92%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">第三章 盒模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%AE%9A%E4%BD%8D%E5%92%8C%E5%B1%82%E5%8F%A0%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number">4.</span> <span class="toc-text">第七章 定位和层叠上下文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1"><span class="toc-number">5.</span> <span class="toc-text">第八章 响应式设计</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -123,7 +123,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        css-笔记
+        深入解析css
     </h1>
 
 
@@ -137,7 +137,7 @@
       
         <time datetime="2022-07-14T15:40:37.000Z" itemprop="datePublished">2022-07-14</time>
         
-        (Updated: <time datetime="2022-09-29T08:22:18.067Z" itemprop="dateModified">2022-09-29</time>)
+        (Updated: <time datetime="2022-10-27T01:08:08.472Z" itemprop="dateModified">2022-10-27</time>)
         
       
     </div>
@@ -230,28 +230,32 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>黑色<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;panel&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>白色<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>使用js改变属性：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rootElement = <span class="built_in">document</span>.documentElement;</span><br><span class="line">rootElement.style.setProperty(<span class="string">&#x27;--main-color&#x27;</span>, <span class="string">&#x27;#ccc&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<h3 id="第3章-盒模型"><a href="#第3章-盒模型" class="headerlink" title="第3章 盒模型"></a>第3章 盒模型</h3><p>1.盒模型<br>box-sizing: content-box; 设置元素宽高只设置内容盒子大小<br>box-sizing: border-box; width和height属性会设置内容、内边距及边框的大小总和。</p>
+<h3 id="第三章-盒模型"><a href="#第三章-盒模型" class="headerlink" title="第三章 盒模型"></a>第三章 盒模型</h3><p>1.盒模型<br>box-sizing: content-box; 设置元素宽高只设置内容盒子大小<br>box-sizing: border-box; width和height属性会设置内容、内边距及边框的大小总和。</p>
 <figure class="highlight plain"><figcaption><span>&#123;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  box-sizing: border-box;</span><br><span class="line">&#125;</span><br><span class="line">*,</span><br><span class="line">::before,</span><br><span class="line">::after &#123;</span><br><span class="line">  box-sizing: .inherit;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>盒模型通常不会被继承，但是使用inherit关键字可以强制继承.这样可以不覆盖第三方组件的盒模型.</p>
 <p>2.垂直居中<br>如果给块级元素设置vertical-align:middle;块级元素的内容不会垂直居中，vertical-align声明只会影响行内元素或者table-cell元素。对于行内元素，它控制着该元素跟同一行内其他元素之间的对齐关系。比如一行内图片和文字对齐方式。</p>
 <p>3.负外边距<br>负外边距的具体行为取决于设置在元素的哪边。如果设置左边或顶部的负外边距，元素就会相应地向左或向上移动，导致元素与它前面的元素重叠，如果设置右边或者底部的负外边距，并不会移动元素，而是将它后面的元素拉过来。给元素底部加上负外边距并不等同于给它下面的元素顶部加上负外边距</p>
 <p>4.外边距折叠<br>所有相邻的顶部和底部外边距会折叠到一起，即使两个元素不是相邻的兄弟节点也会产生外边距折叠。只有上下外边距会产生折叠，左右外边距不会折叠。<br>折叠外边距的大小等于相邻外边距中的最大值</p>
-<h1 id="第7章-定位和层叠上下文"><a href="#第7章-定位和层叠上下文" class="headerlink" title="第7章 定位和层叠上下文"></a>第7章 定位和层叠上下文</h1><p>1.固定和绝对定位可以设置top,right,bottom,left改变定位元素的大小，相对定位不可以<br>2.固定定位相对于视口定位，绝对定位相对于最近定位父元素定位，如果没有定位父元素，则相对于初始包含块定位<br>3.初始包含块是视口和html根元素之间的内容<br>4.相对定位，left和right， top和bottom不能同时使用，left和right一起使用时，right会被忽略，top和bottom一起使用时right会被忽略<br>5.通常情况下（使用定位之前），元素在HTML里出现的顺序决定了绘制的顺序。<br>6.浏览器会先绘制所有非定位的元素，然后绘制定位元素。默认情况下，所有的定位元素会出现在非定位元素前面。<br>7.相对定位依赖于文档流，绝对定位元素依赖于它的定位祖先节点。这时候需要用z-index属性来控制它们的层叠行为。<br>8.z-index属性的值可以是任意整数（正负都行）。z表示的是笛卡儿x-y-z坐标系里的深度方向。拥有较高z-index的元素出现在拥有较低z-index的元素前面。拥有负数z-index的元素出现在静态元素后面<br>9.z-index只在定位元素上生效，不能控制静态元素；给一个定位元素添加z-index属性可以创建层叠上下文。<br>10.一个层叠上下文包含一个元素或由浏览器一起绘制的一组元素。其中一个元素作为层叠上下文的根，比如给一个定位元素设置z-index属性，该元素就是新的层叠上下问的根。<br>11.层叠上下文负责决定哪些元素出现在另一些元素前面，而BFC负责处理文档流，以及元素是否会重叠<br>12.创建层叠上下文方式：给定位元素添加z-index属性，opacity属性小于1，transform、，filter属性，跟节点html<br>13.所有层叠上下文内的元素会按照以下顺序，从后到前叠放：</p>
+<h3 id="第七章-定位和层叠上下文"><a href="#第七章-定位和层叠上下文" class="headerlink" title="第七章 定位和层叠上下文"></a>第七章 定位和层叠上下文</h3><p>1.固定和绝对定位可以设置top,right,bottom,left改变定位元素的大小，相对定位不可以<br>2.固定定位相对于视口定位，绝对定位相对于最近定位父元素定位，如果没有定位父元素，则相对于初始包含块定位<br>3.初始包含块是视口和html根元素之间的内容<br>4.相对定位，left和right， top和bottom不能同时使用，left和right一起使用时，right会被忽略，top和bottom一起使用时right会被忽略<br>5.通常情况下（使用定位之前），元素在HTML里出现的顺序决定了绘制的顺序。<br>6.浏览器会先绘制所有非定位的元素，然后绘制定位元素。默认情况下，所有的定位元素会出现在非定位元素前面。<br>7.相对定位依赖于文档流，绝对定位元素依赖于它的定位祖先节点。这时候需要用z-index属性来控制它们的层叠行为。<br>8.z-index属性的值可以是任意整数（正负都行）。z表示的是笛卡儿x-y-z坐标系里的深度方向。拥有较高z-index的元素出现在拥有较低z-index的元素前面。拥有负数z-index的元素出现在静态元素后面<br>9.z-index只在定位元素上生效，不能控制静态元素；给一个定位元素添加z-index属性可以创建层叠上下文。<br>10.一个层叠上下文包含一个元素或由浏览器一起绘制的一组元素。其中一个元素作为层叠上下文的根，比如给一个定位元素设置z-index属性，该元素就是新的层叠上下问的根。<br>11.层叠上下文负责决定哪些元素出现在另一些元素前面，而BFC负责处理文档流，以及元素是否会重叠<br>12.创建层叠上下文方式：给定位元素添加z-index属性，opacity属性小于1，transform、，filter属性，跟节点html<br>13.所有层叠上下文内的元素会按照以下顺序，从后到前叠放：</p>
 <p>  1.层叠上下文的根<br>  2.z-index为负的定位元素（及其子元素）<br>  3.非定位元素<br>  4.z-index为auto的定位元素（及其子元素）<br>  5.z-index为正的定位元素（及其子元素）</p>
-<h1 id="第8章-响应式设计"><a href="#第8章-响应式设计" class="headerlink" title="第8章 响应式设计"></a>第8章 响应式设计</h1><p>1.响应式设计的三大原则如下</p>
+<h3 id="第八章-响应式设计"><a href="#第八章-响应式设计" class="headerlink" title="第八章 响应式设计"></a>第八章 响应式设计</h3><p>1.响应式设计的三大原则如下</p>
 <p>  (1) 移动优先。这意味着在实现桌面布局之前先构建移动版的布局。不要忘记给视口添加meta标签。<br>  (2) @media规则。使用这个样式规则，可以为不同大小的视口定制样式。用这一语法，通常叫作媒体查询（media queries），写的样式只在特定条件下才会生效。使用媒体查询，按照视口从小到大的顺序渐进增强网页。<br>  (3) 流式布局（fluid layout）。这种方式允许容器根据视口宽度缩放尺寸。</p>
-<h1 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h1><h3 id="1-基础选择器"><a href="#1-基础选择器" class="headerlink" title="1.基础选择器"></a>1.基础选择器</h3><ol>
+<p>选择器</p>
+<p>1.基础选择器</p>
+<ol>
 <li>tagname——类型选择器或者标签选择器。该选择器匹配目标元素的标签名。它的优先级是0,0,1。例如：p、h1、strong。</li>
 <li>class——类选择器。该选择器匹配class属性中有指定类名的元素。它的优先级是0,1,0。例如：.media、.nav-menu。</li>
 <li>#id——ID选择器。该选择器匹配拥有指定ID属性的元素。它的优先级是1,0,0。例如：#sidebar。</li>
 <li>＊——通用选择器。该选择器匹配所有元素。它的优先级是0,0,0。</li>
 </ol>
-<h3 id="2-组合器"><a href="#2-组合器" class="headerlink" title="2.组合器"></a>2.组合器</h3><ol>
+<p>2.组合器</p>
+<ol>
 <li>子组合器（&gt;）——匹配的目标元素是其他元素的直接后代。例如：.parent &gt; .child。</li>
 <li>相邻兄弟组合器（+）——匹配的目标元素紧跟在其他元素后面。例如：p + h2。</li>
 <li>通用兄弟组合器（~）——匹配所有跟随在指定元素之后的兄弟元素。注意，它不会选中目标元素之前的兄弟元素。例如：li.active ~ li。</li>
 </ol>
-<h3 id="3-伪类选择器"><a href="#3-伪类选择器" class="headerlink" title="3.伪类选择器"></a>3.伪类选择器</h3><p>伪类选择器用于选中处于某个特定状态的元素。伪类选择器始终以一个冒号（:）开始。优先级等于一个类选择器（0,1,0）</p>
+<p>3.伪类选择器</p>
+<p>伪类选择器用于选中处于某个特定状态的元素。伪类选择器始终以一个冒号（:）开始。优先级等于一个类选择器（0,1,0）</p>
 <ol>
 <li>:first-child——匹配的元素是其父元素的第一个子元素。</li>
 <li>:last-child——匹配的元素是其父元素的最后一个子元素。</li>
@@ -276,7 +280,8 @@
 <li>:required——匹配设置了required属性的元素（Level4）。</li>
 <li>:optional——匹配没有设置required属性的元素</li>
 </ol>
-<h3 id="4-伪元素选择器"><a href="#4-伪元素选择器" class="headerlink" title="4.伪元素选择器"></a>4.伪元素选择器</h3><p>伪元素类似于伪类，但是它不匹配特定状态的元素，而是匹配在文档中没有直接对应HTML元素的特定部分.<br>以双冒号（::）开头，尽管大多数浏览器也支持单冒号的语法以便向后兼容。伪元素选择器的优先级与类型选择器（0,0,1）相等</p>
+<p>4.伪元素选择器</p>
+<p>伪元素类似于伪类，但是它不匹配特定状态的元素，而是匹配在文档中没有直接对应HTML元素的特定部分.<br>以双冒号（::）开头，尽管大多数浏览器也支持单冒号的语法以便向后兼容。伪元素选择器的优先级与类型选择器（0,0,1）相等</p>
 <ol>
 <li>::before——创建一个伪元素，使其成为匹配元素的第一个子元素。该元素默认是行内元素，可用于插入文字、图片或其他形状。必须指定content属性才能让元素出现，例如：.menu::before。</li>
 <li>::after——创建一个伪元素，使其成为匹配元素的最后一个子元素。该元素默认是行内元素，可用于插入文字、图片或其他形状。必须指定content属性才能让元素出现，例如：.menu::after。1.</li>
@@ -284,7 +289,8 @@
 <li>::first-line——用于指定匹配元素的第一行文本的样式。</li>
 <li>::selection——用于指定用户使用鼠标高亮选择的任意文本的样式。通常用于改变选中文本的background-color。只有少数属性可以使用，包括color、background-color、cursor、text-decoration。</li>
 </ol>
-<h3 id="5-属性选择器"><a href="#5-属性选择器" class="headerlink" title="5.属性选择器"></a>5.属性选择器</h3><p>属性选择器用于根据HTML属性匹配元素。其优先级与一个类选择器（0,1,0）相等</p>
+<p>5.属性选择器</p>
+<p>属性选择器用于根据HTML属性匹配元素。其优先级与一个类选择器（0,1,0）相等</p>
 <p>以下选择器区分大小写：</p>
 <ol>
 <li>[attr]——匹配的元素拥有指定属性attr，无论属性值是什么，例如：input[disabled]。</li>
@@ -326,22 +332,22 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%B1%82%E5%8F%A0%E3%80%81%E4%BC%98%E5%85%88%E7%BA%A7%E5%92%8C%E7%BB%A7%E6%89%BF"><span class="toc-number">1.</span> <span class="toc-text">第一章 层叠、优先级和继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E7%9B%B8%E5%AF%B9%E5%8D%95%E4%BD%8D"><span class="toc-number">2.</span> <span class="toc-text">第二章 相对单位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC3%E7%AB%A0-%E7%9B%92%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">第3章 盒模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC7%E7%AB%A0-%E5%AE%9A%E4%BD%8D%E5%92%8C%E5%B1%82%E5%8F%A0%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number"></span> <span class="toc-text">第7章 定位和层叠上下文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC8%E7%AB%A0-%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1"><span class="toc-number"></span> <span class="toc-text">第8章 响应式设计</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number"></span> <span class="toc-text">选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">1.基础选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%BB%84%E5%90%88%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">2.组合器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BC%AA%E7%B1%BB%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">3.</span> <span class="toc-text">3.伪类选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BC%AA%E5%85%83%E7%B4%A0%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">4.</span> <span class="toc-text">4.伪元素选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%B1%9E%E6%80%A7%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">5.</span> <span class="toc-text">5.属性选择器</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%B1%82%E5%8F%A0%E3%80%81%E4%BC%98%E5%85%88%E7%BA%A7%E5%92%8C%E7%BB%A7%E6%89%BF"><span class="toc-number">1.</span> <span class="toc-text">第一章 层叠、优先级和继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E7%9B%B8%E5%AF%B9%E5%8D%95%E4%BD%8D"><span class="toc-number">2.</span> <span class="toc-text">第二章 相对单位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%9B%92%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">第三章 盒模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%AE%9A%E4%BD%8D%E5%92%8C%E5%B1%82%E5%8F%A0%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number">4.</span> <span class="toc-text">第七章 定位和层叠上下文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E5%93%8D%E5%BA%94%E5%BC%8F%E8%AE%BE%E8%AE%A1"><span class="toc-number">5.</span> <span class="toc-text">第八章 响应式设计</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&text=css-笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=css-笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&is_video=false&description=css-笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=css-笔记&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=css-笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=css-笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=css-笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=css-笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&name=css-笔记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&t=css-笔记"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&text=深入解析css"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=深入解析css"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&is_video=false&description=深入解析css"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=深入解析css&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=深入解析css"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=深入解析css"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=深入解析css"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&title=深入解析css"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&name=深入解析css&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2022/07/14/css-%E7%AC%94%E8%AE%B0/&t=深入解析css"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
