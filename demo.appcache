@@ -1,0 +1,8 @@
+CACHE MANIFEST
+/buju.css
+
+NETWORK:
+/source/images
+
+FALLBACK:
+base64.html

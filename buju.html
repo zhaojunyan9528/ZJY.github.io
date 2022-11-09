@@ -1,104 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" manifest="demo.appcache">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <style>
-    /* 圣杯布局，两边固宽，用父容器padding空出空间
-    float加负margin */
-    * {
-      padding: 0;
-      margin: 0;
-    }
-    .container {
-      padding: 0 60px 0 30px;
-      height: 150px;
-
-    }
-    .main {
-      float: left;
-      width: 100%;
-      height: 150px;
-      background-color: aquamarine;
-    }
-    .left {
-      float: left;
-      width: 30px;
-      height: 100px;
-      background-color: darkkhaki;
-      margin-left: calc(-100% - 30px);
-    }
-    .right {
-      float: left;
-      width: 60px;
-      height: 100px;
-      background-color: firebrick;
-      /* margin-left: -60px;
-      position: relative;
-      left: 60px; */
-      margin-right: -60px;
-    }
-
-    /* 双飞翼布局 */
-
-    .container1 {
-      width: 100%;
-      height: 150px;
-      border-top: 1px solid;
-    }
-    .container1 .main1 {
-      float: left;
-      width: 100%;
-    }
-    .content {
-      height: 150px;
-      background-color: aquamarine;
-      margin: 0 60px 0 30px;
-    }
-    .left1 {
-      float: left;
-      width: 30px;
-      height: 100px;
-      margin-left: -100%;
-      background-color: darkkhaki;
-    }
-    .right1 {
-      float: left;
-      width: 60px;
-      height: 100px;
-      margin-left: -60px;
-      background-color: firebrick;
-    }
-
-    /* flex */
-    .container2 {
-      width: 100%;
-      height: 150px;
-      border-top: 1px solid;
-      display: flex;
-      flex: 1 1 auto;
-    }
-    .main2 {
-      height: 150px;
-      background-color: aquamarine;
-      width: 100%;
-    }
-    .left2 {
-      width: 30px;
-      height: 100px;
-      background-color: darkkhaki;
-    }
-    .right2 {
-      width: 60px;
-      height: 100px;
-      background-color: firebrick;
-      flex-shrink: 0;
-    }
-  </style>
+  <link rel="stylesheet" href="buju.css">
 </head>
 <body>
+  <button onclick="handleClick">点击fetch</button>
   <input type="text" accesskey="n" dir="rtl" draggable="true" 
     tabindex="1" title="input" data-id="test">
   <button>hahhah</button>
@@ -128,6 +38,7 @@
       </tr>
     </tbody>
   </table>
+  <div id="status"></div>
   <div class="container">
     <div class="main">
       <p>圣杯布局</p>
@@ -156,6 +67,23 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
+    function handleClick(e) {
+
+      fetch("http://crm-gateway.test.hxss.com.cn/crm/customer/getCustomerNature?natureType=customerNature", {
+        "headers": {
+          "accept": "*/*",
+          "accept-language": "zh-CN,zh;q=0.9",
+          "admin-token": "b0550d618ebc435e9a6715804f19e391",
+          "x-client-id": "HXSS_CRM_APP",
+          "Referer": "http://localhost:8080/",
+          "Referrer-Policy": "strict-origin-when-cross-origin"
+        },
+        "body": null,
+        "method": "GET"
+      }).finally(res => {
+        console.log(res)
+      })
+    }
     window.onload = function() {
       // console.log(CryptoJS.enc.Base64.stringify)
       // let target = 'abc'
@@ -170,8 +98,163 @@
       var words = CryptoJS.enc.Base64.parse(base64);
       var parseStr = words.toString(CryptoJS.enc.Utf8)
       console.log('CryptoJS-base64---解密:', parseStr)
+
+      //---- service work
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register(
+          '/servicework.js',
+          {
+            scope: '/'
+          }
+        ).then(function(reg) {
+          console.log('Registration succeeded. Scope is ' + reg.scope);
+        }).catch(function(error) {
+          console.log('Registration failed with ' + error);
+        })
+      }
     }
-    
+    this.addEventListener('install', function(event) {
+      event.waitUntil(
+        caches.open('v1').then(function(cache) {
+          return cache.addAll([
+            '/buju.css',
+            'buju.html'
+          ])
+        })
+      )
+    })
+    this.addEventListener('fetch', function(event) {
+      event.respondWith(
+        caches.match(event.request).then(function (response) {
+          // 如果没有在缓存中找到匹配的资源，你可以告诉浏览器对着资源直接去 fetch 默认的网络请求
+          return response || fetch(event.request).then(function (resp) {
+            return caches.open('v1').then(function (cache) {
+              cache.put(event.request, resp.clone())
+              return resp
+            })
+          })
+          // 这里我们用 fetch(event.request) 返回了默认的网络请求，它返回了一个 promise。
+          // 当网络请求的 promise 成功的时候，我们 通过执行一个函数用 caches.open('v1') 来抓取我们
+          // 的缓存，它也返回了一个 promise。当这个 promise 成功的时候， cache.put() 被用来把这些
+          // 资源加入缓存中。资源是从 event.request 抓取的，它的响应会被 response.clone() 克隆一份
+          // 然后被加入缓存。这个克隆被放到缓存中，它的原始响应则会返回给浏览器来给调用它的页面。
+        }).catch(function () {
+          return caches.match('/fallback.html')
+        })
+        // 当请求没有匹配到请求的资源网络也不可用时，请求会失败，提供一个回退方案
+      )
+    })
+
+    // web sql start
+    var dbase = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
+    dbase.transaction(function (tx) {
+      tx.executeSql('CREATE TABLE IF NOT EXISTS WIN (id unique, name)');
+      tx.executeSql('INSERT INTO WIN (id, name) VALUES (1, "winty")');
+      tx.executeSql('INSERT INTO WIN (id, name) VALUES (2, "LuckyWinty")');
+    })
+    dbase.transaction(function (tx) {
+      tx.executeSql('SELECT * FROM WIN', [], function (tx, results) {
+          var len = results.rows.length, i;
+          msg = "<p>查询记录条数: " + len + "</p>";
+          document.querySelector('#status').innerHTML +=  msg;
+
+          for (i = 0; i < len; i++){
+            alert(results.rows.item(i).name );
+          }
+
+      }, null);
+    })
+    // web sql end
+
+    // indexedDB---start
+    {
+      let dbName = 'helloIndexedDB', version = 1, storeName = 'helloStore'
+      let indexedDB = window.indexedDB
+      let db
+      const request = indexedDB.open(dbName, version)
+      request.onsuccess = function (event) {
+        db = event.target.result // 数据库对象
+        console.log('数据库打开成功')
+      }
+      request.onerror = function (event) {
+        console.log('数据库打开报错')
+      }
+      // 数据库创建或升级时触发
+      request.onupgradeneeded = function (event) {
+        console.log('onupgradeneeded')
+        db = event.target.result // 数据库对象
+        let objStore
+        if (!db.objectStoreNames.contains(storeName)) {
+          objStore = db.createObjectStore(storeName, {keyPath: 'id'})
+        }
+      }
+      // 添加数据
+      function addData(db, storeName, data) {
+        let request = db.transaction([storeName], 'readwrite')
+          .objectStore(storeName) // 仓库对象
+          .add(data)
+        request.onsuccess = function(event) {
+          console.log('数据写入成功')
+        }
+        request.onerror = function(event) {
+          console.log('数据写入失败')
+          throw new Error(event.target.error)
+        }
+      }
+
+      // 根据id获取数据
+      function getDataBykey(db, storeName, key) {
+        let req = db.transaction([storeName]).objectStore(storeName).get(key)
+        req.onsuccess = function (event) {
+          console.log('查询结果', req.result)
+        }
+        req.onerror = function (event) {
+          console.log('查询失败')
+        }
+      }
+
+      // 根据id修改数据
+      function updateDB(db, storeName, data) {
+        let req = db.transaction([storeName], 'readwrite')
+          .objectStore(storeName)
+          .put(data)
+        req.onsuccess = function (event) {
+          console.log('数据更新成功')
+        }
+        req.onerror = function (event) {
+          console.log('数据更新失败')
+        }
+      }
+
+      // 根据id删除数据
+      function deleteBD(db, storeName, id) {
+        let req = db.transaction([storeName], 'readwrite')
+          .objectStore(storeName)
+          .delete(id)
+        req.onsuccess = function (event) {
+          console.log('数据删除成功')
+        }
+        req.onerror = function (event) {
+          console.log('数据删除失败')
+        }
+      }
+
+      // 由于打开indexDB是异步的加个定时器避免 db对象还没获取到值导致 报错
+      setTimeout(() => {
+        addData(db, storeName, {
+          id: 1,
+          name: 'zhangsan',
+          age: 18,
+          desc: 'a girl'
+        })
+
+        getDataBykey(db, storeName, 1)
+
+        updateDB(db, storeName, {id: 1, desc: 'a boy'})
+
+        // deleteBD(db, storeName, 1)
+      }, 1000)
+    }
   </script>
   <script>
     // 创建Base64对象
