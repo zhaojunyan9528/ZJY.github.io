@@ -87,3 +87,64 @@
   background-color: firebrick;
   flex-shrink: 0;
 }
+
+input[type='button'] {
+  display: none;
+}
+
+label {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #456;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 2px 2px 4px 0 rgba(0,0,0,.3);
+  border-radius: 2px;
+}
+.flex_row {
+  display: flex;
+}
+.triangle {
+  width: 0;
+  height: 0;
+  border: 10px solid red;
+  margin: 0 10px;
+}
+.t_left {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+
+  border-left-color: transparent;
+}
+.t_right {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+
+  border-right-color: transparent;
+}
+.t_top {
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-top-color: transparent;
+}
+.t_bottom {
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+}
+.t_left_t {
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+.t_left_b {
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+.t_right_t {
+  border-top-color: transparent;
+  border-right-color: transparent;
+}
+.t_right_b {
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+}

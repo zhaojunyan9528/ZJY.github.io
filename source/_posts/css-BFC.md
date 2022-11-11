@@ -17,10 +17,11 @@ w3c标准盒模型-块级盒-border-box：width = content + padding + margin
 IE盒子模型-块级盒-content-box：width = content
 
 + 行内盒：
-    + width/height 不起作用，盒子高度由内容决定（font-size/line-height）
-    + margin-top/margin-bottom padding-top/padding-bottom不起作用
+  + width/height 不起作用，盒子高度由内容决定（font-size/line-height）
+  + margin-top/margin-bottom padding-top/padding-bottom不起作用
 
 tips：
+
 + 两类块级盒子可用过设置box-sizing转换
 + 行内盒与块级盒转换可通过设置display属性来修改
 + 行内盒参与IFC布局，块级盒参与BFC布局，如果块级盒包含行内盒，但是由于BFC内只有块级盒参与，因此行内盒会被匿名块级盒包含
@@ -29,10 +30,11 @@ tips：
 
 Box 是 CSS 布局的对象和基本单位， 直观点来说，就是一个页面是由很多个 Box 组成的。元素的类型和 display 属性，决定了这个 Box 的类型。
 不同类型的 Box， 会参与不同的 Formatting Context（一个决定如何渲染文档的容器），因此Box内的元素会以不同的方式渲染
+
 + block-level：box的display 属性为block, list-item, table 的元素，会生成 block-level box。并且参与（BFC）block fomatting context；
 + inline-level：box的display 属性为inline, inline-block, inline-table 的元素，会生成 inline-level box。并且参与 inline formatting context；
 
-### 格式化上下文：
+### 格式化上下文
 
 + 块级格式化上下文( Block formatting contexts )( BFC )
 + 行内格式化上下文( Inline formatting contexts ) ( IFC )
@@ -46,7 +48,6 @@ Box 是 CSS 布局的对象和基本单位， 直观点来说，就是一个页�
 在非块级格式化上下文中的块容器总是会创建新的BFC：如display为inline-blocks, table-cells, 和table-captions所生成的盒。
 
 而自身也在块级格式化上下文中的块容器，则只有overflow不为visible的情形下才会创建新的BFC
-
 
 + 绝对定位和浮动的块容器则总是会创建新的块级格式化上下文。
 + display值为table或者inline-table的元素将会生成表格（table），表格内部会使用特殊的格式化方式来排布其内部元素。
@@ -97,9 +98,10 @@ block, table, flex, grid, list-item 为块级
 inline, inline-block, inline-table, inline-flex, inline-grid 为行内级
 
 产生垂直外边距合并的必备条件,两个margin是邻接的必须满足以下条件:
+
 + 必须是处于常规文档流（非float和绝对定位）的块级盒子,并且处于同一个BFC当中
 没有线盒，没有空隙（clearance，下面会讲到），没有padding和border将他们分隔开,都属于垂直方向上相邻的外边距，可以是下面任意一种情况:
-    + 元素的margin-top与其第一个常规文档流的子元素的margin-top
-    + 元素的margin-bottom与其下一个常规文档流的兄弟元素的margin-top
-    + height为auto的元素的margin-bottom与其最后一个常规文档流的子元素的margin-bottom
-    + 高度为0并且最小高度也为0，不包含常规文档流的子元素，并且自身没有建立新的BFC的元素的margin-top和margin-bottom
+  + 元素的margin-top与其第一个常规文档流的子元素的margin-top
+  + 元素的margin-bottom与其下一个常规文档流的兄弟元素的margin-top
+  + height为auto的元素的margin-bottom与其最后一个常规文档流的子元素的margin-bottom
+  + 高度为0并且最小高度也为0，不包含常规文档流的子元素，并且自身没有建立新的BFC的元素的margin-top和margin-bottom

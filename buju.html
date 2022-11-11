@@ -8,6 +8,34 @@
   <link rel="stylesheet" href="buju.css">
 </head>
 <body>
+  <div class="flex_row">triangle
+    <div class="triangle"></div>
+
+    <div class="triangle t_left"></div>
+    <div class="triangle t_right"></div>
+    
+    <div class="triangle t_top"></div>
+    <div class="triangle t_bottom"></div>
+    
+    <div class="triangle t_left_b"></div>
+    <div class="triangle t_left_t"></div>
+    <div class="triangle t_right_b"></div>
+    <div class="triangle t_right_t"></div>
+  </div>
+  <br />
+  label：利用label"模拟"button来解决不同浏览器原生button样式不同的问题
+  <input type="button" id="btn">
+  <label for="btn">Button</label>
+  <br />
+  <label for='idName' >姓名</label>
+  <input type='text' id='idName' />
+  <br />
+  <form>
+    <label for="male">Male</label>
+    <input type="radio" name="sex" id="male" />
+  </form>
+  <br />
+
   <button onclick="handleClick">点击fetch</button>
   <input type="text" accesskey="n" dir="rtl" draggable="true" 
     tabindex="1" title="input" data-id="test">
@@ -68,21 +96,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
     function handleClick(e) {
-
-      fetch("http://crm-gateway.test.hxss.com.cn/crm/customer/getCustomerNature?natureType=customerNature", {
-        "headers": {
-          "accept": "*/*",
-          "accept-language": "zh-CN,zh;q=0.9",
-          "admin-token": "b0550d618ebc435e9a6715804f19e391",
-          "x-client-id": "HXSS_CRM_APP",
-          "Referer": "http://localhost:8080/",
-          "Referrer-Policy": "strict-origin-when-cross-origin"
-        },
-        "body": null,
-        "method": "GET"
-      }).finally(res => {
-        console.log(res)
-      })
+      console.log(e);
     }
     window.onload = function() {
       // console.log(CryptoJS.enc.Base64.stringify)
@@ -159,7 +173,7 @@
           document.querySelector('#status').innerHTML +=  msg;
 
           for (i = 0; i < len; i++){
-            alert(results.rows.item(i).name );
+            console.log(results.rows.item(i).name );
           }
 
       }, null);
