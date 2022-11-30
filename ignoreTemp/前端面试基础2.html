@@ -40,7 +40,7 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12890819-1fe94787d58e751d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12890819-8156dafea5e01e46.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="article:published_time" content="2021-01-22T17:24:12.000Z">
-<meta property="article:modified_time" content="2022-11-23T08:42:35.280Z">
+<meta property="article:modified_time" content="2022-11-30T00:50:17.210Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -186,18 +186,12 @@
 <p>直接就一个 img，它 float：left，加文字加 p 标签就好了。</p>
 <hr>
 <p><strong>html 中 title 属性和 alt 属性的区别 ？</strong></p>
-<ol>
-<li>alt</li>
-</ol>
+<p><strong>alt：</strong></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;#&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;alt 信息&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 <p>当图片不输出信息的时候，会显示 alt 信息， 鼠标放上去没有信息。<br>当图片正常读取，不会出现 alt 信息。</p>
-<ol>
-<li>title</li>
-</ol>
+<p><strong>title：</strong></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;#&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;alt 信息&quot;</span> <span class="attr">title</span>=<span class="string">&quot;title 信息&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
 <p>当图片不输出信息的时候，会显示 alt 信息，鼠标放上去会出现 title 信息。<br>当图片正常输出的时候，不会出现 alt 信息，鼠标放上去会出现 title 信息。</p>
-<hr>
 <p><strong>讲述你对 reflow 和 repaint 的理解。</strong></p>
 <p>repaint 就是重绘，reflow 就是回流。</p>
 <p>严重性： 在性能优先的前提下，性能消耗 reflow 大于 repaint。</p>

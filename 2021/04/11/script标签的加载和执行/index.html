@@ -13,11 +13,13 @@
 <meta property="og:site_name" content="ZJY">
 <meta property="og:description" content="1.script标签是如何加载的？ 当浏览器遇到一个script标签时，会暂停页面渲染，运行javascript代码，然后再继续解析渲染页面； 当遇到外部javascript脚本时，浏览器首先下载外部js代码，会占用一部分时间，然后运行js代码，此过程中，页面解析渲染和用户交互是阻塞的。  2.script标签应放在何处？12345&lt;head&gt;&lt;script type&#x3D;&amp;quot">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/images/script.jpg">
 <meta property="article:published_time" content="2021-04-11T14:36:45.000Z">
-<meta property="article:modified_time" content="2022-11-23T08:42:35.276Z">
+<meta property="article:modified_time" content="2022-11-30T00:50:17.206Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/images/script.jpg">
     
     
       
@@ -137,7 +139,7 @@
       
         <time datetime="2021-04-11T14:36:45.000Z" itemprop="datePublished">2021-04-11</time>
         
-        (Updated: <time datetime="2022-11-23T08:42:35.276Z" itemprop="dateModified">2022-11-23</time>)
+        (Updated: <time datetime="2022-11-30T00:50:17.206Z" itemprop="dateModified">2022-11-30</time>)
         
       
     </div>
@@ -173,10 +175,11 @@
 <h3 id="3-非阻塞脚本"><a href="#3-非阻塞脚本" class="headerlink" title="3.非阻塞脚本"></a>3.非阻塞脚本</h3><p>非阻塞脚本就是等页面加载完成之后，再加载js。</p>
 <p>1.defer属性</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;file1.js&quot;</span> <span class="attr">defer</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>此script标签可以放在页面任何位置，解析到script标签时会立即下载此js文件，但会等到页面加载完成后再执行此js文件<br>只对外部js脚本有效，HTML5规范要求脚本按照它们出现的先后顺序执行。</p>
+<p>此script标签可以放在页面任何位置，解析到script标签时会立即下载此js文件，但会等到页面加载完成后再执行此js文件<br>只对外部js脚本有效，HTML5规范要求脚本按照它们出现的先后顺序执行。<br>延迟脚本会按他们在文档里的出现顺序执行</p>
 <p>2.async属性</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;file1.js&quot;</span> <span class="attr">async</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>不让页面等到脚本的下载和执行，从而异步加载页面其他内容。<br>下载完立即执行。不保证按照指定的先后顺序执行。只对外部js脚本有效</p>
+<p>不让页面等到脚本的下载和执行，从而异步加载页面其他内容。<br>下载完立即执行。不保证按照指定的先后顺序执行。只对外部js脚本有效<br>异步脚本在它们载入后执行，但是不能保证执行顺序。</p>
+<p>图片说明script，defer，async：<br><img src="/ZJY.github.io/images/script.jpg" alt="image"></p>
 <p>3.动态创建script标签</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">downloadJSAtOnload</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> element = <span class="built_in">document</span>.createElement(<span class="string">&#x27;script&#x27;</span>);</span></span><br><span class="line"><span class="javascript">  element.src = <span class="string">&#x27;test.js&#x27;</span>;</span></span><br><span class="line"><span class="javascript">  <span class="built_in">document</span>.body.appendChild(element);</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="javascript"><span class="keyword">if</span>(<span class="built_in">window</span>.addEventListener)&#123;</span></span><br><span class="line"><span class="javascript">  <span class="built_in">window</span>.addEventListener(<span class="string">&quot;load&quot;</span>,downloadJSAtOnload, <span class="literal">false</span>);</span></span><br><span class="line"><span class="javascript">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">window</span>.attachEvent)&#123;</span></span><br><span class="line"><span class="javascript">  <span class="built_in">window</span>.attachEvent(<span class="string">&quot;onload&quot;</span>,downloadJSAtOnload);  </span></span><br><span class="line"><span class="javascript">&#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="javascript">  <span class="built_in">window</span>.onload =downloadJSAtOnload; </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>创建script，插入到DOM中，加载完毕后callBack</p>
