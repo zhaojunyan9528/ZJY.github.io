@@ -50,7 +50,6 @@ console.log(me);
 // }
 
 
-
 var xxx = Object.create({
     a:'a'
 },{
@@ -64,7 +63,7 @@ var xxx = Object.create({
 console.log(xxx);
 // xxx{
 //     name:'ha',
-//     xxx:'zjy',
+//     str:'zjy',
 //     __proto__:{
 //         a:'a'
 //     }
@@ -93,5 +92,5 @@ console.log(_aObj);
 //         c:funtion()
 //     }
 // }
-_aObj.c('haha');//n:haha
+_aObj.c('haha'); // n:haha
 ```
