@@ -148,3 +148,13 @@ label {
   border-bottom-color: transparent;
   border-right-color: transparent;
 }
+
+.textarea {
+  width: 200px;
+  border: 1px solid grey;
+  height: 30px;
+  border-radius: 2px;
+  margin: 0 auto;
+  resize: both;
+  overflow: auto;
+}
