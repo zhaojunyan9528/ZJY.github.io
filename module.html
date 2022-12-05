@@ -86,10 +86,82 @@
       background: white;
       padding: 0 5px;
     }
+
+    .parent {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .child {
+      /* position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); */
+    }
+    html,body {
+      height: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+    .content {
+      flex: 1 0 auto;
+    }
+    .footer {
+      flex-shrink: 0;
+    }
+    span {
+      background-color: darkcyan;
+      font-size: 14px;
+    }
+    .box {
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      height: 100%;
+
+    }
+    .row {
+      height: 50%;
+      width: 100%;
+    }
+    .item {
+      width: 50%;
+      height: 100%;
+      border: 1px solid;
+      float: left;
+    }
+    .top {
+      grid-column-start: 1;
+    grid-column-end: 3;
+    }
   </style>
 </head>
 <body>
-  <div class="one">hello world</div>
+  <div class="box">
+    <div class="top">1</div>
+    <div class="left">2</div>
+    <div class="right">3</div>
+  </div>
+
+  <!-- <div>
+    <span>hello</span> <span>world</span>
+  </div> -->
+
+
+  <!-- <div class="wrapper">
+      <div class="content">页面主体内容区域 </div>
+  </div>
+  <div class="footer">需要做到 Sticky Footer 效果的页脚</div> -->
+
+  <!-- <div class="parent">
+    <div class="child">center</div>
+  </div> -->
+  <!-- <br /><br /><br /> -->
+  <!-- <div class="one">hello world</div>
   <div class="multi">杭萧钢构项目杭萧钢构项目杭萧钢构项目钢构项目杭萧钢构项目杭萧钢构项目杭萧钢构项目钢构项目杭萧钢构项目杭萧钢构项目杭萧钢构项目钢构项目杭萧钢构项目杭萧钢构项目杭萧钢构项目钢构项目杭萧钢构项目杭萧钢构项目杭萧钢构项目钢构项目</div>
   <div class="multi2">杭萧钢构项目杭萧钢构项目杭萧钢构项目钢构项目杭萧钢构项目杭萧钢构项目杭萧钢构项目钢构项目杭萧钢构项目杭萧钢构项目杭萧钢构项目钢构项目杭萧钢构项目杭萧钢构项目杭萧钢构项目钢构项目杭萧钢构项目杭萧钢构项目杭萧钢构项目钢构项目</div>
   
@@ -99,6 +171,104 @@
       <div class="swiperItem">2</div>
       <div class="swiperItem">3</div>
     </div>
-  </div>
+  </div> -->
+  <script>
+    // es6 扩展运算符
+    {
+      var obj = {
+        name: 'xiaoming',
+        info: {
+          age: 19,
+          obj: {
+            sex: 1
+          }
+        }
+      }
+      var deepObj = { ...obj }
+      deepObj.info.obj.sex = 2
+      console.log('obj', obj); // sex:2
+      console.log('deepObj', deepObj); // sex:2
+    }
+
+    // Object.assign
+    {
+      var obj = {
+        name: 'xiaoming',
+        info: {
+          age: 19,
+          obj: {
+            sex: 1
+          }
+        }
+      }
+      var deepObj = Object.assign({}, obj)
+      deepObj.info.obj.sex = 2
+      console.log('obj', obj); // sex:2
+      console.log('deepObj', deepObj); // sex:2
+    }
+
+    // JSON.stringify的方式
+    {
+      var obj = {
+        name: 'xiaoming',
+        info: {
+          age: 19,
+          obj: {
+            sex: 1
+          }
+        },
+        fun: function() {
+          console.log('fun', this);
+        }
+      }
+      var deepObj = JSON.parse(JSON.stringify(obj))
+      deepObj.info.obj.sex = 2
+      console.log('obj', obj);
+      // output: {
+      //   name: 'xiaoming',
+      //   info: {
+      //     age: 19,
+      //     obj: {
+      //       sex: 1
+      //     }
+      //   },
+      //   fun: f()
+      // }
+      console.log('deepObj', deepObj);
+      // output: {
+      //   name: 'xiaoming',
+      //   info: {
+      //     age: 19,
+      //     obj: {
+      //       sex: 1
+      //     }
+      //   },
+      //   缺少fun
+      // }
+    }
+    // es6语法糖和合并对象的方法都只能浅拷贝, 当出现对象中有多层级时只会独立拷贝第一层
+    // json的方式虽然能实现深度拷贝, 但是如果对象中有出现方法的情况下 方法无法进行克隆 会被踢出
+
+    function getDataType(obj) {
+      var toString = Object.prototype.toString;
+      var map = {
+        '[object Array]': 'array',
+        '[object Object]': 'object',
+        '[object String]': 'string',
+        '[object Number]': 'number',
+        '[object Null]': 'null',
+        '[object Undefined]': 'undefined',
+        '[object Boolean]': 'boolean',
+        '[object RegExp]': 'regExp',
+        '[object Function]': 'function',
+        '[object Date]': 'date',
+        '[object Symbol]': 'symbol',
+      }
+      if (obj instanceof Element) {
+        return 'element'
+      }
+      return map[toString.call(obj)]
+    }
+  </script>
 </body>
 </html>
