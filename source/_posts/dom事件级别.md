@@ -74,7 +74,7 @@ btn.addEventListener('click',handler,false);
 btn.removeEventListener('click',handler,false);//有效果
 ```
 
-<b>IE事件处理程序</b>
+**IE事件处理程序：**
 attachEvent()和detachEvent()接收同样的参数：事件处理程序的名字和事件处理函数。因为IE8及更早版本只支持冒泡，所以使用attachEvent添加的事件处理程序只会添加到冒泡阶段。
 
 ```js
@@ -103,8 +103,7 @@ btn.attachEvent("onclick",function(){
 });
 ```
 
-
-## dom3级事件：在dom2级事件基础上添加了更多的事件类型。
+## dom3级事件：在dom2级事件基础上添加了更多的事件类型
 
 UI事件:当用户与页面上元素交互时触发,比如:load,scroll,
 焦点事件:当元素获得或失去焦点时触发,比如:blur,focus,
@@ -134,6 +133,7 @@ btn.onclick = function(){
 ```
 
 如果是attachEvent指定的事件处理程序，event对象仍然是window对新的属性，但是出于方便也将其作为参数传入。
+
 ## DOM事件模型和事件流
 
 DOM事件模型分为捕获和冒泡。一个事件发生后，会在子元素和父元素之间传播（propagation）。这种传播分成三个阶段

@@ -1,274 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    .wraper {
-      width: 500px;
-      height: 400px;
-      overflow: hidden;
-    }
-    .container {
-      width: 1500px;
-      height: 400px;
-      position: relative;
-      animation: move 5s infinite linear forwards;
-    }
-    .swiperItem {
-      width: 500px;
-      height: 400px;
-      font-size: 50px;
-      text-align: center;
-      line-height: 400px;
-      user-select: none;
-      float: left;
-    }
-    @keyframes move {
-      0% {
-        /* transform: translateX(0); */
-        margin-left: 0;
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
       }
-      25% {
-        /* transform: translateX(0); */
-        margin-left: 0;
+      .page-container {
+        position: relative;
+        top: 0;
+        transition: all 1000ms ease;
+        touch-action: none;
       }
-      33.3% {
-        /* transform: translateX(-500px); */
-        margin-left: -500px;
+      .page-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        border: 1px solid #ddd;
       }
-      58% {
-        /* transform: translateX(-500px); */
-        margin-left: -500px;
-      }
-      66.6% {
-        /* transform: translateX(-1000px); */
-        margin-left: -1000px;
-      }
-      100% {
-        /* transform: translateX(-1000px); */
-        margin-left: -1000px;
-      }
-    }
-    .swiperItem:nth-child(1) {
-      background-color: aquamarine;
-    }
-    .swiperItem:nth-child(2) {
-      background-color: burlywood;
-    }
-    .swiperItem:nth-child(3) {
-      background-color: cornflowerblue;
-    }
-    .one {
-      text-align: center;
-    }
-    .multi {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      -webkit-line-clamp: 2;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-    }
-    .multi2 {
-      height: 2.8em;
-      line-height: 1.4;
-      overflow: hidden;
-      position: relative;
-    }
-    .multi2::after {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      content: '...';
-      height: 1.4em;
-      background: white;
-      padding: 0 5px;
-    }
-
-    .parent {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .child {
-      /* position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%); */
-    }
-    html,body {
-      height: 100%;
-      padding: 0;
-      margin: 0;
-    }
-    .wrapper {
-      display: flex;
-      flex-direction: column;
-    }
-    .content {
-      flex: 1 0 auto;
-    }
-    .footer {
-      flex-shrink: 0;
-    }
-    span {
-      background-color: darkcyan;
-      font-size: 14px;
-    }
-    .box {
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      height: 100%;
-
-    }
-    .row {
-      height: 50%;
-      width: 100%;
-    }
-    .item {
-      width: 50%;
-      height: 100%;
-      border: 1px solid;
-      float: left;
-    }
-    .top {
-      grid-column-start: 1;
-    grid-column-end: 3;
-    }
-  </style>
-</head>
-<body>
-  <div class="box">
-    <div class="top">1</div>
-    <div class="left">2</div>
-    <div class="right">3</div>
-  </div>
-
-  <!-- <div>
-    <span>hello</span> <span>world</span>
-  </div> -->
-
-
-  <!-- <div class="wrapper">
-      <div class="content">页面主体内容区域 </div>
-  </div>
-  <div class="footer">需要做到 Sticky Footer 效果的页脚</div> -->
-
-  <!-- <div class="parent">
-    <div class="child">center</div>
-  </div> -->
-  <!-- <br /><br /><br /> -->
-  <!-- <div class="one">hello world</div>
-  <div class="multi">杭萧钢构项目杭萧钢构项目杭萧钢构项目钢构项目杭萧钢构项目杭萧钢构项目杭萧钢构项目钢构项目杭萧钢构项目杭萧钢构项目杭萧钢构项目钢构项目杭萧钢构项目杭萧钢构项目杭萧钢构项目钢构项目杭萧钢构项目杭萧钢构项目杭萧钢构项目钢构项目</div>
-  <div class="multi2">杭萧钢构项目杭萧钢构项目杭萧钢构项目钢构项目杭萧钢构项目杭萧钢构项目杭萧钢构项目钢构项目杭萧钢构项目杭萧钢构项目杭萧钢构项目钢构项目杭萧钢构项目杭萧钢构项目杭萧钢构项目钢构项目杭萧钢构项目杭萧钢构项目杭萧钢构项目钢构项目</div>
-  
-  <div class="wraper">
-    <div class="container">
-      <div class="swiperItem">1</div>
-      <div class="swiperItem">2</div>
-      <div class="swiperItem">3</div>
+    </style>
+  </head>
+  <body>
+    <div class="page-container">
+      <div class="page-item">1</div>
+      <div class="page-item">2</div>
+      <div class="page-item">3</div>
     </div>
-  </div> -->
-  <script>
-    // es6 扩展运算符
-    {
-      var obj = {
-        name: 'xiaoming',
-        info: {
-          age: 19,
-          obj: {
-            sex: 1
+    <script>
+      var container = document.querySelector('.page-container')
+      // 获取根元素高度, 页面可视高度
+      var viewHeight = document.documentElement.clientHeight
+      // 获取滚动的页数
+      var pageNum = document.querySelectorAll('.page-item').length
+      // 初始化当前位置, 距离原始顶部距离
+      var currentPosition = 0
+      // 设置页面高度
+      container.style.height = viewHeight + 'px'
+
+      // 向下滚动页面
+      function goDown () {
+        if (currentPosition > - viewHeight * (pageNum - 1)) {
+          currentPosition = currentPosition - viewHeight
+          console.log('down', currentPosition)
+          container.style.top = currentPosition + 'px'
+        }
+      }
+
+      // 向上滚动页面
+      function goUp () {
+        if (currentPosition < 0) {
+          currentPosition = currentPosition + viewHeight
+          container.style.top = currentPosition + 'px'
+        }
+      }
+
+      function throttle (fn, delay) {
+        let baseTime = 0
+        return function () {
+          const currentTime = Date.now()
+          if (baseTime + delay < currentTime) {
+            fn.apply(this, arguments)
+            baseTime = currentTime
           }
         }
       }
-      var deepObj = { ...obj }
-      deepObj.info.obj.sex = 2
-      console.log('obj', obj); // sex:2
-      console.log('deepObj', deepObj); // sex:2
-    }
-
-    // Object.assign
-    {
-      var obj = {
-        name: 'xiaoming',
-        info: {
-          age: 19,
-          obj: {
-            sex: 1
-          }
+      var handlerWheel = throttle(scrollMove, 1000)
+      // https://developer.mozilla.org/en-US/docs/Web/API/Element/mousewheel_event#The_detail_property
+      // firefox的页面滚动事件其他浏览器不一样
+      if (navigator.userAgent.toLowerCase().indexOf('firefox') === -1) {
+        document.addEventListener('mousewheel', handlerWheel)
+      } else {
+        document.addEventListener('DOMMouseScroll', handlerWheel)
+      }
+      function scrollMove (e) {
+        console.log(e.deltaY)
+        if (e.deltaY > 0) {
+          goDown()
+        } else {
+          goUp()
         }
       }
-      var deepObj = Object.assign({}, obj)
-      deepObj.info.obj.sex = 2
-      console.log('obj', obj); // sex:2
-      console.log('deepObj', deepObj); // sex:2
-    }
-
-    // JSON.stringify的方式
-    {
-      var obj = {
-        name: 'xiaoming',
-        info: {
-          age: 19,
-          obj: {
-            sex: 1
-          }
-        },
-        fun: function() {
-          console.log('fun', this);
-        }
-      }
-      var deepObj = JSON.parse(JSON.stringify(obj))
-      deepObj.info.obj.sex = 2
-      console.log('obj', obj);
-      // output: {
-      //   name: 'xiaoming',
-      //   info: {
-      //     age: 19,
-      //     obj: {
-      //       sex: 1
-      //     }
-      //   },
-      //   fun: f()
-      // }
-      console.log('deepObj', deepObj);
-      // output: {
-      //   name: 'xiaoming',
-      //   info: {
-      //     age: 19,
-      //     obj: {
-      //       sex: 1
-      //     }
-      //   },
-      //   缺少fun
-      // }
-    }
-    // es6语法糖和合并对象的方法都只能浅拷贝, 当出现对象中有多层级时只会独立拷贝第一层
-    // json的方式虽然能实现深度拷贝, 但是如果对象中有出现方法的情况下 方法无法进行克隆 会被踢出
-
-    function getDataType(obj) {
-      var toString = Object.prototype.toString;
-      var map = {
-        '[object Array]': 'array',
-        '[object Object]': 'object',
-        '[object String]': 'string',
-        '[object Number]': 'number',
-        '[object Null]': 'null',
-        '[object Undefined]': 'undefined',
-        '[object Boolean]': 'boolean',
-        '[object RegExp]': 'regExp',
-        '[object Function]': 'function',
-        '[object Date]': 'date',
-        '[object Symbol]': 'symbol',
-      }
-      if (obj instanceof Element) {
-        return 'element'
-      }
-      return map[toString.call(obj)]
-    }
-  </script>
-</body>
+    </script>
+  </body>
 </html>
