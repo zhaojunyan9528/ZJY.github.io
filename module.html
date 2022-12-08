@@ -1,93 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      html,
-      body {
-        padding: 0;
-        margin: 0;
-        overflow: hidden;
-      }
-      .page-container {
-        position: relative;
-        top: 0;
-        transition: all 1000ms ease;
-        touch-action: none;
-      }
-      .page-item {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-        border: 1px solid #ddd;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="page-container">
-      <div class="page-item">1</div>
-      <div class="page-item">2</div>
-      <div class="page-item">3</div>
-    </div>
-    <script>
-      var container = document.querySelector('.page-container')
-      // 获取根元素高度, 页面可视高度
-      var viewHeight = document.documentElement.clientHeight
-      // 获取滚动的页数
-      var pageNum = document.querySelectorAll('.page-item').length
-      // 初始化当前位置, 距离原始顶部距离
-      var currentPosition = 0
-      // 设置页面高度
-      container.style.height = viewHeight + 'px'
+<html lang="en" data-theme="default">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>换肤</title>
+  <style>
+    :root {
+      --textColor: blue;
+    }
+    [data-theme="red"] {
+      --textColor: red;
+    }
+    [data-theme="green"] {
+      --textColor: green;
+    }
+    .container {
+      color: var(--textColor);
+    }
+  </style>
+</head>
+<body>
+  <div>
+    换肤：
+    <input id="default" name="skin" type="radio" value="default" checked><label for="default">默认</label>
+    <input id="red" name="skin" type="radio" value="red"><label for="red">红色</label>
+    <input id="green" name="skin" type="radio" value="green"><label for="green">绿色</label>
+  </div>
+  <div class="container">
+    Web Worker 的作用，就是为 JavaScript 创造多线程环境，允许主线程创建 Worker 线程，将一些任务分配给后者运行。在主线程运行的同时，Worker 线程在后台运行，两者互不干扰。等到 Worker 线程完成计算任务，再把结果返回给主线程。这样的好处是，一些计算密集型或高延迟的任务，被 Worker 线程负担了，主线程（通常负责 UI 交互）就会很流畅，不会被阻塞或拖慢。
+    Worker 线程一旦新建成功，就会始终运行，不会被主线程上的活动（比如用户点击按钮、提交表单）打断。这样有利于随时响应主线程的通信。但是，这也造成了 Worker 比较耗费资源，不应该过度使用，而且一旦使用完毕，就应该关闭。
+    Web Worker 有以下几个使用注意点。
+  </div>
+  <script>
+    const $ = document.querySelectorAll.bind(document)
+    const html = $('html')[0]
+    var radios = $('input[type=radio]');
+    [].slice.call(radios).forEach(radio => {
+      radio.addEventListener('click', function() {
+        var value = this.value;
+        html.setAttribute('data-theme', value)
+      })
+    })
 
-      // 向下滚动页面
-      function goDown () {
-        if (currentPosition > - viewHeight * (pageNum - 1)) {
-          currentPosition = currentPosition - viewHeight
-          console.log('down', currentPosition)
-          container.style.top = currentPosition + 'px'
-        }
-      }
+    fetch("http://pmcp-gateway.dev.hxss.com.cn/gateway/client")
+    .then(res => res.json())
+    .then(data => console.log(data))
 
-      // 向上滚动页面
-      function goUp () {
-        if (currentPosition < 0) {
-          currentPosition = currentPosition + viewHeight
-          container.style.top = currentPosition + 'px'
-        }
-      }
-
-      function throttle (fn, delay) {
-        let baseTime = 0
-        return function () {
-          const currentTime = Date.now()
-          if (baseTime + delay < currentTime) {
-            fn.apply(this, arguments)
-            baseTime = currentTime
-          }
-        }
-      }
-      var handlerWheel = throttle(scrollMove, 1000)
-      // https://developer.mozilla.org/en-US/docs/Web/API/Element/mousewheel_event#The_detail_property
-      // firefox的页面滚动事件其他浏览器不一样
-      if (navigator.userAgent.toLowerCase().indexOf('firefox') === -1) {
-        document.addEventListener('mousewheel', handlerWheel)
-      } else {
-        document.addEventListener('DOMMouseScroll', handlerWheel)
-      }
-      function scrollMove (e) {
-        console.log(e.deltaY)
-        if (e.deltaY > 0) {
-          goDown()
-        } else {
-          goUp()
-        }
-      }
-    </script>
-  </body>
+  </script>
+</body>
 </html>
