@@ -37,10 +37,8 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12890819-4352ccf88d4c9e68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12890819-a4909259bd32ae9c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12890819-6b84636562994190.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12890819-1fe94787d58e751d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/12890819-8156dafea5e01e46.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="article:published_time" content="2021-01-22T17:24:12.000Z">
-<meta property="article:modified_time" content="2022-12-05T09:31:52.432Z">
+<meta property="article:modified_time" content="2022-12-08T00:38:05.572Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -1410,7 +1408,6 @@
 <blockquote>
 <p>异步过程的回调函数，一定不在当前的这一轮事件循环中执行。</p>
 </blockquote>
-<hr>
 <p><strong>session 与 cookie 的区别.</strong></p>
 <ul>
 <li>session 保存在服务器，客户端不知道其中的信息；</li>
@@ -1984,17 +1981,6 @@
 <li>方向代理指的是以代理服务器来接收 Internet 上的连接请求，然后将请求转发给内部网络上的服务器， 并且将服务器返回的结果发送给客户端。</li>
 </ul>
 <p><img src="https://upload-images.jianshu.io/upload_images/12890819-6b84636562994190.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
-<hr>
-<p><strong>什么是事件循环 ？</strong></p>
-<ul>
-<li><p>Node 采用的是单线程的处理机制(所有的 I/O 请求都采用非阻塞的工作方式)，至少从 Node.js 开发者的角度是这样的。而在底层，Node.js 借助 libuv 来作为抽象封装层，从而屏蔽不同操作系统的差异，Node 可以借助 livuv 来实现线程。下图表示 Node 和 libuv 的关系。<br><img src="https://upload-images.jianshu.io/upload_images/12890819-1fe94787d58e751d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
-</li>
-<li><p>Libuv 库负责 Node API 的执行。它将不同的任务分配给不同的线程，形成一个事件循环，以异步的方式将任务的执行结果返回给 V8 引擎。可以简单用下面这张图来表示。<br><img src="https://upload-images.jianshu.io/upload_images/12890819-8156dafea5e01e46.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
-</li>
-<li><p>每一个 I/O 都需要一个回调函数 —– 一旦执行完便堆到事件循环上用于执行。</p>
-</li>
-</ul>
-<hr>
 <h2 id="10-HTTPS"><a href="#10-HTTPS" class="headerlink" title="10. HTTPS"></a>10. HTTPS</h2><p><strong>HTTP 是什么?</strong></p>
 <ul>
 <li>HTTP 是基于 TCP/IP（传输控制协议/因特网互联协议，又名网络通讯协议，是 Internet 最基本的协议）的关于数据如何在万维网中如何通信的协议。</li>
