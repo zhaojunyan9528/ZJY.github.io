@@ -1,11 +1,6 @@
-<!--
- * @Description: 
- * @version:: 
- * @Author: zhao
- * @Date: 2021-01-06 16:08:20
- * @LastEditors: zhao
- * @LastEditTime: 2021-01-12 10:28:01
--->
+# blog
+
+```shell
 npm install -g hexo-cli
 
 hexo init project
@@ -13,6 +8,7 @@ hexo init project
 cd project
 
 hexo server
+```
 
 部署项目需安装： yarn add hexo-deployer-git
 
