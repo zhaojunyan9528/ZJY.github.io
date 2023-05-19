@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>react</title>
+</head>
+<body>
+  <div id="test"></div>
+
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <!-- 使用jsx -->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- development version -->
+  <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+  <!-- 可以在任何 <script> 标签内使用 JSX，方法是在为其添加 type="text/babel" 属性 -->
+  <script type="text/babel">
+    // function Demo() {
+    //   return <h1>hahahhaah</h1>
+    // }
+    // class Demo extends React.Component {
+    //   render() {
+    //     return <h1>hahahhaah</h1>
+    //   }
+    // }
+    // ReactDOM.createRoot(document.getElementById('test')).render(<Demo />)
+
+    // const domContainer = document.querySelector('#test');
+    // ReactDOM.createRoot(domContainer).render(vDom)
+
+
+    class Person {
+      constructor(name, age) {
+        // this是类的实例对象
+        this.name = name
+        this.age = age
+      }
+      speak() {
+        // 方法放在了类的原型对象上，Person.prototype.speak
+        // 通过实例对象调用的方法，this就是实例对象
+        console.log(`my name is ${this.name}, age is ${this.age}`)
+      }
+    }
+    // 继承
+    class Student extends Person {
+      constructor(name, age, sex) {
+        // this是类的实例对象
+        super(name, age)
+        this.sex = sex
+      }
+    }
+    const p1 = new Person('lucy', 20)
+    p1.speak()
+    console.log(p1) // Person: { name: 'lucy', age: 20, Prototype: {constructor, speak}}
+
+    const s1 = new Student('xiaomi', 22, '男')
+    console.log(s1)
+    s1.speak()
+
+
+    class Weather extends React.Component {
+      // constructor(props) {
+      //   console.log('11')
+      //   super(props)
+      //   this.state = {
+      //     isHot: false
+      //   }
+      //   this.handleClick = this.handleClick.bind(this)
+      // }
+      state = { isHot: false }
+      handleClick = (e) => {
+        // console.log(this)
+        // handleClick作为onclick的回调，不是通过实例对象调用的是直接调用的， 所以this是undefined， 需要bind绑定this（实例对象）
+        this.setState(prevState => ({
+          isHot: !prevState.isHot
+        }))
+      }
+      render() {
+        console.log(this)
+        return <h1 onClick={this.handleClick}>today is {this.state.isHot ? 'hot': 'cold'}</h1>
+      }
+    }
+    // ReactDOM.createRoot(document.getElementById('test')).render(<Weather />)
+    // class组件
+    // class Woman extends React.Component {
+    //   static propTypes = {
+    //     name: PropTypes.string.isRequired,
+    //     age: PropTypes.number
+    //   }
+    //   static defaultProps = {
+    //     name: 'cassie',
+    //     age: 99
+    //   }
+    //   render() {
+    //     const { name, age } = this.props
+    //     return (
+    //       <ul>
+    //         <li>name: { name }</li>
+    //         <li>age: { age }</li>
+    //       </ul>
+    //     )
+    //   }
+    // }
+    // const p = { name: 'lucy', age: 20 }
+    // ReactDOM.createRoot(document.getElementById('test')).render(<Woman {...p}/>)
+
+    // 函数式组件
+    // function Welcome(props) {
+    //   return <h1>Hello, {props.name}</h1>;
+    // }
+    // ReactDOM.createRoot(document.getElementById('test')).render(<Welcome name="lucy"/>)
+
+    // class Demo extends React.Component {
+    //   constructor(props) {
+    //     super(props)
+    //     this.leftRef = React.createRef()
+    //     this.state = {
+    //       isHot: true
+    //     }
+    //     this.inputText = null
+    //     this.rightRef1 = (current) => {
+    //       console.log('回调refs-class-绑定函数', current);
+    //       this.inputText = current
+    //     }
+    //   }
+    //   handleLeft(e) {
+    //     // const input = document.getElementById('left')
+    //     // alert('input-left: '+ input.value) // 原生js
+    //     // alert('input-left: '+ this.refs.left.value) // string类型的refs（过时）
+    //     console.log(this.leftRef);
+    //     alert('input-left: '+ this.leftRef.current.value) // createRef方式
+    //   }
+    //   handleBlur(e) {
+    //     // const input = document.getElementById('right')
+    //     // alert('input-right: '+ input.value)
+    //     // alert('input-right: '+ this.refs.right.value)
+    //     alert('input-right: ' + this.rightRef.value) // 回调refs
+    //   }
+    //   handleBlur1() {
+    //     alert('input-right: ' + this.inputText.value) // 通过将 ref 的回调函数定义成 class 的绑定函数的方式
+    //   }
+    //   handleState() {
+    //     this.setState({
+    //       isHot: !this.state.isHot
+    //     })
+    //   }
+    //   render() {
+    //     ;
+    //     return (
+    //       <div>
+    //         <input ref={this.leftRef} id="left" type="text" placeholder="please input" />
+    //         <button onClick={(e) => this.handleLeft(e)}>click me left</button>
+    //         <input ref={current => {this.rightRef = current; console.log('rightRef', this.rightRef)}} id="right" onBlur={(e) => this.handleBlur(e)} type="text" placeholder="please input" />
+    //         <input ref={this.rightRef1} id="right" onBlur={(e) => this.handleBlur1(e)} type="text" placeholder="please input" />
+    //         <button onClick={() => this.handleState()}>切换状态{this.state.isHot ? 'true': 'false'}</button>
+    //       </div>
+    //     )
+    //   }
+    // }
+    // ReactDOM.createRoot(document.getElementById('test')).render(<Demo />)
+    
+    class Life extends React.Component {
+      constructor(props) {
+        console.log('constructor')
+        super(props)
+        this.state = {
+          count: 0
+        }
+      }
+      static getDerivedStateFromProps() {
+        console.log('getDerivedStateFromProps')
+        return 1
+      }
+      static getDerivedStateFromProps() {
+        console.log('getDerivedStateFromProps')
+        return 1
+      }
+      handleClick = () => {
+        this.setState({
+          count: this.state.count + 1
+        })
+      }
+      componentDidMount () {
+        console.log('componentDitMount')
+      }
+      shouldComponentUpdate() {
+        console.log('shouldComponentUpdate')
+        return true
+      }
+      componentDidUpdate () {
+        console.log('componentDidUpdate')
+      }
+      componentWillUnmount () {
+        console.log('componentWillUnmount')
+      }
+
+      render() {
+        console.log('render')
+        return (
+          <div>
+            <h2>当前和为： {this.state.count}</h2>
+            <button onClick={this.handleClick}>click me plus+1</button>
+          </div>
+        )
+      }
+    }
+    ReactDOM.createRoot(document.getElementById('test')).render(<Life />)
+  </script>
+</body>
+</html>
