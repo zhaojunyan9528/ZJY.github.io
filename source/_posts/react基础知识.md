@@ -56,7 +56,7 @@ JSX 是 JavaScript XML 的简写，表示 JavaScript 代码中写 XML（HTML）�
 语法规则：
   定义虚拟dom时，不要写引号，使用小括号()
   使用jsx表达式时，用{}包裹
-  样式的类名，使用className属性, style内联样式使用{{}}
+  样式的类名，使用className属性, style内联样式使用`{{ }}`
   只有一个根标签
   标签必须闭合
   标签首字母：若小写字母开头，则转为html标签同名元素，如果没有对应同名元素则报错；若大写字母开头，就去渲染对应的组件，如果没有定义就报错
@@ -213,7 +213,7 @@ function Welcome(props) {
 ReactDOM.createRoot(document.getElementById('test')).render(<Welcome name="lucy"/>)
 ```
 
-**注意：组件无论是使用函数声明还是通过 class 声明，都决不能修改自身的 props**
+**注意：组件无论是使用函数声明还是通过 class 声明，都决不能修改自身的 props.**
 
 ### refs
 
@@ -279,7 +279,7 @@ class Demo extends React.Component {
 ReactDOM.createRoot(document.getElementById('test')).render(<Demo />)
 ```
 
-__关于回调 refs 的说明__
+**关于回调 refs 的说明:**
 
 如果 ref 回调函数是以内联函数的方式定义的，在更新过程中它会被执行两次，第一次传入参数 null，然后第二次会传入参数 DOM 元素。这是因为在每次渲染时会创建一个新的函数实例，所以 React 清空旧的 ref 并且设置新的。
 
@@ -475,7 +475,7 @@ match:
 
 1.注册子路由要写父路由的path
 
-```
+```json
 --/home
   --/home/news
 ```
@@ -618,8 +618,8 @@ HashRouter 使用的是URL的哈希值
 
 **url表现形式不一样：**
 
-BrowserRouter的路径使用/， 例如 "http://localhost:3000/home/news"
-HashRouter的路径使用#， 例如 "http://localhost:3000#home/news"
+BrowserRouter的路径使用/， 例如 "<http://localhost:3000/home/news>"
+HashRouter的路径使用#， 例如 "<http://localhost:3000#home/news>"
 
 **刷新后对路由state参数的影响：**
 
@@ -821,7 +821,6 @@ import store from './store'
 3. 不调用其他非纯函数（Date.now()）
   保证纯函数的原则，则每当我们dispatch一个相同的action，且初状态相同，则
   总是能得到一个相同的结果（状态变化），因此可以实现redux的时间旅行功能。
-
 
 ### 使用redux-devtools工具（浏览器插件）
 
