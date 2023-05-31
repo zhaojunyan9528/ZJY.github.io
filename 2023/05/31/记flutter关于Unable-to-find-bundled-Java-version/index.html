@@ -6,17 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="先查看flutter版本： 1flutter --version 结果：   Flutter 1.20.2 • channel stable • https:&#x2F;&#x2F;github.com&#x2F;flutter&#x2F;flutter.git  Framework • revision bbfbf1770c (2 年 10 个月前) • 2020-08-13 08:33:09 -0700  Engine • revi">
+    <meta name="description" content="先查看flutter版本： 1flutter --version 结果： 1234Flutter 1.20.2 • channel stable • &lt;https:&#x2F;&#x2F;github.com&#x2F;flutter&#x2F;flutter.git&gt;Framework • revision bbfbf1770c (2 年 10 个月前) • 2020-08-13 08:33:09 -0700Engine">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记flutter关于Unable to find bundled Java version">
 <meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2023/05/31/%E8%AE%B0flutter%E5%85%B3%E4%BA%8EUnable-to-find-bundled-Java-version/index.html">
 <meta property="og:site_name" content="ZJY">
-<meta property="og:description" content="先查看flutter版本： 1flutter --version 结果：   Flutter 1.20.2 • channel stable • https:&#x2F;&#x2F;github.com&#x2F;flutter&#x2F;flutter.git  Framework • revision bbfbf1770c (2 年 10 个月前) • 2020-08-13 08:33:09 -0700  Engine • revi">
+<meta property="og:description" content="先查看flutter版本： 1flutter --version 结果： 1234Flutter 1.20.2 • channel stable • &lt;https:&#x2F;&#x2F;github.com&#x2F;flutter&#x2F;flutter.git&gt;Framework • revision bbfbf1770c (2 年 10 个月前) • 2020-08-13 08:33:09 -0700Engine">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/images/flutter_version.jpg">
 <meta property="og:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/images/flutter_comline.jpg">
 <meta property="article:published_time" content="2023-05-31T15:53:01.000Z">
-<meta property="article:modified_time" content="2023-05-31T08:30:59.815Z">
+<meta property="article:modified_time" content="2023-05-31T09:04:02.358Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -82,6 +82,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" href="/ZJY.github.io/2023/05/31/%E8%AE%B0flutter%E5%85%B3%E4%BA%8EAndroid-license-status-unknown/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" href="/ZJY.github.io/2023/05/31/%E8%AE%B0flutter%E5%85%B3%E4%BA%8EFlutter-plugin-not-installed/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
@@ -138,7 +140,7 @@
       
         <time datetime="2023-05-31T15:53:01.000Z" itemprop="datePublished">2023-05-31</time>
         
-        (Updated: <time datetime="2023-05-31T08:30:59.815Z" itemprop="dateModified">2023-05-31</time>)
+        (Updated: <time datetime="2023-05-31T09:04:02.358Z" itemprop="dateModified">2023-05-31</time>)
         
       
     </div>
@@ -166,7 +168,7 @@
     <p>先查看flutter版本：</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter --version</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
-<p>  Flutter 1.20.2 • channel stable • <a target="_blank" rel="noopener" href="https://github.com/flutter/flutter.git">https://github.com/flutter/flutter.git</a><br>  Framework • revision bbfbf1770c (2 年 10 个月前) • 2020-08-13 08:33:09 -0700<br>  Engine • revision 9d5b21729f<br>  Tools • Dart 2.9.1</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Flutter <span class="number">1</span>.<span class="number">20</span>.<span class="number">2</span> • channel stable • &lt;https://github.com/flutter/flutter.git&gt;</span><br><span class="line">Framework • revision bbfbf1770c (<span class="number">2</span> 年 <span class="number">10</span> 个月前) • <span class="number">2020</span>-<span class="number">08</span>-<span class="number">13</span> <span class="number">08</span>:<span class="number">33</span>:<span class="number">09</span> -<span class="number">0700</span></span><br><span class="line">Engine • revision <span class="number">9</span>d5b21729f</span><br><span class="line">Tools • Dart <span class="number">2</span>.<span class="number">9</span>.<span class="number">1</span></span><br></pre></td></tr></table></figure>
 <p>感觉是版本太低，因为很久没更新，尝试更新：</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter upgrade</span><br></pre></td></tr></table></figure>
 <p>结果：</p>
