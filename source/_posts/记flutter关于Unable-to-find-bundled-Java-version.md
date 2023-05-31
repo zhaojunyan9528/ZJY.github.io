@@ -16,10 +16,12 @@ flutter --version
 
 结果：
 
+```cmd
   Flutter 1.20.2 • channel stable • <https://github.com/flutter/flutter.git>
   Framework • revision bbfbf1770c (2 年 10 个月前) • 2020-08-13 08:33:09 -0700
   Engine • revision 9d5b21729f
   Tools • Dart 2.9.1
+```
 
 感觉是版本太低，因为很久没更新，尝试更新：
 
