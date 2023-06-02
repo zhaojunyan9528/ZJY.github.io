@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Array.from()静态方法从可迭代或类数组对象创建一个新的浅拷贝的数组实例。 12345console.log(Array.from(&amp;#x27;foo&amp;#x27;))&#x2F;&#x2F; [&amp;#x27;f&amp;#x27;, &amp;#x27;o&amp;#x27;, &amp;#x27;o&amp;#x27;]console.log(Array.from([1, 2, 3], x &#x3D;&gt; x + x))&#x2F;&#x2F; [2, 4, 6] 语法1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Array.from()的使用">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="Array.from()静态方法从可迭代或类数组对象创建一个新的浅拷贝的数组实例。 12345console.log(Array.from(&amp;#x27;foo&amp;#x27;))&#x2F;&#x2F; [&amp;#x27;f&amp;#x27;, &amp;#x27;o&amp;#x27;, &amp;#x27;o&amp;#x27;]console.log(Array.from([1, 2, 3], x &#x3D;&gt; x + x))&#x2F;&#x2F; [2, 4, 6] 语法1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-02T09:36:01.000Z">
+<meta property="article:modified_time" content="2023-06-02T07:17:57.661Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Array.from()的使用</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/ZJY.github.io/2023/06/02/%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2023/05/31/%E8%AE%B0flutter%E5%85%B3%E4%BA%8EAndroid-license-status-unknown/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/&text=Array.from()的使用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/&title=Array.from()的使用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/&is_video=false&description=Array.from()的使用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Array.from()的使用&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/&title=Array.from()的使用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/&title=Array.from()的使用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/&title=Array.from()的使用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/&title=Array.from()的使用"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/&name=Array.from()的使用&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/&t=Array.from()的使用"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-number">1.2.</span> <span class="toc-text">返回值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.3.</span> <span class="toc-text">描述</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.</span> <span class="toc-text">示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9E%84%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="toc-number">2.1.</span> <span class="toc-text">从字符串构建数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8ESet%E6%9E%84%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="toc-number">2.2.</span> <span class="toc-text">从Set构建数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8EMap%E6%9E%84%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="toc-number">2.3.</span> <span class="toc-text">从Map构建数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8ENodeList%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="toc-number">2.4.</span> <span class="toc-text">从NodeList创建数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E7%B1%BB%E6%95%B0%E7%BB%84%E6%9E%84%E5%BB%BA%E6%95%B0%E7%BB%84%EF%BC%88arguments%EF%BC%89"><span class="toc-number">2.5.</span> <span class="toc-text">从类数组构建数组（arguments）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E5%92%8C-Array-from"><span class="toc-number">2.6.</span> <span class="toc-text">使用箭头函数和 Array.from()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E7%94%9F%E6%88%90%E5%99%A8range"><span class="toc-number">2.7.</span> <span class="toc-text">序列生成器range</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E9%9D%9E%E6%95%B0%E7%BB%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%8A%E8%B0%83%E7%94%A8-from"><span class="toc-number">2.8.</span> <span class="toc-text">在非数组构造函数上调用 from()</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Array.from()的使用
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-06-02T09:36:01.000Z" itemprop="datePublished">2023-06-02</time>
+        
+        (Updated: <time datetime="2023-06-02T07:17:57.661Z" itemprop="dateModified">2023-06-02</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/Javascript/">Javascript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Array.from()静态方法从可迭代或类数组对象创建一个新的浅拷贝的数组实例。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.from(<span class="string">&#x27;foo&#x27;</span>))</span><br><span class="line"><span class="comment">// [&#x27;f&#x27;, &#x27;o&#x27;, &#x27;o&#x27;]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.from([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="function"><span class="params">x</span> =&gt;</span> x + x))</span><br><span class="line"><span class="comment">// [2, 4, 6]</span></span><br></pre></td></tr></table></figure>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.from(arrayLike)</span><br><span class="line"><span class="built_in">Array</span>.from(arrayLike, mapFn?)</span><br><span class="line"><span class="built_in">Array</span>.from(arrayLike, mapFn?, thisArg?)</span><br></pre></td></tr></table></figure>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p><code>arrayLike</code><br>想要转换成数组的可迭代或类数组对象</p>
+<p><code>mapFn</code>(可选)<br>调用数组每个元素的函数。如果提供，每个添加到数组的值首先传递给该函数，然后将mapFn的返回值添加到数组中。该函数提供以下参数：</p>
+<p>  element<br>  数组当前正在处理的元素</p>
+<p>  index<br>  数组当前正在处理的元素的索引</p>
+<p><code>thisArg</code>(可选)<br>执行mapFn时用作this的值</p>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>一个新的数组实例</p>
+<h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><ul>
+<li>可迭代对象（例如map和set）</li>
+<li>类数组对象（带有length属性和索引元素的对象）</li>
+</ul>
+<p>Array.from不会创建<a href="/ZJY.github.io/2023/06/02/%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84/" title="稀疏数组">稀疏数组</a>,如果arrayLike缺少一些索引属性，那么这些属性在数组中将是undefined。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.from(&#123;<span class="attr">length</span>: <span class="number">5</span>&#125;))</span><br><span class="line"><span class="comment">// [undefined, undefined, undefined, undefined, undefined]</span></span><br></pre></td></tr></table></figure>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="从字符串构建数组"><a href="#从字符串构建数组" class="headerlink" title="从字符串构建数组"></a>从字符串构建数组</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.from(<span class="string">&quot;foo&quot;</span>);</span><br><span class="line"><span class="comment">// [ &quot;f&quot;, &quot;o&quot;, &quot;o&quot; ]</span></span><br></pre></td></tr></table></figure>
+<h3 id="从Set构建数组"><a href="#从Set构建数组" class="headerlink" title="从Set构建数组"></a>从Set构建数组</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> set = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>, <span class="string">&quot;baz&quot;</span>, <span class="string">&quot;foo&quot;</span>]);</span><br><span class="line"><span class="built_in">Array</span>.from(set);</span><br><span class="line"><span class="comment">// [ &quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot; ]</span></span><br></pre></td></tr></table></figure>
+<h3 id="从Map构建数组"><a href="#从Map构建数组" class="headerlink" title="从Map构建数组"></a>从Map构建数组</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>([</span><br><span class="line">  [<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="number">4</span>],</span><br><span class="line">  [<span class="number">4</span>, <span class="number">8</span>],</span><br><span class="line">]);</span><br><span class="line"><span class="built_in">Array</span>.from(map);</span><br><span class="line"><span class="comment">// [[1, 2], [2, 4], [4, 8]]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mapper = <span class="keyword">new</span> <span class="built_in">Map</span>([</span><br><span class="line">  [<span class="string">&quot;1&quot;</span>, <span class="string">&quot;a&quot;</span>],</span><br><span class="line">  [<span class="string">&quot;2&quot;</span>, <span class="string">&quot;b&quot;</span>],</span><br><span class="line">]);</span><br><span class="line"><span class="built_in">Array</span>.from(mapper.values());</span><br><span class="line"><span class="comment">// [&#x27;a&#x27;, &#x27;b&#x27;];</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Array</span>.from(mapper.keys());</span><br><span class="line"><span class="comment">// [&#x27;1&#x27;, &#x27;2&#x27;];</span></span><br></pre></td></tr></table></figure>
+<h3 id="从NodeList创建数组"><a href="#从NodeList创建数组" class="headerlink" title="从NodeList创建数组"></a>从NodeList创建数组</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> images = <span class="built_in">document</span>.querySelectorAll(<span class="string">&quot;img&quot;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(images)</span><br><span class="line"><span class="keyword">const</span> sources = <span class="built_in">Array</span>.from(images, <span class="function">(<span class="params">image</span>) =&gt;</span> image.src);</span><br><span class="line"><span class="built_in">console</span>.log(sources)</span><br><span class="line"><span class="keyword">const</span> insecureSources = sources.filter(<span class="function">(<span class="params">link</span>) =&gt;</span> link.startsWith(<span class="string">&quot;http://&quot;</span>));</span><br><span class="line"><span class="built_in">console</span>.log(insecureSources)</span><br><span class="line"></span><br><span class="line"><span class="comment">// output:</span></span><br><span class="line"><span class="comment">// NodeList(14) [img, img, img, img, img, img, img, img, img, img, img, img, img, img]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// (14)[&#x27;http://localhost:8080/static/image/manage/unfold.svg&#x27;, &#x27;http://localhost:8080/static/image/workbench/workInstructions.svg&#x27;, &#x27;http://localhost:8080/static/image/workbench/day.svg&#x27;, &#x27;http://localhost:8080/static/image/workbench/briefing.svg&#x27;, &#x27;http://localhost:8080/static/image/workbench/feedback.svg&#x27;, &#x27;http://localhost:8080/static/image/workbench/schedule.svg&#x27;, &#x27;http://localhost:8080/static/image/workbench/task.svg&#x27;, &#x27;http://localhost:8080/static/image/workbench/achievement.svg&#x27;, &#x27;http://localhost:8080/static/image/workbench/waitclock.svg&#x27;, &#x27;http://localhost:8080/static/image/tabber/workbench-on.png&#x27;, &#x27;http://localhost:8080/static/image/tabber/ranking-list.png&#x27;, &#x27;http://localhost:8080/static/image/tabber/punch.png&#x27;, &#x27;http://localhost:8080/static/image/tabber/handle.png&#x27;, &#x27;http://localhost:8080/static/image/tabber/wode.png&#x27;]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// (14)[&#x27;http://localhost:8080/static/image/manage/unfold.svg&#x27;, &#x27;http://localhost:8080/static/image/workbench/workInstructions.svg&#x27;, &#x27;http://localhost:8080/static/image/workbench/day.svg&#x27;, &#x27;http://localhost:8080/static/image/workbench/briefing.svg&#x27;, &#x27;http://localhost:8080/static/image/workbench/feedback.svg&#x27;, &#x27;http://localhost:8080/static/image/workbench/schedule.svg&#x27;, &#x27;http://localhost:8080/static/image/workbench/task.svg&#x27;, &#x27;http://localhost:8080/static/image/workbench/achievement.svg&#x27;, &#x27;http://localhost:8080/static/image/workbench/waitclock.svg&#x27;, &#x27;http://localhost:8080/static/image/tabber/workbench-on.png&#x27;, &#x27;http://localhost:8080/static/image/tabber/ranking-list.png&#x27;, &#x27;http://localhost:8080/static/image/tabber/punch.png&#x27;, &#x27;http://localhost:8080/static/image/tabber/handle.png&#x27;, &#x27;http://localhost:8080/static/image/tabber/wode.png&#x27;]</span></span><br></pre></td></tr></table></figure>
+<h3 id="从类数组构建数组（arguments）"><a href="#从类数组构建数组（arguments）" class="headerlink" title="从类数组构建数组（arguments）"></a>从类数组构建数组（arguments）</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Array</span>.from(<span class="built_in">arguments</span>)</span><br><span class="line">&#125;</span><br><span class="line">test(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line"><span class="comment">// [1,2,3]</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用箭头函数和-Array-from"><a href="#使用箭头函数和-Array-from" class="headerlink" title="使用箭头函数和 Array.from()"></a>使用箭头函数和 Array.from()</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.from([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], <span class="function">(<span class="params">x</span>) =&gt;</span> x + x)</span><br><span class="line"><span class="comment">// [2,4,6]</span></span><br><span class="line"><span class="built_in">Array</span>.from(&#123;<span class="attr">length</span>: <span class="number">5</span>&#125;, <span class="function">(<span class="params">v, i</span>) =&gt;</span> i)</span><br><span class="line"><span class="comment">// [0, 1, 2, 3, 4]</span></span><br></pre></td></tr></table></figure>
+<h3 id="序列生成器range"><a href="#序列生成器range" class="headerlink" title="序列生成器range"></a>序列生成器range</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 序列生成器函数（通常称为“range”，例如 Clojure、PHP 等）</span></span><br><span class="line"><span class="keyword">const</span> range = <span class="function">(<span class="params">start, stop, step</span>) =&gt;</span></span><br><span class="line">  <span class="built_in">Array</span>.from(&#123; <span class="attr">length</span>: (stop - start) / step + <span class="number">1</span> &#125;, <span class="function">(<span class="params">_, i</span>) =&gt;</span> start + i * step);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成的数字范围 0..4</span></span><br><span class="line">range(<span class="number">0</span>, <span class="number">4</span>, <span class="number">1</span>);</span><br><span class="line"><span class="comment">// [0, 1, 2, 3, 4]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成的数字范围 1..10，步长为 2</span></span><br><span class="line">range(<span class="number">1</span>, <span class="number">10</span>, <span class="number">2</span>);</span><br><span class="line"><span class="comment">// [1, 3, 5, 7, 9]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 Array.from 生成字母表，并将其序列排序</span></span><br><span class="line">range(<span class="string">&quot;A&quot;</span>.charCodeAt(<span class="number">0</span>), <span class="string">&quot;Z&quot;</span>.charCodeAt(<span class="number">0</span>), <span class="number">1</span>).map(<span class="function">(<span class="params">x</span>) =&gt;</span></span><br><span class="line">  <span class="built_in">String</span>.fromCharCode(x),</span><br><span class="line">);</span><br><span class="line"><span class="comment">// [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;, &quot;L&quot;, &quot;M&quot;, &quot;N&quot;, &quot;O&quot;, &quot;P&quot;, &quot;Q&quot;, &quot;R&quot;, &quot;S&quot;, &quot;T&quot;, &quot;U&quot;, &quot;V&quot;, &quot;W&quot;, &quot;X&quot;, &quot;Y&quot;, &quot;Z&quot;]</span></span><br></pre></td></tr></table></figure>
+<h3 id="在非数组构造函数上调用-from"><a href="#在非数组构造函数上调用-from" class="headerlink" title="在非数组构造函数上调用 from()"></a>在非数组构造函数上调用 from()</h3><p>from() 方法可以在任何构造函数上调用，只要该构造函数接受一个表示新数组长度的单个参数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">NotArray</span>(<span class="params">len</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;NotArray called with length&quot;</span>, len);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可迭代对象</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.from.call(NotArray, <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>, <span class="string">&quot;baz&quot;</span>])));</span><br><span class="line"><span class="comment">// NotArray called with length undefined</span></span><br><span class="line"><span class="comment">// NotArray &#123; &#x27;0&#x27;: &#x27;foo&#x27;, &#x27;1&#x27;: &#x27;bar&#x27;, &#x27;2&#x27;: &#x27;baz&#x27;, length: 3 &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 类数组对象</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.from.call(NotArray, &#123; <span class="attr">length</span>: <span class="number">1</span>, <span class="number">0</span>: <span class="string">&quot;foo&quot;</span> &#125;));</span><br><span class="line"><span class="comment">// NotArray called with length 1</span></span><br><span class="line"><span class="comment">// NotArray &#123; &#x27;0&#x27;: &#x27;foo&#x27;, length: 1 &#125;</span></span><br></pre></td></tr></table></figure>
+<p>当 this 值不是构造函数，返回一个普通的数组对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.from.call(&#123;&#125;, &#123; <span class="attr">length</span>: <span class="number">1</span>, <span class="number">0</span>: <span class="string">&quot;foo&quot;</span> &#125;)); <span class="comment">// [ &#x27;foo&#x27; ]</span></span><br></pre></td></tr></table></figure>
+  </div>
+  <div>
+      <!-- <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/Array-from的使用.md" target="_blank">编辑</a> -->
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-number">1.2.</span> <span class="toc-text">返回值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.3.</span> <span class="toc-text">描述</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.</span> <span class="toc-text">示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9E%84%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="toc-number">2.1.</span> <span class="toc-text">从字符串构建数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8ESet%E6%9E%84%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="toc-number">2.2.</span> <span class="toc-text">从Set构建数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8EMap%E6%9E%84%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="toc-number">2.3.</span> <span class="toc-text">从Map构建数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8ENodeList%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="toc-number">2.4.</span> <span class="toc-text">从NodeList创建数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E7%B1%BB%E6%95%B0%E7%BB%84%E6%9E%84%E5%BB%BA%E6%95%B0%E7%BB%84%EF%BC%88arguments%EF%BC%89"><span class="toc-number">2.5.</span> <span class="toc-text">从类数组构建数组（arguments）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E5%92%8C-Array-from"><span class="toc-number">2.6.</span> <span class="toc-text">使用箭头函数和 Array.from()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E7%94%9F%E6%88%90%E5%99%A8range"><span class="toc-number">2.7.</span> <span class="toc-text">序列生成器range</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E9%9D%9E%E6%95%B0%E7%BB%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%8A%E8%B0%83%E7%94%A8-from"><span class="toc-number">2.8.</span> <span class="toc-text">在非数组构造函数上调用 from()</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/&text=Array.from()的使用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/&title=Array.from()的使用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/&is_video=false&description=Array.from()的使用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Array.from()的使用&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/&title=Array.from()的使用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/&title=Array.from()的使用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/&title=Array.from()的使用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/&title=Array.from()的使用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/&name=Array.from()的使用&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/02/Array-from%E7%9A%84%E4%BD%BF%E7%94%A8/&t=Array.from()的使用"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
