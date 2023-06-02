@@ -3,7 +3,7 @@ title: 记flutter关于Unable to find bundled Java version
 tags:
   - 前端
 categories:
-  - - 笔记
+  - - 问题&总结
     - Flutter
 date: 2023-05-31 15:53:01
 ---
