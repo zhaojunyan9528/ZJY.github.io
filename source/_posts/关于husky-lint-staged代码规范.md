@@ -3,8 +3,8 @@ title: 关于husky+lint-staged代码规范
 tags:
   - 前端
 categories:
-  - - 笔记
-    - Javascript
+  - - 问题&总结
+    - vue
 date: 2022-09-29 14:00:43
 ---
 

@@ -3,8 +3,8 @@ title: 记flutter关于Android license status unknown
 tags:
   - 前端
 categories:
-  - - 笔记
-    - Javascript
+  - - 问题&总结
+    - Flutter
 date: 2023-05-31 16:43:37
 ---
 

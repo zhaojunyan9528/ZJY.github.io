@@ -3,7 +3,7 @@ title: 记Clipboard.js触发多次复制成功问题
 tags:
   - 前端
 categories:
-  - - 笔记
+  - - 问题&总结
     - Javascript
 date: 2021-12-17 09:49:13
 ---

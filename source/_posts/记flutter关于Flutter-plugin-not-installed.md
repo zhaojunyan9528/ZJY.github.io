@@ -3,8 +3,8 @@ title: 记flutter关于Flutter plugin not installed
 tags:
   - 前端
 categories:
-  - - 笔记
-    - Javascript
+  - - 问题&总结
+    - Flutter
 date: 2023-05-31 15:47:32
 ---
 
