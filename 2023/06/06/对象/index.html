@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="创建对象对象是一组属性的集合，无序的数据结构，类似于key-value创建对象： 1234567891011121314151617&#x2F;&#x2F; 方式一let person &#x3D; new Object()person.name &#x3D; &amp;#x27;lucy&amp;#x27;person.age &#x3D; 20person.sayName &#x3D; function() &amp;#123;  console.log(this.name)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对象">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="创建对象对象是一组属性的集合，无序的数据结构，类似于key-value创建对象： 1234567891011121314151617&#x2F;&#x2F; 方式一let person &#x3D; new Object()person.name &#x3D; &amp;#x27;lucy&amp;#x27;person.age &#x3D; 20person.sayName &#x3D; function() &amp;#123;  console.log(this.name)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-06T16:05:16.000Z">
+<meta property="article:modified_time" content="2023-06-07T09:17:41.944Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>对象</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2023/06/02/%E7%94%9F%E6%88%90%E5%99%A8/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/&text=对象"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/&title=对象"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/&is_video=false&description=对象"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=对象&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/&title=对象"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/&title=对象"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/&title=对象"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/&title=对象"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/&name=对象&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/&t=对象"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.</span> <span class="toc-text">创建对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-defineProperty-obj-prop-options"><span class="toc-number">1.1.</span> <span class="toc-text">Object.defineProperty(obj, prop, options)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-getOwnPropertyDescriptor%E8%BF%94%E5%9B%9E%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.2.</span> <span class="toc-text">Object.getOwnPropertyDescriptor返回对象的属性描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-assign-target-sourceObj-%E2%80%A6sourceObj-%E5%90%88%E5%B9%B6%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.3.</span> <span class="toc-text">Object.assign(target, sourceObj, …sourceObj)合并对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-is-%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E7%A1%AE%E5%AE%9A%E4%B8%A4%E4%B8%AA%E5%80%BC%E6%98%AF%E5%90%A6%E4%B8%BA%E7%9B%B8%E5%90%8C%E5%80%BC%E3%80%82"><span class="toc-number">1.4.</span> <span class="toc-text">Object.is() 静态方法确定两个值是否为相同值。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88vue%E7%9A%84data%E6%98%AF%E5%87%BD%E6%95%B0%E5%BD%A2%E5%BC%8F-data-return-%EF%BC%8Cmethods%E6%98%AF%E5%AF%B9%E8%B1%A1-methods"><span class="toc-number">2.</span> <span class="toc-text">为什么vue的data是函数形式(data() {return {} })，methods是对象(methods: {})?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">原型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#constructor%E5%B1%9E%E6%80%A7"><span class="toc-number">3.1.</span> <span class="toc-text">constructor属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E5%AF%B9%E8%B1%A1%E8%87%AA%E6%9C%89%E5%B1%9E%E6%80%A7%E8%BF%98%E6%98%AF%E5%8E%9F%E5%9E%8B%E5%B1%9E%E6%80%A7"><span class="toc-number">3.2.</span> <span class="toc-text">判断对象自有属性还是原型属性</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        对象
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-06-06T16:05:16.000Z" itemprop="datePublished">2023-06-06</time>
+        
+        (Updated: <time datetime="2023-06-07T09:17:41.944Z" itemprop="dateModified">2023-06-07</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/Javascript/">Javascript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><p>对象是一组属性的集合，无序的数据结构，类似于key-value<br>创建对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式一</span></span><br><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br><span class="line">person.name = <span class="string">&#x27;lucy&#x27;</span></span><br><span class="line">person.age = <span class="number">20</span></span><br><span class="line">person.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.name)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 方式二：</span></span><br><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">  name: <span class="string">&#x27;lucy&#x27;</span>,</span><br><span class="line">  age: <span class="number">20</span>,</span><br><span class="line">  <span class="function"><span class="title">sayName</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 方式三：</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, prop, options)</span><br></pre></td></tr></table></figure>
+<h3 id="Object-defineProperty-obj-prop-options"><a href="#Object-defineProperty-obj-prop-options" class="headerlink" title="Object.defineProperty(obj, prop, options)"></a>Object.defineProperty(obj, prop, options)</h3><p>参数：</p>
+<ul>
+<li>obj： 对象</li>
+<li>prop： 属性</li>
+<li>options： 选项配置<ul>
+<li>writable: true/false 是否可修改</li>
+<li>value：属性的值，默认undefined</li>
+<li>enumable: 是否可枚举，for…in遍历</li>
+<li>configurable: 属性是否可删除；是否可配置其他配置项</li>
+<li>get： 读取属性时的前置调用</li>
+<li>set：设置属性时的前置调用</li>
+</ul>
+</li>
+</ul>
+<h3 id="Object-getOwnPropertyDescriptor返回对象的属性描述"><a href="#Object-getOwnPropertyDescriptor返回对象的属性描述" class="headerlink" title="Object.getOwnPropertyDescriptor返回对象的属性描述"></a>Object.getOwnPropertyDescriptor返回对象的属性描述</h3><h3 id="Object-assign-target-sourceObj-…sourceObj-合并对象"><a href="#Object-assign-target-sourceObj-…sourceObj-合并对象" class="headerlink" title="Object.assign(target, sourceObj, …sourceObj)合并对象"></a>Object.assign(target, sourceObj, …sourceObj)合并对象</h3><p>接收参数为一个目标对象和一个或多个源对象作为参数，只复制源对象的可枚举属性和自由属性。先使用符合条件的源对象的属性的get访问器获取属性的值，再用目标对象的set方法设置属性的值。<br>注意：Object.assign()是浅拷贝，异常会终止并提前退出，返回一个尽量部分完成的版本。</p>
+<h3 id="Object-is-静态方法确定两个值是否为相同值。"><a href="#Object-is-静态方法确定两个值是否为相同值。" class="headerlink" title="Object.is() 静态方法确定两个值是否为相同值。"></a>Object.is() 静态方法确定两个值是否为相同值。</h3><p>语法： Object.is(value1, value2)<br>返回值：指示两个参数是否相同的值<br>判断两个值是否相同值，如果以下其中一项成立，则两个值相同：</p>
+<ul>
+<li>都是undefiend</li>
+<li>都是null</li>
+<li>都是true或者都是false</li>
+<li>都是长度相同、字符形同、顺序相同的字符串</li>
+<li>都是相同的对象（意味着两个值引用了内存中同一个对象）</li>
+<li>都是BigInt且具有相同的数值</li>
+<li>都是Symbol且引用相同的symbol值</li>
+<li>都是数字，且：<ul>
+<li>都是+0</li>
+<li>都是-0</li>
+<li>都是NaN</li>
+<li>都有相同的值，非零且都不是NaN</li>
+</ul>
+</li>
+</ul>
+<p>Object.is() 和 === 之间的唯一区别在于它们处理带符号的 0 和 NaN 值的时候。=== 运算符（和 == 运算符）将数值 -0 和 +0 视为相等，但是会将 NaN 视为彼此不相等。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-<span class="number">0</span> === <span class="number">0</span></span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"><span class="literal">NaN</span> === <span class="literal">NaN</span></span><br><span class="line"><span class="comment">// false</span></span><br><span class="line"><span class="built_in">Object</span>.is(-<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"><span class="comment">// false</span></span><br><span class="line"><span class="built_in">Object</span>.is(<span class="literal">NaN</span>, <span class="literal">NaN</span>)</span><br><span class="line"><span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h2 id="为什么vue的data是函数形式-data-return-，methods是对象-methods"><a href="#为什么vue的data是函数形式-data-return-，methods是对象-methods" class="headerlink" title="为什么vue的data是函数形式(data() {return {} })，methods是对象(methods: {})?"></a>为什么vue的data是函数形式(data() {return {} })，methods是对象(methods: {})?</h2><p>组件是可复用的，如果data是一个对象，则所有组件实例共享同一个对象，造成数据污染；调用data函数返回一个的新的独立对象，如果可以保证组件是唯一的也可以不写函数直接写对象。</p>
+<p>methods装的是函数方法，只需要调用不需要改变，所以多个组件实例共享同一个函数没有影响，反而只需要更少的空间，和把公有方法放原型链上相似。</p>
+<h2 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h2><p>所有引用类型都有__proto__隐式原型属性，是一个对象<br>所有函数都有一个prototype原型属性，是一个对象<br>所有引用类型的__proto__都指向它构造函数的prototype</p>
+<p>工厂模式：批量创建结构类似的对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPerson</span>(<span class="params">name, age, job</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br><span class="line">  o.name = name</span><br><span class="line">  o.age = age</span><br><span class="line">  o.job = job</span><br><span class="line">  o.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> o</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>构造函数模式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age, job</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name</span><br><span class="line">  <span class="built_in">this</span>.age = age</span><br><span class="line">  <span class="built_in">this</span>.job = job</span><br><span class="line">  <span class="built_in">this</span>.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> person1 = <span class="keyword">new</span> Person(<span class="string">&#x27;lucy&#x27;</span>, <span class="number">20</span>, <span class="string">&#x27;software engineer&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> person2 = <span class="keyword">new</span> Person(<span class="string">&#x27;greg&#x27;</span>, <span class="number">20</span>, <span class="string">&#x27;Doctor&#x27;</span>)</span><br><span class="line">person1.sayName()</span><br><span class="line">person2.sayName()</span><br></pre></td></tr></table></figure>
+<p>构造函数需要使用new关键字</p>
+<p>new关键字操作：</p>
+<ul>
+<li>自动创建一个新的Object对象</li>
+<li>全部属性赋值给this对象，将构造函数的this指向刚创建的新的对象</li>
+<li>如果构造函数有return语句，优先返回return的值，否则返回刚刚自动创建的对象</li>
+</ul>
+<p>每一个实例的公共方法和属性都是再new语法和构造过程中创建的</p>
+<p>每个构造函数都有一个原型属性，所有该构造函数创建的实例都共享这个构造函数的原型属性。<br>当访问对象的一个属性时，会先在这个对象的属性中查找，如果没有找到就去它的__proto__隐式原型中查找，即它的构造函数的prototype，如果还没有找到就去构造函数的prototype.__proto__中查找，这样一层一层的向上查找形成的链式结构叫原型链。一直往上层查找，直到null还没有找到，返回undefined<br>Object.prototype.proto === null</p>
+<h3 id="constructor属性"><a href="#constructor属性" class="headerlink" title="constructor属性"></a>constructor属性</h3><p>除了null原型对象外，任何对象都会再其[[prototype]]上有一个constructor属性。使用字面量创建的对象也会有一个指向该对象构造函数类型的 constructor 属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> o1 = &#123;&#125;;</span><br><span class="line">o1.constructor === <span class="built_in">Object</span>; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> o2 = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">o2.constructor === <span class="built_in">Object</span>; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> a1 = [];</span><br><span class="line">a1.constructor === <span class="built_in">Array</span>; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> a2 = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">a2.constructor === <span class="built_in">Array</span>; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> n = <span class="number">3</span>;</span><br><span class="line">n.constructor === <span class="built_in">Number</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>constructor 属性通常来自构造函数的 prototype 属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Fn</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">Fn.prototype = <span class="keyword">new</span> <span class="built_in">Array</span>()</span><br><span class="line"><span class="keyword">let</span> f = <span class="keyword">new</span> Fn()</span><br><span class="line">f.constructor === <span class="built_in">Array</span></span><br><span class="line"><span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;&#125;</span><br><span class="line">obj.__proto__ === <span class="built_in">Object</span>.prototype</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line">obj.constructor === <span class="built_in">Object</span></span><br><span class="line"><span class="comment">// true</span></span><br><span class="line">obj.__proto__ === obj.constructor.prototype</span><br><span class="line"><span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h3 id="判断对象自有属性还是原型属性"><a href="#判断对象自有属性还是原型属性" class="headerlink" title="判断对象自有属性还是原型属性"></a>判断对象自有属性还是原型属性</h3><ol>
+<li>Object.hasOwnProperty(‘property’)方法返回一个布尔值，表示对象自有属性（而不是继承来的属性）中是否具有指定的属性。</li>
+<li>for…in 语句以任意顺序迭代一个对象的除Symbol以外的可枚举属性，包括继承的可枚举属性。</li>
+<li>Object.keys()静态方法返回一个由给定对象自身的可枚举的字符串键属性名组成的数组</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> triangle = &#123;<span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span>, <span class="attr">c</span>: <span class="number">3</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ColoredTriangle</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.color = <span class="string">&#x27;red&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ColoredTriangle.prototype = triangle;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> ColoredTriangle();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> prop <span class="keyword">in</span> obj) &#123;</span><br><span class="line">  <span class="keyword">if</span> (obj.hasOwnProperty(prop)) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`obj.<span class="subst">$&#123;prop&#125;</span> = <span class="subst">$&#123;obj[prop]&#125;</span>`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Output:</span></span><br><span class="line"><span class="comment">// &quot;obj.color = red&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> prop <span class="keyword">in</span> obj) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`obj.<span class="subst">$&#123;prop&#125;</span> = <span class="subst">$&#123;obj[prop]&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Output:</span></span><br><span class="line"><span class="comment">// obj.color = red</span></span><br><span class="line"><span class="comment">// obj.a = 1</span></span><br><span class="line"><span class="comment">// obj.b = 2</span></span><br><span class="line"><span class="comment">// obj.c = 3</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(triangle))</span><br><span class="line"><span class="comment">//  [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]</span></span><br></pre></td></tr></table></figure>
+<p>键的顺序：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 键的顺序随机的类数组对象</span></span><br><span class="line"><span class="keyword">const</span> anObj = &#123; <span class="number">100</span>: <span class="string">&quot;a&quot;</span>, <span class="number">2</span>: <span class="string">&quot;b&quot;</span>, <span class="number">7</span>: <span class="string">&quot;c&quot;</span> &#125;;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(anObj)); <span class="comment">// [&#x27;2&#x27;, &#x27;7&#x27;, &#x27;100&#x27;]</span></span><br><span class="line"><span class="comment">// (3) [&#x27;2&#x27;, &#x27;7&#x27;, &#x27;100&#x27;]</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> anObj) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 7</span></span><br><span class="line"><span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
+<p>Object.keys()和for…in枚举顺序是不固定的</p>
+<p>Object.keys()获取所有键的数组<br>Object.values()获取所有值的数组<br>Object.entries()获取所有键值对的数组</p>
+
+  </div>
+  <div>
+      <!-- <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/对象.md" target="_blank">编辑</a> -->
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.</span> <span class="toc-text">创建对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-defineProperty-obj-prop-options"><span class="toc-number">1.1.</span> <span class="toc-text">Object.defineProperty(obj, prop, options)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-getOwnPropertyDescriptor%E8%BF%94%E5%9B%9E%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.2.</span> <span class="toc-text">Object.getOwnPropertyDescriptor返回对象的属性描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-assign-target-sourceObj-%E2%80%A6sourceObj-%E5%90%88%E5%B9%B6%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.3.</span> <span class="toc-text">Object.assign(target, sourceObj, …sourceObj)合并对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-is-%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E7%A1%AE%E5%AE%9A%E4%B8%A4%E4%B8%AA%E5%80%BC%E6%98%AF%E5%90%A6%E4%B8%BA%E7%9B%B8%E5%90%8C%E5%80%BC%E3%80%82"><span class="toc-number">1.4.</span> <span class="toc-text">Object.is() 静态方法确定两个值是否为相同值。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88vue%E7%9A%84data%E6%98%AF%E5%87%BD%E6%95%B0%E5%BD%A2%E5%BC%8F-data-return-%EF%BC%8Cmethods%E6%98%AF%E5%AF%B9%E8%B1%A1-methods"><span class="toc-number">2.</span> <span class="toc-text">为什么vue的data是函数形式(data() {return {} })，methods是对象(methods: {})?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">原型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#constructor%E5%B1%9E%E6%80%A7"><span class="toc-number">3.1.</span> <span class="toc-text">constructor属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E5%AF%B9%E8%B1%A1%E8%87%AA%E6%9C%89%E5%B1%9E%E6%80%A7%E8%BF%98%E6%98%AF%E5%8E%9F%E5%9E%8B%E5%B1%9E%E6%80%A7"><span class="toc-number">3.2.</span> <span class="toc-text">判断对象自有属性还是原型属性</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/&text=对象"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/&title=对象"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/&is_video=false&description=对象"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=对象&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/&title=对象"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/&title=对象"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/&title=对象"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/&title=对象"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/&name=对象&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2023/06/06/%E5%AF%B9%E8%B1%A1/&t=对象"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
