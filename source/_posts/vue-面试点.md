@@ -22,11 +22,11 @@ viewModel是view和model的桥梁，数据会绑定到viewModel并自动将数�
 
 ### 3.vue3响应式原理
 
-vue3使用proxy替代了object.defineproperty，proxy可直接检测到数组和对象到变化。并且有13中拦截方法。
+vue3使用proxy替代了object.defineproperty，proxy可直接检测到数组和对象到变化。并且有13种拦截方法。
 
 ### 4.vue3只会监测数组到第一层，vue3怎么解决？
 
-判断Reflect.get到返回值类型是否为object，如果式用Reactive方法继续进行代理，实现数组到深度监测
+判断Reflect.get到返回值类型是否为object，如果是用Reactive方法继续进行代理，实现数组到深度监测
 
 ### 5.监测数组可能多次触发get/set方法，如何防止？
 
@@ -34,7 +34,7 @@ vue3使用proxy替代了object.defineproperty，proxy可直接检测到数组和
 
 ### 6.vue2如何监测数组变化？
 
-使用了函数劫持，并重新了数组方法。vue对data中数组进行了原型链重写，并指向了自己定义的数组原型方法，
+使用了函数劫持，并重写了数组方法。vue对data中数组进行了原型链重写，并指向了自己定义的数组原型方法，
 当调用数组api时，进行依赖更新，当数组中存在引用类型时，会对引用类型再次递归遍历进行监控属性监测数组。
 
 ### 7.nextTick
