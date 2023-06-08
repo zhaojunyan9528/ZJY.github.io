@@ -14,7 +14,7 @@
 <meta property="og:description" content="ProxyProxy对象用于创建对象的代理，从而实现基本操作的拦截和自定义（如属性查找、赋值、枚举、函数调用等）。 语法： 1const p &#x3D; new Proxy(target, handler) 参数： target要使用Proxy包装的对象(可以是任何类型的对象，包括数组，函数，甚至另一个代理) handler一个通常以函数作为属性的对象，各属性中的函数分别定义了在执行各种操作时代理 p 的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-06-07T17:35:29.000Z">
-<meta property="article:modified_time" content="2023-06-07T10:07:18.948Z">
+<meta property="article:modified_time" content="2023-06-08T09:30:34.076Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -108,7 +108,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Proxy"><span class="toc-number">1.</span> <span class="toc-text">Proxy</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Proxy"><span class="toc-number">1.</span> <span class="toc-text">Proxy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#handler%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">handler对象的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.2.</span> <span class="toc-text">示例</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -135,7 +135,7 @@
       
         <time datetime="2023-06-07T17:35:29.000Z" itemprop="datePublished">2023-06-07</time>
         
-        (Updated: <time datetime="2023-06-07T10:07:18.948Z" itemprop="dateModified">2023-06-07</time>)
+        (Updated: <time datetime="2023-06-08T09:30:34.076Z" itemprop="dateModified">2023-06-08</time>)
         
       
     </div>
@@ -166,6 +166,29 @@
 <p>参数：</p>
 <p><code>target</code><br>要使用Proxy包装的对象(可以是任何类型的对象，包括数组，函数，甚至另一个代理)</p>
 <p><code>handler</code><br>一个通常以函数作为属性的对象，各属性中的函数分别定义了在执行各种操作时代理 p 的行为。</p>
+<h3 id="handler对象的方法"><a href="#handler对象的方法" class="headerlink" title="handler对象的方法"></a>handler对象的方法</h3><p>handler 对象是一个容纳一批特定属性的占位符对象。它包含有 Proxy 的各个捕获器（trap）。</p>
+<p>traps:提供属性访问的方法</p>
+<p>所有的捕捉器是可选的。如果没有定义某个捕捉器，那么就会保留源对象的默认行为。</p>
+<p><code>handler.getPropertyOf()</code><br>Object.getPropertyOf 方法的捕获器</p>
+<p><code>handler.setPropertyOf()</code><br>Object.setPropertyOf 方法的捕获器</p>
+<p><code>handler.isExtensible()</code><br>Object.isExtensible 方法的捕捉器</p>
+<p><code>handler.preventExtensions()</code><br>Object.preventExtensions 方法的捕捉器</p>
+<p><code>handler.getOwnPropertyDescriptor()</code><br>Object.getOwnPropertyDescriptor 方法的捕捉器</p>
+<p><code>handler.defindProperty()</code><br>Object.defindProperty 方法的捕捉器</p>
+<p><code>handler.has()</code><br>in 操作符的捕捉器</p>
+<p><code>handler.get()</code><br>属性读取操作的捕捉器</p>
+<p><code>handler.set()</code><br>属性设置操作的捕捉器</p>
+<p><code>handler.deleteProperty()</code><br>delete 操作符的捕捉器</p>
+<p><code>handler.ownKeys()</code><br>Object.getOwnPropertyNames方法和Object.getOwnPropertySymbols方法的捕获器</p>
+<p><code>handler.apply()</code><br>函数调用操作符的捕获器</p>
+<p><code>handler.constructor()</code><br>new 操作符的捕获器</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>当对象中不存在属性名时，默认返回值为 37</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">    get: <span class="function"><span class="keyword">function</span>(<span class="params">obj, prop</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> prop <span class="keyword">in</span> obj ? obj[prop] : <span class="number">37</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;, handler);</span><br><span class="line">p.a = <span class="number">1</span>;</span><br><span class="line">p.b = <span class="literal">undefined</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(p.a, p.b);      <span class="comment">// 1, undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;c&#x27;</span> <span class="keyword">in</span> p, p.c); <span class="comment">// false, 37</span></span><br></pre></td></tr></table></figure>
+<p>无操作转发代理</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> target = &#123;&#125;;</span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, &#123;&#125;);</span><br><span class="line"></span><br><span class="line">p.a = <span class="number">37</span>;   <span class="comment">// 操作转发到目标</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(target.a);    <span class="comment">// 37. 操作已经被正确地转发</span></span><br></pre></td></tr></table></figure>
+<p>通过代理，你可以轻松地验证向一个对象的传.set</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> validator = &#123;</span><br><span class="line">  set: <span class="function"><span class="keyword">function</span>(<span class="params">obj, prop, value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (prop === <span class="string">&#x27;age&#x27;</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!<span class="built_in">Number</span>.isInteger(value)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">&#x27;The age is not an integer&#x27;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (value &gt; <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">RangeError</span>(<span class="string">&#x27;The age seems invalid&#x27;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// The default behavior to store the value</span></span><br><span class="line">    obj[prop] = value;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 表示成功</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;, validator);</span><br><span class="line"></span><br><span class="line">person.age = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(person.age);</span><br><span class="line"><span class="comment">// 100</span></span><br><span class="line"></span><br><span class="line">person.age = <span class="string">&#x27;young&#x27;</span>;</span><br><span class="line"><span class="comment">// 抛出异常：Uncaught TypeError: The age is not an integer</span></span><br><span class="line"></span><br><span class="line">person.age = <span class="number">300</span>;</span><br><span class="line"><span class="comment">// 抛出异常：Uncaught RangeError: The age seems invalid</span></span><br></pre></td></tr></table></figure>
+
 <p>vue采用什么数据劫持？<br>vue2： Object.defineProperty<br>vue3: Proxy</p>
 <p>为什么取代？<br>1.对象直接添加新的属性或删除已有的属性，界面不会自动更新，不是响应式<br>2.直接通过下标arr[1] = “xx”更改元素或数组长度，界面不会自动更新。<br>vue2的响应式的核心是通过defineProperty对对象已有的属性值的读取和修改进行劫持。<br>只能劫持对象的属性，我们需要对每个对象的每个属性进行遍历，无法监控到数组下标的变化。</p>
 <p>通过Proxy代理：拦截对象本身的操作，如属性的添加、删除，值的读写；可以监听对象而非属性，监听数组的变化。</p>
@@ -200,7 +223,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Proxy"><span class="toc-number">1.</span> <span class="toc-text">Proxy</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Proxy"><span class="toc-number">1.</span> <span class="toc-text">Proxy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#handler%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">handler对象的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.2.</span> <span class="toc-text">示例</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
