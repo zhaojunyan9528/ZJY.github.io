@@ -26,6 +26,120 @@ const p = new Proxy(target, handler)
 `handler`
 一个通常以函数作为属性的对象，各属性中的函数分别定义了在执行各种操作时代理 p 的行为。
 
+### handler对象的方法
+
+handler 对象是一个容纳一批特定属性的占位符对象。它包含有 Proxy 的各个捕获器（trap）。
+
+traps:提供属性访问的方法
+
+所有的捕捉器是可选的。如果没有定义某个捕捉器，那么就会保留源对象的默认行为。
+
+`handler.getPropertyOf()`
+Object.getPropertyOf 方法的捕获器
+
+`handler.setPropertyOf()`
+Object.setPropertyOf 方法的捕获器
+
+`handler.isExtensible()`
+Object.isExtensible 方法的捕捉器
+
+`handler.preventExtensions()`
+Object.preventExtensions 方法的捕捉器
+
+`handler.getOwnPropertyDescriptor()`
+Object.getOwnPropertyDescriptor 方法的捕捉器
+
+`handler.defindProperty()`
+Object.defindProperty 方法的捕捉器
+
+`handler.has()`
+in 操作符的捕捉器
+
+`handler.get()`
+属性读取操作的捕捉器
+
+`handler.set()`
+属性设置操作的捕捉器
+
+`handler.deleteProperty()`
+delete 操作符的捕捉器
+
+`handler.ownKeys()`
+Object.getOwnPropertyNames方法和Object.getOwnPropertySymbols方法的捕获器
+
+`handler.apply()`
+函数调用操作符的捕获器
+
+`handler.constructor()`
+new 操作符的捕获器
+
+### 示例
+
+当对象中不存在属性名时，默认返回值为 37
+
+```js
+const handler = {
+    get: function(obj, prop) {
+        return prop in obj ? obj[prop] : 37;
+    }
+};
+
+const p = new Proxy({}, handler);
+p.a = 1;
+p.b = undefined;
+
+console.log(p.a, p.b);      // 1, undefined
+console.log('c' in p, p.c); // false, 37
+```
+
+无操作转发代理
+
+```js
+let target = {};
+let p = new Proxy(target, {});
+
+p.a = 37;   // 操作转发到目标
+
+console.log(target.a);    // 37. 操作已经被正确地转发
+```
+
+通过代理，你可以轻松地验证向一个对象的传.set
+
+```js
+let validator = {
+  set: function(obj, prop, value) {
+    if (prop === 'age') {
+      if (!Number.isInteger(value)) {
+        throw new TypeError('The age is not an integer');
+      }
+      if (value > 200) {
+        throw new RangeError('The age seems invalid');
+      }
+    }
+
+    // The default behavior to store the value
+    obj[prop] = value;
+
+    // 表示成功
+    return true;
+  }
+};
+
+let person = new Proxy({}, validator);
+
+person.age = 100;
+
+console.log(person.age);
+// 100
+
+person.age = 'young';
+// 抛出异常：Uncaught TypeError: The age is not an integer
+
+person.age = 300;
+// 抛出异常：Uncaught RangeError: The age seems invalid
+```
+
+
 vue采用什么数据劫持？
 vue2： Object.defineProperty
 vue3: Proxy
