@@ -14,7 +14,7 @@
 <meta property="og:description" content="2023-11-03&#x2F;sockjs-node&#x2F;info?t&#x3D;${时间戳}当运行npm run dev启动项目后，在浏览器的network中会自动持续发送&#x2F;sockjs-node&#x2F;info?t&#x3D;$&amp;#123;时间戳&amp;#125;请求。 sockjs-node是什么？sockjs-node是一个JavaScript库，提供跨浏览器的API，创建了一个低延迟、全双工的浏览器和web服务器之间的通道。在项目">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-11-03T09:49:54.000Z">
-<meta property="article:modified_time" content="2023-11-03T09:16:06.153Z">
+<meta property="article:modified_time" content="2023-11-22T12:51:04.867Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -108,7 +108,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2023-11-03"><span class="toc-number">1.</span> <span class="toc-text">2023-11-03</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sockjs-node-info-t-%E6%97%B6%E9%97%B4%E6%88%B3"><span class="toc-number">1.1.</span> <span class="toc-text">&#x2F;sockjs-node&#x2F;info?t&#x3D;${时间戳}</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#postinstall%E5%B9%B2%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">postinstall干什么的？？？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.3.</span> <span class="toc-text">数组扩展运算符</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2023-11-03"><span class="toc-number">1.</span> <span class="toc-text">2023-11-03</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sockjs-node-info-t-%E6%97%B6%E9%97%B4%E6%88%B3"><span class="toc-number">1.1.</span> <span class="toc-text">&#x2F;sockjs-node&#x2F;info?t&#x3D;${时间戳}</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#postinstall%E5%B9%B2%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">postinstall干什么的？？？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.3.</span> <span class="toc-text">数组扩展运算符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2023-11-22"><span class="toc-number">2.</span> <span class="toc-text">2023-11-22</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF"><span class="toc-number">2.1.</span> <span class="toc-text">事件循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3js%E4%B8%AD%E7%9A%84%E5%BC%82%E6%AD%A5%EF%BC%9F"><span class="toc-number">2.2.</span> <span class="toc-text">如何理解js中的异步？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js%E4%B8%AD%E8%AE%A1%E6%97%B6%E5%99%A8%E8%83%BD%E5%81%9A%E5%88%B0%E7%B2%BE%E5%87%86%E8%AE%A1%E6%97%B6%E5%90%97%EF%BC%9F"><span class="toc-number">2.3.</span> <span class="toc-text">js中计时器能做到精准计时吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86"><span class="toc-number">2.4.</span> <span class="toc-text">浏览器的渲染原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%A7%A3%E6%9E%90HTML"><span class="toc-number">2.4.1.</span> <span class="toc-text">1.解析HTML</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E6%A0%B7%E5%BC%8F%E8%AE%A1%E7%AE%97-recalculate-style"><span class="toc-number">2.4.2.</span> <span class="toc-text">2、样式计算- recalculate style</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%B8%83%E5%B1%80-Layout"><span class="toc-number">2.4.3.</span> <span class="toc-text">3、布局-Layout</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E5%88%86%E5%B1%82"><span class="toc-number">2.4.4.</span> <span class="toc-text">4、分层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E7%BB%98%E5%88%B6"><span class="toc-number">2.4.5.</span> <span class="toc-text">5、绘制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81%E5%88%86%E5%9D%97"><span class="toc-number">2.4.6.</span> <span class="toc-text">6、分块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E5%85%89%E6%A0%85%E5%8C%96"><span class="toc-number">2.4.7.</span> <span class="toc-text">7.光栅化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-%E7%94%BB"><span class="toc-number">2.4.8.</span> <span class="toc-text">8.画</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFreflow%EF%BC%9F"><span class="toc-number">2.5.</span> <span class="toc-text">什么是reflow？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFrepaint%EF%BC%9F"><span class="toc-number">2.6.</span> <span class="toc-text">什么是repaint？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88transform%E7%9A%84%E6%95%88%E7%8E%87%E9%AB%98%EF%BC%9F"><span class="toc-number">2.7.</span> <span class="toc-text">为什么transform的效率高？</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -135,7 +135,7 @@
       
         <time datetime="2023-11-03T09:49:54.000Z" itemprop="datePublished">2023-11-03</time>
         
-        (Updated: <time datetime="2023-11-03T09:16:06.153Z" itemprop="dateModified">2023-11-03</time>)
+        (Updated: <time datetime="2023-11-22T12:51:04.867Z" itemprop="dateModified">2023-11-22</time>)
         
       
     </div>
@@ -176,6 +176,131 @@
 <p>例如：将 dist 目录下的所有文件复制到 public 目录下。</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts:&quot;</span> &#123;</span><br><span class="line">  <span class="attr">&quot;postinstall&quot;</span>: <span class="string">&quot;cp -r dist/* public/&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="数组扩展运算符"><a href="#数组扩展运算符" class="headerlink" title="数组扩展运算符"></a>数组扩展运算符</h3><p>数组的扩展运算符可以将一个数组转为用逗号分隔的参数序列，且每次只能展开一层数组。</p>
+<h2 id="2023-11-22"><a href="#2023-11-22" class="headerlink" title="2023-11-22"></a>2023-11-22</h2><h3 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h3><p>事件循环：浏览器的核心</p>
+<p>进程：</p>
+<p>何为进程：程序运行需要有他自己专有的内存空间，可以把这块内存空间简单的称为进程</p>
+<p>每个应用至少有一个进程，进程之间相互独立，即使通信也要双方同意。</p>
+<p>何为线程：<br>有了进程后，就可以运行程序，运行程序的称为线程。<br>一个进程至少有一个线程，所以在进程开启后会自动创建一个线程来运行代码，这个线程称为主线程。<br>如果程序需要同时运行多块代码，主线程会启动更多的线程来运行代码。所以一个进程可以包含多个线程。</p>
+<p>浏览器有哪些进程和线程？</p>
+<p>浏览器是一个多进程多线程的应用程序。</p>
+<p>浏览器内部及其复杂，为了避免互相影响，减少崩溃的几率，启动浏览器后，会启动多个进程。</p>
+<p>浏览器进程、网络进程、渲染进程 等</p>
+<p>浏览器主要进程有：</p>
+<p>浏览器进程：<br>负责界面显示、用户交互、子进程管理等，浏览器进程会开启多个线程执行任务。</p>
+<p>网络进程：<br>负责加载网络资源。网络进程内部会开启多个线程来执行不同的网络任务。</p>
+<p>渲染进程：<br>渲染进程开启后，会启动一个渲染主线程，主线程负责html、css、js代码。</p>
+<p>默认情况下，浏览器为每一个标签页开启一个新的渲染进程，保证不同标签页互不影响。</p>
+<p>事件循环发生在渲染主线程。</p>
+<p>渲染主线程是如何工作的？</p>
+<p>渲染主线程是浏览器最繁忙的线程，需要它处理的任务包括但不限于：</p>
+<ul>
+<li>解析html</li>
+<li>解析css</li>
+<li>计算样式</li>
+<li>布局</li>
+<li>处理图层</li>
+<li>每秒把页面画60次</li>
+<li>执行全局js代码</li>
+<li>处理事件监听函数</li>
+<li>执行定时器的回调函数</li>
+<li>…</li>
+</ul>
+<p>渲染主线程如何调度任务呢？排队</p>
+<p>1、最开始的时候，渲染主线程进入一个无限循环<br>2、每一次循环会检查事件队列（消息队列）是否有任务存在，如果有，取出第一个任务在主线程执行，执行完后进入下一个循环；如果没有则进入休眠<br>3、其他所有线程（包括其他进程的线程）可以随时向事件队列添加任务，新任务会添加到事件队列的末尾。在添加新任务时如果主线程处在休眠状态则会唤醒以继续循环拿取任务。</p>
+<p>以上整个过程称为事件循环。</p>
+<p>何为异步？</p>
+<p>代码在执行过程中，会遇到无法立即处理的任务，比如：</p>
+<ul>
+<li>计时完成后需要执行的任务：setTimeout setInterval</li>
+<li>网络通信完成后需要执行的任务：xhr fetch</li>
+<li>用户操作后要执行的任务：addEventListener</li>
+</ul>
+<p>如果让渲染主线程等待这些任务的时机到达，就会导致主线程阻塞，造成浏览器卡死。因此浏览器选择异步来解决问题。</p>
+<p>比如：渲染主线程遇到计时器，通知计时线程去计时，结束该任务，继续循环从事件队列拿取任务，计时线程计时结束后将回调函数包装成任务放进事件队列末尾。</p>
+<p>使用异步的方式，渲染主线程永不阻塞。</p>
+<h3 id="如何理解js中的异步？"><a href="#如何理解js中的异步？" class="headerlink" title="如何理解js中的异步？"></a>如何理解js中的异步？</h3><p>js是一门单线程的语言，运行在浏览器的渲染主线程内，渲染主线程只有一个，承担很多任务，比如解析html、css、计算样式、布局、执行js代码等。如果使用同步的方式就有可能阻塞主线程，导致事件队列的其他任务不能执行，造成渲染主线程白白浪费，页面无法更新，给用户造成卡死现象。<br>所以浏览器使用异步的方式来避免。具体做法是某些任务发生时，如计时器、网络、事件监听，主线程交给其他线程去处理，自身立即结束任务，执行后续代码。当其他线程执行结束时，就将事先传递回调函数包装成任务加入到事件队列末尾，等待主线程调度执行。<br>在这种异步模式下，浏览器永不阻塞，最大限度的保证了单线程的流畅运行。</p>
+<p>js为何会阻碍渲染？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> h1 = <span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;h1&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">let</span> btn = <span class="built_in">document</span>.getElementsByTagName(<span class="string">&#x27;button&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">delay</span>(<span class="params">duration</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> start = <span class="built_in">Date</span>.now()</span><br><span class="line">  <span class="keyword">while</span>(<span class="built_in">Date</span>.now() - start &lt; duration) &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">btn.onclick = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  h1.textContent = <span class="string">&#x27;hahah&#x27;</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;onclick&#x27;</span>)</span><br><span class="line">  delay(<span class="number">3000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码点击按钮时，会打印onclick，延时3秒后h1显示‘hahah’，因为delay方法占据主线程运行3秒，h1.textContent绘制需要事件队列排队等待，造成页面阻塞。</p>
+<p>任务有优先级吗？<br>任务没有优先级，在队列中先进先出<br>但是事件队列是有优先级的。<br>根据w3c最新解释：</p>
+<ul>
+<li>每个任务都有一个类型，同一个类型的任务必须在同一个队列，不同类型的任务可以分属于不同的队列。再一次事件循环中，浏览器可以根据实际情况从不同的队列取出任务执行。</li>
+<li>浏览器必须有一个微队列，微队列中的任务优先于其他任务执行</li>
+</ul>
+<p>随着浏览器的复杂度上升，w3c不再使用宏队列的说法</p>
+<p>在目前chrome的实现中，至少包含以下队列：</p>
+<ul>
+<li>延时队列：用于存放计时器的回调任务，优先级【中】</li>
+<li>交互队列：用于存放用户操作后的回调任务，优先级【高】</li>
+<li>微队列：用户存放最快执行的任务，优先级【最高】</li>
+</ul>
+<p>添加到微队列的方式主要是Promise、MutationObserver<br>例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">立即把一个函数添加到微队列</span><br><span class="line"><span class="built_in">Promise</span>.resolve().then(函数)</span><br></pre></td></tr></table></figure>
+<p>示例1：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>) <span class="comment">// fn1</span></span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>输出： 2、1</p>
+<p>主线程：全局js<br>微队列：<br>延时队列：fn1<br>交互队列：</p>
+<p>解析：主线程执行全局js，遇到setTimeout，计时线程0秒后将fn1放入延时队列-》继续执行全局js-》输出2-》全局js结束，主线程空，微队列空，执行延时队列fn1-》输出1</p>
+<p>示例2:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">delay</span>(<span class="params">duration</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> start = <span class="built_in">Date</span>.now()</span><br><span class="line">  <span class="keyword">while</span>(<span class="built_in">Date</span>.now() - start &lt; duration) &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line">delay()</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>输出：等待3秒、2、1</p>
+<p>解析：主线程执行全局js，遇到setTimeout，计时线程0秒后将fn1放入延时队列-》继续执行全局js-》执行delay函数3秒-》输出2-》全局js结束，主线程空，微队列空，执行延时队列fn1-》输出1</p>
+<p>示例3:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>) <span class="comment">// 回调fn1</span></span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"><span class="built_in">Promise</span>.resolve().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">2</span>) <span class="comment">// 回调fn2</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>输出：3、2、1</p>
+<p>主线程：全局js<br>微队列：fn2<br>延时队列：fn1<br>交互队列：</p>
+<p>解析：<br>  主线程执行全局js，遇到setTimeout，计时线程0秒后将fn1放入延时队列<br>  继续全局js执行，遇Promise，立即将fn2添加到微队列<br>  继续全局js，输出3<br>  全局js结束，主线程空，微队列不为空，执行fn2<br>  输出2，fn2结束，继续循环<br>  微队列空，延迟队列不为空，执行fn1<br>  输出1，fn1结束，继续循环</p>
+<p>示例4:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">  <span class="built_in">Promise</span>.resolve().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>) <span class="comment">// fn2</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123; <span class="comment">// fn3</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">3</span>)</span><br><span class="line">  <span class="built_in">Promise</span>.resolve().then(a) <span class="comment">// fn(a)</span></span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"><span class="built_in">Promise</span>.resolve().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">4</span>) <span class="comment">// fn4</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p>输出：5、4、3、1、2</p>
+<p>主线程：全局js<br>微队列：fn4-&gt;fn(a)-&gt;fn2<br>延时队列：fn3<br>交互队列：</p>
+<p>解析：<br>  主线程执行全局js，遇到setTimeout，计时线程0秒后将fn3放入延时队列<br>  继续全局js执行，遇Promise，立即将fn4添加到微队列<br>  继续全局js，输出5<br>  全局js结束，主线程空，微队列不为空，执行fn4<br>  输出4，结束任务，继续循环，微队列空，查询延时队列不为空<br>  执行fn3，输出3、遇Promise，立即将fn(a)添加到微队列，结束该任务，继续循环<br>  微队列不空，执行fn(a)，输出1，遇Promise，立即将fn2添加到微队列，结束该任务，继续循环<br>  微队列不空，执行fn2，输出2，结束该任务</p>
+<p>示例5:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">  <span class="built_in">Promise</span>.resolve().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>) <span class="comment">// fn2</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123; </span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">3</span>) <span class="comment">// fn3</span></span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"><span class="built_in">Promise</span>.resolve().then(a) <span class="comment">// fn(a)</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<p>输出：4、1、2、3</p>
+<p>主线程：全局js<br>微队列：fn(a)-&gt;fn2<br>延时队列：fn3<br>交互队列：</p>
+<p>解析：<br>  主线程执行全局js，遇到setTimeout，计时线程0秒后将fn3放入延时队列<br>  继续全局js执行，遇Promise，立即将fn(a)添加到微队列<br>  继续全局js，输出4<br>  全局js结束，主线程空，微队列不为空，执行fn(a)<br>  输出1，遇Promise，立即将fn2添加到微队列，结束该任务，继续循环<br>  微队列不空，执行fn2，输出2，结束该任务，继续循环<br>  微队列空，延时队列不空，执行fn3，输出3，结束该任务</p>
+<p>阐述js的事件循环：</p>
+<p>事件循环又叫做消息循环，是浏览器的渲染主线程的工作方式。</p>
+<p>在chrome中开启一个无限循环，每次循环从队列中取出第一个任务执行，而其他线程只需要在合适的时机将任务添加到队列末尾。<br>过去把消息队列分为宏队列和微队列，这种说法无法满足复杂的浏览器环境，取而代之的是另一钟灵活的处理方式。</p>
+<p>根据w3c官方解释，每个任务都有一个类型，同一个类型的任务必须在同一个队列，不同任务属于不同的队列。<br>不同的任务队列有不同的优先级，在一次事件循环中，浏览器自行决定选取哪一个队列的任务。但浏览器必须有一个微队列，微队列具有最高的优先级，必须优先调度执行。</p>
+<h3 id="js中计时器能做到精准计时吗？"><a href="#js中计时器能做到精准计时吗？" class="headerlink" title="js中计时器能做到精准计时吗？"></a>js中计时器能做到精准计时吗？</h3><p>不能，因为：</p>
+<ul>
+<li>计算机硬件没有原子钟，无法做到精准计时</li>
+<li>操作系统的计时函数本身就有偏差，js计时器最终调用的是操作系统的函数，所以携带了偏差</li>
+<li>按照w3c的标准，浏览器实现计时器，嵌套超过5层，则会带有4毫秒的最小偏差，计时少于4毫秒又带来偏差</li>
+<li>受事件循环的影响，计时器的回调函数只能在主线程空闲时执行，因此带来偏差</li>
+</ul>
+<p>单线程是异步产生的原因<br>事件循环是异步的实现方式</p>
+<h3 id="浏览器的渲染原理"><a href="#浏览器的渲染原理" class="headerlink" title="浏览器的渲染原理"></a>浏览器的渲染原理</h3><p>当浏览器的网络线程收到HTML文档后，会产生一个渲染任务，并将其传递到渲染主线程的消息队列。<br>在事件循环机制下，渲染主线程取出渲染任务，开启渲染流程。</p>
+<p>整个渲染流程分为多个阶段，分别是：HTML解析、样式计算、布局、分层、绘制、分块、光栅化、画。<br>每个阶段都有明确的输出，上一个阶段的输出是下一个阶段的输入。<br>这样，整个阶段就成为一段严密的流水线。</p>
+<p><strong><em>HTML字符串-〉解析HTML-〉样式计算-〉布局-〉分层-〉绘制-〉分块-〉光栅化-〉画-〉像素信息</em></strong><br>渲染：将html字符串-&gt;像素信息</p>
+<h4 id="1-解析HTML"><a href="#1-解析HTML" class="headerlink" title="1.解析HTML"></a>1.解析HTML</h4><p>**<br>解析过程中遇到css，解析css，遇到js解析js。为了提高效率，浏览器在解析前，会启动一个预解析的线程，率先下载HTML中外部的css文件和外部的js文件。<br>如果主线程解析到link位置，此时外部的css文件还没有解析下载好，主线程不会等待，继续后续HTML的解析。这是因为下载和解析css是在与解析线程中进行的。这就是css不会阻塞HTML解析的根本原因。<br>如果主线程解析道script位置，主线程会停止解析HTML，转而等待js文件下载好，并将全局代码解析完成后，才继续解析HTML。这是因为js代码可能会修改当前的DOM树，所以DOM生成必须暂停。这就是js会阻塞HMTL解析的根本原因。<br>第一步完成后，会生成CSSOM树和DOM树，内部样式、外部样式、内联样式、浏览器默认样式都会包含在CSSOM树。<br>**</p>
+<p>渲染的第一步是解析HTMl，ParseHTML，产生DOM树（Document Object Model）和CSSOM树(css Object Model)</p>
+<p>css样式包括：内部样式style，外部样式link，内联样式，浏览器默认样式<br>js修改style样式，docu.style = ‘’<br>js修改<code>&lt;style&gt;</code>和外部样式，document.styleSheets[0].addRule(‘div’, ‘border: 1px solid #f40’)</p>
+<p>解析HTML，遇到css代码怎么办？<br>为了提高效率，浏览器会启动一个预解析器率先下载和解析css，css不会阻塞解析HTML。</p>
+<h4 id="2、样式计算-recalculate-style"><a href="#2、样式计算-recalculate-style" class="headerlink" title="2、样式计算- recalculate style"></a>2、样式计算- recalculate style</h4><p>**<br>主线程遍历整个DOM树，依次为每一个节点计算出最终样式，computed style，<br>在这个过程中，很多预设值会变成绝对值，比如red会变成rgb(255, 0, 0); 相对单位会变成绝对单位，比如em会变成px。<br>这一步完成后，会得到一颗带样式的DOM树<br>**</p>
+<p>getComputedStyle()获取最终样式</p>
+<h4 id="3、布局-Layout"><a href="#3、布局-Layout" class="headerlink" title="3、布局-Layout"></a>3、布局-Layout</h4><p>**<br>接下来是布局，布局完成后会得到布局树。<br>布局阶段会依次遍历DOM树的每一个节点，计算每个节点的几何信息。例如节点的宽高、相对包含块的位置。<br>大部分时候，DOM树和布局树不是一一对应的。<br>比如dislay:none没有几何信息，因此不会生成到布局树中，又比如使用伪元素选择器，虽然DOM树中不存在这些伪元素节点，但是他们拥有几何信息，所以会生成到布局树。<br>**</p>
+<p>DOM树和布局树不是一一对应的。有几何信息的才会在布局树中出现，display：none不出现<br>文本内容必须放在行盒中。</p>
+<p>document.body.clientWidth,获取的布局信息</p>
+<h4 id="4、分层"><a href="#4、分层" class="headerlink" title="4、分层"></a>4、分层</h4><p>**<br>主线程会使用一套复杂的策略对布局树进行分层。<br>分层的好处在于，将来某一层改变后，仅对该层进行后续处理，从而提高效率。</p>
+<p>滚动条、堆叠上下文、transform、opacity等样式都会影响分层结果。will-change熟悉会更大程度影响分层。<br>**</p>
+<h4 id="5、绘制"><a href="#5、绘制" class="headerlink" title="5、绘制"></a>5、绘制</h4><p>**<br>主线程会为每个层单独产生绘制指令集，用于描述每个层的内容该如何画出来。<br>完成绘制后，主线程将绘制信息提交给合成线程，后续工作交由合成线程完成。<br>**</p>
+<h4 id="6、分块"><a href="#6、分块" class="headerlink" title="6、分块"></a>6、分块</h4><p>合成线程会对每个图层进行分块，将其划分为更小的区域。<br>它会从线程池中拿更多线程来完成分块工作。</p>
+<p>分块完成后进入光栅化阶段。</p>
+<h4 id="7-光栅化"><a href="#7-光栅化" class="headerlink" title="7.光栅化"></a>7.光栅化</h4><p>合成线程将块交由GPU进程，完成光栅化，极高速度。<br>GPU进程会开启多个线程完成光栅化，并且优先处理靠近视口区域的块。<br>光栅化的结果是一块一块的位图。</p>
+<h4 id="8-画"><a href="#8-画" class="headerlink" title="8.画"></a>8.画</h4><p>合成线程计算出每个位图的在屏幕上的位置，交由GPU进程最终呈现。</p>
+<p>渲染进程（在沙盒，隔离硬件，安全）：渲染主线程、合成线程</p>
+<p>所以交由GPU进程</p>
+<p>transform发生在合成线程，与渲染主线程无关所以效率高。</p>
+<h3 id="什么是reflow？"><a href="#什么是reflow？" class="headerlink" title="什么是reflow？"></a>什么是reflow？</h3><p>渲染主线程：parse—-computed style—-layout—-layer—-paint<br>合成线程：—-tiling分块—-raster光栅化—-draw-〉</p>
+<p>cssom<br>dom<br>几何信息、布局</p>
+<p>reflow的本质是重新计算布局树。<br>当进行了会影响布局树的操作后，会重新计算布局树，引发layout。<br>为了避免连续多次的操作导致布局树多次计算，浏览器会合并这些操作。当js代码全部执行完后统一计算。所以改动属性引发的reflow是异步的。</p>
+<p>因此js获取布局属性时，可能是重新布局前的信息，无法获取最新的布局信息，浏览器在反复权衡下，最终决定获取熟悉立即reflow。</p>
+<p>doc.style.width = ‘’<br>doc.style.height = ‘’<br>doc.style.margin = ‘’<br>doc.clientWidth // 立即reflow</p>
+<h3 id="什么是repaint？"><a href="#什么是repaint？" class="headerlink" title="什么是repaint？"></a>什么是repaint？</h3><p>repaint本质是重新根据分层信息计算了绘制指令。<br>当改动了可见样式就需要重新计算，引发repaint。<br>由于元素的布局信息也属于可见样式，所以reflow一定引发repaint。</p>
+<h3 id="为什么transform的效率高？"><a href="#为什么transform的效率高？" class="headerlink" title="为什么transform的效率高？"></a>为什么transform的效率高？</h3><p>因为transform既不影响布局也不影响绘制，它影响的是渲染流程的最后一个阶段draw。<br>由于draw阶段在合成线程，所以transform的变化几乎不影响渲染主线程。反之，渲染主线程也不会影响transform的变化。</p>
 
   </div>
   <div>
@@ -206,7 +331,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2023-11-03"><span class="toc-number">1.</span> <span class="toc-text">2023-11-03</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sockjs-node-info-t-%E6%97%B6%E9%97%B4%E6%88%B3"><span class="toc-number">1.1.</span> <span class="toc-text">&#x2F;sockjs-node&#x2F;info?t&#x3D;${时间戳}</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#postinstall%E5%B9%B2%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">postinstall干什么的？？？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.3.</span> <span class="toc-text">数组扩展运算符</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2023-11-03"><span class="toc-number">1.</span> <span class="toc-text">2023-11-03</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sockjs-node-info-t-%E6%97%B6%E9%97%B4%E6%88%B3"><span class="toc-number">1.1.</span> <span class="toc-text">&#x2F;sockjs-node&#x2F;info?t&#x3D;${时间戳}</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#postinstall%E5%B9%B2%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">postinstall干什么的？？？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.3.</span> <span class="toc-text">数组扩展运算符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2023-11-22"><span class="toc-number">2.</span> <span class="toc-text">2023-11-22</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF"><span class="toc-number">2.1.</span> <span class="toc-text">事件循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3js%E4%B8%AD%E7%9A%84%E5%BC%82%E6%AD%A5%EF%BC%9F"><span class="toc-number">2.2.</span> <span class="toc-text">如何理解js中的异步？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js%E4%B8%AD%E8%AE%A1%E6%97%B6%E5%99%A8%E8%83%BD%E5%81%9A%E5%88%B0%E7%B2%BE%E5%87%86%E8%AE%A1%E6%97%B6%E5%90%97%EF%BC%9F"><span class="toc-number">2.3.</span> <span class="toc-text">js中计时器能做到精准计时吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86"><span class="toc-number">2.4.</span> <span class="toc-text">浏览器的渲染原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%A7%A3%E6%9E%90HTML"><span class="toc-number">2.4.1.</span> <span class="toc-text">1.解析HTML</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E6%A0%B7%E5%BC%8F%E8%AE%A1%E7%AE%97-recalculate-style"><span class="toc-number">2.4.2.</span> <span class="toc-text">2、样式计算- recalculate style</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%B8%83%E5%B1%80-Layout"><span class="toc-number">2.4.3.</span> <span class="toc-text">3、布局-Layout</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E5%88%86%E5%B1%82"><span class="toc-number">2.4.4.</span> <span class="toc-text">4、分层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E7%BB%98%E5%88%B6"><span class="toc-number">2.4.5.</span> <span class="toc-text">5、绘制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81%E5%88%86%E5%9D%97"><span class="toc-number">2.4.6.</span> <span class="toc-text">6、分块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E5%85%89%E6%A0%85%E5%8C%96"><span class="toc-number">2.4.7.</span> <span class="toc-text">7.光栅化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-%E7%94%BB"><span class="toc-number">2.4.8.</span> <span class="toc-text">8.画</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFreflow%EF%BC%9F"><span class="toc-number">2.5.</span> <span class="toc-text">什么是reflow？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFrepaint%EF%BC%9F"><span class="toc-number">2.6.</span> <span class="toc-text">什么是repaint？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88transform%E7%9A%84%E6%95%88%E7%8E%87%E9%AB%98%EF%BC%9F"><span class="toc-number">2.7.</span> <span class="toc-text">为什么transform的效率高？</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
