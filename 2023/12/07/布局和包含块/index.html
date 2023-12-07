@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="一个元素的尺寸和位置受其包含块的影响，大部分情况下元素的包含块就是最近祖先块元素的内容区域（盒模型的content） 根据包含块计算百分值 height、top、bottom属性根据包含块的height计算 width、left、right、margin、padding属性根据包含块的width计算  确定包含块确定一个元素的包含块的过程依赖于属性position的值：  如果position的值">
+<meta property="og:type" content="article">
+<meta property="og:title" content="布局和包含块">
+<meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/index.html">
+<meta property="og:site_name" content="ZJY">
+<meta property="og:description" content="一个元素的尺寸和位置受其包含块的影响，大部分情况下元素的包含块就是最近祖先块元素的内容区域（盒模型的content） 根据包含块计算百分值 height、top、bottom属性根据包含块的height计算 width、left、right、margin、padding属性根据包含块的width计算  确定包含块确定一个元素的包含块的过程依赖于属性position的值：  如果position的值">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-07T13:50:05.000Z">
+<meta property="article:modified_time" content="2023-12-07T06:14:15.091Z">
+<meta property="article:author" content="ZJY">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ZJY.github.io/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ZJY.github.io/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ZJY.github.io/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>布局和包含块</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ZJY.github.io/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/ZJY.github.io/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/ZJY.github.io/2023/11/03/%E6%97%A5%E5%B8%B8%E9%9A%8F%E8%AE%B0/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/&text=布局和包含块"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/&title=布局和包含块"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/&is_video=false&description=布局和包含块"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=布局和包含块&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/&title=布局和包含块"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/&title=布局和包含块"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/&title=布局和包含块"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/&title=布局和包含块"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/&name=布局和包含块&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/&t=布局和包含块"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E5%8C%85%E5%90%AB%E5%9D%97%E8%AE%A1%E7%AE%97%E7%99%BE%E5%88%86%E5%80%BC"><span class="toc-number">1.</span> <span class="toc-text">根据包含块计算百分值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E5%8C%85%E5%90%AB%E5%9D%97"><span class="toc-number">2.</span> <span class="toc-text">确定包含块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">示例</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        布局和包含块
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">ZJY</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-12-07T13:50:05.000Z" itemprop="datePublished">2023-12-07</time>
+        
+        (Updated: <time datetime="2023-12-07T06:14:15.091Z" itemprop="dateModified">2023-12-07</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/">笔记</a> › <a class="category-link" href="/ZJY.github.io/categories/%E7%AC%94%E8%AE%B0/css/">css</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/ZJY.github.io/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>一个元素的尺寸和位置受其包含块的影响，大部分情况下元素的包含块就是最近祖先块元素的内容区域（盒模型的content）</p>
+<h2 id="根据包含块计算百分值"><a href="#根据包含块计算百分值" class="headerlink" title="根据包含块计算百分值"></a>根据包含块计算百分值</h2><ul>
+<li>height、top、bottom属性根据包含块的height计算</li>
+<li>width、left、right、margin、padding属性根据包含块的width计算</li>
+</ul>
+<h2 id="确定包含块"><a href="#确定包含块" class="headerlink" title="确定包含块"></a>确定包含块</h2><p>确定一个元素的包含块的过程依赖于属性position的值：</p>
+<ul>
+<li>如果position的值为static、sticky、relative，包含块可能为最近的祖先块元素的内容区域</li>
+<li>如果position的值为absolute，包含块为最近position不为static的祖先元素的内边距区域</li>
+<li>如果position的值为fixed，在连续媒体的情况下包含块是viewport视口，分页媒体的情况下包含块是分页区域</li>
+<li>如果position的值为absolute或fixed的，包含块也可能是由满足以下条件的最近父级元素的内边距区的边缘组成的：<ul>
+<li>transform 或 perspective 的值不是 none</li>
+<li>will-change 的值是 transform 或 perspective</li>
+<li>filter 的值不是 none 或 will-change 的值是 filter（只在 Firefox 下生效）。</li>
+<li>contain 的值是 layout、paint、strict 或 content（例如：contain: paint;）</li>
+<li>backdrop-filter 的值不是 none（例如：backdrop-filter: blur(10px);）</li>
+</ul>
+</li>
+</ul>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>这个示例中，P 标签设置为静态定位，所以它的包含块为 <code>&lt;section&gt;</code>，因为距离最近的父节点即是她的包含块。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: beige;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">section</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">160px</span>;</span><br><span class="line">  <span class="attribute">background</span>: lightgray;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50%</span>; <span class="comment">/* == 400px * .5 = 200px */</span></span><br><span class="line">  <span class="attribute">height</span>: <span class="number">25%</span>; <span class="comment">/* == 160px * .25 = 40px */</span></span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">5%</span>; <span class="comment">/* == 400px * .05 = 20px */</span></span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">5%</span>; <span class="comment">/* == 400px * .05 = 20px */</span></span><br><span class="line">  <span class="attribute">background</span>: cyan;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个示例中，P 标签的包含块为 <code>&lt;body&gt;</code> 元素，因为 <code>&lt;section&gt;</code> 不再是一个块容器，所以并没有形成一个格式上下文。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: beige;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">section</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline;</span><br><span class="line">  <span class="attribute">background</span>: lightgray;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50%</span>; <span class="comment">/* == half the body&#x27;s width */</span></span><br><span class="line">  <span class="attribute">height</span>: <span class="number">200px</span>; <span class="comment">/* <span class="doctag">Note:</span> a percentage would be 0 */</span></span><br><span class="line">  <span class="attribute">background</span>: cyan;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个示例中，P 元素的包含块是 <code>&lt;section&gt;</code>，因为 <code>&lt;section&gt;</code> 的 position 为 absolute 。P 元素的百分值会受其包含块的 padding 所影响。不过，如果包含块的 box-sizing 值设置为 border-box ，就没有这个问题。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: beige;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">section</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">160px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">30px</span> <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">background</span>: lightgray;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50%</span>; <span class="comment">/* == (400px + 20px + 20px) * .5 = 220px */</span></span><br><span class="line">  <span class="attribute">height</span>: <span class="number">25%</span>; <span class="comment">/* == (160px + 30px + 30px) * .25 = 55px */</span></span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">5%</span>; <span class="comment">/* == (400px + 20px + 20px) * .05 = 22px */</span></span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">5%</span>; <span class="comment">/* == (400px + 20px + 20px) * .05 = 22px */</span></span><br><span class="line">  <span class="attribute">background</span>: cyan;</span><br><span class="line">&#125;</span><br><span class="line">``</span><br><span class="line"></span><br><span class="line">这个示例中，<span class="selector-tag">P</span> 元素的 <span class="selector-tag">position</span> 为 <span class="selector-tag">fixed</span>，所以它的包含块就是初始包含块（在屏幕上，也就是 <span class="selector-tag">viewport</span>）。这样的话，<span class="selector-tag">P</span> 元素的尺寸大小，将会随着浏览器窗框大小的变化，而变化。</span><br><span class="line"></span><br><span class="line">```<span class="selector-tag">css</span></span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: beige;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">section</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">480px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">15px</span>;</span><br><span class="line">  <span class="attribute">background</span>: lightgray;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: fixed;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50%</span>; <span class="comment">/* == (50vw - (width of vertical scrollbar)) */</span></span><br><span class="line">  <span class="attribute">height</span>: <span class="number">50%</span>; <span class="comment">/* == (50vh - (height of horizontal scrollbar)) */</span></span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">5%</span>; <span class="comment">/* == (5vw - (width of vertical scrollbar)) */</span></span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">5%</span>; <span class="comment">/* == (5vw - (width of vertical scrollbar)) */</span></span><br><span class="line">  <span class="attribute">background</span>: cyan;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个示例中，P 元素的 position 为 absolute，所以它的包含块是<code>&lt;section&gt;</code>，也就是距离它最近的一个 transform 值不为 none 的父元素。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: beige;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">section</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">0deg</span>);</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">160px</span>;</span><br><span class="line">  <span class="attribute">background</span>: lightgray;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">80px</span>;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50%</span>; <span class="comment">/* == 200px */</span></span><br><span class="line">  <span class="attribute">height</span>: <span class="number">25%</span>; <span class="comment">/* == 40px */</span></span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">5%</span>; <span class="comment">/* == 20px */</span></span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">5%</span>; <span class="comment">/* == 20px */</span></span><br><span class="line">  <span class="attribute">background</span>: cyan;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  </div>
+  <div>
+      <!-- <a href="https://github.com/zhaojunyan9528/ZJY.github.io/tree/myblog/source/_posts/布局和包含块.md" target="_blank">编辑</a> -->
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E5%8C%85%E5%90%AB%E5%9D%97%E8%AE%A1%E7%AE%97%E7%99%BE%E5%88%86%E5%80%BC"><span class="toc-number">1.</span> <span class="toc-text">根据包含块计算百分值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E5%8C%85%E5%90%AB%E5%9D%97"><span class="toc-number">2.</span> <span class="toc-text">确定包含块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">示例</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/&text=布局和包含块"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/&title=布局和包含块"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/&is_video=false&description=布局和包含块"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=布局和包含块&body=Check out this article: https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/&title=布局和包含块"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/&title=布局和包含块"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/&title=布局和包含块"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/&title=布局和包含块"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/&name=布局和包含块&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://zhaojunyan9528.github.io/ZJY.github.io/2023/12/07/%E5%B8%83%E5%B1%80%E5%92%8C%E5%8C%85%E5%90%AB%E5%9D%97/&t=布局和包含块"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    ZJY
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ZJY.github.io/">首页</a></li>
+         
+          <li><a href="/ZJY.github.io/archives/">归档</a></li>
+         
+          <li><a href="/ZJY.github.io/tags">标签</a></li>
+         
+          <li><a href="/ZJY.github.io/categories">分类</a></li>
+         
+          <li><a href="/ZJY.github.io/search/">搜索</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/ZJY.github.io/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/ZJY.github.io/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ZJY.github.io/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/ZJY.github.io/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ZJY.github.io/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
