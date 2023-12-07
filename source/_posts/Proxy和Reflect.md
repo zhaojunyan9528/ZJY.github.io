@@ -49,8 +49,8 @@ Object.preventExtensions 方法的捕捉器
 `handler.getOwnPropertyDescriptor()`
 Object.getOwnPropertyDescriptor 方法的捕捉器
 
-`handler.defindProperty()`
-Object.defindProperty 方法的捕捉器
+`handler.defineProperty()`
+Object.defineProperty 方法的捕捉器
 
 `handler.has()`
 in 操作符的捕捉器
@@ -242,7 +242,7 @@ Reflect.set(duck, 'eyes', 'black');
 // returns "true" if successful
 // "duck" now contains the property "eyes: 'black'"
 Reflect.ownKeys(duck)
-// (5) ['name', 'color', 'greeting', 'property', 'eyes']
+// (5) ['name', 'color', 'greeting', 'eyes']
 ```
 
 获取某个属性的描述：
@@ -409,7 +409,7 @@ try {
 
 ## Object.keys()
 
-Object.keys()静态方法返回一个给定对象的自身可枚举字符串属性名组成的数组
+Object.keys()静态方法返回一个给定对象的自身可枚举字符串属性名组成的数组(不包含Symbol)
 
 ```js
 const d= Symbol('d')
@@ -426,7 +426,7 @@ console.log(Object.keys(object1));
 
 ## Object.values()
 
-Object.values()静态方法返回一个给定对象的自身可枚举字符串键属性的值组成的数组。
+Object.values()静态方法返回一个给定对象的自身可枚举字符串键属性的值组成的数组(不包含Symbol)。
 
 ```js
 const d= Symbol('d')
@@ -459,7 +459,7 @@ console.log(Object.entries(object1))
 
 ## Object.assign()
 
-Object.assign()静态方法将一个或多个源对象所有自身可枚举属性复制到目标对象种，并返回修改后的目标对象。目标对象也将被修改。
+Object.assign()静态方法将一个或多个源对象所有自身可枚举属性（包含Symbol）复制到目标对象中，并返回修改后的目标对象。目标对象也将被修改。
 
 ```js
 const target = { a: 1, b: 2 };
