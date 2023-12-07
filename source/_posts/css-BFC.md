@@ -51,7 +51,7 @@ Box 是 CSS 布局的对象和基本单位， 直观点来说，就是一个页�
 
 + 绝对定位和浮动的块容器则总是会创建新的块级格式化上下文。
 + display值为table或者inline-table的元素将会生成表格（table），表格内部会使用特殊的格式化方式来排布其内部元素。
-+ display值为grid或者inline-grid的元素将会生成格元素（grid element），与table情形类似，它内部也是使用特殊的格式化方式来排布其内部元素，
++ display值为grid或者inline-grid的元素将会生成网格元素（grid element），与table情形类似，它内部也是使用特殊的格式化方式来排布其内部元素，
 + display值为flex或者inline-flex的元素将会生成自适应容器（flex container），自适应容器在其内部产生自适应格式化上下文（flex formatting context）
 
 FC的全称是：Formatting Contexts，是W3C CSS2.1规范中的一个概念。它是页面中的一块渲染区域，并且有一套渲染规则，它决定了其子元素将如何定位，以及和其他元素的关系和相互作用。

@@ -26,7 +26,7 @@ x 轴代表水平方向，y 轴代表垂直方向，z 轴则代表我们的目�
 
 每个网页都会默认创建一个层叠上下文，这个上下文的根部就是html元素，html元素的所有子元素都会默认在上下文中的某个层叠等级。
 
-当你个某个元素设置z-index值非auto时，就会创建一个新的层叠上下文。它和它所包含的层叠等级都是独立于其他层叠上下文和层叠等级的。
+当你给某个元素设置z-index值非auto时，就会创建一个新的层叠上下文。它和它所包含的层叠等级都是独立于其他层叠上下文和层叠等级的。
 
 在一个层叠上下文中，一共可能出现七个层叠等级，从低到高排序依次是：
 
@@ -129,7 +129,7 @@ fixed 属性会创建新的层叠上下文。当元素祖先的 transform, persp
   + mask / mask-image / mask-border
 + isolation 属性值为 isolate 的元素；
 + -webkit-overflow-scrolling 属性值为 touch 的元素；
-+ will-change 值设定了任一属性而该属性在 non-initial 值时会创建层叠上下文的元素（参考这篇文章）；
++ will-change 值设定了任一属性而该属性在 non-initial 值时会创建层叠上下文的元素；
 + contain 属性值为 layout、paint 或包含它们其中之一的合成值（比如 contain: strict、contain: content）的元素。
 
 总结:
