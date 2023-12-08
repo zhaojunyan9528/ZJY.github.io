@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="BOX： css布局的基本单位&amp;盒模型 盒模型–块级盒&#x2F;行内盒一个盒包含：内容（content）&#x2F;边（border）&#x2F;内边距（padding）&#x2F;外边距（margin）盒的尺寸（width和height–计算得到offsetWidth和offsetHeight）定义受到box-sizing属性的影响w3c标准盒模型-块级盒-border-box：width &#x3D; content + paddi">
+    <meta name="description" content="BOX： css布局的基本单位&amp;盒模型 盒模型–块级盒&#x2F;行内盒一个盒包含：内容（content）&#x2F;边（border）&#x2F;内边距（padding）&#x2F;外边距（margin）盒的尺寸（width和height–计算得到offsetWidth和offsetHeight）定义受到box-sizing属性的影响IE怪异盒模型-块级盒-border-box：width &#x3D; content + paddin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="css-BFC块级格式化上下文">
 <meta property="og:url" content="https://zhaojunyan9528.github.io/ZJY.github.io/2021/01/14/css-BFC/index.html">
 <meta property="og:site_name" content="ZJY">
-<meta property="og:description" content="BOX： css布局的基本单位&amp;盒模型 盒模型–块级盒&#x2F;行内盒一个盒包含：内容（content）&#x2F;边（border）&#x2F;内边距（padding）&#x2F;外边距（margin）盒的尺寸（width和height–计算得到offsetWidth和offsetHeight）定义受到box-sizing属性的影响w3c标准盒模型-块级盒-border-box：width &#x3D; content + paddi">
+<meta property="og:description" content="BOX： css布局的基本单位&amp;盒模型 盒模型–块级盒&#x2F;行内盒一个盒包含：内容（content）&#x2F;边（border）&#x2F;内边距（padding）&#x2F;外边距（margin）盒的尺寸（width和height–计算得到offsetWidth和offsetHeight）定义受到box-sizing属性的影响IE怪异盒模型-块级盒-border-box：width &#x3D; content + paddin">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-14T17:57:42.000Z">
-<meta property="article:modified_time" content="2023-12-08T10:17:39.042Z">
+<meta property="article:modified_time" content="2023-12-08T10:24:19.232Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -137,7 +137,7 @@
       
         <time datetime="2021-01-14T17:57:42.000Z" itemprop="datePublished">2021-01-14</time>
         
-        (Updated: <time datetime="2023-12-08T10:17:39.042Z" itemprop="dateModified">2023-12-08</time>)
+        (Updated: <time datetime="2023-12-08T10:24:19.232Z" itemprop="dateModified">2023-12-08</time>)
         
       
     </div>
@@ -163,7 +163,7 @@
 
   <div class="content" itemprop="articleBody">
     <h3 id="BOX：-css布局的基本单位-amp-盒模型"><a href="#BOX：-css布局的基本单位-amp-盒模型" class="headerlink" title="BOX： css布局的基本单位&amp;盒模型"></a>BOX： css布局的基本单位&amp;盒模型</h3><ul>
-<li><p>盒模型–块级盒/行内盒<br>一个盒包含：内容（content）/边（border）/内边距（padding）/外边距（margin）<br>盒的尺寸（width和height–计算得到offsetWidth和offsetHeight）定义受到box-sizing属性的影响<br>w3c标准盒模型-块级盒-border-box：width = content + padding + margin<br>IE盒子模型-块级盒-content-box：width = content</p>
+<li><p>盒模型–块级盒/行内盒<br>一个盒包含：内容（content）/边（border）/内边距（padding）/外边距（margin）<br>盒的尺寸（width和height–计算得到offsetWidth和offsetHeight）定义受到box-sizing属性的影响<br>IE怪异盒模型-块级盒-border-box：width = content + padding + margin<br>w3c标准盒模型-块级盒-content-box：width = content</p>
 </li>
 <li><p>行内盒：</p>
 <ul>
