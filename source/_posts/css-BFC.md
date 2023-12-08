@@ -13,8 +13,8 @@ date: 2021-01-14 17:57:42
 + 盒模型--块级盒/行内盒
 一个盒包含：内容（content）/边（border）/内边距（padding）/外边距（margin）
 盒的尺寸（width和height--计算得到offsetWidth和offsetHeight）定义受到box-sizing属性的影响
-w3c标准盒模型-块级盒-border-box：width = content + padding + margin
-IE盒子模型-块级盒-content-box：width = content
+IE怪异盒模型-块级盒-border-box：width = content + padding + margin
+w3c标准盒模型-块级盒-content-box：width = content
 
 + 行内盒：
   + width/height 不起作用，盒子高度由内容决定（font-size/line-height）
