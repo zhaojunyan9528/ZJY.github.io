@@ -201,7 +201,7 @@ self.addEventListener('activate', function(event) {
 })
 ```
 
-## 5.Web SQL
+## 6.Web SQL
 
 Web SQL数据库API并不是HTML5规范的一部分，但它是一个独立的规范，引入了一组使用SQL操作客户端数据库的APIs。
 
@@ -256,7 +256,7 @@ db.transaction(function (tx) {
 
 ![image](/images/websql.jpg)
 
-## 6.indexedDB
+## 7.indexedDB
 
 ```js
 let dbName = 'helloIndexedDB', version = 1, storeName = 'helloStore'

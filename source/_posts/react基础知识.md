@@ -13,7 +13,7 @@ date: 2023-04-11 16:31:41
 React 是一个用于构建用户界面的 JavaScript 库。
 
 + 原生js操作Dom繁琐、效率低
-+ 原生js直接操作dom，浏览器进行大量重绘重拍
++ 原生js直接操作dom，浏览器进行大量重绘重排
 + 原生js没有组件化编码，代码复用率低
 
 React的特点：
@@ -412,7 +412,7 @@ getCarData = () => {
 2.public/index.html引入样式不写 ./ 写 %PUBLIC_URL%
 3.使用HashRouter
 
-### Rediect的使用
+### Redirect的使用
 
 一般卸载路由注册的最下方，当所有路由都无法匹配时，跳转到redirect所指定的路由
 

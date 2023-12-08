@@ -631,7 +631,7 @@ shallowstate.c.d = 33 // 劫持get() c
 // 如果将一个对象赋值给 ref，那么这个对象将通过 reactive() 转为具有深层次响应式的对象
 function ref(target) {
   if (target && typeof target === 'object') {
-    target = reactive(target)
+    target = ref(target)
   }
   return {
     _value: target,

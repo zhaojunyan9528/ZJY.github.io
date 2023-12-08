@@ -18,7 +18,7 @@ IE盒子模型-块级盒-content-box：width = content
 
 + 行内盒：
   + width/height 不起作用，盒子高度由内容决定（font-size/line-height）
-  + margin-top/margin-bottom padding-top/padding-bottom不起作用
+  + margin-top/margin-bottom不起作用
 
 tips：
 
