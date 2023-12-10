@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/images/templateCompile.jpg">
 <meta property="og:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/images/template.jpg">
 <meta property="article:published_time" content="2022-03-28T09:40:12.000Z">
-<meta property="article:modified_time" content="2023-12-08T13:15:48.856Z">
+<meta property="article:modified_time" content="2023-12-10T06:16:11.950Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -146,7 +146,7 @@
       
         <time datetime="2022-03-28T09:40:12.000Z" itemprop="datePublished">2022-03-28</time>
         
-        (Updated: <time datetime="2023-12-08T13:15:48.856Z" itemprop="dateModified">2023-12-08</time>)
+        (Updated: <time datetime="2023-12-10T06:16:11.950Z" itemprop="dateModified">2023-12-10</time>)
         
       
     </div>
@@ -2039,7 +2039,7 @@
 <p>2、初始化阶段</p>
 <p>初始化实例的数据响应式系统，按照props、methods、data顺序来初始化相关数据，包括对data中的属性进行依赖收集并进行劫持，数据发生变化时可以自动更新视图。</p>
 <p>3、模板编译阶段</p>
-<p>如果实例中配置了template或render函数则对其进行预编译成render函数，如果没有则将el所在的dom内容作为模版进行编译</p>
+<p>如果vue实例选项中有render函数直接渲染dom，如果没有，但是实例中配置了template则对其进行预编译成render函数，如果没有template则将el所在的dom内容作为模版进行编译</p>
 <p>将template解析成ast tree抽象语法树<br>将ast tree转换成render语法字符串<br>生成render函数</p>
 <p>4、挂载阶段</p>
 <p>调用render函数生成vnode树，再调用patch生成真实dom，最后将实例挂载到el所在dom元素上，并开始渲染视图。</p>
@@ -2078,7 +2078,112 @@
 <p>在 HTML 中，某些字符是预留的。</p>
 <p>在 HTML 中不能使用小于号（&lt;）和大于号（&gt;），这是因为浏览器会误认为它们是标签。</p>
 <p>如果希望正确地显示预留字符，我们必须在 HTML 源代码中使用字符实体。</p>
-<p>|显示结果| 描述 |实体名称 |实体编号|<br>|:—:|:—:|:—:|<br>|空格| |&nbsp; |&#160;|<br>|&lt;| 小于号| &lt;| &#60;|<br>|&gt;| 大于号| &gt;| &#62;|<br>|&amp;| 和号| &amp;| &#38;|<br>|”| 引号| &quot;| &#34;|<br>|’| 撇号|  &apos;| (IE不支持) &#39;|<br>|￠| 分| &cent;| &#162;|<br>|£| 镑| &pound;| &#163;|<br>|¥| 人民币/日元| &yen;| &#165;|<br>|€| 欧元| &euro;| &#8364;|<br>|§| 小节| &sect;| &#167;|<br>|©| 版权| &copy;| &#169;|<br>|®| 注册商标| &reg;| &#174;|<br>|™| 商标| &trade;| &#8482;|<br>|×| 乘号| &times;| &#215;|<br>|÷| 除号| &divide;| &#247;|</p>
+<table>
+<thead>
+<tr>
+<th align="center">显示结果</th>
+<th align="center">描述</th>
+<th align="center">实体名称</th>
+<th align="center">实体编号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">空格</td>
+<td align="center"><code>&amp;nbsp;</code></td>
+<td align="center"><code>&amp;nbsp;</code></td>
+<td align="center"><code>&amp;#160;</code></td>
+</tr>
+<tr>
+<td align="center">&lt;</td>
+<td align="center">小于号</td>
+<td align="center"><code>&amp;lt;</code></td>
+<td align="center"><code>&amp;#60;</code></td>
+</tr>
+<tr>
+<td align="center">&gt;</td>
+<td align="center">大于号</td>
+<td align="center"><code>&amp;gt;</code></td>
+<td align="center"><code>&amp;#62;</code></td>
+</tr>
+<tr>
+<td align="center">&amp;</td>
+<td align="center">和号</td>
+<td align="center"><code>&amp;amp;</code></td>
+<td align="center"><code>&amp;#38;</code></td>
+</tr>
+<tr>
+<td align="center">“</td>
+<td align="center">引号</td>
+<td align="center"><code>&amp;quot;</code></td>
+<td align="center"><code>&amp;#34;</code></td>
+</tr>
+<tr>
+<td align="center">‘</td>
+<td align="center">撇号</td>
+<td align="center"><code>&amp;apos;</code></td>
+<td align="center">(IE不支持) <code>&amp;#39;</code></td>
+</tr>
+<tr>
+<td align="center">￠</td>
+<td align="center">分</td>
+<td align="center"><code>&amp;cent;</code></td>
+<td align="center"><code>&amp;#162;</code></td>
+</tr>
+<tr>
+<td align="center">£</td>
+<td align="center">镑</td>
+<td align="center"><code>&amp;pound;</code></td>
+<td align="center"><code>&amp;#163;</code></td>
+</tr>
+<tr>
+<td align="center">¥</td>
+<td align="center">人民币/日元</td>
+<td align="center"><code>&amp;yen;</code></td>
+<td align="center"><code>&amp;#165;</code></td>
+</tr>
+<tr>
+<td align="center">€</td>
+<td align="center">欧元</td>
+<td align="center"><code>&amp;euro;</code></td>
+<td align="center"><code>&amp;#8364;</code></td>
+</tr>
+<tr>
+<td align="center">§</td>
+<td align="center">小节</td>
+<td align="center"><code>&amp;sect;</code></td>
+<td align="center"><code>&amp;#167;</code></td>
+</tr>
+<tr>
+<td align="center">©</td>
+<td align="center">版权</td>
+<td align="center"><code>&amp;copy;</code></td>
+<td align="center"><code>&amp;#169;</code></td>
+</tr>
+<tr>
+<td align="center">®</td>
+<td align="center">注册商标</td>
+<td align="center"><code>&amp;reg;</code></td>
+<td align="center"><code>&amp;#174;</code></td>
+</tr>
+<tr>
+<td align="center">™</td>
+<td align="center">商标</td>
+<td align="center"><code>&amp;trade;</code></td>
+<td align="center"><code>&amp;#8482;</code></td>
+</tr>
+<tr>
+<td align="center">×</td>
+<td align="center">乘号</td>
+<td align="center"><code>&amp;times;</code></td>
+<td align="center"><code>&amp;#215;</code></td>
+</tr>
+<tr>
+<td align="center">÷</td>
+<td align="center">除号</td>
+<td align="center"><code>&amp;divide;</code></td>
+<td align="center"><code>&amp;#247;</code></td>
+</tr>
+</tbody></table>
 <h3 id="202-说说position的absolute和fixed共同与不同点分别是什么？"><a href="#202-说说position的absolute和fixed共同与不同点分别是什么？" class="headerlink" title="202.说说position的absolute和fixed共同与不同点分别是什么？"></a>202.说说position的absolute和fixed共同与不同点分别是什么？</h3><p>absolute<br>元素会被移出正常文档流，并不为元素预留空间，通过指定元素相对于最近的非 static 定位祖先元素的偏移，来确定元素位置。绝对定位的元素可以设置外边距（margins），且不会与其他边距合并。</p>
 <p>fixed<br>元素会被移出正常文档流，并不为元素预留空间，而是通过指定元素相对于屏幕视口（viewport）的位置来指定元素位置。元素的位置在屏幕滚动时不会改变。打印时，元素会出现在的每页的固定位置。fixed 属性会创建新的层叠上下文。当元素祖先的 transform, perspective 或 filter 属性非 none 时，容器由视口改为该祖先。</p>
 <h3 id="203-举例子说明javascript的变量声明提升和函数声明提升"><a href="#203-举例子说明javascript的变量声明提升和函数声明提升" class="headerlink" title="203.举例子说明javascript的变量声明提升和函数声明提升"></a>203.举例子说明javascript的变量声明提升和函数声明提升</h3><p><strong>变量声明:</strong></p>
