@@ -14,7 +14,7 @@
 <meta property="og:description" content="1.mvvmm,指数据模型（data）,v,指视图，UI组件，vm视图模型，把传统的mvc中controller演变成viewModel.viewModel是view和model的桥梁，数据会绑定到viewModel并自动将数据渲染到页面，视图变化时会通知viewModel层更新数据。 2.vue2中响应式原理在初始化数据时，会使用Object.defineProperty()方法重新定义data">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-20T11:37:13.000Z">
-<meta property="article:modified_time" content="2023-12-13T06:45:58.495Z">
+<meta property="article:modified_time" content="2024-02-25T08:44:26.820Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -137,7 +137,7 @@
       
         <time datetime="2021-01-20T11:37:13.000Z" itemprop="datePublished">2021-01-20</time>
         
-        (Updated: <time datetime="2023-12-13T06:45:58.495Z" itemprop="dateModified">2023-12-13</time>)
+        (Updated: <time datetime="2024-02-25T08:44:26.820Z" itemprop="dateModified">2024-02-25</time>)
         
       
     </div>
@@ -276,7 +276,7 @@
 <p>访问器属性不包含数据值value，包含一对getter,setter函数（非必须）。value和writable和get/set不能共存。<br>configurable—能否用delete删除属性从而重新定义属性<br>enumerable—能否通过for-in遍历，即是否可枚举<br>get—读取属性调用的函数，默认为undefined<br>value—读取属性调用的函数，默认为undefined</p>
 <p>Object.create(null): this.set = Object.create(null)这样赋值，这样写不需要考虑原型链上的属性，可以真正创建一个纯净的对象。</p>
 <h3 id="29-es6"><a href="#29-es6" class="headerlink" title="29.es6"></a>29.es6</h3><p>export default和export的区别：<br>1.在一个文件或模块中，可以有多个export，而export default只能有一个<br>2.通过export方式导出，在导入时要加{},而export default则不需要</p>
-<p>箭头函数：<br>1.箭头函数中的this的指向时固定不变的，即是定义函数时的指向<br>2.普通函数中的this的指向是变化的，即是使用函数时的指向<br>class继承：<br>可通过extends关键字实现继承。</p>
+<p>箭头函数：<br>1.箭头函数中的this的指向是固定不变的，即是定义函数时的指向<br>2.普通函数中的this的指向是变化的，即是使用函数时的指向<br>class继承：<br>可通过extends关键字实现继承。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.company=‘A’;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">testA</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.company;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.exployee=<span class="string">&#x27;B&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>super关键字，表示父类的构造函数，用来新建父类的this对象。super虽然代表类父类A的构造函数，但是返回的是子类B的实例，即super内部的this指向的是B，因此 super()在这里相当于A.prototype.constructor.call(this)</p>
 <ul>
@@ -357,7 +357,7 @@
     Copyright &copy;
     
     
-    2020-2023
+    2020-2024
     ZJY
   </div>
   <div class="footer-right">

@@ -14,7 +14,7 @@
 <meta property="og:description" content="1.缓存好的缓存策略可以缩短网页请求资源的距离，减少延迟，并且缓存文件可以重复利用，可以减少带宽，降低网络负荷。 一个数据请求，可以分为发起网络请求、后端处理、浏览器响应三个步骤。缓存可以帮我们在第一和第三步骤中优化性能。比如说直接使用缓存而不发起请求，或者发起了请求但存储的数据和前端一致，那么就没有必要再将数据回传回来，减少响应。 2.缓存位置缓存位置上分4种，并各有优先级，当一次查找都没有命中">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-29T17:01:29.000Z">
-<meta property="article:modified_time" content="2023-12-13T06:45:58.499Z">
+<meta property="article:modified_time" content="2024-02-25T08:44:26.824Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -137,7 +137,7 @@
       
         <time datetime="2021-04-29T17:01:29.000Z" itemprop="datePublished">2021-04-29</time>
         
-        (Updated: <time datetime="2023-12-13T06:45:58.499Z" itemprop="dateModified">2023-12-13</time>)
+        (Updated: <time datetime="2024-02-25T08:44:26.824Z" itemprop="dateModified">2024-02-25</time>)
         
       
     </div>
@@ -172,7 +172,7 @@
 <li>Push Cache</li>
 </ul>
 <h4 id="1-Service-Worker"><a href="#1-Service-Worker" class="headerlink" title="1.Service Worker"></a>1.Service Worker</h4><p>运行在浏览器的独立线程，可以实现缓存功能。<br>使用Service Worker，传输协议必须为HTTPS。<br>Service Worker 实现缓存功能一般分为三个步骤：首先需要先注册 Service Worker，然后监听到 install 事件以后就可以缓存需要的文件，那么在下次用户访问的时候就可以通过拦截请求的方式查询是否存在缓存，存在缓存的话就可以直接读取缓存文件，否则就去请求数据。</p>
-<h4 id="2-Memory-Cache"><a href="#2-Memory-Cache" class="headerlink" title="2.Memory Cache"></a>2.Memory Cache</h4><p>内存中的缓存，主要包含当前页面中已经抓取的资源，例如页面上已经下载的样式，脚本，图片等。读取内存中的数据肯定比磁盘块，内存缓存虽然读取高校，但是可持续性短，会随着进程的释放而释放。一旦我们关闭tab页面，内存中的缓存就被释放了。</p>
+<h4 id="2-Memory-Cache"><a href="#2-Memory-Cache" class="headerlink" title="2.Memory Cache"></a>2.Memory Cache</h4><p>内存中的缓存，主要包含当前页面中已经抓取的资源，例如页面上已经下载的样式，脚本，图片等。读取内存中的数据肯定比磁盘块，内存缓存虽然读取高效，但是可持续性短，会随着进程的释放而释放。一旦我们关闭tab页面，内存中的缓存就被释放了。</p>
 <h4 id="3-Disk-Cache"><a href="#3-Disk-Cache" class="headerlink" title="3.Disk Cache"></a>3.Disk Cache</h4><p>存储在硬盘中的缓存，虽然读取慢，但什么都能存储，比Memory Cache胜在存储的容量和存储时效上。</p>
 <p>在所有浏览器缓存中，Disk Cache 覆盖面基本是最大的。它会根据 HTTP Herder 中的字段判断哪些资源需要缓存，哪些资源可以不请求直接使用，哪些资源已经过期需要重新请求。并且即使在跨站点的情况下，相同地址的资源一旦被硬盘缓存下来，就不会再次去请求数据。</p>
 <h4 id="4-Push-Cache"><a href="#4-Push-Cache" class="headerlink" title="4.Push Cache"></a>4.Push Cache</h4><p>推送缓存是http/2中的内容，当以上3中缓存都没有命中时，才会使用。它只在会话（session）中存在，一旦会话结束就被释放，并且缓存时间很短。</p>
@@ -290,7 +290,7 @@
     Copyright &copy;
     
     
-    2020-2023
+    2020-2024
     ZJY
   </div>
   <div class="footer-right">

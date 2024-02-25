@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/images/vue-data.png">
 <meta property="article:published_time" content="2021-04-20T12:27:22.000Z">
-<meta property="article:modified_time" content="2023-12-13T06:45:58.495Z">
+<meta property="article:modified_time" content="2024-02-25T08:44:26.820Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -139,7 +139,7 @@
       
         <time datetime="2021-04-20T12:27:22.000Z" itemprop="datePublished">2021-04-20</time>
         
-        (Updated: <time datetime="2023-12-13T06:45:58.495Z" itemprop="dateModified">2023-12-13</time>)
+        (Updated: <time datetime="2024-02-25T08:44:26.820Z" itemprop="dateModified">2024-02-25</time>)
         
       
     </div>
@@ -196,11 +196,17 @@
 <h3 id="2-9-总结"><a href="#2-9-总结" class="headerlink" title="2.9 总结"></a>2.9 总结</h3><p>Object可以通过Object.definedProperty将属性转换成getter/setter的形式来追踪变化。读取数据时会触发getter，修改数据时会触发setter。</p>
 <p>我们需要在getter中收集有哪些依赖发生了变化。当setter触发时，去通知getter中收集的依赖数据发生了变化。</p>
 <p>收集依赖需要为依赖找一个存储的地方，即Dep，它用来收集依赖、删除依赖、通知依赖更新等。</p>
-<p>所谓的依赖，其实就是Watcher，只有watcher触发的getter才会被收集，哪个watcher触发了getter，就把它收集到Dep中，当数据发生变化，就循环依赖列表通知所有watcher。</p>
+<p>所谓的依赖，可能vue实例，组件的一个属性、模版中的表达式或者watch监听，把它抽象为Watcher类，只有watcher触发的getter才会被收集，哪个watcher触发了getter，就把它收集到Dep中，当数据发生变化，就循环依赖列表通知所有watcher。</p>
 <p>Watcher的原理是先把自己设置到全局唯一指定的地方（window.target），然后读取数据，触发getter，接着，getter中就会从全局唯一指定的地方去获取当前正在读取数据的watcher，并把这个watcher收集到Dep中，通过这样方式，Watcher可以主动去订阅任意一个数据的变化。</p>
 <p>此外，Observer类把一个object中给的所有数据包括子数据都转换成响应式的。但是在对象上新增或删除属性都无法被追踪到。</p>
 <p>如下图，Data、Observer、Dep、Watcher之间关系。</p>
 <p><img src="/ZJY.github.io/images/vue-data.png" alt="image"></p>
+<p>vue双向数据绑定的原理：</p>
+<p>通过数据劫持和发布订阅模式实现。对数据的各个属性的读取和修改进行拦截，并在数据发生变化时发布消息给相关订阅者进行更新。</p>
+<p>1、实现一个Observer（观察者）类，用来劫持并监听所有属性，如果数据变动，触发setter，通知相关依赖中的watcher进行更新。</p>
+<p>2、实现一个解析器Compile，解析指令，将模版中的变量替换成数据，然后初始化渲染页面视图；并将每个指令对应的节点绑定对应的更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，更新视图。</p>
+<p>3、实现一个Watcher订阅者，作为compile和Observer之间通信的桥梁，能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数，从而更新视图。</p>
+<p>4、Dep依赖收集器，每个属性都有一个Dep实例，内部维护了一个数组，用来存储所有订阅了该属性的Watcher。</p>
 <p>Data通过Observer转换成getter/setter形式来追踪变化。<br>当外界通过Watcher读取数据时，会触发getter从而将watcher添加到依赖中。<br>当数据发生变化，会触发setter，从而向Dep中的依赖（Watcher）发送通知。<br>Watcher接收到通知后，会向外界发送通知，变化通知到外界可能会触发视图更新，也有可能触发用户某个回调函数。</p>
 
   </div>
@@ -268,7 +274,7 @@
     Copyright &copy;
     
     
-    2020-2023
+    2020-2024
     ZJY
   </div>
   <div class="footer-right">
