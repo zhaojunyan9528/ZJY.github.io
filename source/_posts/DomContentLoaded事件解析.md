@@ -16,7 +16,7 @@ date: 2021-06-09 10:50:42
 
 当整个页面及所有依赖资源如样式表和图片都已完成加载时，将触发load事件
 
-<b>DOMContentLoaded事件和load事件区别：</b>
+**DOMContentLoaded事件和load事件区别：**
 DOMContentLoaded在HTML文档被解析完成之后触发，而load是在HTML所有相关资源被加载完成后触发
 
 ### 3.HTML解析过程与DOMContentLoaded触发时机
@@ -46,6 +46,7 @@ DOMContentLoaded事件的触发时机为:HTML解析为DOM之后
 html文档解析时如果遇见同步脚本，则停止解析，先加载脚本再执行，执行结束后继续解析HTML文档。HTML文档解析完毕后触发DOMContentLoaded事件
 
 异步脚本：
+
 + defer
 
 当 HTML 文档被解析时如果遇见 defer 脚本，则在后台加载脚本，文档解析过程不中断，而等文档解析结束之后，defer 脚本执行。另外，defer 脚本的执行顺序与定义时的位置有关。在前面的script会先执行

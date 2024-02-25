@@ -32,7 +32,7 @@ cookie是一段不超过4KB的小型文本数据，由一个名称name,一个值
 
 ## 2.本地存储localStorage
 
-以键值对（key-value）的方式存储，永久存储，永不失效，除非手动删除。
+以键值对（key-value）的方式存储，存储的数据已字符串形式存在，永久存储，永不失效，除非手动删除。
 每个域名5M。
 常用API：getItem,setItem,removeItem,key,clear
 localStorage只要在相同的协议、相同的主机名、相同的端口下，就能读取/修改到同一份localStorage数据。
@@ -204,6 +204,7 @@ self.addEventListener('activate', function(event) {
 ## 6.Web SQL
 
 Web SQL数据库API并不是HTML5规范的一部分，但它是一个独立的规范，引入了一组使用SQL操作客户端数据库的APIs。
+但由于兼容性和性能问题，Web SQL已经被IndexedDB所取代。
 
 核心方法
 
@@ -430,3 +431,18 @@ import IndexDB from './IndexDB.js'
 ```
 
 ![image](/images/indexedDB.jpg)
+
+### 浏览器常用存储方式有哪些？
+
++ cookie：本身用于浏览器和server通讯，由服务器发送给浏览器存储，并且每次浏览器向同一服务器发送请求时，都会携带这些Cookies。本身存储大小有限（通常为4KB），并且可以设置过期时间。通常用来存储用户登录信息，个性化设置等。
++ localStorage：用于持久化的本地存储，除非主动删除数据，否则数据是永远不会过期的。以key-value的形式存储，存储数据以字符串形式存在，大小通常为5M或更大。适用于存储大量持久数据。
++ sessionStorage：用于本地存储，数据在当前浏览器窗口或标签关闭后自动删除。适用于存储临时数据只在当前会话中保存。
++ IndexedDB：IndexedDB 是一个事务型数据库，用于在客户端存储大量结构化数据。
++ Web SQL：一种使用 SQL 的数据库，用于在浏览器中存储数据。
+
+### 浏览器cookie和sessionStorage/localStorage的区别
+
++ 存储大小：cookie数据大小不能超过4K。sessionStorage和localStorage可以达到5M或更大。
++ 有效时间：localStorage存储持久数据，浏览器关闭后数据不丢失除非主动删除数据；sessionStorage数据在当前浏览器窗口关闭后自动删除。cookie设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭。
++ 存储位置：cookie数据存储在浏览器中；sessionStorage和localStorage数据存储在浏览器内存中；如果浏览器配置为默认不保存数据，那么数据将会丢失。
++ 数据共享：cookie、session和localStorage都遵循同源原则进行数据共享。cookie和localStorage在所有同源窗口中都是共享的；sessionStorage在不同的浏览器窗口中不共享。

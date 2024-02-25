@@ -73,4 +73,3 @@ date: 2021-01-19 23:03:20
 
         history.back();//触发onpopstate事件，输出'router',重新加载test
         history.state; //输出：{foo:"barreplace"}
-

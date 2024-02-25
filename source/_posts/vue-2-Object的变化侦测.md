@@ -257,7 +257,7 @@ Object可以通过Object.definedProperty将属性转换成getter/setter的形式
 
 收集依赖需要为依赖找一个存储的地方，即Dep，它用来收集依赖、删除依赖、通知依赖更新等。
 
-所谓的依赖，其实就是Watcher，只有watcher触发的getter才会被收集，哪个watcher触发了getter，就把它收集到Dep中，当数据发生变化，就循环依赖列表通知所有watcher。
+所谓的依赖，可能vue实例，组件的一个属性、模版中的表达式或者watch监听，把它抽象为Watcher类，只有watcher触发的getter才会被收集，哪个watcher触发了getter，就把它收集到Dep中，当数据发生变化，就循环依赖列表通知所有watcher。
 
 Watcher的原理是先把自己设置到全局唯一指定的地方（window.target），然后读取数据，触发getter，接着，getter中就会从全局唯一指定的地方去获取当前正在读取数据的watcher，并把这个watcher收集到Dep中，通过这样方式，Watcher可以主动去订阅任意一个数据的变化。
 
@@ -266,6 +266,18 @@ Watcher的原理是先把自己设置到全局唯一指定的地方（window.tar
 如下图，Data、Observer、Dep、Watcher之间关系。
 
 ![image](/images/vue-data.png)
+
+vue双向数据绑定的原理：
+
+通过数据劫持和发布订阅模式实现。对数据的各个属性的读取和修改进行拦截，并在数据发生变化时发布消息给相关订阅者进行更新。
+
+1、实现一个Observer（观察者）类，用来劫持并监听所有属性，如果数据变动，触发setter，通知相关依赖中的watcher进行更新。
+
+2、实现一个解析器Compile，解析指令，将模版中的变量替换成数据，然后初始化渲染页面视图；并将每个指令对应的节点绑定对应的更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，更新视图。
+
+3、实现一个Watcher订阅者，作为compile和Observer之间通信的桥梁，能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数，从而更新视图。
+
+4、Dep依赖收集器，每个属性都有一个Dep实例，内部维护了一个数组，用来存储所有订阅了该属性的Watcher。
 
 Data通过Observer转换成getter/setter形式来追踪变化。
 当外界通过Watcher读取数据时，会触发getter从而将watcher添加到依赖中。

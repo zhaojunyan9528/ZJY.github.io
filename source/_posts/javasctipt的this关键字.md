@@ -51,13 +51,13 @@ person.fullName(); // John Doe
 
 在浏览器中，全局对象指window
 
-```
+```js
 console.log(this === window); //true
 ```
 
 严格模式下，单独使用this，也是指全局对象。
 
-```
+```js
 'use strict'
 console.log(this === window); //true
 ```

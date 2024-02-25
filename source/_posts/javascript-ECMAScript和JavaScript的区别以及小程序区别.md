@@ -10,6 +10,7 @@ date: 2021-01-19 21:59:22
 
 
 ### ECMAScript
+
 ECMAScript是一种由Ecma国际通过ECMA-262标准化的脚本程序设计语言， JavaScript 是 ECMAScript 的一种实现.
 
 小程序中的 JavaScript同浏览器中的 JavaScript 以及 NodeJS 中的 JavaScript 是不相同的

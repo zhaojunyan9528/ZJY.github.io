@@ -245,73 +245,74 @@ slice(start,end)向数组中选出指定数组，返回被截选的子数组
 1.typeof:
 
 ```javascript
-        typeof 'ls' // string
-        typeof 123 // number
-        typeof true // bollean
-        typeof null // object
-        typeof undefined // undefined
-        typeof [] // object
-        typeof {} // object
-        typeof function(){} // function
-        typeof Symbol(1) // symbol
+  typeof 'ls' // string
+  typeof 123 // number
+  typeof true // bollean
+  typeof null // object
+  typeof undefined // undefined
+  typeof [] // object
+  typeof {} // object
+  typeof function(){} // function
+  typeof Symbol(1) // symbol
 ```
 
 typeof可以判断基本数据类型：String，Boolean,Number,但不能判断Array,Object,Null类型
-
 
 2.instanceof
 
 判断构造函数的prototype属性是否存在某实例对象的原型链上。
 
 ```javascript
-        // instanceof 运算符用来测试一个对象在其原型链中是否存在一个构造函数的 prototype 属性。其意思就是判断对象是否是某一数据类型（如Array）的实例
-        function A(){}
-        let a = new A();
-        console.log(a instanceof A);//true,因为 Object.getPrototypeOf(a) === A.prototype;
-        
-        console.log('srr' intanceof String) //false
-        console.log(1 instanceof Number) // false
-        console.log(true instanceof Boolean) // false
-        在这里字面量值，2， true ，'str'不是实例，所以判断值为false
-        console.log(new Number(2) instanceof Number)// true
-        console.log(new String('2') instanceof String)// true
-        console.log(new Boolean(false) instanceof Boolean)// true
-        console.log([] instanceof Array) // true
-        console.log({} instanceof Object) // true
-        console.log(function(){} instanceof Function)// true
-        
-        // null和undefined
-        conosle.log(null instanceof Null) // Null is not defined
-        console.log(undefined instanceof Undefined) //Undefined is not undefined
-        
-        console.log(new null instanceof Null) // null is not a constructor
-        console.log(new undefined instanceof Undefined) //undefined is not a constructor
-        // 浏览器认为null，undefined不是构造器
-``` 
+  // instanceof 运算符用来测试一个对象在其原型链中是否存在一个构造函数的 prototype 属性。其意思就是判断对象是否是某一数据类型（如Array）的实例
+  function A(){}
+  let a = new A();
+  console.log(a instanceof A);//true,因为 Object.getPrototypeOf(a) === A.prototype;
+  
+  console.log('srr' intanceof String) //false
+  console.log(1 instanceof Number) // false
+  console.log(true instanceof Boolean) // false
+  // 在这里字面量值，2， true ，'str'不是实例，所以判断值为false
+  console.log(new Number(2) instanceof Number)// true
+  console.log(new String('2') instanceof String)// true
+  console.log(new Boolean(false) instanceof Boolean)// true
+  console.log([] instanceof Array) // true
+  console.log({} instanceof Object) // true
+  console.log(function(){} instanceof Function)// true
+  
+  // null和undefined
+  conosle.log(null instanceof Null) // Null is not defined
+  console.log(undefined instanceof Undefined) //Undefined is not undefined
+  
+  console.log(new null instanceof Null) // null is not a constructor
+  console.log(new undefined instanceof Undefined) //undefined is not a constructor
+  // 浏览器认为null，undefined不是构造器
+```
 
-能判断Array,Object,Null类型，但不能区分基本数据类型
+能判断Array,Object,Null类型，但不能区分基本数据类型，而且它依赖于对象的原型链，若原型链被修改，结果可能并不准确
 
 3.constructor
 
 constructor属性返回创建该对象时构造函数的引用
 
 ```javascript
-        console.log((2).constructor === Number); //true
-        console.log((true).constructor === Boolean);//true
-        console.log(('str').constructor === String);//true
-        console.log(([]).constructor === Array);//true
-        console.log(({}).constructor === Object);//true
-        console.log((function() {}).constructor === Function);//true
-        
-        // 用costructor来判断类型看起来是完美的，然而，如果
-        // 我创建一个对象，更改它的原型，这种方式也变得不可
-        // 靠了
-        function Fn(){}
-        Fn.prototype = new Array();
-        var f = new Fn();
-        console.log(f.constructor === Fn);//false
-        console.log(f.constructor=== Array);//true
-``` 
+  console.log((2).constructor === Number); //true
+  console.log((true).constructor === Boolean);//true
+  console.log(('str').constructor === String);//true
+  console.log(([]).constructor === Array);//true
+  console.log(({}).constructor === Object);//true
+  console.log((function() {}).constructor === Function);//true
+  
+  // 用costructor来判断类型看起来是完美的，然而，如果
+  // 我创建一个对象，更改它的原型，这种方式也变得不可
+  // 靠了
+  function Fn(){}
+  Fn.prototype = new Array();
+  var f = new Fn();
+  console.log(f.constructor === Fn);//false
+  console.log(f.constructor=== Array);//true
+```
+
+constructor属性可以被修改，因此并不是可靠的类型检查方法
 
 4.Object.prototype.toString.call
 
@@ -319,21 +320,24 @@ toString方法返回调用它的对象的类型或值。
 返回值默认是[object class],class是对象的内部类型，通常对应对象的构造函数名。
 
 ```javascript  
-        // 常用于判断浏览器内置对象,对于所有基本的数据类型都能进行判断，即使是 null 和 undefined
-        var  test = Object.prototype.toString;
-        console.log(test.call(1)); //[object Number]
-        console.log(test.call(true)); //[object Boolean]
-        console.log(test.call('123')); //[object String]
-        console.log(test.call([])); //[object Array]
-        console.log(test.call({})); //[object Object]
-        console.log(test.call(function(){})); //[object Function]
-        console.log(test.call(null)); //[object Null]
-        console.log(test.call(undefined)); //[object Undefined]       
+  // 常用于判断浏览器内置对象,对于所有基本的数据类型都能进行判断，即使是 null 和 undefined
+  var  test = Object.prototype.toString;
+  console.log(test.call(1)); //[object Number]
+  console.log(test.call(true)); //[object Boolean]
+  console.log(test.call('123')); //[object String]
+  console.log(test.call([])); //[object Array]
+  console.log(test.call({})); //[object Object]
+  console.log(test.call(function(){})); //[object Function]
+  console.log(test.call(null)); //[object Null]
+  console.log(test.call(undefined)); //[object Undefined]       
 ```
 
-5.Array.isArray
+是一个可靠的类型检查方法因为它不依赖于原型链
 
-```javascript   
+5.Array.isArray
+用来判断一个对象是否是数组
+
+```javascript
    console.log(Array.isArray([]))// true
         
     var str = new String('123');
@@ -346,6 +350,7 @@ toString方法返回调用它的对象的类型或值。
 ### 17.闭包的概念
 
 闭包就是能访问其他函数内部的变量的函数
+
 + 优点：
     避免全局变量的污染
     变量长期存储在内存中（缓存变量）
@@ -353,17 +358,17 @@ toString方法返回调用它的对象的类型或值。
     常驻内存，加大内存使用
     内存泄漏
 闭包实现了私有变量和参数
-    
+
 ### 18.深拷贝和浅拷贝
 
 + 基础数据类型（number string boolean null undefined）存储在栈内存中
 + 引用数据类型（Function Array Object）变量名与内存地址存储在栈内存中，值作为对象保存在堆内存中
 + 基础数据类型的比较是值比较
 + 引用数据类型的比较是内存地址比较
-    
+
 浅拷贝：只复制指向某个对象的指针，而不复制对象本身，新旧对象共享同一块内存
 深拷贝：复制并创建一个一摸一样的对象，不共享内存，修改新对象，旧对象保持不变
-    
+
 + 浅拷贝：
         Object.assign()
         扩展运算符...
@@ -815,7 +820,7 @@ undefined、symbol 和函数这三种情况，会直接忽略
 
 优点：该方法可以顾虑到重复的 String、Boolean、 Number、undefined、null、NaN、Object，返回的是去重后的新数组。
 缺点：针对 NaN和'NaN', 对象的key会视为一个key，区分不了NaN和'NaN'
-    
+
 6.利用ES6的Set数据结构的特性
 
 ```javascript
@@ -831,7 +836,7 @@ undefined、symbol 和函数这三种情况，会直接忽略
 
 优点：该方法可以顾虑到重复的 String、Boolean、 Number、undefined、null、NaN，返回的是去重后的新数组。
 缺点：不能过滤重复的Object
-    
+
 7.利用ES6的Map数据结构的特性去重
 
 ```javascript
@@ -856,8 +861,8 @@ undefined、symbol 和函数这三种情况，会直接忽略
 优点：该方法可以顾虑到重复的 String、Boolean、 Number、undefined、null、NaN，返回的是去重后的新数组。
 缺点：不能过滤重复的Object
 
-
 总结：
+
 + splice、indexof（不能过滤NaN、object）：
         双重for循环，判断arr[i] 和 arr[j](j=i+1)是否相等利
         用splice去重数组，正向遍历数组，不能过滤掉 NaN、Object
@@ -865,7 +870,6 @@ undefined、symbol 和函数这三种情况，会直接忽略
         用splice去重数组，逆向遍历数组，不能过滤掉 NaN、Object
         定义新数组，for循环判断新数组是否包含indexOf当前循环值，
         利用indexOf去重，不能过滤掉 NaN、Object
-    
 + includes、set、map（不能过滤object）：
         定义新数组，for循环判断新数组是否includes当
         前循环值，利用includes去重，不能过滤掉 Object
@@ -875,13 +879,11 @@ undefined、symbol 和函数这三种情况，会直接忽略
             let map = new Map()
             for循环中判断：map.has(arr[i])
         不能过滤掉 Object
-        
 + 利用对象的属性key唯一的特性去重:
         let obj = {}
         for循环判断：obj[arr[i]]不存在将当前循环元素push新数组
         可以过滤掉 NaN、Object，不可以区分'NaN'和NaN
-        
-        
+
 ### 20.DOM 事件有哪些阶段？谈谈对事件代理的理解
 
 捕获阶段-目标阶段-冒泡阶段
@@ -889,7 +891,7 @@ undefined、symbol 和函数这三种情况，会直接忽略
 事件代理简单说就是：事件不直接绑定到某元素上，而是绑定到该元素的父元素上，进行触发事件操作时(例如'click')，再通过条件判断，执行事件触发后的语句(例如'alert(e.target.innerHTML)')
 
 好处：(1)使代码更简洁；(2)节省内存开销
-    
+
 ### 21.async/await
 
 async用于声明一个函数是异步的，await用来等待一个异步
@@ -922,7 +924,7 @@ then()链来处理这个promise对象：
 await等待的是一个表达式，这个表达式的结果是promise对
 象或其他值（直接量或者普通函数）
 
-```javascript       
+```javascript
         function getSomething() {
             return "something";
         }
