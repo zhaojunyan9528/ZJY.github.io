@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .item {
+        background-color: red;
+        padding: 10px;
+        line-height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <span class="item">li<br />1212</span>
+    <script>
+      // var x;
+      // console.log(x == undefined)
+      // console.log(x === undefined)
+      // console.log(x === 'undefined')
+      // console.log(typeof x === 'undefined')
+
+      var a = 5
+      const obj = {
+        a: 3,
+        test1: function () {
+          console.log(this, this.a)
+        },
+        test2: () => {
+          console.log(this, this.a)
+        },
+        test3() {
+          console.log(this, this.a)
+        },
+        test4() {
+          return function () {
+            console.log(this, this.a)
+          }
+        }
+      }
+      console.log("打印obj.test1()", obj.test1()) // 3----3
+      console.log("打印obj.test2()", obj.test2()) // 3----5
+      console.log("打印obj.test3()", obj.test3()) // 3----3
+      console.log("打印obj.test4()", obj.test4()()) // 5----5
+      console.log("------------")
+      const obj2 = {
+        a: 2
+      }
+      obj2.test1 = obj.test1
+      obj2.test2 = obj.test2
+      obj2.test3 = obj.test3
+      obj2.test4 = obj.test4()
+      console.log("打印obj2.test1()", obj2.test1()) // 2----2
+      console.log("打印obj2.test2()", obj2.test2()) // 2----5
+      console.log("打印obj2.test3()", obj2.test3()) // 2----2
+      console.log("打印obj2.test4()", obj2.test4()) // 2----2
+
+      console.log("打印obj.test1.apply(obj2)", obj.test1.apply(obj2)) // 2----2
+    </script>
+    <script>
+      initPage()
+      function initPage() {
+        var clientWidth =
+          document.documentElement.clientWidth || document.body / clientWidth //获取屏幕可视区宽
+        var html = document.getElementsByTagName("html")[0] //获取html根元素
+        html.style.fontSize = clientWidth / 10 + "px" //动态设置font-size大小
+      }
+      window.onresize = initPage
+    </script>
+  </body>
+</html>
