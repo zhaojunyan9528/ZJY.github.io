@@ -14,7 +14,20 @@
   </head>
   <body>
     <span class="item">li<br />1212</span>
+    <hr>
+    <div onclick="handleParent(event)">
+      <h3 data-id="0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio incidunt dolorem numquam rem accusamus, debitis exercitationem quis explicabo quos cupiditate, placeat eos magni corporis qui ab provident quas. Quidem, maiores.</h3>
+      <h3 data-id="1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio incidunt dolorem numquam rem accusamus, debitis exercitationem quis explicabo quos cupiditate, placeat eos magni corporis qui ab provident quas. Quidem, maiores.</h3>
+      <h3 data-id="2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio incidunt dolorem numquam rem accusamus, debitis exercitationem quis explicabo quos cupiditate, placeat eos magni corporis qui ab provident quas. Quidem, maiores.</h3>
+      <h3 data-id="3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio incidunt dolorem numquam rem accusamus, debitis exercitationem quis explicabo quos cupiditate, placeat eos magni corporis qui ab provident quas. Quidem, maiores.</h3>
+      <h3 data-id="4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio incidunt dolorem numquam rem accusamus, debitis exercitationem quis explicabo quos cupiditate, placeat eos magni corporis qui ab provident quas. Quidem, maiores.</h3>
+      <h3 data-id="5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio incidunt dolorem numquam rem accusamus, debitis exercitationem quis explicabo quos cupiditate, placeat eos magni corporis qui ab provident quas. Quidem, maiores.</h3>>
+    </div>
+    <hr>
     <script>
+      function handleParent(e) {
+        console.log("handleParent", e.target.dataset)
+      }
       // var x;
       // console.log(x == undefined)
       // console.log(x === undefined)
@@ -59,14 +72,14 @@
       console.log("打印obj.test1.apply(obj2)", obj.test1.apply(obj2)) // 2----2
     </script>
     <script>
-      initPage()
-      function initPage() {
-        var clientWidth =
-          document.documentElement.clientWidth || document.body / clientWidth //获取屏幕可视区宽
-        var html = document.getElementsByTagName("html")[0] //获取html根元素
-        html.style.fontSize = clientWidth / 10 + "px" //动态设置font-size大小
-      }
-      window.onresize = initPage
+      // initPage()
+      // function initPage() {
+      //   var clientWidth =
+      //     document.documentElement.clientWidth || document.body / clientWidth //获取屏幕可视区宽
+      //   var html = document.getElementsByTagName("html")[0] //获取html根元素
+      //   html.style.fontSize = clientWidth / 10 + "px" //动态设置font-size大小
+      // }
+      // window.onresize = initPage
     </script>
   </body>
 </html>
