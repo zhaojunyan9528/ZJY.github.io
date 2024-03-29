@@ -25,6 +25,7 @@
     </div>
     <hr>
     <script>
+
       function handleParent(e) {
         console.log("handleParent", e.target.dataset)
       }
@@ -80,6 +81,19 @@
       //   html.style.fontSize = clientWidth / 10 + "px" //动态设置font-size大小
       // }
       // window.onresize = initPage
+    </script>
+    <script>
+      // console.time()
+
+      let aT = performance.now()
+      for(let i=0; i< 10000; i++) {
+        let div = document.createElement('div')
+        div.innerHTML = i
+      }
+      // console.timeEnd()
+      let bT = performance.now()
+
+      console.log(bT - aT)
     </script>
   </body>
 </html>
