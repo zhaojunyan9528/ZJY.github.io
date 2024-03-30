@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>拖拽</title>
+  <style>
+    .list {
+      margin-top: 2rem;
+    }
+    .item {
+      width: 300px;
+      height: 60px;
+      line-height: 60px;
+      background-color: green;
+      color: white;
+      border-radius: 10px;
+      padding-left: 10px;
+      margin-bottom: 10px;
+    }
+    .item.moving {
+      background-color: transparent;
+      border: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+  <div class="list">
+    <div draggable="true" class="item">1</div>
+    <div draggable="true" class="item">2</div>
+    <div draggable="true" class="item">3</div>
+    <div draggable="true" class="item">4</div>
+    <div draggable="true" class="item">5</div>
+    <div draggable="true" class="item">6</div>
+  </div>
+  <script>
+    
+    // 获取列表元素
+    const list = document.querySelector('.list');
+    let sourceNode = null
+    // 拖拽开始
+    list.ondragstart = (e) => {
+      // 在ondragstart中添加样式
+      setTimeout(() => {
+        e.target.classList.add('moving');
+      }, 0);
+      // 记录拖拽开始时的元素
+      sourceNode = e.target
+    }
+    // 拖拽进入
+    list.ondragenter = (e) => {
+      // 阻止默认行为
+      e.preventDefault();
+      // 如果目标元素是列表或者拖拽开始时的元素，则直接返回
+      if (e.target === list || e.target === sourceNode) return;
+      console.log('打印', e.target);
+      // 获取列表中子元素的索引
+      const children = [...list.children];
+      const sourceIndex = children.indexOf(sourceNode);
+      const targetIndex = children.indexOf(e.target);
+      // 如果源元素索引小于目标元素索引，则目标元素向下移
+      if (sourceIndex < targetIndex) {
+        console.log('打印', '下移')
+        list.insertBefore(sourceNode, e.target.nextElementSibling);
+      // 否则，目标元素向上移
+      } else {
+        console.log('打印', '上移')
+        list.insertBefore(sourceNode, e.target);
+      }
+    }
+    // 拖拽移动
+    list.ondragover = (e) => {
+      // 阻止默认行为
+      e.preventDefault();
+    }
+    // 拖拽结束
+    list.ondragend = (e) => {
+      // 移除样式
+      e.target.classList.remove('moving');
+    }
+  </script>
+</body>
+</html>
