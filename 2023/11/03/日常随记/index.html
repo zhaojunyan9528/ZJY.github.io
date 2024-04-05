@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/">
 <meta property="og:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/images/vuex.png">
 <meta property="article:published_time" content="2023-11-03T09:49:54.000Z">
-<meta property="article:modified_time" content="2024-04-03T11:11:59.337Z">
+<meta property="article:modified_time" content="2024-04-05T13:17:00.412Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="+ 前端">
 <meta name="twitter:card" content="summary">
@@ -145,7 +145,7 @@
       
         <time datetime="2023-11-03T09:49:54.000Z" itemprop="datePublished">2023-11-03</time>
         
-        (Updated: <time datetime="2024-04-03T11:11:59.337Z" itemprop="dateModified">2024-04-03</time>)
+        (Updated: <time datetime="2024-04-05T13:17:00.412Z" itemprop="dateModified">2024-04-05</time>)
         
       
     </div>
@@ -2105,6 +2105,19 @@
 <p>在Vue.js中，当页面刷新时，Vue Router会重新加载路由配置，并且只会加载在初始化时定义的路由（即在创建<code>router</code>实例时通过<code>routes</code>选项传入的路由）。动态添加的路由在页面刷新后会丢失，因为它们是在运行时通过<code>addRoutes</code>方法添加到路由表中的。</p>
 <p>如果你希望在页面刷新后仍然保留动态添加的路由，你需要将这些路由持久化到某种存储机制中，并在应用启动时从该存储中恢复它们。</p>
 <p>或者全局路由守卫拦截判断是否获取用户权限，拿到权限后动态添加权限路由；用户权限数据存储在store里不做持久化存储，每次刷新重新拿取用户权限数据进而实现重新添加动态路由。</p>
+<p>全局导航守卫：<br>判断是否登录：</p>
+<ul>
+<li>未登录：在白名单内放行，不在重定向登录页面</li>
+<li>已登录：判断是否加载了动态路由<ul>
+<li>已加载，放行</li>
+<li>未加载，判断是否拿到权限数据：<ul>
+<li>拿到权限数据，根据权限生成权限路由动态添加到路由，设置加载动态路由状态为true，然后放行</li>
+<li>未拿到权限数据，获取权限数据并生成路由动态添加，设置加载动态路由状态为true，然后放行</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="如何避免刷新页面二次加载路由"><a href="#如何避免刷新页面二次加载路由" class="headerlink" title="如何避免刷新页面二次加载路由"></a>如何避免刷新页面二次加载路由</h3><p>1、window.location.reload()</p>
 <p>2、新创建的router的matcher替换旧的路由matcher</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> createRouter = <span class="function">() =&gt;</span> <span class="keyword">new</span> Router(&#123;</span><br><span class="line">  <span class="comment">// mode: &#x27;history&#x27;, // require service support</span></span><br><span class="line">  scrollBehavior: <span class="function">() =&gt;</span> (&#123; <span class="attr">y</span>: <span class="number">0</span> &#125;),</span><br><span class="line">  routes: constantRouterMap</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = createRouter()</span><br><span class="line"></span><br><span class="line"><span class="comment">// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">resetRouter</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> newRouter = createRouter()</span><br><span class="line">  <span class="comment">// matcher包含了关于路径匹配的所有信息</span></span><br><span class="line">  router.matcher = newRouter.matcher <span class="comment">// reset router</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
