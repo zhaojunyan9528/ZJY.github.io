@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/">
 <meta property="og:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/images/vuex.png">
 <meta property="article:published_time" content="2023-11-03T09:49:54.000Z">
-<meta property="article:modified_time" content="2024-04-06T13:46:15.266Z">
+<meta property="article:modified_time" content="2024-04-06T15:18:30.074Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="+ 前端">
 <meta name="twitter:card" content="summary">
@@ -145,7 +145,7 @@
       
         <time datetime="2023-11-03T09:49:54.000Z" itemprop="datePublished">2023-11-03</time>
         
-        (Updated: <time datetime="2024-04-06T13:46:15.266Z" itemprop="dateModified">2024-04-06</time>)
+        (Updated: <time datetime="2024-04-06T15:18:30.074Z" itemprop="dateModified">2024-04-06</time>)
         
       
     </div>
@@ -2559,13 +2559,13 @@
 <li>工作原理：CommonJS 是同步的模块加载机制，模块在运行时通过<code>require</code>函数导入，通过<code>module.exports</code>或<code>exports</code>导出。每个模块在执行时有自己的全局作用域，模块加载后立即执行，输出的是导出对象的一个副本。</li>
 <li>使用场景：常用于Node.js的服务器端编程，如在express框架中加载中间件和路由模块。</li>
 </ul>
-<p>**2. Asynchronous Module Definition (AMD)**：</p>
+<p><strong>2. Asynchronous Module Definition (AMD)：</strong></p>
 <ul>
 <li>设计初衷：AMD 是面向浏览器环境设计的，由 RequireJS 首先提出并广泛应用，解决浏览器环境下异步加载模块的需求。</li>
 <li>工作原理：AMD 使用异步方式加载模块，模块的加载和执行是分离的。通过<code>define</code>函数定义模块，通过<code>require</code>函数异步加载模块，并在回调函数中使用加载完成的模块。AMD 支持模块的动态加载和依赖管理。</li>
 <li>使用场景：适用于浏览器端的复杂单页面应用，特别是需要异步加载和模块按需加载的场景。</li>
 </ul>
-<p>**3. ECMAScript Modules (ES6 Modules)**：</p>
+<p><strong>3. ECMAScript Modules (ES6 Modules)：</strong></p>
 <ul>
 <li>设计初衷：ES6 Modules 是 ECMAScript 6 标准中正式引入的模块系统，它既适用于浏览器环境也适用于非浏览器环境。</li>
 <li>工作原理：ESM 使用<code>import</code>关键字导入模块，通过<code>export</code>关键字导出模块成员。模块的加载是静态的（静态分析时就可以确定模块依赖），并且默认支持异步加载（尽管现代浏览器也支持同步模块加载）。模块在导入时不会立即执行，而是等到导入它的模块需要时才执行。</li>
