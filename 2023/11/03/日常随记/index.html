@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/">
 <meta property="og:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/images/vuex.png">
 <meta property="article:published_time" content="2023-11-03T09:49:54.000Z">
-<meta property="article:modified_time" content="2024-04-05T13:17:00.412Z">
+<meta property="article:modified_time" content="2024-04-06T13:46:15.266Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="+ 前端">
 <meta name="twitter:card" content="summary">
@@ -145,7 +145,7 @@
       
         <time datetime="2023-11-03T09:49:54.000Z" itemprop="datePublished">2023-11-03</time>
         
-        (Updated: <time datetime="2024-04-05T13:17:00.412Z" itemprop="dateModified">2024-04-05</time>)
+        (Updated: <time datetime="2024-04-06T13:46:15.266Z" itemprop="dateModified">2024-04-06</time>)
         
       
     </div>
@@ -2424,7 +2424,7 @@
 <li>行内元素（Inline Elements）</li>
 </ol>
 <p>行内元素不会开始新的行，它们只会占据其内容本身的宽度和高度。行内元素通常用于表示文本或文本的一部分，例如链接、强调的文本等。</p>
-<p>例子：<span> <a> <strong> <em></p>
+<p>例子：<code>&lt;span&gt;</code> <code>&lt;a&gt;</code> <code>&lt;strong&gt;</code> <code>&lt;em&gt;</code></p>
 <p>特点：</p>
 <p>不会独占一行，和其他行内元素并排显示。<br>宽度和高度由内容决定，不能设置固定的宽高。<br>只能容纳文本或其他行内元素，不能包含块级元素。</p>
 <ol>
@@ -2453,8 +2453,8 @@
 <h3 id="如何实现响应式布局？介绍几种常见的方法和技术"><a href="#如何实现响应式布局？介绍几种常见的方法和技术" class="headerlink" title="如何实现响应式布局？介绍几种常见的方法和技术"></a>如何实现响应式布局？介绍几种常见的方法和技术</h3><p>一套代码适应不同的屏幕尺寸。<br>1、百分比布局</p>
 <p>百分比相对于包含块计算，元素的位置和尺寸由包含块决定，默认是最近祖先块元素的内容区域，width\top\bottom百分比值由包含块的width决定，height\left\right\margin\padding百分比值由包含块的height决定</p>
 <p>2、媒体查询布局</p>
-<p>通过@media 媒体查询，可以通过给不同屏幕的大小编写不同的样式来实现响应式的布局。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line"><span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line"><span class="attribute">height</span>: <span class="number">500px</span>;</span><br><span class="line"><span class="attribute">background-color</span>: aqua;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width:</span> <span class="number">1280px</span>) &#123;</span><br><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">400px</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width:</span> <span class="number">980px</span>) &#123;</span><br><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width:</span> <span class="number">765px</span>) &#123;</span><br><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过<code>@media</code> 媒体查询，可以通过给不同屏幕的大小编写不同的样式来实现响应式的布局。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: aqua;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width:</span> <span class="number">1280px</span>) &#123;</span><br><span class="line">  <span class="selector-class">.box</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">400px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width:</span> <span class="number">980px</span>) &#123;</span><br><span class="line">  <span class="selector-class">.box</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width:</span> <span class="number">765px</span>) &#123;</span><br><span class="line">  <span class="selector-class">.box</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>响应式缺点：如果浏览器大小改变时，需要改变的样式太多，那么多套样式代码会很繁琐。</p>
 <p>3、rem 响应式布局</p>
 <p>em 是相对于 html 根元素的字体大小的单位。</p>
@@ -2465,7 +2465,7 @@
 <p>在实际的开发中，我们通常会以 750px 的移动端设计稿来开发。1rem = 75px</p>
 <p>我们在代码写完后，统一会把所有 px 单位全部转成 rem 来实现.<br>js 动态修改 html 根元素的 font-size 的大小，能适配不同尺寸的屏幕</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">initPage()</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initPage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> clientWidth =</span><br><span class="line">    <span class="built_in">document</span>.documentElement.clientWidth || <span class="built_in">document</span>.body / clientWidth <span class="comment">//获取屏幕可视区宽</span></span><br><span class="line">  <span class="keyword">var</span> html = <span class="built_in">document</span>.getElementsByTagName(<span class="string">&quot;html&quot;</span>)[<span class="number">0</span>] <span class="comment">//获取html根元素</span></span><br><span class="line">  html.style.fontSize = clientWidth / <span class="number">10</span> + <span class="string">&quot;px&quot;</span> <span class="comment">//动态设置font-size大小</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.onresize = initPage</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>flexible.js 原理就是根据不同的屏幕宽度动态的设置网页中 html 根节点的 font-size</p>
+<p><code>flexible.js</code> 原理就是根据不同的屏幕宽度动态的设置网页中 html 根节点的 font-size</p>
 <p>4、vw 和 vh响应式布局<br>vw 和 vh 分别相对的是视图窗口的宽度和视图窗口的高度。<br>在宽为 750px 的设计稿下，把 px 转换为 vw，是用 px/7.5 得到对应的 vw 单位，即750px为100vw</p>
 <p>5、flex 弹性布局</p>
 <p>在父元素上，我们经常会用到的有关弹性布局的属性主要有 flex-direction , flex-wrap , justify-content , align-items , align-content ，这几个属性分别从 主轴的方向、是否换行、项目在主轴上的对齐方式、项目在交叉轴上的对齐方式、项目在多根轴线上的对齐方式来规范了项目在父元素中的弹性。</p>
@@ -2475,63 +2475,46 @@
 <p><strong>2、借助indexOf函数: indexOf() 方法返回数组中第一次出现给定元素的下标，如果不存在则返回 -1.</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> uniqueArray = []</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">  <span class="keyword">if</span> (uniqueArray.indexOf(array[i] === -<span class="number">1</span>)) &#123;</span><br><span class="line">    uniqueArray.push(array[i])</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>3、借助filter方法:</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> uniqueArray = array.filter(<span class="function">(<span class="params">element, index, self</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> self.indexOf(element) === -<span class="number">1</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> uniqueArray = array.filter(<span class="function">(<span class="params">element, index, self</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> self.indexOf(element) === index</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p><strong>4、利用reduce方法:</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> uniqueArray = array.reduce(<span class="function">(<span class="params">calcResult, current</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (!calcResult.includes(current)) &#123;</span><br><span class="line">    calcResult.push(current)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> calcResult</span><br><span class="line">&#125;, [])</span><br></pre></td></tr></table></figure>
 <p><strong>性能优化：</strong></p>
-<p>如何提高网页加载速度和首屏渲染时间？<br>资源压缩</p>
 <p>如何减少重绘和回流？请举例说明。</p>
-<ol>
-<li><strong>批量修改DOM和样式</strong>：</li>
-</ol>
+<p><strong>1.批量修改DOM和样式</strong>：</p>
 <ul>
 <li>尽量将多个DOM操作集中在一起执行，而不是分散在不同的事件或者循环中逐个修改。例如：</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不好的做法（每次循环都会引起回流）</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line"> <span class="built_in">document</span>.getElementById(<span class="string">&#x27;list&#x27;</span>).style.height = i + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 好的做法（一次性设置，仅触发一次回流）</span></span><br><span class="line"><span class="keyword">let</span> newHeight;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line"> newHeight = i + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&#x27;list&#x27;</span>).style.height = newHeight;</span><br></pre></td></tr></table></figure>
-<ol>
-<li><strong>使用CSS类代替内联样式</strong>：</li>
-</ol>
+<p><strong>2.使用CSS类代替内联样式</strong>：</p>
 <ul>
 <li>修改类名而不是直接修改元素样式，可以避免连续的样式变更引起的重绘。</li>
 </ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* CSS */</span></span><br><span class="line"><span class="selector-class">.hidden</span> &#123; <span class="attribute">display</span>: none; &#125;</span><br><span class="line"><span class="selector-class">.visible</span> &#123; <span class="attribute">display</span>: block; &#125;</span><br><span class="line"></span><br><span class="line">// <span class="selector-tag">JavaScript</span></span><br><span class="line">element.classList.add(&#x27;hidden&#x27;); // 更改类名而非 style.display</span><br></pre></td></tr></table></figure>
-<ol>
-<li><strong>避免不必要的布局信息查询</strong>：</li>
-</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/* CSS */</span><br><span class="line">.hidden &#123; display: none; &#125;</span><br><span class="line">.visible &#123; display: block; &#125;</span><br><span class="line"></span><br><span class="line">//JavaScript</span><br><span class="line">element.classList.add(&#x27;hidden&#x27;); // 更改类名而非 style.display</span><br></pre></td></tr></table></figure>
+<p><strong>3.避免不必要的布局信息查询</strong>：</p>
 <ul>
 <li>查询布局信息（如offsetTop/Left、scrollWidth/Height等）也会触发回流。在不需要精确值时，考虑延后获取或使用MutationObserver观察变化。</li>
 </ul>
-<ol start="2">
-<li><strong>利用层叠上下文（Composite Layers）</strong>：</li>
-</ol>
+<p><strong>4.利用层叠上下文（Composite Layers）</strong>：</p>
 <ul>
 <li>如果元素有独立动画，可以通过<code>will-change</code>属性或者3D变换（translateZ(0)）创建一个新的层，使得重绘只发生在单独的合成层上，不影响主文档流。</li>
 </ul>
-<ol start="3">
-<li><strong>使用CSS3硬件加速</strong>：</li>
-</ol>
+<p><strong>5.使用CSS3硬件加速</strong>：</p>
 <ul>
 <li>对于动画，使用transform和opacity属性，这两个属性的变化不会触发重排，只会触发重绘，并且可以被GPU硬件加速。</li>
 </ul>
-<ol start="4">
-<li><strong>虚拟DOM</strong>：</li>
-</ol>
+<p><strong>6.虚拟DOM</strong>：</p>
 <ul>
 <li>使用像React或Vue这样的现代前端框架，它们提供了虚拟DOM机制，只有当实际视图需要更新时才会对比并最小化地更新真实DOM，从而减少回流和重绘的发生。</li>
 </ul>
-<ol start="5">
-<li><strong>懒加载和异步更新</strong>：</li>
-</ol>
+<p><strong>7.懒加载和异步更新</strong>：</p>
 <ul>
 <li>对于不在可视区域内的图片或动态内容，延迟加载直到进入视窗再进行渲染，可以有效避免非必要的计算和渲染。</li>
 </ul>
-<ol start="6">
-<li><strong>分离读写操作</strong>：</li>
-</ol>
+<p><strong>8.分离读写操作</strong>：</p>
 <ul>
 <li>如果既有读取又有修改DOM的操作，尽量先完成读取，然后集中进行写入，避免读写交错引起的多次回流。</li>
 </ul>
-<ol start="7">
+<ol>
 <li><strong>减少不必要的DOM节点数量</strong>：</li>
 </ol>
 <ul>
@@ -2570,25 +2553,19 @@
 </ul>
 <p>综合来看，懒加载和预加载虽然方向相反，但都是为了优化网页性能和用户体验，只是应用场景和目标有所差异。懒加载适用于节省初次加载资源量和时间的情况，而预加载更注重提升后续操作的流畅度和响应性。</p>
 <h3 id="请描述CommonJS、AMD、ES6-Modules之间的区别"><a href="#请描述CommonJS、AMD、ES6-Modules之间的区别" class="headerlink" title="请描述CommonJS、AMD、ES6 Modules之间的区别"></a>请描述CommonJS、AMD、ES6 Modules之间的区别</h3><p>CommonJS、AMD 和 ES6 Modules（也称为 ECMAScript Modules，简称 ESM）是JavaScript中三种不同的模块化规范，它们的主要区别在于设计目的、工作原理以及使用场景：</p>
-<ol>
-<li><strong>CommonJS</strong>：</li>
-</ol>
+<p><strong>1. CommonJS</strong>：</p>
 <ul>
 <li>设计初衷：CommonJS 主要应用于服务器端，由 Node.js 实现并流行起来，适用于非浏览器环境。</li>
 <li>工作原理：CommonJS 是同步的模块加载机制，模块在运行时通过<code>require</code>函数导入，通过<code>module.exports</code>或<code>exports</code>导出。每个模块在执行时有自己的全局作用域，模块加载后立即执行，输出的是导出对象的一个副本。</li>
 <li>使用场景：常用于Node.js的服务器端编程，如在express框架中加载中间件和路由模块。</li>
 </ul>
-<ol start="2">
-<li>**Asynchronous Module Definition (AMD)**：</li>
-</ol>
+<p>**2. Asynchronous Module Definition (AMD)**：</p>
 <ul>
 <li>设计初衷：AMD 是面向浏览器环境设计的，由 RequireJS 首先提出并广泛应用，解决浏览器环境下异步加载模块的需求。</li>
 <li>工作原理：AMD 使用异步方式加载模块，模块的加载和执行是分离的。通过<code>define</code>函数定义模块，通过<code>require</code>函数异步加载模块，并在回调函数中使用加载完成的模块。AMD 支持模块的动态加载和依赖管理。</li>
 <li>使用场景：适用于浏览器端的复杂单页面应用，特别是需要异步加载和模块按需加载的场景。</li>
 </ul>
-<ol start="3">
-<li>**ECMAScript Modules (ES6 Modules)**：</li>
-</ol>
+<p>**3. ECMAScript Modules (ES6 Modules)**：</p>
 <ul>
 <li>设计初衷：ES6 Modules 是 ECMAScript 6 标准中正式引入的模块系统，它既适用于浏览器环境也适用于非浏览器环境。</li>
 <li>工作原理：ESM 使用<code>import</code>关键字导入模块，通过<code>export</code>关键字导出模块成员。模块的加载是静态的（静态分析时就可以确定模块依赖），并且默认支持异步加载（尽管现代浏览器也支持同步模块加载）。模块在导入时不会立即执行，而是等到导入它的模块需要时才执行。</li>
