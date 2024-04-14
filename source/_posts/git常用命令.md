@@ -191,27 +191,26 @@ git reset --hard HEAD^  //回到上一个版本
 
 1.仓库b添加仓库a连接
 
-```
+```shell
 git remote add 仓库a的项目名 仓库a的git地址
 ```
 
 2.仓库b 拉取仓库a分支a 的最新代码
 
-```
+```shell
 git pull 仓库a的项目名 branch-a
 ```
 
 3.仓库b根据仓库a的分支a创建分支a
 
-```
+```shell
 git checkout -b branch-a 仓库a的项目名/branch-a
 ```
 
 例子：
 
-```
+```shell
 git remote add storeA storeA.git
 git pull storeA branch-a
 git checkout -b branch-a storeA/branch-a
 ```
-
