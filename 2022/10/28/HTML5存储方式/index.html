@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/images/websql.jpg">
 <meta property="og:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/images/indexedDB.jpg">
 <meta property="article:published_time" content="2022-10-28T10:45:27.000Z">
-<meta property="article:modified_time" content="2024-04-14T06:28:11.448Z">
+<meta property="article:modified_time" content="2024-04-28T02:29:18.285Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -140,7 +140,7 @@
       
         <time datetime="2022-10-28T10:45:27.000Z" itemprop="datePublished">2022-10-28</time>
         
-        (Updated: <time datetime="2024-04-14T06:28:11.448Z" itemprop="dateModified">2024-04-14</time>)
+        (Updated: <time datetime="2024-04-28T02:29:18.285Z" itemprop="dateModified">2024-04-28</time>)
         
       
     </div>
@@ -184,8 +184,8 @@
 <li>Secure属性：指定是否使用HTTPS安全协议发送Cookie</li>
 <li>HTTPOnly 属性 ：用于防止客户端脚本通过document.cookie属性访问Cookie</li>
 </ul>
-<h2 id="2-本地存储localStorage"><a href="#2-本地存储localStorage" class="headerlink" title="2.本地存储localStorage"></a>2.本地存储localStorage</h2><p>以键值对（key-value）的方式存储，存储的数据已字符串形式存在，永久存储，永不失效，除非手动删除。<br>每个域名5M。<br>常用API：getItem,setItem,removeItem,key,clear<br>localStorage只要在相同的协议、相同的主机名、相同的端口下，就能读取/修改到同一份localStorage数据。</p>
-<h2 id="3-本地存储sessionStorage"><a href="#3-本地存储sessionStorage" class="headerlink" title="3.本地存储sessionStorage"></a>3.本地存储sessionStorage</h2><p>协议，域名，端口和窗口<br>session，只要关闭浏览器（也包括浏览器的标签页），就会被清空</p>
+<h2 id="2-本地存储localStorage"><a href="#2-本地存储localStorage" class="headerlink" title="2.本地存储localStorage"></a>2.本地存储localStorage</h2><p>以键值对（key-value）的方式存储，存储的数据已字符串形式存在，永久存储，永不失效，除非手动删除。<br>每个域名5M。<br>常用API：getItem,setItem,removeItem,key,clear<br>localStorage只要在相同的协议、相同的主机名、相同的端口下，就能读取/修改到同一份localStorage数据。<br>存储在硬盘中。</p>
+<h2 id="3-本地存储sessionStorage"><a href="#3-本地存储sessionStorage" class="headerlink" title="3.本地存储sessionStorage"></a>3.本地存储sessionStorage</h2><p>协议，域名，端口和窗口<br>session，只要关闭浏览器（也包括浏览器的标签页），就会被清空。存储在浏览器内存中</p>
 <h2 id="4-离线缓存（application-cache）"><a href="#4-离线缓存（application-cache）" class="headerlink" title="4.离线缓存（application cache）"></a>4.离线缓存（application cache）</h2><p>本地缓存应用所需的文件</p>
 <p>1.配置manifest文件</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">HTML</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">manifest</span>=<span class="string">&quot;demo.appcache&quot;</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
