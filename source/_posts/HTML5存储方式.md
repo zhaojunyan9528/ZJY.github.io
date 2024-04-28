@@ -36,11 +36,12 @@ cookie是一段不超过4KB的小型文本数据，由一个名称name,一个值
 每个域名5M。
 常用API：getItem,setItem,removeItem,key,clear
 localStorage只要在相同的协议、相同的主机名、相同的端口下，就能读取/修改到同一份localStorage数据。
+存储在硬盘中。
 
 ## 3.本地存储sessionStorage
 
 协议，域名，端口和窗口
-session，只要关闭浏览器（也包括浏览器的标签页），就会被清空
+session，只要关闭浏览器（也包括浏览器的标签页），就会被清空。存储在浏览器内存中
 
 ## 4.离线缓存（application cache）
 
