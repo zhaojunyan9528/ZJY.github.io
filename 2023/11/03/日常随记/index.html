@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/">
 <meta property="og:image" content="https://zhaojunyan9528.github.io/ZJY.github.io/images/vuex.png">
 <meta property="article:published_time" content="2023-11-03T09:49:54.000Z">
-<meta property="article:modified_time" content="2024-04-28T02:29:18.293Z">
+<meta property="article:modified_time" content="2024-05-07T13:32:17.186Z">
 <meta property="article:author" content="ZJY">
 <meta property="article:tag" content="+ 前端">
 <meta name="twitter:card" content="summary">
@@ -145,7 +145,7 @@
       
         <time datetime="2023-11-03T09:49:54.000Z" itemprop="datePublished">2023-11-03</time>
         
-        (Updated: <time datetime="2024-04-28T02:29:18.293Z" itemprop="dateModified">2024-04-28</time>)
+        (Updated: <time datetime="2024-05-07T13:32:17.186Z" itemprop="dateModified">2024-05-07</time>)
         
       
     </div>
@@ -453,7 +453,7 @@
 <p>主线程：全局js<br>微队列：<br>延时队列：fn1<br>交互队列：</p>
 <p>解析：主线程执行全局js，遇到setTimeout，计时线程0秒后将fn1放入延时队列-》继续执行全局js-》输出2-》全局js结束，主线程空，微队列空，执行延时队列fn1-》输出1</p>
 <p>示例2:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">delay</span>(<span class="params">duration</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> start = <span class="built_in">Date</span>.now()</span><br><span class="line">  <span class="keyword">while</span>(<span class="built_in">Date</span>.now() + start &lt; duration) &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line">delay()</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">delay</span>(<span class="params">duration</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> start = <span class="built_in">Date</span>.now()</span><br><span class="line">  <span class="keyword">while</span>(<span class="built_in">Date</span>.now() + start &lt; duration) &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line">delay(<span class="number">3000</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
 <p>输出：等待3秒、2、1</p>
 <p>解析：主线程执行全局js，遇到setTimeout，计时线程0秒后将fn1放入延时队列-》继续执行全局js-》执行delay函数3秒-》输出2-》全局js结束，主线程空，微队列空，执行延时队列fn1-》输出1</p>
 <p>示例3:</p>
@@ -479,7 +479,9 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// h: 5,   微：3, 7, </span></span><br><span class="line"><span class="comment">// 4, 2, 1, 6, 8, 3, 7, 5</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">2</span>)</span><br><span class="line">  <span class="keyword">await</span> foo()</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">3</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">5</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">bar()</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">6</span>)</span><br><span class="line">  resolve()</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">7</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
 <p>阐述js的事件循环：</p>
 <p>事件循环又叫做消息循环，是浏览器的渲染主线程的工作方式。</p>
-<p>在chrome中开启一个无限循环，每次循环从队列中取出第一个任务执行，而其他线程只需要在合适的时机将任务添加到队列末尾。<br>过去把消息队列分为宏队列和微队列，这种说法无法满足复杂的浏览器环境，取而代之的是另一钟灵活的处理方式。</p>
+<p>在chrome中开启一个无限循环，每次循环从队列中取出第一个任务执行，而其他线程只需要在合适的时机将任务添加到队列末尾。</p>
+<p>在事件循环中，任务通常分为微任务和宏任务。微任务包括Promise.then、async/await、process.nextTick和queueMicrotask等，而宏任务则包括定时器（setTimeout、setInterval、requestAnimationFrame）、事件绑定、ajax回调函数以及Node.js的fs模块等。在执行顺序上，主任务会首先执行，然后是微任务，最后是宏任务。如果在执行微任务的过程中又产生了新的微任务，那么这些新的微任务会在当前轮次的微任务全部执行完毕后才会执行。</p>
+<p>过去把消息队列分为宏队列和微队列，这种说法无法满足复杂的浏览器环境，取而代之的是另一钟灵活的处理方式。</p>
 <p>根据w3c官方解释，每个任务都有一个类型，同一个类型的任务必须在同一个队列，不同任务属于不同的队列。<br>不同的任务队列有不同的优先级，在一次事件循环中，浏览器自行决定选取哪一个队列的任务。但浏览器必须有一个微队列，微队列具有最高的优先级，必须优先调度执行。</p>
 <h3 id="js中计时器能做到精准计时吗？"><a href="#js中计时器能做到精准计时吗？" class="headerlink" title="js中计时器能做到精准计时吗？"></a>js中计时器能做到精准计时吗？</h3><p>不能，因为：</p>
 <ul>
@@ -492,7 +494,7 @@
 <h3 id="浏览器的渲染原理"><a href="#浏览器的渲染原理" class="headerlink" title="浏览器的渲染原理"></a>浏览器的渲染原理</h3><p>当浏览器的网络线程收到HTML文档后，会产生一个渲染任务，并将其传递到渲染主线程的消息队列。<br>在事件循环机制下，渲染主线程取出渲染任务，开启渲染流程。</p>
 <p>整个渲染流程分为多个阶段，分别是：HTML解析、样式计算、布局、分层、绘制、分块、光栅化、画。<br>每个阶段都有明确的输出，上一个阶段的输出是下一个阶段的输入。<br>这样，整个阶段就成为一段严密的流水线。</p>
 <p><strong><em>HTML字符串-〉解析HTML-〉样式计算-〉布局-〉分层-〉绘制-〉分块-〉光栅化-〉画-〉像素信息</em></strong><br>渲染：将html字符串-&gt;像素信息</p>
-<h4 id="1-解析HTML"><a href="#1-解析HTML" class="headerlink" title="1.解析HTML"></a>1.解析HTML</h4><p>**<br>解析过程中遇到css，解析css，遇到js解析js。为了提高效率，浏览器在解析前，会启动一个预解析的线程，率先下载HTML中外部的css文件和外部的js文件。<br>如果主线程解析到link位置，此时外部的css文件还没有解析下载好，主线程不会等待，继续后续HTML的解析。这是因为下载和解析css是在与解析线程中进行的。这就是css不会阻塞HTML解析的根本原因。<br>如果主线程解析道script位置，主线程会停止解析HTML，转而等待js文件下载好，并将全局代码解析完成后，才继续解析HTML。这是因为js代码可能会修改当前的DOM树，所以DOM生成必须暂停。这就是js会阻塞HMTL解析的根本原因。<br>第一步完成后，会生成CSSOM树和DOM树，内部样式、外部样式、内联样式、浏览器默认样式都会包含在CSSOM树。<br>**</p>
+<h4 id="1-解析HTML"><a href="#1-解析HTML" class="headerlink" title="1.解析HTML"></a>1.解析HTML</h4><p>**<br>解析过程中遇到css，解析css，遇到js解析js。为了提高效率，浏览器在解析前，会启动一个预解析的线程，率先下载HTML中外部的css文件和外部的js文件。<br>如果主线程解析到link位置，此时外部的css文件还没有解析下载好，主线程不会等待，继续后续HTML的解析。这是因为下载和解析css是在预解析线程中进行的。这就是css不会阻塞HTML解析的根本原因。<br>如果主线程解析到script位置，主线程会停止解析HTML，转而等待js文件下载好，并将全局代码解析完成后，才继续解析HTML。这是因为js代码可能会修改当前的DOM树，所以DOM生成必须暂停。这就是js会阻塞HMTL解析的根本原因。<br>第一步完成后，会生成CSSOM树和DOM树，内部样式、外部样式、内联样式、浏览器默认样式都会包含在CSSOM树。<br>**</p>
 <p>渲染的第一步是解析HTMl，ParseHTML，产生DOM树（Document Object Model）和CSSOM树(css Object Model)</p>
 <p>css样式包括：内部样式style，外部样式link，内联样式，浏览器默认样式<br>js修改style样式，docu.style = ‘’<br>js修改<code>&lt;style&gt;</code>和外部样式，document.styleSheets[0].addRule(‘div’, ‘border: 1px solid #f40’)</p>
 <p>解析HTML，遇到css代码怎么办？<br>为了提高效率，浏览器会启动一个预解析器率先下载和解析css，css不会阻塞解析HTML。</p>
@@ -963,7 +965,7 @@
 <p><strong>3.减少代码体积.</strong></p>
 <ul>
 <li>使用<br>Tree Shaking<br>剔除了没有使用的多余代码，让代码体积更小。</li>
-<li>使用<br>@babe1/plugin-transform-runtime 插件对 babel进行处理，让辅助代码从中引入，而不是每个文件都生成辅助代码，从而体积更小。</li>
+<li>使用<br>@babel/plugin-transform-runtime 插件对 babel进行处理，让辅助代码从中引入，而不是每个文件都生成辅助代码，从而体积更小。</li>
 <li>使用<br>Image Minimizer 对项目中图片进行压缩，体积更小，请求速度更快。（需要注意的是，如果项目中图片都是在线链接，那么就不需要了。本地项目静态图片才需要进行压缩。）</li>
 </ul>
 <p><strong>4.优化代码运行性能.</strong></p>
@@ -1211,7 +1213,7 @@
 <li>移除keyCode作为v-on修饰符的支持</li>
 <li>移除filter过滤器</li>
 <li>移除$on,$off,$once</li>
-<li>移除Sdestroy实例方法</li>
+<li>移除$destroy实例方法</li>
 <li>移除$children,建议使用模版引用ref</li>
 <li>全局的set和delete方法以及实例方法$set,$delete</li>
 </ul>
@@ -1551,7 +1553,7 @@
 </ul>
 <p>每个对象都有一个  <code>__proto__</code>  属性，指向它构造函数的原型对象。</p>
 <p>原型链：</p>
-<p>对象都有<code>__proto__</code>属性，指向他的构造函数的原型对象，原型对象也是原型，也有<code>__proto__</code>属性，指向它的构造函数的原型，这样一层一层形成的链式结构称为原型链，顶层为null。</p>
+<p>对象都有<code>__proto__</code>属性，指向他的构造函数的原型对象，原型对象也是对象，也有<code>__proto__</code>属性，指向它的构造函数的原型，这样一层一层形成的链式结构称为原型链，顶层为null。</p>
 <p>prototype 原型对象：</p>
 <ul>
 <li>是函数的一个属性</li>
@@ -2086,7 +2088,7 @@
 <p>6、禁用移动端选中文字</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 禁止用户选择文本 */</span>  </span><br><span class="line">* &#123;  </span><br><span class="line">  <span class="attribute">-webkit-touch-callout</span>: none; <span class="comment">/* iOS Safari */</span>  </span><br><span class="line">  <span class="attribute">-webkit-user-select</span>: none; <span class="comment">/* Safari */</span>  </span><br><span class="line">  <span class="attribute">-khtml-user-select</span>: none; <span class="comment">/* Konqueror HTML */</span>  </span><br><span class="line">  <span class="attribute">-moz-user-select</span>: none; <span class="comment">/* Firefox */</span>  </span><br><span class="line">  <span class="attribute">-ms-user-select</span>: none; <span class="comment">/* Internet Explorer/Edge */</span>  </span><br><span class="line">  <span class="attribute">user-select</span>: none; <span class="comment">/* 非前缀版本，目前被大多数浏览器支持 */</span>  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">/* 如果需要允许 input 元素内的文本选择，可以单独设置 */</span>  </span><br><span class="line"><span class="selector-tag">input</span> &#123;  </span><br><span class="line">  <span class="attribute">-webkit-user-select</span>: auto; <span class="comment">/* 允许 input 内的文本选择 */</span>  </span><br><span class="line">&#125;</span><br><span class="line">​```</span><br></pre></td></tr></table></figure>
 <p>7、ios识别长串数字为电话</p>
-<p>解决：<code>&lt;meta name=&quot;fomat-dection&quot; content=&quot;telphone=no&quot;</code></p>
+<p>解决：<code>&lt;meta name=&quot;format-dection&quot; content=&quot;telphone=no&quot;</code></p>
 <h3 id="v-for中key的作用"><a href="#v-for中key的作用" class="headerlink" title="v-for中key的作用"></a>v-for中key的作用</h3><p>1、作为元素的唯一标识，避免<code>v-for</code>的“就地更新”策略导致的问题。</p>
 <p>2、更高效的更新虚拟DOM，提高渲染效率</p>
 <p>3、避免带有输入框的DOM产生错误更新造成数据混乱</p>
