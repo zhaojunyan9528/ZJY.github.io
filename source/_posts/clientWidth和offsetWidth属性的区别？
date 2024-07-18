@@ -1,6 +1,6 @@
 ---
 title: clientWidth和offsetWidth属性的区别？
-category: JavaScript
+category: Javascript
 ---
 
 clientWidth和offsetWidth都是用来描述HTML元素宽度的属性，但它们之间存在明显的区别。以下是关于这两个属性的详细解释：
